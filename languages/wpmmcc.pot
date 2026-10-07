@@ -1,0 +1,4798 @@
+# Copyright (C) 2026 WPMMCC Team
+# This file is distributed under the GPL v2 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: WPMMCC 2.0.1\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wpmmcc\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2026-03-18T04:12:01+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.12.0\n"
+"X-Domain: wpmmcc\n"
+
+#. Plugin Name of the plugin
+#: wpmmcc.php
+#: src/Admin/AdminService.php:125
+#: src/Admin/AdminService.php:126
+msgid "WPMMCC"
+msgstr ""
+
+#. Description of the plugin
+#: wpmmcc.php
+msgid "A comprehensive multilingual solution for WordPress with content translation, theme translation, site group management, and multilingual sitemaps."
+msgstr ""
+
+#. Author of the plugin
+#: wpmmcc.php
+msgid "WPMMCC Team"
+msgstr ""
+
+#. Author URI of the plugin
+#: wpmmcc.php
+msgid "https://www.wpmm.cc"
+msgstr ""
+
+#: includes/asrunner/classes/abstracts/ActionScheduler_Abstract_QueueRunner.php:168
+msgid "This action appears to be consistently failing. A new instance will not be scheduled."
+msgstr ""
+
+#: includes/asrunner/classes/abstracts/ActionScheduler_Logger.php:98
+msgid "action created"
+msgstr ""
+
+#: includes/asrunner/classes/abstracts/ActionScheduler_Logger.php:107
+msgid "action canceled"
+msgstr ""
+
+#. translators: %s: context
+#: includes/asrunner/classes/abstracts/ActionScheduler_Logger.php:119
+#, php-format
+msgid "action started via %s"
+msgstr ""
+
+#: includes/asrunner/classes/abstracts/ActionScheduler_Logger.php:121
+msgid "action started"
+msgstr ""
+
+#. translators: %s: context
+#: includes/asrunner/classes/abstracts/ActionScheduler_Logger.php:136
+#, php-format
+msgid "action complete via %s"
+msgstr ""
+
+#: includes/asrunner/classes/abstracts/ActionScheduler_Logger.php:138
+msgid "action complete"
+msgstr ""
+
+#. translators: 1: context 2: exception message
+#: includes/asrunner/classes/abstracts/ActionScheduler_Logger.php:153
+#, php-format
+msgid "action failed via %1$s: %2$s"
+msgstr ""
+
+#. translators: %s: exception message
+#: includes/asrunner/classes/abstracts/ActionScheduler_Logger.php:156
+#, php-format
+msgid "action failed: %s"
+msgstr ""
+
+#. translators: %s: amount of time
+#: includes/asrunner/classes/abstracts/ActionScheduler_Logger.php:169
+#, php-format
+msgid "action marked as failed after %s seconds. Unknown error occurred. Check server, PHP and database error logs to diagnose cause."
+msgstr ""
+
+#. translators: 1: error message 2: filename 3: line
+#: includes/asrunner/classes/abstracts/ActionScheduler_Logger.php:181
+#, php-format
+msgid "unexpected shutdown: PHP Fatal error %1$s in %2$s on line %3$s"
+msgstr ""
+
+#: includes/asrunner/classes/abstracts/ActionScheduler_Logger.php:191
+msgid "action reset"
+msgstr ""
+
+#. translators: %s: context
+#: includes/asrunner/classes/abstracts/ActionScheduler_Logger.php:203
+#, php-format
+msgid "action ignored via %s"
+msgstr ""
+
+#: includes/asrunner/classes/abstracts/ActionScheduler_Logger.php:205
+msgid "action ignored"
+msgstr ""
+
+#. translators: %s: exception message
+#: includes/asrunner/classes/abstracts/ActionScheduler_Logger.php:220
+#, php-format
+msgid "There was a failure fetching this action: %s"
+msgstr ""
+
+#: includes/asrunner/classes/abstracts/ActionScheduler_Logger.php:222
+msgid "There was a failure fetching this action"
+msgstr ""
+
+#. translators: %s: exception message
+#: includes/asrunner/classes/abstracts/ActionScheduler_Logger.php:236
+#, php-format
+msgid "There was a failure scheduling the next instance of this action: %s"
+msgstr ""
+
+#. translators: %d is a number (maximum length of action arguments).
+#: includes/asrunner/classes/abstracts/ActionScheduler_Store.php:376
+#, php-format
+msgid "ActionScheduler_Action::$args too long. To ensure the args column can be indexed, action args should not be more than %d characters when encoded as JSON."
+msgstr ""
+
+#: includes/asrunner/classes/abstracts/ActionScheduler_Store.php:454
+#: src/Admin/Pages/TaskListPage.php:530
+#: src/Admin/Pages/TaskListPage.php:796
+#: src/Admin/Pages/TaskListPage.php:941
+msgid "Complete"
+msgstr ""
+
+#: includes/asrunner/classes/abstracts/ActionScheduler_Store.php:455
+#: src/Admin/Pages/TaskListPage.php:528
+#: src/Admin/Pages/TaskListPage.php:794
+#: src/Admin/Pages/TaskListPage.php:939
+#: src/Admin/Tables/TaskChainTable.php:308
+#: src/Admin/Tables/TaskListTable.php:344
+msgid "Pending"
+msgstr ""
+
+#: includes/asrunner/classes/abstracts/ActionScheduler_Store.php:456
+msgid "In-progress"
+msgstr ""
+
+#: includes/asrunner/classes/abstracts/ActionScheduler_Store.php:457
+#: src/Admin/Pages/TaskListPage.php:531
+#: src/Admin/Pages/TaskListPage.php:797
+#: src/Admin/Pages/TaskListPage.php:942
+#: src/Admin/Tables/TaskChainTable.php:311
+#: src/Admin/Tables/TaskListTable.php:347
+msgid "Failed"
+msgstr ""
+
+#: includes/asrunner/classes/abstracts/ActionScheduler_Store.php:458
+#: src/Admin/Pages/TaskListPage.php:532
+#: src/Admin/Pages/TaskListPage.php:798
+#: src/Admin/Pages/TaskListPage.php:943
+#: src/Admin/Tables/TaskChainTable.php:312
+#: src/Admin/Tables/TaskListTable.php:348
+msgid "Canceled"
+msgstr ""
+
+#. translators: 1: action hook.
+#: includes/asrunner/classes/actions/ActionScheduler_Action.php:80
+#, php-format
+msgid "Scheduled action for %1$s will not be executed as no callbacks are registered."
+msgstr ""
+
+#: includes/asrunner/classes/ActionScheduler_ActionFactory.php:232
+msgid "Invalid action - must be a recurring action."
+msgstr ""
+
+#. translators: %1$s is the name of the hook to be enqueued, %2$s is the exception message.
+#: includes/asrunner/classes/ActionScheduler_ActionFactory.php:323
+#, php-format
+msgid "Caught exception while enqueuing action \"%1$s\": %2$s"
+msgstr ""
+
+#. translators: 1: action ID 2: schedule
+#: includes/asrunner/classes/ActionScheduler_InvalidActionException.php:22
+#, php-format
+msgid "Action [%1$s] has an invalid schedule: %2$s"
+msgstr ""
+
+#. translators: 1: action ID 2: arguments
+#: includes/asrunner/classes/ActionScheduler_InvalidActionException.php:40
+#, php-format
+msgid "Action [%1$s] has invalid arguments. It cannot be JSON decoded to an array. $args = %2$s"
+msgstr ""
+
+#. Translators: %s is the exception message.
+#: includes/asrunner/classes/ActionScheduler_QueueCleaner.php:70
+#, php-format
+msgid "It was not possible to determine a valid cut-off time: %s."
+msgstr ""
+
+#: includes/asrunner/classes/data-stores/ActionScheduler_DBStore.php:165
+msgid "Database error."
+msgstr ""
+
+#. translators: %s: error message
+#: includes/asrunner/classes/data-stores/ActionScheduler_DBStore.php:173
+#, php-format
+msgid "Error saving action: %s"
+msgstr ""
+
+#: includes/asrunner/classes/data-stores/ActionScheduler_DBStore.php:462
+msgid "Invalid value for select or count parameter. Cannot query actions."
+msgstr ""
+
+#: includes/asrunner/classes/data-stores/ActionScheduler_DBStore.php:531
+msgid "JSON partial matching not supported in your environment. Please check your MySQL/MariaDB version."
+msgstr ""
+
+#. translators: %s: provided value type
+#: includes/asrunner/classes/data-stores/ActionScheduler_DBStore.php:549
+#, php-format
+msgid "The value type for the JSON partial matching is not supported. Must be either integer, boolean, double or string. %s type provided."
+msgstr ""
+
+#: includes/asrunner/classes/data-stores/ActionScheduler_DBStore.php:571
+msgid "Unknown partial args matching value."
+msgstr ""
+
+#. translators: %s: action ID
+#: includes/asrunner/classes/data-stores/ActionScheduler_DBStore.php:742
+#, php-format
+msgid "Unidentified action %s: we were unable to cancel this action. It may may have been deleted by another process."
+msgstr ""
+
+#. translators: %s is the action ID
+#: includes/asrunner/classes/data-stores/ActionScheduler_DBStore.php:844
+#, php-format
+msgid "Unidentified action %s: we were unable to delete this action. It may may have been deleted by another process."
+msgstr ""
+
+#. translators: %s is the action ID
+#: includes/asrunner/classes/data-stores/ActionScheduler_DBStore.php:881
+#, php-format
+msgid "Unidentified action %s: we were unable to determine the date of this action. It may may have been deleted by another process."
+msgstr ""
+
+#. translators: %s: group name(s)
+#: includes/asrunner/classes/data-stores/ActionScheduler_DBStore.php:989
+#, php-format
+msgid "The group \"%s\" does not exist."
+msgid_plural "The groups \"%s\" do not exist."
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/asrunner/classes/data-stores/ActionScheduler_DBStore.php:1163
+msgctxt "database error"
+msgid "unknown"
+msgstr ""
+
+#. translators: %s database error.
+#: includes/asrunner/classes/data-stores/ActionScheduler_DBStore.php:1169
+#, php-format
+msgid "Unable to claim actions. Database error: %s."
+msgstr ""
+
+#. translators: %d is an id.
+#: includes/asrunner/classes/data-stores/ActionScheduler_DBStore.php:1289
+#, php-format
+msgid "Unable to release actions from claim id %d."
+msgstr ""
+
+#. translators: %s is the action ID
+#: includes/asrunner/classes/data-stores/ActionScheduler_DBStore.php:1343
+#, php-format
+msgid "Unidentified action %s: we were unable to mark this action as having failed. It may may have been deleted by another process."
+msgstr ""
+
+#. translators: 1: action ID. 2: status slug.
+#: includes/asrunner/classes/data-stores/ActionScheduler_DBStore.php:1375
+#, php-format
+msgid "Unable to update the status of action %1$d to %2$s."
+msgstr ""
+
+#. translators: %s is the action ID
+#: includes/asrunner/classes/data-stores/ActionScheduler_DBStore.php:1412
+#, php-format
+msgid "Unidentified action %s: we were unable to mark this action as having completed. It may may have been deleted by another process."
+msgstr ""
+
+#: includes/asrunner/classes/data-stores/ActionScheduler_DBStore.php:1449
+msgid "Invalid action ID. No status found."
+msgstr ""
+
+#: includes/asrunner/classes/data-stores/ActionScheduler_DBStore.php:1451
+msgid "Unknown status found for action."
+msgstr ""
+
+#: src/Admin/AdminService.php:135
+#: src/Admin/AdminService.php:261
+#: src/Admin/AdminService.php:501
+#: src/Admin/Pages/SiteListPage.php:1531
+#: src/Admin/Pages/ThemeTranslationPage.php:270
+#: src/Admin/Pages/TranslationRulesPage.php:486
+msgid "Machine translation"
+msgstr ""
+
+#: src/Admin/AdminService.php:136
+#: src/Admin/AdminService.php:262
+#: src/Admin/Pages/SiteListPage.php:1531
+#: src/Admin/Pages/ThemeTranslationPage.php:270
+#: src/Admin/Pages/TranslationRulesPage.php:487
+msgid "LLM translation"
+msgstr ""
+
+#: src/Admin/AdminService.php:137
+#: src/Admin/Pages/SitesPage.php:94
+msgid "Sites"
+msgstr ""
+
+#: src/Admin/AdminService.php:138
+#: src/Admin/Pages/ThemePage.php:95
+msgid "Theme"
+msgstr ""
+
+#: src/Admin/AdminService.php:139
+#: src/Admin/Pages/TasksPage.php:59
+msgid "Tasks"
+msgstr ""
+
+#: src/Admin/AdminService.php:140
+#: src/Admin/Pages/TranslationManagementPage.php:112
+msgid "Translation management"
+msgstr ""
+
+#: src/Admin/AdminService.php:141
+#: src/Admin/Pages/SitemapPage.php:139
+msgid "Sitemap"
+msgstr ""
+
+#: src/Admin/AdminService.php:142
+msgid "Parameters"
+msgstr ""
+
+#: src/Admin/AdminService.php:207
+msgid "Testing, please wait…"
+msgstr ""
+
+#: src/Admin/AdminService.php:208
+msgid "Test succeeded."
+msgstr ""
+
+#: src/Admin/AdminService.php:209
+msgid "Test failed, please check the configuration."
+msgstr ""
+
+#: src/Admin/AdminService.php:210
+msgid "Please enter test content first."
+msgstr ""
+
+#: src/Admin/AdminService.php:211
+msgid "Configuration has changed, please test again before saving."
+msgstr ""
+
+#: src/Admin/AdminService.php:212
+msgid "Please complete the rule configuration before testing."
+msgstr ""
+
+#. translators: %s: Comma-separated list of fields that need values.
+#: src/Admin/AdminService.php:214
+#, php-format
+msgid "Please fill in the following fields before testing: %s."
+msgstr ""
+
+#: src/Admin/AdminService.php:216
+#: src/Admin/Pages/TranslationRulesPage.php:475
+#: src/Admin/Tables/TranslationRulesTable.php:70
+#: src/Admin/Tables/TranslationRulesTable.php:83
+msgid "Rule name"
+msgstr ""
+
+#: src/Admin/AdminService.php:217
+#: src/Admin/Pages/TranslationRulesPage.php:496
+#: src/Admin/Tables/TranslationRulesTable.php:84
+msgid "Translation vendor"
+msgstr ""
+
+#: src/Admin/AdminService.php:218
+#: src/Admin/Pages/TranslationRulesPage.php:508
+msgid "LLM model"
+msgstr ""
+
+#: src/Admin/AdminService.php:219
+#: src/Admin/Pages/TranslationRulesPage.php:544
+msgid "Source language code"
+msgstr ""
+
+#: src/Admin/AdminService.php:220
+#: src/Admin/Pages/TranslationRulesPage.php:550
+msgid "Target language code"
+msgstr ""
+
+#: src/Admin/AdminService.php:221
+msgid "Maximum content length per request"
+msgstr ""
+
+#: src/Admin/AdminService.php:222
+msgid "Test text content"
+msgstr ""
+
+#: src/Admin/AdminService.php:223
+#: src/Admin/Pages/TranslationRulesPage.php:522
+#: src/Admin/Tables/TranslationRulesTable.php:72
+msgid "Temperature"
+msgstr ""
+
+#: src/Admin/AdminService.php:224
+#: src/Admin/Pages/TranslationRulesPage.php:529
+#: src/Admin/Tables/TranslationRulesTable.php:73
+msgid "Maximum input tokens"
+msgstr ""
+
+#: src/Admin/AdminService.php:225
+#: src/Admin/Pages/TranslationRulesPage.php:536
+#: src/Admin/Tables/TranslationRulesTable.php:74
+msgid "Prompt"
+msgstr ""
+
+#: src/Admin/AdminService.php:227
+msgid "Checking rule name…"
+msgstr ""
+
+#: src/Admin/AdminService.php:228
+msgid "Rule name already exists, please choose another."
+msgstr ""
+
+#: src/Admin/AdminService.php:229
+msgid "An error occurred while checking the rule name. Please try again later."
+msgstr ""
+
+#. translators: %s: Comma-separated list of fields that need values.
+#: src/Admin/AdminService.php:231
+#, php-format
+msgid "Please fill in the following fields: %s."
+msgstr ""
+
+#: src/Admin/AdminService.php:232
+#: src/Admin/Pages/TranslationRulesPage.php:831
+msgid "Please test the translation and ensure it succeeds before saving the rule."
+msgstr ""
+
+#: src/Admin/AdminService.php:233
+msgid "Temperature must be between 0 and 2."
+msgstr ""
+
+#: src/Admin/AdminService.php:234
+msgid "Maximum input tokens must be an integer greater than or equal to 0."
+msgstr ""
+
+#: src/Admin/AdminService.php:235
+msgid "Maximum content length per request must be between 1 and 5000."
+msgstr ""
+
+#: src/Admin/AdminService.php:236
+msgid "QPS must be an integer greater than 0."
+msgstr ""
+
+#: src/Admin/AdminService.php:237
+#: src/Admin/Pages/SiteGroupsPage.php:661
+msgid "Site group name cannot be empty."
+msgstr ""
+
+#: src/Admin/AdminService.php:238
+msgid "Site group name already exists, please choose another."
+msgstr ""
+
+#: src/Admin/AdminService.php:239
+msgid "An error occurred while checking the site group name. Please try again later."
+msgstr ""
+
+#: src/Admin/AdminService.php:240
+msgid "Site group directory already exists, please choose another."
+msgstr ""
+
+#: src/Admin/AdminService.php:241
+msgid "An error occurred while checking the site group directory. Please try again later."
+msgstr ""
+
+#: src/Admin/AdminService.php:242
+msgid "Completing uniqueness checks, please wait…"
+msgstr ""
+
+#: src/Admin/AdminService.php:243
+msgid "Please enter a custom permalink structure."
+msgstr ""
+
+#: src/Admin/AdminService.php:244
+msgid "Saving"
+msgstr ""
+
+#: src/Admin/AdminService.php:245
+msgid "Saving, please wait…"
+msgstr ""
+
+#: src/Admin/AdminService.php:246
+msgid "Site information has been saved."
+msgstr ""
+
+#. translators: %s: Error message returned when saving site fails.
+#: src/Admin/AdminService.php:248
+#, php-format
+msgid "Failed to save site: %s"
+msgstr ""
+
+#: src/Admin/AdminService.php:249
+#: src/Admin/Pages/TranslationRulesPage.php:798
+msgid "Language code cannot be empty."
+msgstr ""
+
+#: src/Admin/AdminService.php:250
+msgid "Please choose a translation rule."
+msgstr ""
+
+#: src/Admin/AdminService.php:251
+msgid "Please enter a child site directory."
+msgstr ""
+
+#: src/Admin/AdminService.php:252
+msgid "Please choose the child site to bind."
+msgstr ""
+
+#: src/Admin/AdminService.php:253
+msgid "This translation rule is already used by another site."
+msgstr ""
+
+#: src/Admin/AdminService.php:254
+msgid "Please save the current row before editing another site."
+msgstr ""
+
+#: src/Admin/AdminService.php:255
+msgid "Before deleting, please make sure the child site has been cleaned. Continue?"
+msgstr ""
+
+#: src/Admin/AdminService.php:256
+msgid "Remove this unsaved site row?"
+msgstr ""
+
+#. translators: %s: Error message returned when deleting a site fails.
+#: src/Admin/AdminService.php:258
+#, php-format
+msgid "Failed to delete site: %s"
+msgstr ""
+
+#: src/Admin/AdminService.php:259
+#: src/Admin/AdminService.php:372
+#: src/Admin/Pages/ThemeTranslationPage.php:400
+#: src/Admin/Tables/TaskChainTable.php:160
+#: src/Admin/Tables/TaskListTable.php:530
+msgid "Cancel"
+msgstr ""
+
+#: src/Admin/AdminService.php:260
+msgid "Discard the new site and remove unsaved changes?"
+msgstr ""
+
+#: src/Admin/AdminService.php:263
+msgid "Select a rule"
+msgstr ""
+
+#: src/Admin/AdminService.php:264
+msgid "Enter directory"
+msgstr ""
+
+#: src/Admin/AdminService.php:265
+msgid "Select a child site"
+msgstr ""
+
+#: src/Admin/AdminService.php:266
+msgid "Search by site title or domain"
+msgstr ""
+
+#: src/Admin/AdminService.php:267
+msgid "For example: zh-CN"
+msgstr ""
+
+#: src/Admin/AdminService.php:268
+msgid "Site has been deleted."
+msgstr ""
+
+#: src/Admin/AdminService.php:269
+msgid "Translate main site title"
+msgstr ""
+
+#: src/Admin/AdminService.php:270
+msgid "Translate main site tagline"
+msgstr ""
+
+#: src/Admin/AdminService.php:271
+msgid "Translating, please wait…"
+msgstr ""
+
+#: src/Admin/AdminService.php:272
+msgid "Translation loaded, you can continue editing."
+msgstr ""
+
+#. translators: %s: Error message returned from translation API.
+#: src/Admin/AdminService.php:274
+#, php-format
+msgid "Translation failed: %s"
+msgstr ""
+
+#: src/Admin/AdminService.php:275
+msgid "Please save the site and choose a translation rule first."
+msgstr ""
+
+#: src/Admin/AdminService.php:276
+msgid "Please choose a translation rule for this site first."
+msgstr ""
+
+#: src/Admin/AdminService.php:277
+msgid "Main site content is empty and cannot be translated."
+msgstr ""
+
+#: src/Admin/AdminService.php:278
+#: src/Admin/Pages/TranslationRulesPage.php:808
+msgid "Language code must not exceed 10 characters."
+msgstr ""
+
+#: src/Admin/AdminService.php:279
+#: src/Admin/AdminService.php:365
+#: src/Admin/Hooks/TermListHooks.php:1173
+#: src/Admin/Pages/SiteGroupsPage.php:158
+#: src/Admin/Pages/SiteGroupsPage.php:323
+#: src/Admin/Pages/SiteListPage.php:1537
+#: src/Admin/Services/SiteContextService.php:308
+#: src/Sites/SiteContextService.php:311
+msgid "Main site"
+msgstr ""
+
+#: src/Admin/AdminService.php:280
+#: src/Admin/Pages/SiteListPage.php:1537
+msgid "Child site"
+msgstr ""
+
+#: src/Admin/AdminService.php:281
+msgid "Main site does not require translation"
+msgstr ""
+
+#: src/Admin/AdminService.php:282
+msgid "No available sites."
+msgstr ""
+
+#: src/Admin/AdminService.php:283
+msgid "No available rules."
+msgstr ""
+
+#: src/Admin/AdminService.php:284
+#: src/Admin/Pages/SiteGroupsPage.php:191
+#: src/Admin/Pages/SiteListPage.php:1076
+#: src/Admin/Pages/ThemeTranslationPage.php:1193
+#: src/Admin/Tables/LlmModelTable.php:168
+#: src/Admin/Tables/TranslationRulesTable.php:227
+msgid "Edit"
+msgstr ""
+
+#: src/Admin/AdminService.php:285
+#: src/Admin/Pages/ThemeTranslationPage.php:434
+msgid "Save"
+msgstr ""
+
+#: src/Admin/AdminService.php:286
+#: src/Admin/Hooks/TermListHooks.php:538
+#: src/Admin/Pages/SeoFieldsPage.php:69
+#: src/Admin/Pages/SiteGroupsPage.php:192
+#: src/Admin/Pages/SiteListPage.php:1078
+#: src/Admin/Pages/ThemeTranslationPage.php:1198
+#: src/Admin/Tables/LlmModelTable.php:64
+#: src/Admin/Tables/LlmModelTable.php:169
+#: src/Admin/Tables/TaskChainTable.php:178
+#: src/Admin/Tables/TaskListTable.php:542
+#: src/Admin/Tables/TranslationRelationTable.php:76
+#: src/Admin/Tables/TranslationRulesTable.php:100
+#: src/Admin/Tables/TranslationRulesTable.php:228
+msgid "Delete"
+msgstr ""
+
+#: src/Admin/AdminService.php:287
+msgid "Please enter the original content."
+msgstr ""
+
+#: src/Admin/AdminService.php:288
+msgid "Please enter the source identifier."
+msgstr ""
+
+#: src/Admin/AdminService.php:289
+msgid "Please enter the translated content."
+msgstr ""
+
+#: src/Admin/AdminService.php:290
+#: src/Admin/Pages/ThemeTranslationPage.php:1127
+msgid "Manual translation has been saved."
+msgstr ""
+
+#: src/Admin/AdminService.php:291
+#: src/Admin/Pages/ThemeTranslationPage.php:1120
+msgid "Failed to save manual translation. Please try again later."
+msgstr ""
+
+#: src/Admin/AdminService.php:292
+msgid "Saving…"
+msgstr ""
+
+#: src/Admin/AdminService.php:293
+msgid "Please choose a valid child site before adding manual translations."
+msgstr ""
+
+#: src/Admin/AdminService.php:362
+msgid "Choose target sites for translation"
+msgstr ""
+
+#: src/Admin/AdminService.php:363
+msgid "Select the sites to translate content into (multiple selection allowed). Translation tasks run in the background; you can track progress in the task list."
+msgstr ""
+
+#: src/Admin/AdminService.php:364
+#: src/Admin/Tables/TranslationRelationTable.php:62
+msgid "Source site"
+msgstr ""
+
+#: src/Admin/AdminService.php:366
+msgid "Selected items"
+msgstr ""
+
+#: src/Admin/AdminService.php:367
+msgid "Target sites (multiple)"
+msgstr ""
+
+#: src/Admin/AdminService.php:368
+msgid "Select all"
+msgstr ""
+
+#: src/Admin/AdminService.php:369
+msgid "Deselect all"
+msgstr ""
+
+#: src/Admin/AdminService.php:370
+msgid "No available target sites"
+msgstr ""
+
+#: src/Admin/AdminService.php:371
+msgid "-- Please select --"
+msgstr ""
+
+#: src/Admin/AdminService.php:373
+msgid "Start translation"
+msgstr ""
+
+#: src/Admin/AdminService.php:374
+msgid "Please select items to translate first."
+msgstr ""
+
+#: src/Admin/AdminService.php:375
+msgid "Please select at least one target site."
+msgstr ""
+
+#: src/Admin/AdminService.php:376
+msgid "Creating translation task…"
+msgstr ""
+
+#: src/Admin/AdminService.php:377
+msgid "Translation task created. The page will refresh automatically."
+msgstr ""
+
+#: src/Admin/AdminService.php:378
+msgid "Failed to create translation task. Please try again."
+msgstr ""
+
+#: src/Admin/AdminService.php:379
+#: src/Admin/Pages/TaskListPage.php:1303
+msgid "Request failed"
+msgstr ""
+
+#: src/Admin/AdminService.php:380
+msgid "Draft"
+msgstr ""
+
+#: src/Admin/AdminService.php:395
+#: src/Admin/Pages/ApiVendorsPage.php:191
+#: src/Admin/Pages/GlobalSettingsPage.php:248
+#: src/Admin/Pages/LlmPage.php:83
+#: src/Admin/Pages/SeoFieldsPage.php:46
+#: src/Admin/Pages/SettingsPage.php:72
+#: src/Admin/Pages/SiteGroupsPage.php:49
+#: src/Admin/Pages/SiteListPage.php:87
+#: src/Admin/Pages/SitemapPage.php:64
+#: src/Admin/Pages/SitesPage.php:57
+#: src/Admin/Pages/TaskListPage.php:64
+#: src/Admin/Pages/TasksPage.php:31
+#: src/Admin/Pages/ThemePage.php:69
+#: src/Admin/Pages/ThemeTemplateTagsPage.php:64
+#: src/Admin/Pages/ThemeTranslationPage.php:110
+#: src/Admin/Pages/TranslationFieldsPage.php:43
+#: src/Admin/Pages/TranslationManagementPage.php:82
+#: src/Admin/Pages/TranslationRulesPage.php:130
+msgid "You do not have permission to access this page."
+msgstr ""
+
+#: src/Admin/AdminService.php:414
+msgid "Multilingual Manager"
+msgstr ""
+
+#: src/Admin/AdminService.php:415
+msgid "Use this dashboard to control diagnostics or jump to translation tools."
+msgstr ""
+
+#: src/Admin/AdminService.php:420
+msgid "Plugin logging"
+msgstr ""
+
+#: src/Admin/AdminService.php:421
+msgid "Toggle whether wpmmcc writes debug information to the WordPress debug log."
+msgstr ""
+
+#: src/Admin/AdminService.php:429
+msgid "Enable plugin debug logging"
+msgstr ""
+
+#. translators: %s: Path to the current log file.
+#: src/Admin/AdminService.php:436
+#, php-format
+msgid "Current log file: %s"
+msgstr ""
+
+#: src/Admin/AdminService.php:441
+msgid "Save logging setting"
+msgstr ""
+
+#: src/Admin/AdminService.php:449
+msgid "Go to translation rules"
+msgstr ""
+
+#: src/Admin/AdminService.php:465
+msgid "You do not have permission to modify settings."
+msgstr ""
+
+#: src/Admin/AdminService.php:476
+msgid "Plugin logging has been enabled."
+msgstr ""
+
+#: src/Admin/AdminService.php:477
+msgid "Plugin logging has been disabled."
+msgstr ""
+
+#: src/Admin/AdminService.php:489
+msgid "Vendor settings"
+msgstr ""
+
+#: src/Admin/AdminService.php:490
+#: src/Admin/Pages/LlmPage.php:93
+#: src/Admin/Pages/TranslationRulesPage.php:248
+msgid "Translation rules"
+msgstr ""
+
+#: src/Admin/AdminService.php:512
+#: src/Admin/Pages/LlmPage.php:108
+#: src/Admin/Pages/TranslationRulesPage.php:249
+msgid "Add rule"
+msgstr ""
+
+#: src/Admin/AdminService.php:517
+msgid "Machine translation navigation"
+msgstr ""
+
+#: src/Admin/AdminService.php:544
+#: src/Admin/Tables/TranslationRulesTable.php:140
+msgid "Search rules"
+msgstr ""
+
+#: src/Admin/AdminService.php:545
+#: src/Admin/Tables/TranslationRulesTable.php:124
+msgid "Enter a rule name"
+msgstr ""
+
+#: src/Admin/AdminService.php:546
+#: src/Admin/Pages/LlmPage.php:137
+#: src/Admin/Pages/SiteGroupsPage.php:139
+#: src/Admin/Pages/SiteListPage.php:1003
+#: src/Admin/Pages/ThemeTranslationPage.php:454
+msgid "Search"
+msgstr ""
+
+#: src/Admin/AdminService.php:698
+msgid "Coming soon"
+msgstr ""
+
+#: src/Admin/Ajax/BulkTranslationAjaxHandler.php:80
+#: src/Admin/Pages/ApiVendorsPage.php:305
+#: src/Admin/Pages/GlobalSettingsPage.php:210
+#: src/Admin/Pages/GlobalSettingsPage.php:637
+#: src/Admin/Pages/GlobalSettingsPage.php:730
+#: src/Admin/Pages/LlmPage.php:500
+#: src/Admin/Pages/LlmPage.php:678
+#: src/Admin/Pages/SettingsPage.php:204
+#: src/Admin/Pages/SettingsPage.php:239
+#: src/Admin/Pages/SiteGroupsPage.php:553
+#: src/Admin/Pages/SiteGroupsPage.php:787
+#: src/Admin/Pages/SiteGroupsPage.php:836
+#: src/Admin/Pages/SiteGroupsPage.php:861
+#: src/Admin/Pages/SiteListPage.php:160
+#: src/Admin/Pages/SiteListPage.php:227
+#: src/Admin/Pages/SiteListPage.php:299
+#: src/Admin/Pages/SiteListPage.php:424
+#: src/Admin/Pages/TaskListPage.php:806
+#: src/Admin/Pages/ThemeTranslationPage.php:982
+#: src/Admin/Pages/TranslationManagementPage.php:384
+#: src/Admin/Pages/TranslationManagementPage.php:459
+#: src/Admin/Pages/TranslationRulesPage.php:702
+#: src/Admin/Pages/TranslationRulesPage.php:921
+#: src/Admin/Pages/TranslationRulesPage.php:1003
+#: src/Admin/Pages/TranslationRulesPage.php:1076
+msgid "You do not have permission to perform this action."
+msgstr ""
+
+#: src/Admin/Ajax/BulkTranslationAjaxHandler.php:110
+msgid "Required parameters are missing. Please try again."
+msgstr ""
+
+#: src/Admin/Ajax/BulkTranslationAjaxHandler.php:118
+msgid "Unsupported object type."
+msgstr ""
+
+#: src/Admin/Ajax/BulkTranslationAjaxHandler.php:126
+msgid "Bulk translation is only available on the main site. Please switch to the main site and try again."
+msgstr ""
+
+#. translators: %d: Target site ID.
+#: src/Admin/Ajax/BulkTranslationAjaxHandler.php:137
+#, php-format
+msgid "Invalid target site ID: %d"
+msgstr ""
+
+#: src/Admin/Ajax/BulkTranslationAjaxHandler.php:149
+msgid "The current site could not be resolved. Please check site configuration."
+msgstr ""
+
+#: src/Admin/Ajax/BulkTranslationAjaxHandler.php:159
+msgid "The current site configuration is incomplete. Please verify the site group setup."
+msgstr ""
+
+#: src/Admin/Ajax/BulkTranslationAjaxHandler.php:212
+msgid "None of the selected items are original main site content. Only main site content can be translated."
+msgstr ""
+
+#. translators: 1: number of items, 2: object type label
+#: src/Admin/Ajax/BulkTranslationAjaxHandler.php:319
+#, php-format
+msgid "Bulk translation task created: %1$d %2$s"
+msgstr ""
+
+#: src/Admin/Ajax/BulkTranslationAjaxHandler.php:348
+#: src/Admin/Hooks/MediaBulkActions.php:277
+#: src/Admin/Hooks/PostBulkActions.php:286
+#: src/Admin/Hooks/TermBulkActions.php:305
+msgid "Failed to create translation tasks. Please try again later."
+msgstr ""
+
+#. translators: 1: Tasks created, 2: Object count, 3: Object type label, 4: Target site count.
+#: src/Admin/Ajax/BulkTranslationAjaxHandler.php:356
+#, php-format
+msgid "Created %1$d translation tasks to translate %2$d %3$s into %4$d target sites."
+msgstr ""
+
+#. translators: %d: Number of sites for which task creation failed.
+#: src/Admin/Ajax/BulkTranslationAjaxHandler.php:367
+#, php-format
+msgid "Note: creating tasks failed for %d sites."
+msgstr ""
+
+#: src/Admin/Ajax/BulkTranslationAjaxHandler.php:389
+msgid "An unexpected error occurred. Please try again later."
+msgstr ""
+
+#: src/Admin/Ajax/BulkTranslationAjaxHandler.php:405
+msgid "posts"
+msgstr ""
+
+#: src/Admin/Ajax/BulkTranslationAjaxHandler.php:406
+msgid "terms"
+msgstr ""
+
+#: src/Admin/Ajax/BulkTranslationAjaxHandler.php:407
+msgid "media items"
+msgstr ""
+
+#: src/Admin/Components/Pagination.php:41
+msgid "items"
+msgstr ""
+
+#. translators: 1: total items, 2: unit label
+#: src/Admin/Components/Pagination.php:83
+#, php-format
+msgid "Total %1$s %2$s"
+msgstr ""
+
+#: src/Admin/Components/SiteSelector.php:69
+#: src/Admin/Components/SiteSelector.php:142
+#: src/Admin/Components/SiteSelector.php:219
+#: src/Admin/Hooks/MediaListHooks.php:309
+#: src/Admin/Hooks/TermListHooks.php:175
+#: src/Admin/Hooks/TermListHooks.php:291
+#: src/Admin/Hooks/TermListHooks.php:1122
+#: src/Admin/MetaBoxes/PostSiteMetaBox.php:91
+#: src/Admin/Pages/SiteListPage.php:1047
+msgid "Site"
+msgstr ""
+
+#: src/Admin/Components/SiteSelector.php:265
+msgid "Select which site this term belongs to."
+msgstr ""
+
+#: src/Admin/Hooks/CommentListHooks.php:99
+#: src/Admin/Hooks/TermListHooks.php:225
+msgid "Site filter"
+msgstr ""
+
+#. translators: %s: Directory path already used by a multisite site.
+#. translators: %s: Directory path already used by multisite site.
+#: src/Admin/Hooks/DirectoryConflictHooks.php:100
+#: src/Admin/Hooks/DirectoryConflictHooks.php:205
+#, php-format
+msgid "The directory \"%s\" is already used by a WordPress multisite site. Please choose another directory."
+msgstr ""
+
+#. translators: %s: Directory path already used by another plugin site.
+#: src/Admin/Hooks/DirectoryConflictHooks.php:120
+#, php-format
+msgid "The directory \"%s\" is already used by another site. Please choose a different directory."
+msgstr ""
+
+#. translators: %s: Directory path already used by plugin.
+#: src/Admin/Hooks/DirectoryConflictHooks.php:166
+#, php-format
+msgid "Error: the directory \"/%s\" is already used by the multilingual translation plugin. Please use another path or contact an administrator."
+msgstr ""
+
+#: src/Admin/Hooks/DirectoryConflictHooks.php:169
+msgid "Directory conflict"
+msgstr ""
+
+#. translators: 1: Requested directory, 2: Existing group name.
+#: src/Admin/Hooks/DirectoryConflictHooks.php:224
+#, php-format
+msgid "The directory \"%1$s\" is already used by the site group \"%2$s\". Please choose another directory."
+msgstr ""
+
+#: src/Admin/Hooks/MediaBulkActions.php:128
+msgid "Translate media information"
+msgstr ""
+
+#: src/Admin/Hooks/MediaBulkActions.php:153
+#: src/Admin/Hooks/PostBulkActions.php:158
+#: src/Admin/Hooks/TermBulkActions.php:157
+msgid "This site belongs to a multisite-type group, but the wpmmcc plugin is not network-activated. Cross-site translation is disabled. Please enable wpmmcc at “Network Admin → Plugins” and try again."
+msgstr ""
+
+#: src/Admin/Hooks/MediaBulkActions.php:171
+#: src/Admin/Hooks/TermBulkActions.php:175
+msgid "The bulk translation flow has been updated. Please refresh the page and try again."
+msgstr ""
+
+#: src/Admin/Hooks/MediaBulkActions.php:183
+msgid "Media translation can only be started from the main site. Please switch to the main site and try again."
+msgstr ""
+
+#: src/Admin/Hooks/MediaBulkActions.php:194
+msgid "Please select at least one media item before starting translation."
+msgstr ""
+
+#: src/Admin/Hooks/MediaBulkActions.php:264
+msgid "Task created from media library bulk action."
+msgstr ""
+
+#: src/Admin/Hooks/MediaBulkActions.php:287
+#: src/Admin/Hooks/PostBulkActions.php:296
+#: src/Admin/Hooks/TermBulkActions.php:315
+msgid "Translation tasks have been created and will appear in the task list shortly."
+msgstr ""
+
+#: src/Admin/Hooks/MediaBulkActions.php:319
+#: src/Admin/Hooks/PostBulkActions.php:328
+#: src/Admin/Hooks/TermBulkActions.php:347
+msgid "The current site does not belong to a configured site group. Please complete setup in the \"Site list\" screen first."
+msgstr ""
+
+#: src/Admin/Hooks/MediaBulkActions.php:320
+#: src/Admin/Hooks/PostBulkActions.php:329
+#: src/Admin/Hooks/TermBulkActions.php:348
+msgid "The current site group does not have a main site configured and cannot create translation tasks."
+msgstr ""
+
+#: src/Admin/Hooks/MediaBulkActions.php:321
+#: src/Admin/Hooks/PostBulkActions.php:330
+#: src/Admin/Hooks/TermBulkActions.php:349
+msgid "The current site group has no available target sites. Please add sites in the \"Site list\" screen."
+msgstr ""
+
+#: src/Admin/Hooks/MediaEditHooks.php:121
+msgid "View translated content"
+msgstr ""
+
+#: src/Admin/Hooks/MediaEditHooks.php:124
+msgid "Select a site to view its translated metadata."
+msgstr ""
+
+#: src/Admin/Hooks/MediaEditHooks.php:238
+msgid "No media translation fields are enabled for this site group. Enable them on the \"Translation fields\" settings page."
+msgstr ""
+
+#: src/Admin/Hooks/MediaEditHooks.php:251
+msgid "Select site:"
+msgstr ""
+
+#: src/Admin/Hooks/MediaEditHooks.php:253
+#: src/Admin/Hooks/MediaEditHooks.php:274
+#: src/Admin/Pages/ThemeTranslationPage.php:391
+#: src/Admin/Pages/ThemeTranslationPage.php:427
+#: src/Admin/Pages/ThemeTranslationPage.php:497
+msgid "Original content"
+msgstr ""
+
+#: src/Admin/Hooks/MediaEditHooks.php:263
+msgid "(no translation)"
+msgstr ""
+
+#: src/Admin/Hooks/MediaEditHooks.php:278
+#: src/Admin/Hooks/MediaEditHooks.php:333
+#: src/Admin/Pages/TranslationFieldsPage.php:95
+#: src/Admin/Pages/TranslationManagementPage.php:224
+msgid "Title"
+msgstr ""
+
+#: src/Admin/Hooks/MediaEditHooks.php:284
+#: src/Admin/Hooks/MediaEditHooks.php:339
+#: src/Admin/Pages/TranslationFieldsPage.php:122
+msgid "Alt text"
+msgstr ""
+
+#: src/Admin/Hooks/MediaEditHooks.php:290
+#: src/Admin/Hooks/MediaEditHooks.php:345
+#: src/Admin/Pages/TranslationFieldsPage.php:121
+msgid "Caption"
+msgstr ""
+
+#: src/Admin/Hooks/MediaEditHooks.php:296
+#: src/Admin/Hooks/MediaEditHooks.php:351
+#: src/Admin/Pages/SiteGroupsPage.php:162
+#: src/Admin/Pages/TranslationFieldsPage.php:123
+#: src/Admin/Pages/TranslationFieldsPage.php:152
+msgid "Description"
+msgstr ""
+
+#: src/Admin/Hooks/MediaEditHooks.php:326
+msgid "No translated content found. Showing original content."
+msgstr ""
+
+#: src/Admin/Hooks/MediaListHooks.php:312
+msgid "Choose which site this media item belongs to."
+msgstr ""
+
+#: src/Admin/Hooks/MediaListHooks.php:428
+#: src/Admin/Hooks/TermListHooks.php:537
+msgid "Translate to other languages"
+msgstr ""
+
+#: src/Admin/Hooks/MediaListHooks.php:429
+msgid "Dismiss this notice"
+msgstr ""
+
+#: src/Admin/Hooks/MediaListHooks.php:430
+msgid "Please click \"Bulk select\" first, then choose the media items you want to translate."
+msgstr ""
+
+#: src/Admin/Hooks/MediaListHooks.php:431
+msgid "The bulk translation feature is not available yet. Please refresh the page and try again."
+msgstr ""
+
+#: src/Admin/Hooks/MediaListHooks.php:432
+msgid "Translation is only available on the main site."
+msgstr ""
+
+#: src/Admin/Hooks/MediaListHooks.php:433
+msgid "Translation is only available on the main site. Switch to the main site and try again."
+msgstr ""
+
+#: src/Admin/Hooks/NetworkStatusNotices.php:96
+msgid "This site belongs to a “multisite-style” site group, but the wpmmcc plugin is not network-activated. Cross-site translation and site selection features are disabled. To enable them, go to “Network Admin → Plugins” and set wpmmcc to “Network Active”."
+msgstr ""
+
+#: src/Admin/Hooks/PostBulkActions.php:133
+#: src/Admin/Hooks/TermBulkActions.php:132
+msgid "Translate into other languages"
+msgstr ""
+
+#: src/Admin/Hooks/PostBulkActions.php:169
+msgid "This content is not on the main site and cannot be submitted for translation."
+msgstr ""
+
+#: src/Admin/Hooks/PostBulkActions.php:189
+msgid "The bulk translation workflow has changed. Please refresh the page and try again."
+msgstr ""
+
+#: src/Admin/Hooks/PostBulkActions.php:200
+msgid "Please select at least one post before starting translation."
+msgstr ""
+
+#: src/Admin/Hooks/PostBulkActions.php:273
+msgid "Task created from post list bulk action."
+msgstr ""
+
+#: src/Admin/Hooks/TermBulkActions.php:187
+msgid "Term translation can only be started from the main site. Please switch to the main site and try again."
+msgstr ""
+
+#: src/Admin/Hooks/TermBulkActions.php:198
+msgid "Please select at least one item before starting translation."
+msgstr ""
+
+#: src/Admin/Hooks/TermBulkActions.php:291
+msgid "Task created from term list bulk action."
+msgstr ""
+
+#: src/Admin/Hooks/TermListHooks.php:303
+msgid "Choose which site this category or tag belongs to."
+msgstr ""
+
+#: src/Admin/Hooks/TermListHooks.php:535
+#: src/Admin/Tables/TranslationRelationTable.php:141
+msgid "Select bulk action"
+msgstr ""
+
+#: src/Admin/Hooks/TermListHooks.php:536
+#: src/Admin/Tables/TranslationRelationTable.php:143
+msgid "Bulk actions"
+msgstr ""
+
+#: src/Admin/Hooks/TermListHooks.php:539
+#: src/Admin/Pages/GlobalSettingsPage.php:191
+#: src/Admin/Tables/TranslationRelationTable.php:148
+msgid "Apply"
+msgstr ""
+
+#: src/Admin/Hooks/TermListHooks.php:540
+msgid "Search tags:"
+msgstr ""
+
+#: src/Admin/Hooks/TermListHooks.php:541
+msgid "Search tags"
+msgstr ""
+
+#: src/Admin/Hooks/TermListHooks.php:542
+#: src/Admin/Pages/SiteGroupsPage.php:134
+#: src/Admin/Pages/SiteListPage.php:998
+#: src/Admin/Pages/ThemeTranslationPage.php:326
+#: src/Admin/Tables/TaskListTable.php:192
+#: src/Admin/Tables/TranslationRelationTable.php:181
+#: src/Admin/Tables/TranslationRulesTable.php:173
+msgid "Filter"
+msgstr ""
+
+#: src/Admin/Hooks/TermListHooks.php:1163
+msgid "Main site (original)"
+msgstr ""
+
+#: src/Admin/MetaBoxes/PostSiteMetaBox.php:131
+msgid "Untitled"
+msgstr ""
+
+#: src/Admin/MetaBoxes/PostSiteMetaBox.php:154
+msgid "Warning"
+msgstr ""
+
+#. translators: %s: Site information placeholder.
+#: src/Admin/MetaBoxes/PostSiteMetaBox.php:157
+#, php-format
+msgid "The original site is unknown: %s. Please choose a new site."
+msgstr ""
+
+#: src/Admin/MetaBoxes/PostSiteMetaBox.php:167
+msgid "Choose which site this content belongs to. When publishing, the selected site determines which directory-style site it appears on."
+msgstr ""
+
+#: src/Admin/Pages/ApiVendorsPage.php:63
+#: src/Admin/Pages/TranslationRulesPage.php:79
+#: src/Admin/Tables/TranslationRulesTable.php:418
+msgid "Google Cloud Translation"
+msgstr ""
+
+#: src/Admin/Pages/ApiVendorsPage.php:66
+#: src/Admin/Pages/ApiVendorsPage.php:86
+#: src/Admin/Pages/LlmPage.php:456
+msgid "API Key"
+msgstr ""
+
+#: src/Admin/Pages/ApiVendorsPage.php:70
+#: src/Admin/Pages/ApiVendorsPage.php:90
+#: src/Admin/Pages/ApiVendorsPage.php:114
+#: src/Admin/Pages/ApiVendorsPage.php:138
+msgid "QPS Limit"
+msgstr ""
+
+#: src/Admin/Pages/ApiVendorsPage.php:72
+#: src/Admin/Pages/ApiVendorsPage.php:92
+#: src/Admin/Pages/ApiVendorsPage.php:116
+#: src/Admin/Pages/ApiVendorsPage.php:140
+#: src/Admin/Pages/LlmPage.php:478
+msgid "Maximum concurrent requests per second (minimum 1, default 10)."
+msgstr ""
+
+#: src/Admin/Pages/ApiVendorsPage.php:83
+#: src/Admin/Pages/TranslationRulesPage.php:80
+#: src/Admin/Tables/TranslationRulesTable.php:419
+msgid "DeepL"
+msgstr ""
+
+#: src/Admin/Pages/ApiVendorsPage.php:103
+#: src/Admin/Pages/TranslationRulesPage.php:81
+#: src/Admin/Tables/TranslationRulesTable.php:420
+msgid "Baidu Translate"
+msgstr ""
+
+#: src/Admin/Pages/ApiVendorsPage.php:106
+msgid "APP ID"
+msgstr ""
+
+#: src/Admin/Pages/ApiVendorsPage.php:110
+msgid "Secret Key"
+msgstr ""
+
+#: src/Admin/Pages/ApiVendorsPage.php:127
+#: src/Admin/Pages/TranslationRulesPage.php:82
+#: src/Admin/Tables/TranslationRulesTable.php:421
+msgid "Youdao Translate"
+msgstr ""
+
+#: src/Admin/Pages/ApiVendorsPage.php:130
+msgid "App ID"
+msgstr ""
+
+#: src/Admin/Pages/ApiVendorsPage.php:134
+msgid "App Secret Key"
+msgstr ""
+
+#: src/Admin/Pages/ApiVendorsPage.php:199
+msgid "Machine Translation"
+msgstr ""
+
+#: src/Admin/Pages/ApiVendorsPage.php:236
+#: src/Admin/Pages/ApiVendorsPage.php:238
+msgid "Show Key"
+msgstr ""
+
+#: src/Admin/Pages/ApiVendorsPage.php:236
+msgid "Hide Key"
+msgstr ""
+
+#: src/Admin/Pages/ApiVendorsPage.php:243
+msgid "Saved key is hidden. Please re-enter when updating."
+msgstr ""
+
+#: src/Admin/Pages/ApiVendorsPage.php:278
+#: src/Admin/Pages/GlobalSettingsPage.php:594
+#: src/Admin/Pages/SettingsPage.php:161
+msgid "Save Settings"
+msgstr ""
+
+#: src/Admin/Pages/ApiVendorsPage.php:316
+msgid "Unsupported translation vendor."
+msgstr ""
+
+#: src/Admin/Pages/ApiVendorsPage.php:374
+msgid "Unable to save settings: settings table does not exist."
+msgstr ""
+
+#: src/Admin/Pages/ApiVendorsPage.php:410
+#: src/Admin/Pages/GlobalSettingsPage.php:708
+#: src/Admin/Pages/SettingsPage.php:224
+msgid "Settings saved."
+msgstr ""
+
+#: src/Admin/Pages/GlobalSettingsPage.php:81
+#: src/Admin/Pages/TaskListPage.php:161
+#: src/Admin/Pages/TaskListPage.php:525
+#: src/Admin/Services/SiteContextService.php:327
+#: src/Admin/Tables/TaskListTable.php:172
+#: src/Admin/Tables/TaskListTable.php:248
+#: src/Admin/Tables/TaskListTable.php:281
+#: src/Sites/SiteContextService.php:330
+msgid "Unknown"
+msgstr ""
+
+#. translators: %s: version number
+#: src/Admin/Pages/GlobalSettingsPage.php:98
+#, php-format
+msgid "Modified based on %s"
+msgstr ""
+
+#: src/Admin/Pages/GlobalSettingsPage.php:103
+msgid "WPMMCC Built-in"
+msgstr ""
+
+#: src/Admin/Pages/GlobalSettingsPage.php:106
+msgid "External Plugin"
+msgstr ""
+
+#: src/Admin/Pages/GlobalSettingsPage.php:113
+msgid "Multiple Action Scheduler versions detected. The highest version is automatically used."
+msgstr ""
+
+#: src/Admin/Pages/GlobalSettingsPage.php:119
+msgid "Action Scheduler Status"
+msgstr ""
+
+#: src/Admin/Pages/GlobalSettingsPage.php:123
+msgid "Active Version:"
+msgstr ""
+
+#: src/Admin/Pages/GlobalSettingsPage.php:124
+msgid "Not loaded"
+msgstr ""
+
+#: src/Admin/Pages/GlobalSettingsPage.php:127
+msgid "Source:"
+msgstr ""
+
+#: src/Admin/Pages/GlobalSettingsPage.php:131
+msgid "Built-in Version:"
+msgstr ""
+
+#: src/Admin/Pages/GlobalSettingsPage.php:136
+msgid "External Plugin:"
+msgstr ""
+
+#: src/Admin/Pages/GlobalSettingsPage.php:139
+msgid "Action Scheduler plugin is installed"
+msgstr ""
+
+#: src/Admin/Pages/GlobalSettingsPage.php:169
+msgid "Use WordPress language"
+msgstr ""
+
+#: src/Admin/Pages/GlobalSettingsPage.php:181
+msgid "Plugin language"
+msgstr ""
+
+#: src/Admin/Pages/GlobalSettingsPage.php:194
+msgid "Select the display language for the plugin admin interface."
+msgstr ""
+
+#: src/Admin/Pages/GlobalSettingsPage.php:232
+msgid "Plugin language has been updated."
+msgstr ""
+
+#: src/Admin/Pages/GlobalSettingsPage.php:318
+msgid "Global Settings"
+msgstr ""
+
+#: src/Admin/Pages/GlobalSettingsPage.php:325
+msgid "Multisite network mode is not enabled. Global configuration is unavailable; the plugin will always work in local site configuration mode."
+msgstr ""
+
+#: src/Admin/Pages/GlobalSettingsPage.php:327
+msgid "This plugin is not network-activated. Please enable \"Network Activate\" in Network Admin → Plugins before using global shared mode."
+msgstr ""
+
+#: src/Admin/Pages/GlobalSettingsPage.php:329
+msgid "When multisite network mode is enabled and the plugin is network-activated, you can choose whether all sites share the same plugin configuration and data."
+msgstr ""
+
+#: src/Admin/Pages/GlobalSettingsPage.php:358
+msgid "Global plugin configuration"
+msgstr ""
+
+#: src/Admin/Pages/GlobalSettingsPage.php:364
+msgid "Off (each site keeps its own settings and data)"
+msgstr ""
+
+#: src/Admin/Pages/GlobalSettingsPage.php:369
+msgid "On (all sites in the current network share settings and data)"
+msgstr ""
+
+#: src/Admin/Pages/GlobalSettingsPage.php:375
+msgid "When enabled, task queue settings, translation vendor configuration and plugin data will be shared across all sites in the current network; when disabled, each site uses its own independent settings and data."
+msgstr ""
+
+#: src/Admin/Pages/GlobalSettingsPage.php:377
+msgid "To enable global sharing, please first activate this plugin network‑wide in the Network Admin, then return here. While the plugin is not network‑activated, only local site configuration is available."
+msgstr ""
+
+#: src/Admin/Pages/GlobalSettingsPage.php:379
+msgid "To use network‑level global configuration, please enable WordPress Multisite first. In a single‑site environment only local site configuration is available."
+msgstr ""
+
+#: src/Admin/Pages/GlobalSettingsPage.php:387
+msgid "Shared data source site"
+msgstr ""
+
+#: src/Admin/Pages/GlobalSettingsPage.php:391
+msgid "Multisite network is not enabled. Only the current site data will be used."
+msgstr ""
+
+#: src/Admin/Pages/GlobalSettingsPage.php:393
+msgid "The plugin is not network‑activated, so a shared data source site cannot be selected."
+msgstr ""
+
+#: src/Admin/Pages/GlobalSettingsPage.php:395
+msgid "No available network sites were found; the current site will be used as the data source by default."
+msgstr ""
+
+#: src/Admin/Pages/GlobalSettingsPage.php:405
+msgid "When network sharing is enabled, the plugin tables from the selected site will be used as the shared data source across the network."
+msgstr ""
+
+#: src/Admin/Pages/GlobalSettingsPage.php:412
+msgid "hreflang tags"
+msgstr ""
+
+#: src/Admin/Pages/GlobalSettingsPage.php:418
+msgid "Output hreflang tags in the front‑end <head> section (wpmmcc_ml_hreflang_links)."
+msgstr ""
+
+#: src/Admin/Pages/GlobalSettingsPage.php:421
+msgid "When disabled, template tags and related hooks will no longer output hreflang tags, but canonical and other SEO settings remain unaffected."
+msgstr ""
+
+#: src/Admin/Pages/GlobalSettingsPage.php:428
+msgid "Canonical tag"
+msgstr ""
+
+#: src/Admin/Pages/GlobalSettingsPage.php:434
+msgid "Output the canonical tag in the front‑end <head> section (wpmmcc_ml_canonical_url)."
+msgstr ""
+
+#: src/Admin/Pages/GlobalSettingsPage.php:437
+msgid "When disabled, the plugin will no longer output canonical tags, which is suitable when another SEO plugin manages canonical URLs."
+msgstr ""
+
+#: src/Admin/Pages/GlobalSettingsPage.php:444
+msgid "Handling of deleted translated content"
+msgstr ""
+
+#: src/Admin/Pages/GlobalSettingsPage.php:450
+msgid "Create new translated content (keep the old record in the trash)."
+msgstr ""
+
+#: src/Admin/Pages/GlobalSettingsPage.php:455
+msgid "Reuse the deleted content ID (restore from trash and overwrite)."
+msgstr ""
+
+#: src/Admin/Pages/GlobalSettingsPage.php:459
+msgid "When a translated post is deleted (moved to the trash), you can choose whether to reuse the original post ID by restoring it from the trash, or create a brand new translated post. The default behavior is to create a new post."
+msgstr ""
+
+#: src/Admin/Pages/GlobalSettingsPage.php:465
+msgid "Data retention on uninstall"
+msgstr ""
+
+#: src/Admin/Pages/GlobalSettingsPage.php:471
+msgid "Keep plugin data when uninstalling (for easy reinstallation)."
+msgstr ""
+
+#: src/Admin/Pages/GlobalSettingsPage.php:474
+msgid "When enabled, database tables and settings will be preserved when the plugin is deleted. This allows you to reinstall the plugin without losing data. Disable this option if you want to completely remove all plugin data."
+msgstr ""
+
+#: src/Admin/Pages/GlobalSettingsPage.php:511
+msgid "Task Queue Settings"
+msgstr ""
+
+#: src/Admin/Pages/GlobalSettingsPage.php:512
+msgid "Configure Action Scheduler task queue behavior and maintenance settings."
+msgstr ""
+
+#: src/Admin/Pages/GlobalSettingsPage.php:518
+#: src/Admin/Pages/SettingsPage.php:86
+msgid "Queue Batch Size"
+msgstr ""
+
+#: src/Admin/Pages/GlobalSettingsPage.php:521
+#: src/Admin/Pages/SettingsPage.php:89
+msgid "Maximum tasks processed in a single Action Scheduler run, recommended 5-25."
+msgstr ""
+
+#: src/Admin/Pages/GlobalSettingsPage.php:525
+#: src/Admin/Pages/SettingsPage.php:93
+msgid "Concurrent Batches"
+msgstr ""
+
+#: src/Admin/Pages/GlobalSettingsPage.php:528
+#: src/Admin/Pages/SettingsPage.php:96
+msgid "Number of batches allowed to run simultaneously, typically keep at 1, can increase when resources are sufficient."
+msgstr ""
+
+#: src/Admin/Pages/GlobalSettingsPage.php:532
+#: src/Admin/Pages/SettingsPage.php:100
+msgid "Time Limit (seconds)"
+msgstr ""
+
+#: src/Admin/Pages/GlobalSettingsPage.php:535
+#: src/Admin/Pages/SettingsPage.php:103
+msgid "Maximum runtime for a single Action Scheduler batch execution to avoid excessive resource usage."
+msgstr ""
+
+#: src/Admin/Pages/GlobalSettingsPage.php:539
+#: src/Admin/Pages/SettingsPage.php:107
+msgid "Execution Timeout (seconds)"
+msgstr ""
+
+#: src/Admin/Pages/GlobalSettingsPage.php:542
+#: src/Admin/Pages/SettingsPage.php:110
+msgid "Tasks not completed within this time will be considered stalled and marked as failed."
+msgstr ""
+
+#: src/Admin/Pages/GlobalSettingsPage.php:546
+#: src/Admin/Pages/SettingsPage.php:114
+msgid "Maintenance Check Interval (seconds)"
+msgstr ""
+
+#: src/Admin/Pages/GlobalSettingsPage.php:549
+#: src/Admin/Pages/SettingsPage.php:117
+msgid "Frequency of periodic queue checks and cleanup, recommended 300 seconds."
+msgstr ""
+
+#: src/Admin/Pages/GlobalSettingsPage.php:553
+#: src/Admin/Pages/SettingsPage.php:121
+msgid "Overwrite Existing Data When Syncing"
+msgstr ""
+
+#: src/Admin/Pages/GlobalSettingsPage.php:557
+#: src/Admin/Pages/SettingsPage.php:125
+msgid "Overwrite existing data on target site when syncing translations."
+msgstr ""
+
+#: src/Admin/Pages/GlobalSettingsPage.php:562
+#: src/Admin/Pages/SettingsPage.php:130
+msgid "Task Retention Days"
+msgstr ""
+
+#: src/Admin/Pages/GlobalSettingsPage.php:565
+#: src/Admin/Pages/SettingsPage.php:133
+msgid "Tasks and logs older than this will be automatically cleaned up."
+msgstr ""
+
+#: src/Admin/Pages/GlobalSettingsPage.php:569
+#: src/Admin/Pages/SettingsPage.php:137
+msgid "Translation Max Retries"
+msgstr ""
+
+#: src/Admin/Pages/GlobalSettingsPage.php:572
+#: src/Admin/Pages/SettingsPage.php:140
+msgid "Maximum number of retries after a translation request fails, recommended 3. Set to 0 to disable retries."
+msgstr ""
+
+#: src/Admin/Pages/GlobalSettingsPage.php:576
+#: src/Admin/Pages/SettingsPage.php:144
+msgid "Translation Retry Delay (seconds)"
+msgstr ""
+
+#: src/Admin/Pages/GlobalSettingsPage.php:579
+#: src/Admin/Pages/SettingsPage.php:147
+msgid "Delay before each retry (seconds), recommended 1-3 seconds. Prevents rate limiting from frequent requests."
+msgstr ""
+
+#: src/Admin/Pages/GlobalSettingsPage.php:583
+#: src/Admin/Pages/SettingsPage.php:151
+msgid "Enable Database Scan"
+msgstr ""
+
+#: src/Admin/Pages/GlobalSettingsPage.php:587
+#: src/Admin/Pages/SettingsPage.php:155
+msgid "Include database content (theme_mods, custom fields, etc.) when scanning themes. Especially important for block themes."
+msgstr ""
+
+#: src/Admin/Pages/GlobalSettingsPage.php:600
+#: src/Admin/Pages/SettingsPage.php:166
+msgid "Task Log Cleanup"
+msgstr ""
+
+#: src/Admin/Pages/GlobalSettingsPage.php:602
+#: src/Admin/Pages/SettingsPage.php:168
+msgid "When automatic cleanup fails, you can manually delete task logs older than a specified number of days here. This operation does not create new task records."
+msgstr ""
+
+#: src/Admin/Pages/GlobalSettingsPage.php:604
+#: src/Admin/Pages/SettingsPage.php:170
+msgid "Risk Warning: Log deletion is irreversible. After deletion, you will not be able to view historical task execution details. Only proceed after confirming these logs are no longer needed."
+msgstr ""
+
+#: src/Admin/Pages/GlobalSettingsPage.php:613
+#: src/Admin/Pages/SettingsPage.php:179
+msgid "Delete All Logs Older Than 3 Days"
+msgstr ""
+
+#: src/Admin/Pages/GlobalSettingsPage.php:616
+#: src/Admin/Pages/SettingsPage.php:182
+msgid "Delete All Logs Older Than 10 Days"
+msgstr ""
+
+#: src/Admin/Pages/GlobalSettingsPage.php:618
+#: src/Admin/Pages/SettingsPage.php:184
+msgid "Are you sure you want to delete all task logs? This action cannot be undone."
+msgstr ""
+
+#: src/Admin/Pages/GlobalSettingsPage.php:619
+#: src/Admin/Pages/SettingsPage.php:185
+msgid "Delete All Logs"
+msgstr ""
+
+#: src/Admin/Pages/GlobalSettingsPage.php:740
+#: src/Admin/Pages/SettingsPage.php:249
+msgid "No valid log cleanup range selected."
+msgstr ""
+
+#: src/Admin/Pages/GlobalSettingsPage.php:753
+#: src/Admin/Pages/SettingsPage.php:263
+msgid "Task log table does not exist or has not been created yet, no cleanup needed."
+msgstr ""
+
+#: src/Admin/Pages/GlobalSettingsPage.php:769
+#: src/Admin/Pages/SettingsPage.php:280
+msgid "The provided log cleanup days are invalid."
+msgstr ""
+
+#. translators: %d: deleted log rows count
+#: src/Admin/Pages/GlobalSettingsPage.php:790
+#: src/Admin/Pages/SettingsPage.php:302
+#, php-format
+msgid "Log cleanup completed, %d records deleted."
+msgstr ""
+
+#: src/Admin/Pages/GlobalSettingsPage.php:798
+#: src/Admin/Pages/SettingsPage.php:311
+msgid "No logs matching the criteria need to be cleaned up."
+msgstr ""
+
+#: src/Admin/Pages/LlmPage.php:92
+msgid "Models"
+msgstr ""
+
+#: src/Admin/Pages/LlmPage.php:101
+msgid "LLM Translation"
+msgstr ""
+
+#: src/Admin/Pages/LlmPage.php:105
+#: src/Admin/Pages/LlmPage.php:366
+msgid "Add model"
+msgstr ""
+
+#: src/Admin/Pages/LlmPage.php:113
+msgid "LLM translation navigation"
+msgstr ""
+
+#: src/Admin/Pages/LlmPage.php:135
+#: src/Admin/Tables/LlmModelTable.php:106
+msgid "Search models"
+msgstr ""
+
+#: src/Admin/Pages/LlmPage.php:136
+msgid "Enter a model name"
+msgstr ""
+
+#. translators: %d: Number of LLM models deleted.
+#: src/Admin/Pages/LlmPage.php:174
+#, php-format
+msgid "%d model deleted."
+msgid_plural "%d models deleted."
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/Admin/Pages/LlmPage.php:364
+msgid "LLM model configuration"
+msgstr ""
+
+#: src/Admin/Pages/LlmPage.php:402
+#: src/Admin/Pages/LlmPage.php:685
+msgid "Missing model ID."
+msgstr ""
+
+#: src/Admin/Pages/LlmPage.php:406
+msgid "The requested model does not exist."
+msgstr ""
+
+#: src/Admin/Pages/LlmPage.php:424
+msgid "Edit LLM model"
+msgstr ""
+
+#: src/Admin/Pages/LlmPage.php:424
+msgid "Add LLM model"
+msgstr ""
+
+#: src/Admin/Pages/LlmPage.php:442
+#: src/Admin/Tables/LlmModelTable.php:47
+msgid "Vendor name"
+msgstr ""
+
+#: src/Admin/Pages/LlmPage.php:445
+msgid "Enter the name of the vendor or service to make it easier to recognise in the admin UI."
+msgstr ""
+
+#: src/Admin/Pages/LlmPage.php:449
+msgid "API endpoint URL"
+msgstr ""
+
+#: src/Admin/Pages/LlmPage.php:452
+msgid "For example: https://api.openai.com/v1/chat/completions"
+msgstr ""
+
+#: src/Admin/Pages/LlmPage.php:460
+#: src/Admin/Pages/LlmPage.php:462
+msgid "Show secret"
+msgstr ""
+
+#: src/Admin/Pages/LlmPage.php:460
+msgid "Hide secret"
+msgstr ""
+
+#: src/Admin/Pages/LlmPage.php:468
+#: src/Admin/Tables/LlmModelTable.php:50
+#: src/Admin/Tables/TranslationRulesTable.php:71
+msgid "Model name"
+msgstr ""
+
+#: src/Admin/Pages/LlmPage.php:471
+msgid "For example: gpt-4o-mini, gpt-3.5-turbo, etc."
+msgstr ""
+
+#: src/Admin/Pages/LlmPage.php:475
+#: src/Admin/Tables/LlmModelTable.php:51
+msgid "QPS limit"
+msgstr ""
+
+#: src/Admin/Pages/LlmPage.php:483
+msgid "Save model"
+msgstr ""
+
+#: src/Admin/Pages/LlmPage.php:536
+msgid "Vendor name cannot be empty."
+msgstr ""
+
+#: src/Admin/Pages/LlmPage.php:540
+msgid "Vendor name must not exceed 80 characters."
+msgstr ""
+
+#: src/Admin/Pages/LlmPage.php:544
+msgid "Please enter a valid API endpoint URL."
+msgstr ""
+
+#: src/Admin/Pages/LlmPage.php:548
+msgid "Model name cannot be empty."
+msgstr ""
+
+#: src/Admin/Pages/LlmPage.php:552
+msgid "QPS must be a positive integer greater than 0."
+msgstr ""
+
+#: src/Admin/Pages/LlmPage.php:559
+msgid "The requested model does not exist or has been deleted."
+msgstr ""
+
+#: src/Admin/Pages/LlmPage.php:579
+msgid "The model identifier already exists."
+msgstr ""
+
+#: src/Admin/Pages/LlmPage.php:587
+msgid "API Key cannot be empty."
+msgstr ""
+
+#: src/Admin/Pages/LlmPage.php:624
+#: src/Admin/Pages/LlmPage.php:647
+#: src/Admin/Pages/TranslationRulesPage.php:866
+#: src/Admin/Pages/TranslationRulesPage.php:890
+msgid "Saving failed. Please try again later."
+msgstr ""
+
+#: src/Admin/Pages/LlmPage.php:662
+msgid "Model saved."
+msgstr ""
+
+#: src/Admin/Pages/LlmPage.php:708
+msgid "The model is referenced by translation rules and cannot be deleted."
+msgstr ""
+
+#: src/Admin/Pages/LlmPage.php:728
+#: src/Admin/Pages/TranslationRulesPage.php:958
+msgid "Deletion failed. Please try again later."
+msgstr ""
+
+#: src/Admin/Pages/LlmPage.php:736
+msgid "Model deleted."
+msgstr ""
+
+#: src/Admin/Pages/LlmPage.php:801
+msgid "You are a professional translation engine. Translate the user provided text into the target language while keeping HTML tags intact."
+msgstr ""
+
+#: src/Admin/Pages/SeoFieldsPage.php:63
+msgid "Please select a table to scan."
+msgstr ""
+
+#: src/Admin/Pages/SeoFieldsPage.php:64
+msgid "No fields available to add."
+msgstr ""
+
+#: src/Admin/Pages/SeoFieldsPage.php:65
+msgid "Field added."
+msgstr ""
+
+#: src/Admin/Pages/SeoFieldsPage.php:66
+msgid "Field removed."
+msgstr ""
+
+#: src/Admin/Pages/SeoFieldsPage.php:67
+msgid "This field will no longer be translated after deletion. Continue?"
+msgstr ""
+
+#: src/Admin/Pages/SeoFieldsPage.php:68
+msgid "Add"
+msgstr ""
+
+#. translators: %s: meta_key name
+#: src/Admin/Pages/SeoFieldsPage.php:71
+#, php-format
+msgid "meta_key: %s"
+msgstr ""
+
+#. translators: %s: field name
+#: src/Admin/Pages/SeoFieldsPage.php:73
+#, php-format
+msgid "Field: %s"
+msgstr ""
+
+#: src/Admin/Pages/SeoFieldsPage.php:81
+#: src/Admin/Pages/SeoFieldsPage.php:86
+msgid "Add SEO fields"
+msgstr ""
+
+#: src/Admin/Pages/SeoFieldsPage.php:88
+#: src/Admin/Pages/ThemeTranslationPage.php:304
+#: src/Admin/Pages/TranslationFieldsPage.php:73
+#: src/Admin/Tables/TaskListTable.php:95
+#: src/Admin/Tables/TranslationRelationTable.php:61
+msgid "Site group"
+msgstr ""
+
+#: src/Admin/Pages/SeoFieldsPage.php:92
+#: src/Admin/Pages/TranslationFieldsPage.php:76
+msgid "No site groups available"
+msgstr ""
+
+#: src/Admin/Pages/SeoFieldsPage.php:110
+msgid "Select database table"
+msgstr ""
+
+#: src/Admin/Pages/SeoFieldsPage.php:112
+msgid "Please select"
+msgstr ""
+
+#: src/Admin/Pages/SeoFieldsPage.php:122
+msgid "Scan fields"
+msgstr ""
+
+#: src/Admin/Pages/SeoFieldsPage.php:126
+msgid "If the scanned results already include configured fields, you can remove them or toggle their enabled state here."
+msgstr ""
+
+#: src/Admin/Pages/SeoFieldsPage.php:127
+msgid "Select a table above and click Scan."
+msgstr ""
+
+#: src/Admin/Pages/SeoFieldsPage.php:210
+msgid "Please choose a table to scan."
+msgstr ""
+
+#: src/Admin/Pages/SeoFieldsPage.php:214
+msgid "Scanning this table is not allowed."
+msgstr ""
+
+#: src/Admin/Pages/SeoFieldsPage.php:222
+msgid "Unable to read table structure."
+msgstr ""
+
+#: src/Admin/Pages/SeoFieldsPage.php:328
+#: src/Admin/Pages/SeoFieldsPage.php:332
+msgid "Field information is incomplete."
+msgstr ""
+
+#: src/Admin/Pages/SeoFieldsPage.php:336
+msgid "Invalid field type."
+msgstr ""
+
+#: src/Admin/Pages/SeoFieldsPage.php:344
+#: src/Admin/Pages/TranslationFieldsPage.php:243
+msgid "A site group can have at most 10 SEO fields enabled."
+msgstr ""
+
+#: src/Admin/Pages/SeoFieldsPage.php:365
+#: src/Admin/Pages/SeoFieldsPage.php:384
+msgid "Missing parameters."
+msgstr ""
+
+#: src/Admin/Pages/SeoFieldsPage.php:395
+#: src/Admin/Pages/TranslationFieldsPage.php:257
+msgid "Insufficient permissions."
+msgstr ""
+
+#: src/Admin/Pages/SiteGroupsPage.php:128
+msgid "Filter site group type"
+msgstr ""
+
+#: src/Admin/Pages/SiteGroupsPage.php:130
+#: src/Admin/Pages/TranslationManagementPage.php:94
+#: src/Admin/Tables/TaskListTable.php:177
+msgid "All types"
+msgstr ""
+
+#: src/Admin/Pages/SiteGroupsPage.php:131
+msgid "Multisite site group"
+msgstr ""
+
+#: src/Admin/Pages/SiteGroupsPage.php:132
+msgid "Directory site group"
+msgstr ""
+
+#: src/Admin/Pages/SiteGroupsPage.php:137
+msgid "Search site group name"
+msgstr ""
+
+#: src/Admin/Pages/SiteGroupsPage.php:138
+msgid "Enter site group name"
+msgstr ""
+
+#: src/Admin/Pages/SiteGroupsPage.php:156
+#: src/Admin/Pages/TranslationFieldsPage.php:151
+#: src/Admin/Tables/TranslationRelationTable.php:64
+msgid "Name"
+msgstr ""
+
+#: src/Admin/Pages/SiteGroupsPage.php:157
+#: src/Admin/Tables/TaskChainTable.php:58
+msgid "Type"
+msgstr ""
+
+#: src/Admin/Pages/SiteGroupsPage.php:159
+#: src/Admin/Pages/SiteGroupsPage.php:334
+msgid "Canonical Redirect"
+msgstr ""
+
+#: src/Admin/Pages/SiteGroupsPage.php:160
+#: src/Admin/Pages/SiteGroupsPage.php:183
+msgid "Directory"
+msgstr ""
+
+#: src/Admin/Pages/SiteGroupsPage.php:161
+msgid "Site count"
+msgstr ""
+
+#: src/Admin/Pages/SiteGroupsPage.php:163
+#: src/Admin/Tables/TaskChainTable.php:61
+#: src/Admin/Tables/TaskListTable.php:100
+#: src/Admin/Tables/TranslationRulesTable.php:77
+msgid "Created at"
+msgstr ""
+
+#: src/Admin/Pages/SiteGroupsPage.php:164
+#: src/Admin/Pages/SiteListPage.php:1053
+#: src/Admin/Pages/ThemeTranslationPage.php:499
+#: src/Admin/Tables/LlmModelTable.php:52
+#: src/Admin/Tables/TaskChainTable.php:62
+#: src/Admin/Tables/TaskListTable.php:101
+#: src/Admin/Tables/TranslationRulesTable.php:78
+#: src/Admin/Tables/TranslationRulesTable.php:88
+msgid "Actions"
+msgstr ""
+
+#: src/Admin/Pages/SiteGroupsPage.php:169
+#: src/Admin/Pages/SiteListPage.php:991
+#: src/Admin/Pages/SiteListPage.php:1028
+msgid "No site groups have been created yet."
+msgstr ""
+
+#: src/Admin/Pages/SiteGroupsPage.php:183
+msgid "Multisite"
+msgstr ""
+
+#: src/Admin/Pages/SiteGroupsPage.php:185
+msgid "Enabled"
+msgstr ""
+
+#: src/Admin/Pages/SiteGroupsPage.php:185
+msgid "Disabled"
+msgstr ""
+
+#: src/Admin/Pages/SiteGroupsPage.php:192
+msgid "Please make sure all child sites have been removed before deleting. Continue?"
+msgstr ""
+
+#: src/Admin/Pages/SiteGroupsPage.php:239
+#: src/Admin/Pages/SiteGroupsPage.php:795
+msgid "Missing site group ID."
+msgstr ""
+
+#: src/Admin/Pages/SiteGroupsPage.php:243
+#: src/Admin/Pages/SiteListPage.php:330
+#: src/Admin/Pages/SiteListPage.php:343
+msgid "Site group does not exist."
+msgstr ""
+
+#: src/Admin/Pages/SiteGroupsPage.php:262
+msgid "Edit Site Group"
+msgstr ""
+
+#: src/Admin/Pages/SiteGroupsPage.php:262
+msgid "Create Site Group"
+msgstr ""
+
+#: src/Admin/Pages/SiteGroupsPage.php:293
+msgid "Multisite (subdomain)"
+msgstr ""
+
+#: src/Admin/Pages/SiteGroupsPage.php:293
+msgid "Multisite (subdirectory)"
+msgstr ""
+
+#: src/Admin/Pages/SiteGroupsPage.php:305
+msgid "Site group name"
+msgstr ""
+
+#: src/Admin/Pages/SiteGroupsPage.php:309
+#: src/Admin/Pages/ThemeTemplateTagsPage.php:100
+msgid "Site group type"
+msgstr ""
+
+#: src/Admin/Pages/SiteGroupsPage.php:312
+msgid "Directory (virtual sites)"
+msgstr ""
+
+#: src/Admin/Pages/SiteGroupsPage.php:315
+msgid "WordPress multisite is not enabled. This type cannot be selected."
+msgstr ""
+
+#: src/Admin/Pages/SiteGroupsPage.php:317
+msgid "Please network-activate the wpmmcc plugin before creating multisite groups."
+msgstr ""
+
+#: src/Admin/Pages/SiteGroupsPage.php:330
+msgid "For directory groups select the current site; for multisite groups select the real main site blog_id."
+msgstr ""
+
+#: src/Admin/Pages/SiteGroupsPage.php:338
+msgid "Enable canonical redirect for URLs with extra path segments"
+msgstr ""
+
+#: src/Admin/Pages/SiteGroupsPage.php:340
+msgid "When enabled, URLs with extra path segments will be 301 redirected to the correct URL. If no match is found, a 404 will be returned."
+msgstr ""
+
+#: src/Admin/Pages/SiteGroupsPage.php:344
+msgid "Site group directory"
+msgstr ""
+
+#: src/Admin/Pages/SiteGroupsPage.php:347
+msgid "Only lowercase letters, digits and hyphens are allowed. Invalid characters will be normalised. Leave empty to skip a directory prefix."
+msgstr ""
+
+#: src/Admin/Pages/SiteGroupsPage.php:351
+msgid "Site group description"
+msgstr ""
+
+#: src/Admin/Pages/SiteGroupsPage.php:358
+msgid "Save site group"
+msgstr ""
+
+#: src/Admin/Pages/SiteGroupsPage.php:440
+msgid "No eligible main site"
+msgstr ""
+
+#. translators: %d: WordPress site ID.
+#. translators: %d: site ID
+#: src/Admin/Pages/SiteGroupsPage.php:497
+#: src/Admin/Pages/SiteListPage.php:1777
+#, php-format
+msgid "Site ID %d"
+msgstr ""
+
+#. translators: 1: Site URL, 2: WordPress site ID.
+#. translators: 1: Site name, 2: WordPress site ID.
+#. translators: 1: Site type label, 2: WP site ID.
+#: src/Admin/Pages/SiteGroupsPage.php:502
+#: src/Admin/Pages/SiteGroupsPage.php:507
+#: src/Admin/Pages/SiteListPage.php:1570
+#, php-format
+msgid "%1$s · ID %2$d"
+msgstr ""
+
+#. translators: 1: Site name, 2: Site URL, 3: WordPress site ID.
+#: src/Admin/Pages/SiteGroupsPage.php:511
+#, php-format
+msgid "%1$s (%2$s) · ID %3$d"
+msgstr ""
+
+#: src/Admin/Pages/SiteGroupsPage.php:629
+msgid "Multisite is not enabled or the plugin is not network-activated. Cannot create multisite-based site group."
+msgstr ""
+
+#: src/Admin/Pages/SiteGroupsPage.php:693
+msgid "Site group name already exists. Please choose another."
+msgstr ""
+
+#: src/Admin/Pages/SiteGroupsPage.php:705
+msgid "Site group directory already exists. Please choose another."
+msgstr ""
+
+#: src/Admin/Pages/SiteGroupsPage.php:715
+msgid "The selected main site is already being used by another site group. Please select a different site."
+msgstr ""
+
+#: src/Admin/Pages/SiteGroupsPage.php:748
+msgid "Save not completed due to site group data save failure. Please try again."
+msgstr ""
+
+#: src/Admin/Pages/SiteGroupsPage.php:768
+msgid "Site group has been saved."
+msgstr ""
+
+#: src/Admin/Pages/SiteGroupsPage.php:806
+msgid "Please remove sites from the site group before deleting."
+msgstr ""
+
+#: src/Admin/Pages/SiteGroupsPage.php:821
+msgid "Site group has been deleted."
+msgstr ""
+
+#: src/Admin/Pages/SiteListPage.php:169
+#: src/Admin/Pages/SiteListPage.php:241
+msgid "Request payload is invalid."
+msgstr ""
+
+#: src/Admin/Pages/SiteListPage.php:234
+msgid "Missing field to update."
+msgstr ""
+
+#: src/Admin/Pages/SiteListPage.php:311
+msgid "Unsupported site field for translation."
+msgstr ""
+
+#: src/Admin/Pages/SiteListPage.php:320
+#: src/Admin/Pages/SiteListPage.php:437
+#: src/Translation/TranslationCoordinator.php:125
+msgid "Site does not exist."
+msgstr ""
+
+#: src/Admin/Pages/SiteListPage.php:324
+msgid "The main site does not require translation."
+msgstr ""
+
+#: src/Admin/Pages/SiteListPage.php:334
+msgid "Missing site group information."
+msgstr ""
+
+#: src/Admin/Pages/SiteListPage.php:338
+#: src/Admin/Pages/SiteListPage.php:850
+msgid "Please select a translation rule."
+msgstr ""
+
+#: src/Admin/Pages/SiteListPage.php:349
+msgid "The main site content is empty and cannot be translated."
+msgstr ""
+
+#: src/Admin/Pages/SiteListPage.php:359
+#: src/Translation/TranslationService.php:415
+msgid "The translation rule does not exist."
+msgstr ""
+
+#: src/Admin/Pages/SiteListPage.php:363
+msgid "The translation rule type does not match."
+msgstr ""
+
+#: src/Admin/Pages/SiteListPage.php:368
+msgid "Translation failed. Please try again later."
+msgstr ""
+
+#: src/Admin/Pages/SiteListPage.php:432
+msgid "Missing required parameters."
+msgstr ""
+
+#: src/Admin/Pages/SiteListPage.php:441
+msgid "The main site cannot be deleted."
+msgstr ""
+
+#: src/Admin/Pages/SiteListPage.php:546
+msgid "Site group information is missing."
+msgstr ""
+
+#: src/Admin/Pages/SiteListPage.php:551
+msgid "The specified site group does not exist."
+msgstr ""
+
+#: src/Admin/Pages/SiteListPage.php:560
+msgid "The site record could not be found."
+msgstr ""
+
+#: src/Admin/Pages/SiteListPage.php:634
+#: src/Admin/Pages/SiteListPage.php:760
+msgid "Failed to update the site. Please try again."
+msgstr ""
+
+#: src/Admin/Pages/SiteListPage.php:640
+#: src/Admin/Pages/SiteListPage.php:767
+msgid "Failed to create the site. Please try again."
+msgstr ""
+
+#: src/Admin/Pages/SiteListPage.php:739
+msgid "This translation rule is already used by another site in the group."
+msgstr ""
+
+#: src/Admin/Pages/SiteListPage.php:743
+msgid "This path is already used by another site in the group."
+msgstr ""
+
+#: src/Admin/Pages/SiteListPage.php:747
+msgid "The selected child site has already been linked to another record."
+msgstr ""
+
+#: src/Admin/Pages/SiteListPage.php:822
+msgid "Language code is required. Please enter a 2-5 character value (letters and hyphen only)."
+msgstr ""
+
+#: src/Admin/Pages/SiteListPage.php:827
+msgid "Language codes must be between 2 and 5 characters."
+msgstr ""
+
+#: src/Admin/Pages/SiteListPage.php:831
+msgid "Language codes can only contain letters and the \"-\" symbol (e.g. ZH, EN, ZH-CN)."
+msgstr ""
+
+#: src/Admin/Pages/SiteListPage.php:917
+msgid "Failed to sync the site title."
+msgstr ""
+
+#: src/Admin/Pages/SiteListPage.php:926
+msgid "Failed to sync the site subtitle."
+msgstr ""
+
+#: src/Admin/Pages/SiteListPage.php:1001
+msgid "Search sites"
+msgstr ""
+
+#: src/Admin/Pages/SiteListPage.php:1002
+msgid "Enter site title or path"
+msgstr ""
+
+#: src/Admin/Pages/SiteListPage.php:1030
+#: src/Admin/Pages/SiteListPage.php:1060
+msgid "This site group does not contain any sites yet."
+msgstr ""
+
+#: src/Admin/Pages/SiteListPage.php:1032
+#: src/Admin/Pages/SiteListPage.php:1060
+msgid "No sites matched your search."
+msgstr ""
+
+#: src/Admin/Pages/SiteListPage.php:1048
+msgid "Domain/Path"
+msgstr ""
+
+#: src/Admin/Pages/SiteListPage.php:1049
+msgid "Translation rule"
+msgstr ""
+
+#: src/Admin/Pages/SiteListPage.php:1050
+msgid "Site title"
+msgstr ""
+
+#: src/Admin/Pages/SiteListPage.php:1051
+msgid "Site subtitle"
+msgstr ""
+
+#: src/Admin/Pages/SiteListPage.php:1052
+msgid "Language code"
+msgstr ""
+
+#: src/Admin/Pages/SiteListPage.php:1058
+msgid "No site groups exist yet. Please create one on the “Site groups” page."
+msgstr ""
+
+#: src/Admin/Pages/SiteListPage.php:1088
+msgid "Add row"
+msgstr ""
+
+#. translators: 1: site name, 2: domain
+#. translators: 1: Translation rule name, 2: Rule type label.
+#: src/Admin/Pages/SiteListPage.php:1454
+#: src/Admin/Pages/SiteListPage.php:1533
+#: src/Admin/Pages/SiteListPage.php:1789
+#: src/Admin/Pages/ThemeTranslationPage.php:273
+#, php-format
+msgid "%1$s (%2$s)"
+msgstr ""
+
+#: src/Admin/Pages/SiteListPage.php:1519
+msgid "Main site does not require translation."
+msgstr ""
+
+#: src/Admin/Pages/SiteListPage.php:1523
+#: src/Admin/Pages/SiteListPage.php:1528
+#: src/Admin/Pages/ThemeTranslationPage.php:279
+msgid "Not configured"
+msgstr ""
+
+#. translators: 1: Site type label, 2: Site domain/path.
+#: src/Admin/Pages/SiteListPage.php:1566
+#, php-format
+msgid "%1$s · %2$s"
+msgstr ""
+
+#. translators: %d: WordPress site ID.
+#: src/Admin/Pages/SiteListPage.php:1583
+#, php-format
+msgid "Site ID: %d"
+msgstr ""
+
+#: src/Admin/Pages/SiteListPage.php:1600
+msgid "Please select the child site to bind."
+msgstr ""
+
+#: src/Admin/Pages/SiteListPage.php:1604
+msgid "Child sites cannot be identical to the main site."
+msgstr ""
+
+#: src/Admin/Pages/SiteListPage.php:1627
+msgid "Please enter a directory for the child site."
+msgstr ""
+
+#: src/Admin/Pages/SitemapPage.php:85
+#: src/Admin/Pages/TranslationManagementPage.php:95
+msgid "Posts"
+msgstr ""
+
+#: src/Admin/Pages/SitemapPage.php:86
+#: src/Admin/Pages/TranslationManagementPage.php:96
+msgid "Pages"
+msgstr ""
+
+#: src/Admin/Pages/SitemapPage.php:87
+#: src/Admin/Pages/TranslationManagementPage.php:99
+#: src/Admin/Tables/TranslationRelationTable.php:101
+msgid "Media"
+msgstr ""
+
+#: src/Admin/Pages/SitemapPage.php:88
+#: src/Admin/Pages/TranslationFieldsPage.php:142
+#: src/Admin/Pages/TranslationManagementPage.php:97
+msgid "Categories"
+msgstr ""
+
+#: src/Admin/Pages/SitemapPage.php:89
+#: src/Admin/Pages/TranslationFieldsPage.php:143
+#: src/Admin/Pages/TranslationManagementPage.php:98
+msgid "Tags"
+msgstr ""
+
+#: src/Admin/Pages/SitemapPage.php:90
+msgid "Archives"
+msgstr ""
+
+#: src/Admin/Pages/SitemapPage.php:91
+msgid "Authors"
+msgstr ""
+
+#: src/Admin/Pages/SitemapPage.php:102
+msgid "All site (single sitemap)"
+msgstr ""
+
+#: src/Admin/Pages/SitemapPage.php:103
+msgid "By content type (multiple sitemaps)"
+msgstr ""
+
+#: src/Admin/Pages/SitemapPage.php:112
+msgid "Date descending (newest first)"
+msgstr ""
+
+#: src/Admin/Pages/SitemapPage.php:113
+msgid "Date ascending (oldest first)"
+msgstr ""
+
+#: src/Admin/Pages/SitemapPage.php:150
+msgid "Select site group"
+msgstr ""
+
+#: src/Admin/Pages/SitemapPage.php:159
+msgid "Select site"
+msgstr ""
+
+#: src/Admin/Pages/SitemapPage.php:162
+msgid "No sites available"
+msgstr ""
+
+#: src/Admin/Pages/SitemapPage.php:174
+msgid "Output format"
+msgstr ""
+
+#: src/Admin/Pages/SitemapPage.php:183
+msgid "URLs per sitemap"
+msgstr ""
+
+#: src/Admin/Pages/SitemapPage.php:190
+msgid "Generation mode"
+msgstr ""
+
+#: src/Admin/Pages/SitemapPage.php:197
+msgid "All site: generate a single sitemap containing all URLs. By content type: generate separate sitemaps for each content type."
+msgstr ""
+
+#: src/Admin/Pages/SitemapPage.php:202
+msgid "Sort order"
+msgstr ""
+
+#: src/Admin/Pages/SitemapPage.php:209
+msgid "Determines the order of URLs in the generated sitemap."
+msgstr ""
+
+#: src/Admin/Pages/SitemapPage.php:215
+msgid "Custom directory prefix (optional)"
+msgstr ""
+
+#: src/Admin/Pages/SitemapPage.php:223
+msgid "e.g. sitemap"
+msgstr ""
+
+#: src/Admin/Pages/SitemapPage.php:226
+msgid "Used only for pretty URLs in previews. Appended after the site root; maximum length 8; letters, numbers, underscores and dashes only."
+msgstr ""
+
+#: src/Admin/Pages/SitemapPage.php:231
+msgid "Content types"
+msgstr ""
+
+#: src/Admin/Pages/SitemapPage.php:270
+msgid "loc (required)"
+msgstr ""
+
+#: src/Admin/Pages/SitemapPage.php:274
+msgid "lastmod (last modified time)"
+msgstr ""
+
+#: src/Admin/Pages/SitemapPage.php:278
+msgid "changefreq (update frequency, optional hint)"
+msgstr ""
+
+#: src/Admin/Pages/SitemapPage.php:282
+msgid "priority (priority, optional hint)"
+msgstr ""
+
+#: src/Admin/Pages/SitemapPage.php:290
+msgid "XML node configuration"
+msgstr ""
+
+#: src/Admin/Pages/SitemapPage.php:309
+msgid "The loc node is required; lastmod / changefreq / priority are optional hints that can be enabled as needed."
+msgstr ""
+
+#: src/Admin/Pages/SitemapPage.php:316
+msgid "Generate sitemap links"
+msgstr ""
+
+#: src/Admin/Pages/SitemapPage.php:322
+msgid "Refresh preview"
+msgstr ""
+
+#: src/Admin/Pages/SitemapPage.php:331
+msgid "Please select at least one content type to generate."
+msgstr ""
+
+#: src/Admin/Pages/SitemapPage.php:332
+msgid "Generated sitemap links (pretty URL preview)"
+msgstr ""
+
+#: src/Admin/Pages/SitesPage.php:65
+msgid "Site groups"
+msgstr ""
+
+#: src/Admin/Pages/SitesPage.php:71
+msgid "Site list"
+msgstr ""
+
+#: src/Admin/Pages/SitesPage.php:77
+#: src/Admin/Pages/TranslationFieldsPage.php:67
+msgid "Translation fields"
+msgstr ""
+
+#: src/Admin/Pages/SitesPage.php:111
+msgid "Add site group"
+msgstr ""
+
+#: src/Admin/Pages/SitesPage.php:125
+msgid "Add SEO field"
+msgstr ""
+
+#: src/Admin/Pages/SitesPage.php:131
+msgid "Site management navigation"
+msgstr ""
+
+#: src/Admin/Pages/TaskListPage.php:160
+msgid "All Sites"
+msgstr ""
+
+#: src/Admin/Pages/TaskListPage.php:335
+#: src/Admin/Pages/TaskListPage.php:827
+msgid "Missing task ID."
+msgstr ""
+
+#: src/Admin/Pages/TaskListPage.php:340
+msgid "Task does not exist."
+msgstr ""
+
+#: src/Admin/Pages/TaskListPage.php:425
+msgid "Task Logs"
+msgstr ""
+
+#: src/Admin/Pages/TaskListPage.php:427
+#: src/Admin/Pages/TaskListPage.php:759
+msgid "Back to Task List"
+msgstr ""
+
+#: src/Admin/Pages/TaskListPage.php:443
+msgid "Are you sure you want to retry this task?"
+msgstr ""
+
+#: src/Admin/Pages/TaskListPage.php:444
+msgid "Retry Task"
+msgstr ""
+
+#: src/Admin/Pages/TaskListPage.php:451
+msgid "Task Chain Stages"
+msgstr ""
+
+#. translators: %s: Task stage letter.
+#. translators: %s: stage number
+#. translators: %s: stage letter (A, B, C, etc.)
+#. translators: %s: stage letter
+#: src/Admin/Pages/TaskListPage.php:457
+#: src/Admin/Pages/TaskListPage.php:546
+#: src/Admin/Tables/TaskListTable.php:507
+#: src/Tasks/TaskStageHelper.php:245
+#: src/Tasks/TaskStageHelper.php:314
+#: src/Tasks/TaskStageHelper.php:342
+#, php-format
+msgid "Stage %s"
+msgstr ""
+
+#. translators: %d: Number of tasks within the stage.
+#: src/Admin/Pages/TaskListPage.php:467
+#, php-format
+msgid "(%d tasks)"
+msgstr ""
+
+#. translators: 1: Total log entries, 2: Current page, 3: Total pages.
+#: src/Admin/Pages/TaskListPage.php:480
+#, php-format
+msgid "Total %1$s log records, page %2$s of %3$s"
+msgstr ""
+
+#: src/Admin/Pages/TaskListPage.php:491
+msgid "Time"
+msgstr ""
+
+#: src/Admin/Pages/TaskListPage.php:492
+#: src/Admin/Tables/TaskChainTable.php:57
+#: src/Admin/Tables/TaskListTable.php:94
+msgid "Task ID"
+msgstr ""
+
+#: src/Admin/Pages/TaskListPage.php:493
+msgid "Task Status"
+msgstr ""
+
+#: src/Admin/Pages/TaskListPage.php:494
+#: src/Admin/Tables/TaskChainTable.php:56
+msgid "Stage"
+msgstr ""
+
+#: src/Admin/Pages/TaskListPage.php:495
+msgid "Message"
+msgstr ""
+
+#: src/Admin/Pages/TaskListPage.php:496
+msgid "Context"
+msgstr ""
+
+#: src/Admin/Pages/TaskListPage.php:503
+msgid "No log records available for this task. Logs may not have been generated yet or have been cleared."
+msgstr ""
+
+#: src/Admin/Pages/TaskListPage.php:529
+#: src/Admin/Pages/TaskListPage.php:795
+#: src/Admin/Pages/TaskListPage.php:940
+msgid "In Progress"
+msgstr ""
+
+#: src/Admin/Pages/TaskListPage.php:562
+msgid "None"
+msgstr ""
+
+#: src/Admin/Pages/TaskListPage.php:569
+msgid "View Details"
+msgstr ""
+
+#. translators: %s: Formatted count of log entries.
+#. translators: %s: Formatted count of translation records.
+#: src/Admin/Pages/TaskListPage.php:606
+#: src/Admin/Pages/ThemeTranslationPage.php:529
+#, php-format
+msgid "%s item"
+msgid_plural "%s items"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/Admin/Pages/TaskListPage.php:617
+#: src/Admin/Pages/TaskListPage.php:623
+#: src/Admin/Pages/ThemeTranslationPage.php:540
+#: src/Admin/Pages/ThemeTranslationPage.php:546
+msgid "First page"
+msgstr ""
+
+#: src/Admin/Pages/TaskListPage.php:633
+#: src/Admin/Pages/TaskListPage.php:639
+#: src/Admin/Pages/ThemeTranslationPage.php:556
+#: src/Admin/Pages/ThemeTranslationPage.php:562
+msgid "Previous page"
+msgstr ""
+
+#. translators: 1: current page, 2: total pages.
+#: src/Admin/Pages/TaskListPage.php:648
+#: src/Admin/Pages/ThemeTranslationPage.php:571
+#, php-format
+msgid "%1$s of %2$s"
+msgstr ""
+
+#: src/Admin/Pages/TaskListPage.php:662
+#: src/Admin/Pages/TaskListPage.php:668
+#: src/Admin/Pages/ThemeTranslationPage.php:585
+#: src/Admin/Pages/ThemeTranslationPage.php:591
+msgid "Next page"
+msgstr ""
+
+#: src/Admin/Pages/TaskListPage.php:678
+#: src/Admin/Pages/TaskListPage.php:684
+#: src/Admin/Pages/ThemeTranslationPage.php:601
+#: src/Admin/Pages/ThemeTranslationPage.php:607
+msgid "Last page"
+msgstr ""
+
+#: src/Admin/Pages/TaskListPage.php:745
+msgid "Missing task chain identifier."
+msgstr ""
+
+#: src/Admin/Pages/TaskListPage.php:757
+msgid "Task Chain Details"
+msgstr ""
+
+#: src/Admin/Pages/TaskListPage.php:763
+msgid "Chain Statistics"
+msgstr ""
+
+#. translators: %d: Total number of tasks in the chain.
+#: src/Admin/Pages/TaskListPage.php:767
+#, php-format
+msgid "Total tasks: %d"
+msgstr ""
+
+#. translators: 1: Task status label, 2: Count.
+#: src/Admin/Pages/TaskListPage.php:773
+#, php-format
+msgid "%1$s: %2$d"
+msgstr ""
+
+#: src/Admin/Pages/TaskListPage.php:841
+msgid "Task canceled."
+msgstr ""
+
+#: src/Admin/Pages/TaskListPage.php:845
+msgid "Task added to immediate execution queue."
+msgstr ""
+
+#: src/Admin/Pages/TaskListPage.php:847
+msgid "Unable to execute task immediately, please try again later."
+msgstr ""
+
+#: src/Admin/Pages/TaskListPage.php:854
+msgid "Task has been requeued."
+msgstr ""
+
+#: src/Admin/Pages/TaskListPage.php:858
+msgid "Task and its logs have been deleted."
+msgstr ""
+
+#: src/Admin/Pages/TaskListPage.php:860
+msgid "Task deletion failed, it may still be running."
+msgstr ""
+
+#: src/Admin/Pages/TaskListPage.php:908
+msgid "Post Translation"
+msgstr ""
+
+#: src/Admin/Pages/TaskListPage.php:909
+msgid "Page Translation"
+msgstr ""
+
+#: src/Admin/Pages/TaskListPage.php:910
+msgid "Category Translation"
+msgstr ""
+
+#: src/Admin/Pages/TaskListPage.php:911
+msgid "Tag Translation"
+msgstr ""
+
+#: src/Admin/Pages/TaskListPage.php:912
+msgid "Theme Translation"
+msgstr ""
+
+#. translators: %d: Site ID.
+#. translators: %d: site ID
+#: src/Admin/Pages/TaskListPage.php:980
+#: src/Admin/Tables/TaskListTable.php:167
+#: src/Admin/Tables/TaskListTable.php:274
+#, php-format
+msgid "Site #%d"
+msgstr ""
+
+#: src/Admin/Pages/TaskListPage.php:1100
+msgid "Insufficient permissions"
+msgstr ""
+
+#: src/Admin/Pages/TaskListPage.php:1107
+msgid "Nonce verification failed"
+msgstr ""
+
+#: src/Admin/Pages/TaskListPage.php:1118
+msgid "All tasks completed, no processing needed"
+msgstr ""
+
+#. translators: %d: Number of tasks pending in queue.
+#: src/Admin/Pages/TaskListPage.php:1131
+#, php-format
+msgid "Task queue is running automatically, %d tasks pending"
+msgstr ""
+
+#: src/Admin/Pages/TaskListPage.php:1146
+msgid "Action Scheduler not loaded"
+msgstr ""
+
+#: src/Admin/Pages/TaskListPage.php:1156
+msgid "Action Scheduler unavailable"
+msgstr ""
+
+#. translators: 1: Number of batches, 2: Total processed tasks, 3: Duration in seconds.
+#: src/Admin/Pages/TaskListPage.php:1234
+#, php-format
+msgid "Queue processing complete! Executed %1$d batches, processed %2$d tasks in %3$.2f seconds"
+msgstr ""
+
+#. translators: %d: Remaining tasks.
+#: src/Admin/Pages/TaskListPage.php:1243
+#, php-format
+msgid " (%d tasks still pending)"
+msgstr ""
+
+#. translators: %s: Error message.
+#: src/Admin/Pages/TaskListPage.php:1261
+#, php-format
+msgid "Queue processing failed: %s"
+msgstr ""
+
+#: src/Admin/Pages/TaskListPage.php:1299
+msgid "Processing..."
+msgstr ""
+
+#: src/Admin/Pages/TaskListPage.php:1300
+msgid "Error:"
+msgstr ""
+
+#: src/Admin/Pages/TaskListPage.php:1301
+#: src/Translation/MachineTranslationVendorTester.php:192
+msgid "Unknown error"
+msgstr ""
+
+#: src/Admin/Pages/TaskListPage.php:1302
+#: src/Admin/Tables/TaskListTable.php:538
+msgid "Retry"
+msgstr ""
+
+#: src/Admin/Pages/TaskListPage.php:1304
+msgid "Request timed out; the queue may still be processing in the background."
+msgstr ""
+
+#: src/Admin/Pages/TaskListPage.php:1305
+msgid "Network connection error. Please check your connection."
+msgstr ""
+
+#: src/Admin/Pages/TaskListPage.php:1306
+msgid "Server error"
+msgstr ""
+
+#: src/Admin/Pages/TasksPage.php:41
+msgid "Task list"
+msgstr ""
+
+#: src/Admin/Pages/TasksPage.php:47
+msgid "Task settings"
+msgstr ""
+
+#: src/Admin/Pages/TasksPage.php:62
+msgid "Tasks navigation"
+msgstr ""
+
+#: src/Admin/Pages/ThemePage.php:77
+#: src/Admin/Pages/ThemeTranslationPage.php:297
+msgid "Theme translations"
+msgstr ""
+
+#: src/Admin/Pages/ThemePage.php:83
+msgid "Template tags"
+msgstr ""
+
+#: src/Admin/Pages/ThemePage.php:98
+msgid "Theme tools navigation"
+msgstr ""
+
+#: src/Admin/Pages/ThemeTemplateTagsPage.php:75
+msgid "Directory mode site groups"
+msgstr ""
+
+#: src/Admin/Pages/ThemeTemplateTagsPage.php:76
+msgid "Directory mode manages multilingual content under a single WordPress site, using subdirectories to distinguish languages."
+msgstr ""
+
+#: src/Admin/Pages/ThemeTemplateTagsPage.php:80
+msgid "Multisite mode"
+msgstr ""
+
+#: src/Admin/Pages/ThemeTemplateTagsPage.php:81
+msgid "Multisite mode uses WordPress network sites, with an individual child site for each language."
+msgstr ""
+
+#: src/Admin/Pages/ThemeTemplateTagsPage.php:101
+msgid "The site group type identifies how multilingual sites are organized on the current page. Directory groups return \\\"directory\\\" and multisite groups return \\\"multisite\\\"."
+msgstr ""
+
+#: src/Admin/Pages/ThemeTemplateTagsPage.php:104
+msgid "Current site group type"
+msgstr ""
+
+#: src/Admin/Pages/ThemeTemplateTagsPage.php:105
+msgid "Automatically returns directory or multisite based on the current site. Useful for hints or composing CSS class names."
+msgstr ""
+
+#: src/Admin/Pages/ThemeTemplateTagsPage.php:108
+#: src/Admin/Pages/ThemeTemplateTagsPage.php:135
+#: src/Admin/Pages/ThemeTemplateTagsPage.php:183
+msgid "PHP template"
+msgstr ""
+
+#: src/Admin/Pages/ThemeTemplateTagsPage.php:110
+msgid "Output the site group type directly in theme templates with HTML escaping applied."
+msgstr ""
+
+#: src/Admin/Pages/ThemeTemplateTagsPage.php:113
+#: src/Admin/Pages/ThemeTemplateTagsPage.php:140
+#: src/Admin/Pages/ThemeTemplateTagsPage.php:166
+#: src/Admin/Pages/ThemeTemplateTagsPage.php:188
+msgid "Shortcode"
+msgstr ""
+
+#: src/Admin/Pages/ThemeTemplateTagsPage.php:115
+msgid "Insert the site group type text into classic editor or shortcode blocks."
+msgstr ""
+
+#: src/Admin/Pages/ThemeTemplateTagsPage.php:118
+msgid "Filter example"
+msgstr ""
+
+#: src/Admin/Pages/ThemeTemplateTagsPage.php:120
+msgid "Write the site group type into the body class so that styles can differ by mode."
+msgstr ""
+
+#: src/Admin/Pages/ThemeTemplateTagsPage.php:127
+msgid "Current site language"
+msgstr ""
+
+#: src/Admin/Pages/ThemeTemplateTagsPage.php:128
+msgid "The current site language returns the language code configured in the site list (2–4 characters, letters and hyphen only). It can be used for conditional rendering or marking the current language on the page."
+msgstr ""
+
+#: src/Admin/Pages/ThemeTemplateTagsPage.php:131
+msgid "Current language code"
+msgstr ""
+
+#: src/Admin/Pages/ThemeTemplateTagsPage.php:132
+msgid "Returns the language code of the current site in real time."
+msgstr ""
+
+#: src/Admin/Pages/ThemeTemplateTagsPage.php:137
+msgid "Output the language code in templates, for example zh-CN."
+msgstr ""
+
+#: src/Admin/Pages/ThemeTemplateTagsPage.php:142
+msgid "Display the current language via shortcode within pages or widgets."
+msgstr ""
+
+#: src/Admin/Pages/ThemeTemplateTagsPage.php:145
+msgid "Data attribute"
+msgstr ""
+
+#: src/Admin/Pages/ThemeTemplateTagsPage.php:147
+msgid "Output to a custom data attribute that front-end scripts can use for additional logic."
+msgstr ""
+
+#: src/Admin/Pages/ThemeTemplateTagsPage.php:152
+msgid "Language item data"
+msgstr ""
+
+#: src/Admin/Pages/ThemeTemplateTagsPage.php:153
+msgid "Return an array of switchable sites, which can be used for custom navigation or API responses."
+msgstr ""
+
+#: src/Admin/Pages/ThemeTemplateTagsPage.php:156
+msgid "PHP array"
+msgstr ""
+
+#: src/Admin/Pages/ThemeTemplateTagsPage.php:158
+msgid "Iterate over the returned language array and render the required HTML yourself."
+msgstr ""
+
+#: src/Admin/Pages/ThemeTemplateTagsPage.php:161
+msgid "JSON output"
+msgstr ""
+
+#: src/Admin/Pages/ThemeTemplateTagsPage.php:163
+msgid "Quickly output the language array as a JSON string for front-end scripts."
+msgstr ""
+
+#: src/Admin/Pages/ThemeTemplateTagsPage.php:168
+msgid "Output JSON via shortcode. When format=raw, returns PHP var_export style text."
+msgstr ""
+
+#: src/Admin/Pages/ThemeTemplateTagsPage.php:175
+msgid "Site navigation"
+msgstr ""
+
+#: src/Admin/Pages/ThemeTemplateTagsPage.php:176
+msgid "Site navigation provides language switchers for visitors. You can use the default list or customize rendering based on the language array."
+msgstr ""
+
+#: src/Admin/Pages/ThemeTemplateTagsPage.php:179
+msgid "Default language switcher"
+msgstr ""
+
+#: src/Admin/Pages/ThemeTemplateTagsPage.php:180
+msgid "Output a list with the current language highlighted."
+msgstr ""
+
+#: src/Admin/Pages/ThemeTemplateTagsPage.php:185
+msgid "Outputs an <ul> list by default. Use parameters to customize the container and classes."
+msgstr ""
+
+#: src/Admin/Pages/ThemeTemplateTagsPage.php:190
+msgid "Quickly insert the language switcher via shortcode. Supports parameters like container, class, show_current and more."
+msgstr ""
+
+#: src/Admin/Pages/ThemeTemplateTagsPage.php:193
+msgid "Block example"
+msgstr ""
+
+#: src/Admin/Pages/ThemeTemplateTagsPage.php:195
+msgid "Insert a shortcode block in the block editor to reuse the language switcher."
+msgstr ""
+
+#: src/Admin/Pages/ThemeTemplateTagsPage.php:205
+msgid "Template tags collect the most common output helpers for multilingual sites. Copy the code snippets into your theme where needed."
+msgstr ""
+
+#: src/Admin/Pages/ThemeTemplateTagsPage.php:237
+msgid "Usage"
+msgstr ""
+
+#: src/Admin/Pages/ThemeTemplateTagsPage.php:279
+msgid "Usage code"
+msgstr ""
+
+#: src/Admin/Pages/ThemeTemplateTagsPage.php:282
+#: src/Admin/Pages/ThemeTemplateTagsPage.php:317
+msgid "Copy code"
+msgstr ""
+
+#: src/Admin/Pages/ThemeTemplateTagsPage.php:316
+msgid "Copied"
+msgstr ""
+
+#. translators: %d: Translation rule ID.
+#: src/Admin/Pages/ThemeTranslationPage.php:266
+#, php-format
+msgid "Rule #%d"
+msgstr ""
+
+#. translators: %d: Translation rule ID.
+#: src/Admin/Pages/ThemeTranslationPage.php:276
+#, php-format
+msgid "Rule missing (#%d)"
+msgstr ""
+
+#: src/Admin/Pages/ThemeTranslationPage.php:311
+msgid "Select child site"
+msgstr ""
+
+#: src/Admin/Pages/ThemeTranslationPage.php:312
+#: src/Admin/Pages/ThemeTranslationPage.php:313
+msgid "Select a site"
+msgstr ""
+
+#: src/Admin/Pages/ThemeTranslationPage.php:331
+msgid "Main site theme"
+msgstr ""
+
+#: src/Admin/Pages/ThemeTranslationPage.php:332
+msgid "Unknown theme"
+msgstr ""
+
+#: src/Admin/Pages/ThemeTranslationPage.php:333
+msgid "Main site URL"
+msgstr ""
+
+#: src/Admin/Pages/ThemeTranslationPage.php:334
+#: src/Admin/Pages/ThemeTranslationPage.php:336
+#: src/Admin/Pages/ThemeTranslationPage.php:342
+#: src/Admin/Pages/ThemeTranslationPage.php:344
+#: src/Admin/Pages/ThemeTranslationPage.php:346
+#: src/Admin/Pages/ThemeTranslationPage.php:348
+msgid "No data"
+msgstr ""
+
+#: src/Admin/Pages/ThemeTranslationPage.php:335
+msgid "Main site ID"
+msgstr ""
+
+#: src/Admin/Pages/ThemeTranslationPage.php:337
+msgid "Last scan time"
+msgstr ""
+
+#: src/Admin/Pages/ThemeTranslationPage.php:338
+msgid "No records yet"
+msgstr ""
+
+#: src/Admin/Pages/ThemeTranslationPage.php:341
+msgid "Current child site URL"
+msgstr ""
+
+#: src/Admin/Pages/ThemeTranslationPage.php:343
+msgid "Child site title"
+msgstr ""
+
+#: src/Admin/Pages/ThemeTranslationPage.php:345
+msgid "Child site translation rule"
+msgstr ""
+
+#: src/Admin/Pages/ThemeTranslationPage.php:347
+msgid "Child site ID"
+msgstr ""
+
+#: src/Admin/Pages/ThemeTranslationPage.php:354
+msgid "There are no available target sites in this group. Please add child sites on the Sites page first."
+msgstr ""
+
+#: src/Admin/Pages/ThemeTranslationPage.php:356
+msgid "Please select a child site before creating a scan task."
+msgstr ""
+
+#: src/Admin/Pages/ThemeTranslationPage.php:365
+msgid "Scan strategy"
+msgstr ""
+
+#: src/Admin/Pages/ThemeTranslationPage.php:366
+msgid "Overwrite existing translations"
+msgstr ""
+
+#: src/Admin/Pages/ThemeTranslationPage.php:367
+msgid "Only add new content"
+msgstr ""
+
+#: src/Admin/Pages/ThemeTranslationPage.php:372
+msgid "Scan and translate"
+msgstr ""
+
+#: src/Admin/Pages/ThemeTranslationPage.php:375
+msgid "Are you sure you want to delete all theme translations for this child site? This operation cannot be undone."
+msgstr ""
+
+#: src/Admin/Pages/ThemeTranslationPage.php:376
+msgid "Delete theme translations"
+msgstr ""
+
+#: src/Admin/Pages/ThemeTranslationPage.php:378
+msgid "Add manually"
+msgstr ""
+
+#: src/Admin/Pages/ThemeTranslationPage.php:382
+msgid "Add translations manually"
+msgstr ""
+
+#: src/Admin/Pages/ThemeTranslationPage.php:386
+msgid "Source identifier"
+msgstr ""
+
+#: src/Admin/Pages/ThemeTranslationPage.php:388
+msgid "Used to distinguish this manual translation entry. Please fill this field."
+msgstr ""
+
+#: src/Admin/Pages/ThemeTranslationPage.php:395
+#: src/Admin/Pages/ThemeTranslationPage.php:431
+#: src/Admin/Pages/ThemeTranslationPage.php:498
+msgid "Translated content"
+msgstr ""
+
+#: src/Admin/Pages/ThemeTranslationPage.php:399
+msgid "Save manual translation"
+msgstr ""
+
+#: src/Admin/Pages/ThemeTranslationPage.php:410
+msgid "The current site does not have a language code configured, so translations cannot be edited."
+msgstr ""
+
+#: src/Admin/Pages/ThemeTranslationPage.php:420
+msgid "Edit translation"
+msgstr ""
+
+#: src/Admin/Pages/ThemeTranslationPage.php:442
+msgid "Translation results"
+msgstr ""
+
+#. translators: %s: Description of searchable fields.
+#: src/Admin/Pages/ThemeTranslationPage.php:451
+#, php-format
+msgid "Search within (%s)"
+msgstr ""
+
+#. translators: %s: Description of searchable fields.
+#: src/Admin/Pages/ThemeTranslationPage.php:451
+msgid "Source / original / translated content"
+msgstr ""
+
+#: src/Admin/Pages/ThemeTranslationPage.php:453
+msgid "Search source, original or translated content"
+msgstr ""
+
+#: src/Admin/Pages/ThemeTranslationPage.php:496
+msgid "Source"
+msgstr ""
+
+#: src/Admin/Pages/ThemeTranslationPage.php:505
+msgid "No translation records yet."
+msgstr ""
+
+#: src/Admin/Pages/ThemeTranslationPage.php:631
+#: src/Admin/Pages/ThemeTranslationPage.php:924
+#: src/Admin/Pages/ThemeTranslationPage.php:963
+msgid "Security check failed. Please try again."
+msgstr ""
+
+#: src/Admin/Pages/ThemeTranslationPage.php:635
+msgid "Please select a valid site group before scanning."
+msgstr ""
+
+#: src/Admin/Pages/ThemeTranslationPage.php:643
+msgid "Invalid site group parameter."
+msgstr ""
+
+#: src/Admin/Pages/ThemeTranslationPage.php:658
+msgid "This site group does not have a main site configured. Unable to scan theme."
+msgstr ""
+
+#: src/Admin/Pages/ThemeTranslationPage.php:662
+msgid "Please select a valid child site before submitting the task."
+msgstr ""
+
+#: src/Admin/Pages/ThemeTranslationPage.php:674
+#: src/Admin/Pages/ThemeTranslationPage.php:846
+msgid "The selected child site is invalid or has been removed."
+msgstr ""
+
+#: src/Admin/Pages/ThemeTranslationPage.php:682
+msgid "Unable to detect the theme of the main site. Please verify the site configuration."
+msgstr ""
+
+#. translators: %s: Site label.
+#: src/Admin/Pages/ThemeTranslationPage.php:708
+#, php-format
+msgid "Site %s does not have a translation rule configured and has been skipped."
+msgstr ""
+
+#. translators: %s: Site label.
+#: src/Admin/Pages/ThemeTranslationPage.php:713
+#, php-format
+msgid "The translation rule for site %s does not exist or has been deleted."
+msgstr ""
+
+#. translators: %s: Site label.
+#: src/Admin/Pages/ThemeTranslationPage.php:733
+#, php-format
+msgid "Failed to create theme translation task for site %s."
+msgstr ""
+
+#. translators: %d: Number of tasks created.
+#: src/Admin/Pages/ThemeTranslationPage.php:743
+#, php-format
+msgid "Successfully created %d theme translation master task(s). The system will automatically split and execute them."
+msgstr ""
+
+#: src/Admin/Pages/ThemeTranslationPage.php:752
+msgid "No tasks were created. Please verify the site and translation rule configuration."
+msgstr ""
+
+#: src/Admin/Pages/ThemeTranslationPage.php:808
+msgid "Security check failed while deleting theme translations."
+msgstr ""
+
+#: src/Admin/Pages/ThemeTranslationPage.php:820
+msgid "Invalid site group or child site. Please refresh the page and try again."
+msgstr ""
+
+#: src/Admin/Pages/ThemeTranslationPage.php:829
+msgid "There are no available target sites in this group."
+msgstr ""
+
+#: src/Admin/Pages/ThemeTranslationPage.php:880
+msgid "Failed to enqueue theme translation delete task. Please try again later."
+msgstr ""
+
+#. translators: 1: site label, 2: task ID
+#: src/Admin/Pages/ThemeTranslationPage.php:903
+#, php-format
+msgid "Theme translation delete task (ID #%2$d) has been queued for child site %1$s. You can monitor its progress on the Tasks page."
+msgstr ""
+
+#: src/Admin/Pages/ThemeTranslationPage.php:909
+msgid "View tasks"
+msgstr ""
+
+#: src/Admin/Pages/ThemeTranslationPage.php:929
+#: src/Admin/Pages/ThemeTranslationPage.php:968
+msgid "Invalid translation record."
+msgstr ""
+
+#: src/Admin/Pages/ThemeTranslationPage.php:934
+msgid "Translation record not found."
+msgstr ""
+
+#: src/Admin/Pages/ThemeTranslationPage.php:942
+msgid "Missing language identifier. Cannot save translation."
+msgstr ""
+
+#: src/Admin/Pages/ThemeTranslationPage.php:948
+msgid "Failed to save translation. Please try again."
+msgstr ""
+
+#: src/Admin/Pages/ThemeTranslationPage.php:951
+msgid "Translation has been saved."
+msgstr ""
+
+#: src/Admin/Pages/ThemeTranslationPage.php:972
+msgid "Failed to delete translation record. Please try again later."
+msgstr ""
+
+#: src/Admin/Pages/ThemeTranslationPage.php:975
+msgid "Translation record has been deleted."
+msgstr ""
+
+#: src/Admin/Pages/ThemeTranslationPage.php:996
+msgid "Please select a valid child site before manually adding translations."
+msgstr ""
+
+#: src/Admin/Pages/ThemeTranslationPage.php:1000
+msgid "Please fill in the source identifier."
+msgstr ""
+
+#: src/Admin/Pages/ThemeTranslationPage.php:1004
+msgid "Please fill in the original content."
+msgstr ""
+
+#: src/Admin/Pages/ThemeTranslationPage.php:1008
+msgid "Please fill in the translated content."
+msgstr ""
+
+#: src/Admin/Pages/ThemeTranslationPage.php:1013
+msgid "Child site information is invalid."
+msgstr ""
+
+#: src/Admin/Pages/ThemeTranslationPage.php:1054
+msgid "Failed to save original content. Please try again later."
+msgstr ""
+
+#: src/Admin/Pages/ThemeTranslationPage.php:1062
+msgid "Original content already exists"
+msgstr ""
+
+#: src/Admin/Pages/ThemeTranslationPage.php:1176
+msgid "Are you sure you want to delete this translation record?"
+msgstr ""
+
+#: src/Admin/Pages/ThemeTranslationPage.php:1189
+msgid "Awaiting translation"
+msgstr ""
+
+#: src/Admin/Pages/TranslationFieldsPage.php:58
+msgid "Loading, please wait…"
+msgstr ""
+
+#: src/Admin/Pages/TranslationFieldsPage.php:59
+msgid "Save failed. Please try again later."
+msgstr ""
+
+#: src/Admin/Pages/TranslationFieldsPage.php:96
+msgid "Content"
+msgstr ""
+
+#: src/Admin/Pages/TranslationFieldsPage.php:97
+msgid "Excerpt"
+msgstr ""
+
+#: src/Admin/Pages/TranslationFieldsPage.php:120
+msgid "Attachment title"
+msgstr ""
+
+#: src/Admin/Pages/TranslationFieldsPage.php:127
+msgid "Media attachments"
+msgstr ""
+
+#: src/Admin/Pages/TranslationFieldsPage.php:168
+msgid "SEO fields"
+msgstr ""
+
+#: src/Admin/Pages/TranslationFieldsPage.php:171
+msgid "No SEO fields have been added yet. Please configure them using the button above."
+msgstr ""
+
+#: src/Admin/Pages/TranslationFieldsPage.php:225
+msgid "Missing or invalid parameters."
+msgstr ""
+
+#: src/Admin/Pages/TranslationManagementPage.php:128
+msgid "Please create at least one site group on the “Site groups” page first."
+msgstr ""
+
+#: src/Admin/Pages/TranslationManagementPage.php:214
+msgid "Translation targets"
+msgstr ""
+
+#: src/Admin/Pages/TranslationManagementPage.php:215
+msgid "Search child site or title"
+msgstr ""
+
+#: src/Admin/Pages/TranslationManagementPage.php:216
+msgid "Close"
+msgstr ""
+
+#: src/Admin/Pages/TranslationManagementPage.php:222
+msgid "Site name"
+msgstr ""
+
+#: src/Admin/Pages/TranslationManagementPage.php:223
+msgid "Site domain/path"
+msgstr ""
+
+#: src/Admin/Pages/TranslationManagementPage.php:225
+#: src/Admin/Tables/TranslationRelationTable.php:66
+msgid "Last translated at"
+msgstr ""
+
+#: src/Admin/Pages/TranslationManagementPage.php:392
+msgid "Missing relation ID."
+msgstr ""
+
+#: src/Admin/Pages/TranslationManagementPage.php:403
+msgid "The translation mapping has been deleted."
+msgstr ""
+
+#: src/Admin/Pages/TranslationManagementPage.php:403
+msgid "Deletion failed or the mapping no longer exists."
+msgstr ""
+
+#: src/Admin/Pages/TranslationManagementPage.php:470
+msgid "No bulk action was executed."
+msgstr ""
+
+#: src/Admin/Pages/TranslationManagementPage.php:486
+msgid "Please select at least one record to delete."
+msgstr ""
+
+#: src/Admin/Pages/TranslationManagementPage.php:560
+msgid "Failed to enqueue delete tasks. Please try again."
+msgstr ""
+
+#: src/Admin/Pages/TranslationManagementPage.php:568
+msgid "Some delete tasks could not be created. Please check the task list or try again."
+msgstr ""
+
+#. translators: 1: Total selected items, 2: Valid items.
+#: src/Admin/Pages/TranslationManagementPage.php:578
+#, php-format
+msgid "You selected %1$d items, but only %2$d were valid."
+msgstr ""
+
+#. translators: 1: Number of valid items deleted, 2: Tasks created.
+#: src/Admin/Pages/TranslationManagementPage.php:587
+#, php-format
+msgid "Delete submitted: %1$d items (%2$d tasks)."
+msgstr ""
+
+#: src/Admin/Pages/TranslationRulesPage.php:85
+msgid "OpenAI-compatible API"
+msgstr ""
+
+#. translators: %d: number of deleted rules.
+#: src/Admin/Pages/TranslationRulesPage.php:294
+#, php-format
+msgid "%d rule has been deleted."
+msgid_plural "%d rules have been deleted."
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/Admin/Pages/TranslationRulesPage.php:391
+#: src/Admin/Pages/TranslationRulesPage.php:929
+msgid "Missing rule ID."
+msgstr ""
+
+#: src/Admin/Pages/TranslationRulesPage.php:395
+msgid "The requested rule does not exist."
+msgstr ""
+
+#: src/Admin/Pages/TranslationRulesPage.php:444
+msgid "Edit translation rule"
+msgstr ""
+
+#: src/Admin/Pages/TranslationRulesPage.php:444
+msgid "Create translation rule"
+msgstr ""
+
+#: src/Admin/Pages/TranslationRulesPage.php:483
+msgid "Translation type"
+msgstr ""
+
+#: src/Admin/Pages/TranslationRulesPage.php:511
+msgid "Select a model"
+msgstr ""
+
+#: src/Admin/Pages/TranslationRulesPage.php:517
+msgid "No LLM models have been configured yet. Please add a model on the \"LLM Translation\" page first."
+msgstr ""
+
+#: src/Admin/Pages/TranslationRulesPage.php:525
+msgid "Controls the creativity of the model. A value between 0.2 and 0.8 is recommended."
+msgstr ""
+
+#: src/Admin/Pages/TranslationRulesPage.php:532
+msgid "Leave empty or set to 0 to let the model decide automatically."
+msgstr ""
+
+#: src/Admin/Pages/TranslationRulesPage.php:539
+msgid "Sent to the model as a system prompt. Leave empty to use the default prompt."
+msgstr ""
+
+#: src/Admin/Pages/TranslationRulesPage.php:557
+msgid "Maximum characters per request"
+msgstr ""
+
+#: src/Admin/Pages/TranslationRulesPage.php:560
+msgid "Fill in the maximum number of characters allowed per request according to the vendor documentation."
+msgstr ""
+
+#: src/Admin/Pages/TranslationRulesPage.php:565
+msgid "Test text"
+msgstr ""
+
+#: src/Admin/Pages/TranslationRulesPage.php:568
+msgid "Enter sample text and click the button below to run a real-time test (no content will be saved to the database)."
+msgstr ""
+
+#: src/Admin/Pages/TranslationRulesPage.php:570
+msgid "Test translation"
+msgstr ""
+
+#: src/Admin/Pages/TranslationRulesPage.php:576
+msgid "Test result"
+msgstr ""
+
+#: src/Admin/Pages/TranslationRulesPage.php:603
+msgid "Save rule"
+msgstr ""
+
+#: src/Admin/Pages/TranslationRulesPage.php:766
+msgid "Please select an available LLM model."
+msgstr ""
+
+#: src/Admin/Pages/TranslationRulesPage.php:777
+msgid "Rule name cannot be empty."
+msgstr ""
+
+#: src/Admin/Pages/TranslationRulesPage.php:787
+msgid "Rule name must not exceed 20 characters."
+msgstr ""
+
+#: src/Admin/Pages/TranslationRulesPage.php:820
+msgid "The maximum characters per request must be between 1 and 5000."
+msgstr ""
+
+#: src/Admin/Pages/TranslationRulesPage.php:841
+#: src/Admin/Pages/TranslationRulesPage.php:1095
+msgid "The rule name already exists. Please choose another name."
+msgstr ""
+
+#: src/Admin/Pages/TranslationRulesPage.php:904
+msgid "Translation rule saved."
+msgstr ""
+
+#: src/Admin/Pages/TranslationRulesPage.php:946
+msgid "This rule is in use by sites and cannot be deleted."
+msgstr ""
+
+#: src/Admin/Pages/TranslationRulesPage.php:969
+msgid "Translation rule deleted."
+msgstr ""
+
+#: src/Admin/Pages/TranslationRulesPage.php:1053
+#: src/Translation/MachineTranslationVendorTester.php:203
+#: src/Translation/MachineTranslationVendorTester.php:247
+msgid "Test completed."
+msgstr ""
+
+#: src/Admin/Pages/TranslationRulesPage.php:1059
+msgid "Test failed."
+msgstr ""
+
+#: src/Admin/Pages/TranslationRulesPage.php:1087
+msgid "Please enter a rule name."
+msgstr ""
+
+#: src/Admin/Services/SiteContextService.php:297
+#: src/Admin/Tables/TaskListTable.php:139
+#: src/Admin/Tables/TaskListTable.php:140
+#: src/Sites/SiteContextService.php:300
+msgid "All sites"
+msgstr ""
+
+#: src/Admin/Tables/LlmModelTable.php:48
+msgid "API endpoint"
+msgstr ""
+
+#: src/Admin/Tables/LlmModelTable.php:49
+msgid "KEY"
+msgstr ""
+
+#: src/Admin/Tables/LlmModelTable.php:91
+msgid "Enter vendor or model name"
+msgstr ""
+
+#: src/Admin/Tables/LlmModelTable.php:133
+msgid "Show key"
+msgstr ""
+
+#: src/Admin/Tables/LlmModelTable.php:134
+msgid "Hide key"
+msgstr ""
+
+#: src/Admin/Tables/LlmModelTable.php:169
+msgid "Are you sure you want to delete this model?"
+msgstr ""
+
+#: src/Admin/Tables/TaskChainTable.php:59
+#: src/Admin/Tables/TaskListTable.php:98
+msgid "Status"
+msgstr ""
+
+#: src/Admin/Tables/TaskChainTable.php:60
+#: src/Admin/Tables/TaskListTable.php:99
+msgid "Progress"
+msgstr ""
+
+#: src/Admin/Tables/TaskChainTable.php:67
+msgid "No tasks found in this task chain."
+msgstr ""
+
+#: src/Admin/Tables/TaskChainTable.php:100
+#: src/Admin/Tables/TaskListTable.php:234
+msgid "View logs"
+msgstr ""
+
+#: src/Admin/Tables/TaskChainTable.php:123
+msgid "Waiting for statistics"
+msgstr ""
+
+#: src/Admin/Tables/TaskChainTable.php:177
+msgid "Are you sure you want to delete this task and all related subtasks?"
+msgstr ""
+
+#: src/Admin/Tables/TaskChainTable.php:309
+#: src/Admin/Tables/TaskListTable.php:345
+msgid "In progress"
+msgstr ""
+
+#: src/Admin/Tables/TaskChainTable.php:310
+#: src/Admin/Tables/TaskListTable.php:346
+msgid "Completed"
+msgstr ""
+
+#: src/Admin/Tables/TaskChainTable.php:334
+#: src/Admin/Tables/TaskListTable.php:327
+#: src/Tasks/Executors/PostTranslationExecutor.php:47
+#: src/Tasks/Executors/PostTranslationExecutor.php:93
+#: src/Tasks/Executors/PostTranslationExecutor.php:99
+#: src/Tasks/Executors/PostTranslationExecutor.php:318
+#: src/Tasks/Executors/PostTranslationExecutor.php:385
+#: src/Tasks/Executors/PostTranslationExecutor.php:691
+#: src/Tasks/TaskStageHelper.php:95
+msgid "Post translation"
+msgstr ""
+
+#: src/Admin/Tables/TaskChainTable.php:335
+#: src/Admin/Tables/TaskListTable.php:328
+#: src/Tasks/TaskStageHelper.php:104
+msgid "Page translation"
+msgstr ""
+
+#: src/Admin/Tables/TaskChainTable.php:336
+#: src/Admin/Tables/TaskListTable.php:323
+#: src/Admin/Tables/TaskListTable.php:329
+msgid "Category/Tag translation"
+msgstr ""
+
+#: src/Admin/Tables/TaskChainTable.php:337
+#: src/Admin/Tables/TaskListTable.php:330
+#: src/Tasks/Executors/MediaTranslationExecutor.php:46
+#: src/Tasks/Executors/MediaTranslationExecutor.php:171
+#: src/Tasks/Executors/MediaTranslationExecutor.php:233
+#: src/Tasks/Executors/MediaTranslationExecutor.php:602
+#: src/Tasks/Executors/MediaTranslationExecutor.php:655
+#: src/Tasks/Executors/PostTranslationExecutor.php:777
+#: src/Tasks/TaskStageHelper.php:113
+msgid "Media translation"
+msgstr ""
+
+#: src/Admin/Tables/TaskChainTable.php:338
+msgid "Theme translation (master task)"
+msgstr ""
+
+#: src/Admin/Tables/TaskChainTable.php:339
+msgid "Theme translation (scan)"
+msgstr ""
+
+#: src/Admin/Tables/TaskChainTable.php:340
+#: src/Admin/Tables/TaskChainTable.php:341
+msgid "Theme translation (file scan)"
+msgstr ""
+
+#: src/Admin/Tables/TaskChainTable.php:342
+msgid "Theme translation (menu scan)"
+msgstr ""
+
+#: src/Admin/Tables/TaskChainTable.php:343
+msgid "Theme translation (menu item scan)"
+msgstr ""
+
+#: src/Admin/Tables/TaskChainTable.php:344
+#: src/Admin/Tables/TaskChainTable.php:345
+msgid "Theme translation (widget scan)"
+msgstr ""
+
+#: src/Admin/Tables/TaskChainTable.php:346
+#: src/Admin/Tables/TaskListTable.php:308
+msgid "Theme translation"
+msgstr ""
+
+#: src/Admin/Tables/TaskChainTable.php:347
+#: src/Admin/Tables/TaskListTable.php:331
+msgid "Sitemap generation"
+msgstr ""
+
+#: src/Admin/Tables/TaskChainTable.php:348
+#: src/Admin/Tables/TaskListTable.php:332
+msgid "URL rewrite"
+msgstr ""
+
+#: src/Admin/Tables/TaskListTable.php:96
+msgid "Target site"
+msgstr ""
+
+#: src/Admin/Tables/TaskListTable.php:97
+msgid "Task type"
+msgstr ""
+
+#: src/Admin/Tables/TaskListTable.php:124
+#: src/Admin/Tables/TranslationRelationTable.php:163
+msgid "Filter by site group"
+msgstr ""
+
+#: src/Admin/Tables/TaskListTable.php:126
+#: src/Admin/Tables/TranslationRelationTable.php:165
+msgid "All site groups"
+msgstr ""
+
+#: src/Admin/Tables/TaskListTable.php:135
+msgid "Site group (unknown)"
+msgstr ""
+
+#: src/Admin/Tables/TaskListTable.php:138
+msgid "Filter by site"
+msgstr ""
+
+#: src/Admin/Tables/TaskListTable.php:175
+msgid "Filter by type"
+msgstr ""
+
+#: src/Admin/Tables/TaskListTable.php:183
+msgid "Filter by status"
+msgstr ""
+
+#: src/Admin/Tables/TaskListTable.php:185
+msgid "All statuses"
+msgstr ""
+
+#: src/Admin/Tables/TaskListTable.php:205
+msgid "Refresh task status"
+msgstr ""
+
+#: src/Admin/Tables/TaskListTable.php:209
+msgid "Checking..."
+msgstr ""
+
+#: src/Admin/Tables/TaskListTable.php:213
+#: src/Admin/Tables/TaskListTable.php:216
+msgid "Search tasks"
+msgstr ""
+
+#: src/Admin/Tables/TaskListTable.php:214
+msgid "Enter site group or site name"
+msgstr ""
+
+#: src/Admin/Tables/TaskListTable.php:304
+msgid "Translation deletion"
+msgstr ""
+
+#: src/Admin/Tables/TaskListTable.php:317
+#: src/Tasks/TaskStageHelper.php:130
+msgid "Category translation"
+msgstr ""
+
+#: src/Admin/Tables/TaskListTable.php:319
+#: src/Tasks/TaskStageHelper.php:138
+msgid "Tag translation"
+msgstr ""
+
+#: src/Admin/Tables/TaskListTable.php:339
+msgid "Unknown type"
+msgstr ""
+
+#: src/Admin/Tables/TaskListTable.php:477
+msgid "Awaiting metrics"
+msgstr ""
+
+#: src/Admin/Tables/TaskListTable.php:513
+msgid "View chain"
+msgstr ""
+
+#: src/Admin/Tables/TaskListTable.php:534
+msgid "Run now"
+msgstr ""
+
+#: src/Admin/Tables/TaskListTable.php:542
+msgid "Are you sure you want to delete this task and its logs?"
+msgstr ""
+
+#: src/Admin/Tables/TaskListTable.php:554
+msgid "Cancel selected"
+msgstr ""
+
+#: src/Admin/Tables/TaskListTable.php:555
+msgid "Retry selected"
+msgstr ""
+
+#: src/Admin/Tables/TaskListTable.php:556
+msgid "Delete selected"
+msgstr ""
+
+#: src/Admin/Tables/TaskListTable.php:582
+msgid "Please select at least one task before executing this action."
+msgstr ""
+
+#: src/Admin/Tables/TaskListTable.php:606
+msgid "Selected tasks were canceled."
+msgstr ""
+
+#: src/Admin/Tables/TaskListTable.php:607
+msgid "Task has been canceled."
+msgstr ""
+
+#: src/Admin/Tables/TaskListTable.php:608
+msgid "Selected tasks were re-queued."
+msgstr ""
+
+#: src/Admin/Tables/TaskListTable.php:609
+msgid "Task has been re-queued."
+msgstr ""
+
+#: src/Admin/Tables/TaskListTable.php:610
+msgid "Selected tasks were deleted (running tasks remain untouched)."
+msgstr ""
+
+#: src/Admin/Tables/TaskListTable.php:611
+msgid "Task deleted (running tasks are not removed)."
+msgstr ""
+
+#: src/Admin/Tables/TaskListTable.php:614
+msgid "Action completed."
+msgstr ""
+
+#: src/Admin/Tables/TranslationRelationTable.php:63
+msgid "Object type"
+msgstr ""
+
+#: src/Admin/Tables/TranslationRelationTable.php:65
+#: src/PublicSite/Hooks/AdminBarHooks.php:90
+msgid "Translations"
+msgstr ""
+
+#: src/Admin/Tables/TranslationRelationTable.php:99
+msgid "Post"
+msgstr ""
+
+#: src/Admin/Tables/TranslationRelationTable.php:100
+msgid "Page"
+msgstr ""
+
+#: src/Admin/Tables/TranslationRelationTable.php:102
+#: src/Tasks/Executors/PostTranslationExecutor.php:1011
+msgid "Category"
+msgstr ""
+
+#: src/Admin/Tables/TranslationRelationTable.php:103
+#: src/Tasks/Executors/PostTranslationExecutor.php:1012
+msgid "Tag"
+msgstr ""
+
+#: src/Admin/Tables/TranslationRelationTable.php:173
+msgid "Filter by object type"
+msgstr ""
+
+#: src/Admin/Tables/TranslationRelationTable.php:193
+msgid "Search translation relations"
+msgstr ""
+
+#: src/Admin/Tables/TranslationRelationTable.php:194
+msgid "Search by title"
+msgstr ""
+
+#: src/Admin/Tables/TranslationRelationTable.php:196
+msgid "Search translations"
+msgstr ""
+
+#: src/Admin/Tables/TranslationRulesTable.php:75
+#: src/Admin/Tables/TranslationRulesTable.php:85
+msgid "Source language"
+msgstr ""
+
+#: src/Admin/Tables/TranslationRulesTable.php:76
+#: src/Admin/Tables/TranslationRulesTable.php:86
+msgid "Target language"
+msgstr ""
+
+#: src/Admin/Tables/TranslationRulesTable.php:87
+msgid "Max length per request"
+msgstr ""
+
+#: src/Admin/Tables/TranslationRulesTable.php:164
+msgid "Filter by vendor"
+msgstr ""
+
+#: src/Admin/Tables/TranslationRulesTable.php:166
+msgid "All vendors"
+msgstr ""
+
+#: src/Admin/Tables/TranslationRulesTable.php:228
+msgid "Are you sure you want to delete this rule?"
+msgstr ""
+
+#: src/Admin/Tables/TranslationRulesTable.php:414
+#: src/Admin/Tables/TranslationRulesTable.php:437
+msgid "OpenAI / Compatible API"
+msgstr ""
+
+#: src/Core/SitemapService.php:274
+#: src/Core/SitemapService.php:655
+msgid "XML Sitemap Index"
+msgstr ""
+
+#: src/Core/SitemapService.php:506
+#: src/Core/SitemapService.php:521
+#: src/Core/SitemapService.php:565
+#: src/Core/SitemapService.php:593
+#: src/Core/SitemapService.php:602
+#: src/Core/SitemapService.php:621
+#: src/Core/SitemapService.php:636
+msgid "XML Sitemap"
+msgstr ""
+
+#: src/Core/SitemapService.php:508
+msgid "Unknown sitemap type."
+msgstr ""
+
+#: src/Core/SitemapService.php:567
+msgid "No sitemap found for this group."
+msgstr ""
+
+#: src/Core/SitemapService.php:604
+msgid "No sitemap found for this group site."
+msgstr ""
+
+#: src/Core/SitemapService.php:623
+msgid "No sitemap found for this page."
+msgstr ""
+
+#. translators: %s: language label for the currently active site
+#: src/PublicSite/Hooks/AdminBarHooks.php:107
+#, php-format
+msgid "&#9679; %s (current)"
+msgstr ""
+
+#: src/Scheduling/TaskMaintenance.php:109
+msgid "The task exceeded the execution timeout and has been marked as failed automatically."
+msgstr ""
+
+#: src/Scheduling/TaskMaintenance.php:110
+msgid "Task execution timed out and has been stopped."
+msgstr ""
+
+#: src/Scheduling/TaskQueue.php:552
+msgid "The task was canceled by Action Scheduler."
+msgstr ""
+
+#: src/Scheduling/TaskQueue.php:774
+msgid "The task has been canceled."
+msgstr ""
+
+#: src/Scheduling/TaskQueue.php:798
+msgid "The task has been deleted."
+msgstr ""
+
+#: src/Tasks/Executors/MediaTranslationExecutor.php:46
+msgid "Starting media translation task."
+msgstr ""
+
+#: src/Tasks/Executors/MediaTranslationExecutor.php:60
+#: src/Tasks/Executors/PostTranslationExecutor.php:61
+#: src/Tasks/Executors/TermTranslationExecutor.php:67
+msgid "No pending subtasks."
+msgstr ""
+
+#: src/Tasks/Executors/MediaTranslationExecutor.php:169
+msgid "Media translation subtask skipped (no translatable content)."
+msgstr ""
+
+#: src/Tasks/Executors/MediaTranslationExecutor.php:210
+#: src/Tasks/Executors/PostTranslationExecutor.php:295
+#: src/Tasks/Executors/TermTranslationExecutor.php:206
+msgid "Unknown translation error"
+msgstr ""
+
+#. translators: %s: error message
+#: src/Tasks/Executors/MediaTranslationExecutor.php:229
+#: src/Tasks/Executors/PostTranslationExecutor.php:314
+#: src/Tasks/Executors/TermTranslationExecutor.php:225
+#, php-format
+msgid "Translation completed with warnings: %s"
+msgstr ""
+
+#: src/Tasks/Executors/MediaTranslationExecutor.php:600
+msgid "Media translation subtask failed."
+msgstr ""
+
+#: src/Tasks/Executors/MediaTranslationExecutor.php:653
+msgid "Media translation subtask completed."
+msgstr ""
+
+#: src/Tasks/Executors/MediaTranslationExecutor.php:698
+msgid "Source attachment file is missing."
+msgstr ""
+
+#: src/Tasks/Executors/MediaTranslationExecutor.php:709
+msgid "Could not create target upload directory."
+msgstr ""
+
+#: src/Tasks/Executors/MediaTranslationExecutor.php:716
+msgid "Failed to copy attachment file to target site."
+msgstr ""
+
+#: src/Tasks/Executors/MediaTranslationExecutor.php:771
+#: src/Tasks/Executors/PostTranslationExecutor.php:1277
+#: src/Tasks/Executors/TermTranslationExecutor.php:668
+#: src/Tasks/Executors/ThemeTranslationExecutor.php:428
+msgid "(excerpt)"
+msgstr ""
+
+#: src/Tasks/Executors/PostTranslationExecutor.php:47
+msgid "Starting post translation task."
+msgstr ""
+
+#: src/Tasks/Executors/PostTranslationExecutor.php:92
+msgid "Subtask completed."
+msgstr ""
+
+#: src/Tasks/Executors/PostTranslationExecutor.php:98
+msgid "Subtask failed."
+msgstr ""
+
+#: src/Tasks/Executors/PostTranslationExecutor.php:383
+msgid "Target site not found; post translation aborted."
+msgstr ""
+
+#: src/Tasks/Executors/PostTranslationExecutor.php:525
+msgid "Failed to create target post."
+msgstr ""
+
+#: src/Tasks/Executors/PostTranslationExecutor.php:689
+msgid "Post translation subtask processed."
+msgstr ""
+
+#: src/Tasks/Executors/PostTranslationExecutor.php:775
+msgid "Media translation task created from post/page translation."
+msgstr ""
+
+#. Translators: %s: taxonomy type label.
+#: src/Tasks/Executors/PostTranslationExecutor.php:1018
+#, php-format
+msgid "%s translation task created from post translation."
+msgstr ""
+
+#: src/Tasks/Executors/PostTranslationExecutor.php:1022
+#: src/Tasks/Executors/TermTranslationExecutor.php:47
+#: src/Tasks/Executors/TermTranslationExecutor.php:169
+#: src/Tasks/Executors/TermTranslationExecutor.php:229
+#: src/Tasks/Executors/TermTranslationExecutor.php:633
+#: src/Tasks/TaskStageHelper.php:122
+msgid "Term translation"
+msgstr ""
+
+#: src/Tasks/Executors/TermTranslationExecutor.php:47
+msgid "Starting term translation task."
+msgstr ""
+
+#: src/Tasks/Executors/TermTranslationExecutor.php:167
+msgid "Term translation subtask skipped (no translatable content)."
+msgstr ""
+
+#: src/Tasks/Executors/TermTranslationExecutor.php:631
+msgid "Term translation subtask completed."
+msgstr ""
+
+#: src/Tasks/Executors/ThemeTranslationDeleteExecutor.php:46
+msgid "Theme translation delete subtask missing required parameters."
+msgstr ""
+
+#: src/Tasks/Executors/ThemeTranslationDeleteExecutor.php:61
+msgid "The specified theme translation entry does not exist; nothing to delete."
+msgstr ""
+
+#: src/Tasks/Executors/ThemeTranslationDeleteExecutor.php:84
+msgid "Failed to delete the theme translation entry."
+msgstr ""
+
+#: src/Tasks/Executors/ThemeTranslationDeleteExecutor.php:93
+msgid "Theme translation entry deleted."
+msgstr ""
+
+#: src/Tasks/Executors/ThemeTranslationDeleteMasterExecutor.php:60
+msgid "Theme translation delete master task is missing required parameters. Aborting."
+msgstr ""
+
+#: src/Tasks/Executors/ThemeTranslationDeleteMasterExecutor.php:76
+msgid "Theme translation delete master task has started and is collecting entries to delete."
+msgstr ""
+
+#: src/Tasks/Executors/ThemeTranslationDeleteMasterExecutor.php:97
+msgid "No theme translation entries were found for deletion."
+msgstr ""
+
+#. translators: 1: delete task ID, 2: entry ID
+#: src/Tasks/Executors/ThemeTranslationDeleteMasterExecutor.php:146
+#, php-format
+msgid "Created theme translation delete subtask #%1$d (entry ID=%2$d)."
+msgstr ""
+
+#: src/Tasks/Executors/ThemeTranslationDeleteMasterExecutor.php:164
+msgid "Failed to create any theme translation delete subtasks."
+msgstr ""
+
+#. translators: %d: number of delete subtasks
+#: src/Tasks/Executors/ThemeTranslationDeleteMasterExecutor.php:173
+#, php-format
+msgid "Theme translation delete master task finished with %d delete subtasks."
+msgstr ""
+
+#: src/Tasks/Executors/ThemeTranslationExecutor.php:61
+msgid "Theme translation rule not found."
+msgstr ""
+
+#: src/Tasks/Executors/ThemeTranslationExecutor.php:115
+msgid "No pending theme translation content."
+msgstr ""
+
+#: src/Tasks/Executors/ThemeTranslationExecutor.php:201
+msgid "Invalid theme translation item found, skipped."
+msgstr ""
+
+#: src/Tasks/Executors/ThemeTranslationExecutor.php:203
+#: src/Tasks/Executors/ThemeTranslationExecutor.php:245
+#: src/Tasks/Executors/ThemeTranslationExecutor.php:344
+msgid "Theme translation entry"
+msgstr ""
+
+#: src/Tasks/Executors/ThemeTranslationExecutor.php:235
+msgid "Translation failed"
+msgstr ""
+
+#. translators: %s: error message
+#: src/Tasks/Executors/ThemeTranslationExecutor.php:243
+#, php-format
+msgid "Translation item failed: %s"
+msgstr ""
+
+#: src/Tasks/Executors/ThemeTranslationExecutor.php:342
+msgid "Theme translation entry processed."
+msgstr ""
+
+#. translators: 1: total items, 2: successful, 3: skipped, 4: failed
+#: src/Tasks/Executors/ThemeTranslationExecutor.php:386
+#, php-format
+msgid "Translation task completed: %1$d total, %2$d succeeded, %3$d skipped, %4$d failed"
+msgstr ""
+
+#: src/Tasks/Executors/ThemeTranslationExecutor.php:393
+msgid "Theme translation summary"
+msgstr ""
+
+#: src/Tasks/Executors/ThemeTranslationExecutor.php:445
+msgid "Task has been canceled, execution stopped."
+msgstr ""
+
+#: src/Tasks/Executors/ThemeTranslationExecutor.php:474
+msgid "Upstream task has been deleted, current task terminated."
+msgstr ""
+
+#: src/Tasks/Executors/ThemeTranslationExecutor.php:482
+msgid "Upstream task canceled or failed, current task terminated."
+msgstr ""
+
+#: src/Tasks/Executors/TranslationDeleteExecutor.php:41
+msgid "Required delete parameters are missing."
+msgstr ""
+
+#. translators: 1: object type, 2: object ID
+#: src/Tasks/Executors/TranslationDeleteExecutor.php:81
+#, php-format
+msgid "No translation relations found to delete: %1$s ID=%2$d"
+msgstr ""
+
+#. translators: 1: object type, 2: object ID, 3: count
+#: src/Tasks/Executors/TranslationDeleteExecutor.php:93
+#, php-format
+msgid "Preparing to delete %3$d translation relations for %1$s ID=%2$d."
+msgstr ""
+
+#. translators: 1: object type, 2: object ID
+#: src/Tasks/Executors/TranslationDeleteExecutor.php:133
+#, php-format
+msgid "Failed to delete translation relations for %1$s ID=%2$d."
+msgstr ""
+
+#. translators: 1: object type, 2: object ID, 3: count
+#: src/Tasks/Executors/TranslationDeleteExecutor.php:147
+#, php-format
+msgid "Deleted %3$d translation relations for %1$s ID=%2$d."
+msgstr ""
+
+#. translators: 1: post ID
+#: src/Tasks/Executors/TranslationDeleteExecutor.php:240
+#, php-format
+msgid "Deleted shadow post ID=%d."
+msgstr ""
+
+#: src/Tasks/Executors/TranslationDeleteMasterExecutor.php:39
+msgid "No translation relations to delete."
+msgstr ""
+
+#. translators: %d: number of objects
+#: src/Tasks/Executors/TranslationDeleteMasterExecutor.php:54
+#, php-format
+msgid "Translation delete master task started, preparing to delete translation relations for %d objects."
+msgstr ""
+
+#. translators: 1: task ID, 2: object type, 3: object ID
+#: src/Tasks/Executors/TranslationDeleteMasterExecutor.php:110
+#, php-format
+msgid "Created delete subtask #%1$d: %2$s ID=%3$d"
+msgstr ""
+
+#: src/Tasks/Executors/TranslationDeleteMasterExecutor.php:125
+msgid "Failed to create any delete subtasks."
+msgstr ""
+
+#. translators: %d: number of subtasks
+#: src/Tasks/Executors/TranslationDeleteMasterExecutor.php:133
+#, php-format
+msgid "Translation delete master task completed, created %d delete subtasks."
+msgstr ""
+
+#: src/Tasks/TaskDispatcher.php:114
+#: src/Tasks/TaskDispatcher.php:115
+msgid "No matching task executor was found."
+msgstr ""
+
+#: src/Tasks/TaskDispatcher.php:133
+msgid "Task started."
+msgstr ""
+
+#: src/Tasks/TaskDispatcher.php:162
+msgid "Task completed."
+msgstr ""
+
+#: src/Tasks/TaskDispatcher.php:168
+msgid "Task execution failed."
+msgstr ""
+
+#: src/Tasks/TaskStageHelper.php:49
+msgid "Theme translation - Master task"
+msgstr ""
+
+#: src/Tasks/TaskStageHelper.php:50
+msgid "Create theme translation task chain, plan scan units"
+msgstr ""
+
+#: src/Tasks/TaskStageHelper.php:70
+msgid "Theme translation - Scan stage"
+msgstr ""
+
+#: src/Tasks/TaskStageHelper.php:71
+msgid "Scan theme files, menus, widgets and other translatable content"
+msgstr ""
+
+#: src/Tasks/TaskStageHelper.php:80
+#: src/Tasks/TaskStageHelper.php:86
+msgid "Theme translation - Translation stage"
+msgstr ""
+
+#: src/Tasks/TaskStageHelper.php:81
+#: src/Tasks/TaskStageHelper.php:87
+msgid "Execute actual theme content translation"
+msgstr ""
+
+#: src/Tasks/TaskStageHelper.php:96
+msgid "Translate post content"
+msgstr ""
+
+#: src/Tasks/TaskStageHelper.php:105
+msgid "Translate page content"
+msgstr ""
+
+#: src/Tasks/TaskStageHelper.php:114
+msgid "Translate media title, description and other info"
+msgstr ""
+
+#: src/Tasks/TaskStageHelper.php:123
+msgid "Translate categories, tags and other taxonomy terms"
+msgstr ""
+
+#: src/Tasks/TaskStageHelper.php:131
+msgid "Translate category information"
+msgstr ""
+
+#: src/Tasks/TaskStageHelper.php:139
+msgid "Translate tag information"
+msgstr ""
+
+#: src/Tasks/TaskStageHelper.php:147
+msgid "Delete translation - Master task"
+msgstr ""
+
+#: src/Tasks/TaskStageHelper.php:148
+msgid "Get original object IDs, create delete task chain"
+msgstr ""
+
+#: src/Tasks/TaskStageHelper.php:155
+msgid "Delete translation - Execution stage"
+msgstr ""
+
+#: src/Tasks/TaskStageHelper.php:156
+msgid "Find and delete translation records from child and main sites"
+msgstr ""
+
+#: src/Tasks/TaskStageHelper.php:161
+msgid "Delete translation"
+msgstr ""
+
+#: src/Tasks/TaskStageHelper.php:162
+msgid "Delete translations for specified content (legacy)"
+msgstr ""
+
+#: src/Tasks/TaskStageHelper.php:238
+msgid "Unknown stage"
+msgstr ""
+
+#. translators: %d: stage position number
+#: src/Tasks/TaskStageHelper.php:316
+#, php-format
+msgid "Stage %d of task execution"
+msgstr ""
+
+#. translators: 1: stage letter, 2: stage name
+#: src/Tasks/TaskStageHelper.php:330
+#, php-format
+msgid "Stage %1$s - %2$s"
+msgstr ""
+
+#: src/Theme/Workflow/ThemeTranslationWorkflow.php:163
+msgid "Detected an existing pending or running theme translation master task for this site. Skipping creation."
+msgstr ""
+
+#: src/Theme/Workflow/ThemeTranslationWorkflow.php:207
+msgid "Theme translation master task has been created and queued."
+msgstr ""
+
+#: src/Theme/Workflow/ThemeTranslationWorkflow.php:281
+msgid "The master task is missing a valid translation rule."
+msgstr ""
+
+#: src/Theme/Workflow/ThemeTranslationWorkflow.php:307
+msgid "Failed to resolve site information. Master task aborted."
+msgstr ""
+
+#: src/Theme/Workflow/ThemeTranslationWorkflow.php:316
+#: src/Theme/Workflow/ThemeTranslationWorkflow.php:539
+msgid "Failed to load the source site theme."
+msgstr ""
+
+#. translators: %s: theme type (block theme or classic theme).
+#: src/Theme/Workflow/ThemeTranslationWorkflow.php:326
+#, php-format
+msgid "Detected theme type: %s"
+msgstr ""
+
+#: src/Theme/Workflow/ThemeTranslationWorkflow.php:327
+msgid "block theme"
+msgstr ""
+
+#: src/Theme/Workflow/ThemeTranslationWorkflow.php:327
+msgid "classic theme"
+msgstr ""
+
+#: src/Theme/Workflow/ThemeTranslationWorkflow.php:356
+msgid "No theme resources were found for scanning."
+msgstr ""
+
+#: src/Theme/Workflow/ThemeTranslationWorkflow.php:402
+msgid "Theme scan task has been queued."
+msgstr ""
+
+#: src/Theme/Workflow/ThemeTranslationWorkflow.php:413
+msgid "Failed to create theme scan tasks."
+msgstr ""
+
+#: src/Theme/Workflow/ThemeTranslationWorkflow.php:419
+msgid "Theme scan tasks have been created."
+msgstr ""
+
+#: src/Theme/Workflow/ThemeTranslationWorkflow.php:498
+msgid "Theme scan task is missing required parameters."
+msgstr ""
+
+#: src/Theme/Workflow/ThemeTranslationWorkflow.php:506
+msgid "Failed to resolve site information. Theme scan aborted."
+msgstr ""
+
+#: src/Theme/Workflow/ThemeTranslationWorkflow.php:514
+msgid "Theme scan task started."
+msgstr ""
+
+#: src/Theme/Workflow/ThemeTranslationWorkflow.php:547
+msgid "No translatable theme text was found during the scan."
+msgstr ""
+
+#: src/Theme/Workflow/ThemeTranslationWorkflow.php:620
+msgid "Failed to persist scan results."
+msgstr ""
+
+#: src/Theme/Workflow/ThemeTranslationWorkflow.php:629
+msgid "Theme scan originals have been synchronized to the translation repository."
+msgstr ""
+
+#: src/Theme/Workflow/ThemeTranslationWorkflow.php:706
+msgid "No original entries require processing. Theme scan has completed."
+msgstr ""
+
+#: src/Theme/Workflow/ThemeTranslationWorkflow.php:725
+msgid "Theme scan has completed and translation tasks have not been created automatically."
+msgstr ""
+
+#: src/Theme/Workflow/ThemeTranslationWorkflow.php:796
+msgid "Theme translation sub-task has been created."
+msgstr ""
+
+#: src/Theme/Workflow/ThemeTranslationWorkflow.php:807
+msgid "Theme scan has completed and translation tasks have been scheduled."
+msgstr ""
+
+#: src/Theme/Workflow/ThemeTranslationWorkflow.php:841
+msgid "Task has been canceled. Execution will not continue."
+msgstr ""
+
+#: src/Theme/Workflow/ThemeTranslationWorkflow.php:868
+msgid "An upstream task has been deleted. The current task has been stopped."
+msgstr ""
+
+#: src/Theme/Workflow/ThemeTranslationWorkflow.php:876
+msgid "An upstream task has been canceled or failed. The current task has been stopped."
+msgstr ""
+
+#: src/Translation/MachineTranslationVendorTester.php:69
+msgid "Automatic verification is not supported for this vendor."
+msgstr ""
+
+#: src/Translation/MachineTranslationVendorTester.php:79
+msgid "The API response format is invalid."
+msgstr ""
+
+#: src/Translation/MachineTranslationVendorTester.php:110
+msgid "The translation rule could not be found."
+msgstr ""
+
+#: src/Translation/MachineTranslationVendorTester.php:132
+msgid "Please enter the text to test."
+msgstr ""
+
+#: src/Translation/MachineTranslationVendorTester.php:140
+msgid "The test text is not valid."
+msgstr ""
+
+#: src/Translation/MachineTranslationVendorTester.php:151
+msgid "Please select a machine translation vendor."
+msgstr ""
+
+#: src/Translation/MachineTranslationVendorTester.php:172
+msgid "Vendor credentials are not configured yet. Please fill them on the \"Vendor Settings\" page first."
+msgstr ""
+
+#. translators: %s: error message from vendor verification.
+#: src/Translation/MachineTranslationVendorTester.php:191
+#, php-format
+msgid "Vendor verification failed: %s"
+msgstr ""
+
+#: src/Translation/MachineTranslationVendorTester.php:225
+msgid "Translation API call failed. Please check your configuration."
+msgstr ""
+
+#: src/Translation/MachineTranslationVendorTester.php:234
+msgid "The number of translation results does not match the input. Please try again later."
+msgstr ""
+
+#: src/Translation/MachineTranslationVendorTester.php:241
+msgid "The translation appears to have returned fallback content. Please verify the configuration."
+msgstr ""
+
+#: src/Translation/Providers/AbstractProvider.php:67
+msgid "This vendor does not support credential verification yet."
+msgstr ""
+
+#: src/Translation/Providers/BaiduProvider.php:28
+msgid "Baidu Translate credentials are not configured."
+msgstr ""
+
+#: src/Translation/Providers/BaiduProvider.php:50
+msgid "Baidu translation returned a mismatched number of results."
+msgstr ""
+
+#: src/Translation/Providers/BaiduProvider.php:109
+msgid "Baidu translation request failed. Please check network or credential configuration."
+msgstr ""
+
+#: src/Translation/Providers/BaiduProvider.php:122
+msgid "Baidu translation returned invalid JSON."
+msgstr ""
+
+#: src/Translation/Providers/BaiduProvider.php:133
+msgid "Baidu translation returned an unexpected response."
+msgstr ""
+
+#: src/Translation/Providers/BaiduProvider.php:199
+msgid "Please enter Baidu Translate APP ID and secret key."
+msgstr ""
+
+#: src/Translation/Providers/BaiduProvider.php:209
+#: src/Translation/Providers/DeepLProvider.php:120
+#: src/Translation/Providers/GoogleProvider.php:120
+#: src/Translation/Providers/YoudaoProvider.php:222
+msgid "Test text cannot be empty."
+msgstr ""
+
+#: src/Translation/Providers/BaiduProvider.php:241
+msgid "Baidu API returned invalid JSON."
+msgstr ""
+
+#: src/Translation/Providers/BaiduProvider.php:248
+#: src/Translation/Providers/DeepLProvider.php:154
+#: src/Translation/Providers/GoogleProvider.php:155
+#: src/Translation/Providers/YoudaoProvider.php:267
+msgid "The API did not return any translation result."
+msgstr ""
+
+#: src/Translation/Providers/BaiduProvider.php:254
+#: src/Translation/Providers/DeepLProvider.php:159
+#: src/Translation/Providers/GoogleProvider.php:160
+#: src/Translation/Providers/YoudaoProvider.php:273
+msgid "Credential verification succeeded."
+msgstr ""
+
+#: src/Translation/Providers/DeepLProvider.php:23
+msgid "DeepL API key is not configured."
+msgstr ""
+
+#: src/Translation/Providers/DeepLProvider.php:53
+msgid "DeepL translation API request failed."
+msgstr ""
+
+#: src/Translation/Providers/DeepLProvider.php:66
+msgid "DeepL translation returned invalid JSON."
+msgstr ""
+
+#: src/Translation/Providers/DeepLProvider.php:77
+msgid "DeepL translation returned an unexpected response."
+msgstr ""
+
+#: src/Translation/Providers/DeepLProvider.php:90
+msgid "DeepL translation returned a mismatched number of results."
+msgstr ""
+
+#: src/Translation/Providers/DeepLProvider.php:110
+msgid "Please enter DeepL API key."
+msgstr ""
+
+#: src/Translation/Providers/DeepLProvider.php:147
+msgid "DeepL API returned invalid JSON."
+msgstr ""
+
+#: src/Translation/Providers/GoogleProvider.php:23
+msgid "Google Cloud Translation API key is not configured."
+msgstr ""
+
+#: src/Translation/Providers/GoogleProvider.php:53
+msgid "Google Translation API request failed."
+msgstr ""
+
+#: src/Translation/Providers/GoogleProvider.php:66
+msgid "Google translation returned invalid JSON."
+msgstr ""
+
+#: src/Translation/Providers/GoogleProvider.php:77
+msgid "Google translation returned an unexpected response."
+msgstr ""
+
+#: src/Translation/Providers/GoogleProvider.php:90
+msgid "Google translation returned a mismatched number of results."
+msgstr ""
+
+#: src/Translation/Providers/GoogleProvider.php:110
+msgid "Please enter a Google Cloud Translation API key."
+msgstr ""
+
+#: src/Translation/Providers/GoogleProvider.php:148
+msgid "Google API returned invalid JSON."
+msgstr ""
+
+#: src/Translation/Providers/OpenAiProvider.php:73
+msgid "No usable LLM model found. Please configure one in the model list."
+msgstr ""
+
+#: src/Translation/Providers/OpenAiProvider.php:88
+msgid "LLM model configuration is incomplete. Please confirm API URL, API key and model name."
+msgstr ""
+
+#: src/Translation/Providers/OpenAiProvider.php:135
+msgid "LLM translation API request failed."
+msgstr ""
+
+#: src/Translation/Providers/OpenAiProvider.php:152
+msgid "LLM translation returned an unexpected response. Could not find content in any known format."
+msgstr ""
+
+#: src/Translation/Providers/OpenAiProvider.php:169
+msgid "LLM translation result could not be parsed."
+msgstr ""
+
+#: src/Translation/Providers/YoudaoProvider.php:28
+msgid "Youdao Translate credentials are not configured."
+msgstr ""
+
+#: src/Translation/Providers/YoudaoProvider.php:50
+msgid "Youdao translation returned a mismatched number of results."
+msgstr ""
+
+#: src/Translation/Providers/YoudaoProvider.php:113
+msgid "Youdao translation API request failed."
+msgstr ""
+
+#: src/Translation/Providers/YoudaoProvider.php:126
+msgid "Youdao translation returned invalid JSON."
+msgstr ""
+
+#: src/Translation/Providers/YoudaoProvider.php:137
+msgid "Youdao translation returned an unexpected response."
+msgstr ""
+
+#: src/Translation/Providers/YoudaoProvider.php:212
+msgid "Please enter Youdao application ID and secret key."
+msgstr ""
+
+#: src/Translation/Providers/YoudaoProvider.php:259
+msgid "Youdao API returned invalid JSON."
+msgstr ""
+
+#: src/Translation/TranslationCoordinator.php:136
+msgid "The site has no translation rule configured."
+msgstr ""
+
+#: src/Translation/TranslationService.php:233
+msgid "The translation service is currently busy. Please try again later."
+msgstr ""
+
+#: src/Translation/TranslationService.php:807
+msgid "Translation returned a mismatched number of results."
+msgstr ""
+
+#: src/Translation/TranslationService.php:878
+msgid "Some translations were empty and replaced with original text."
+msgstr ""
+
+#: src/Infrastructure/Activator.php:116
+msgid "Go back to Plugins"
+msgstr ""
+
+#: src/Infrastructure/Activator.php:102
+msgid "Plugin Activation Error"
+msgstr ""
+
+#: src/Infrastructure/Activator.php:100
+msgid "Plugin Activation Failed"
+msgstr ""
+
+#: src/Infrastructure/Deactivator.php:32
+msgid "WPMMCC Multilingual was deactivated while translation tasks were still running. Some tasks may be incomplete."
+msgstr ""
+
+#: src/Infrastructure/Activator.php:95
+msgid "WPMMCC Multilingual requires either the cURL or Sockets PHP extension for HTTP communication."
+msgstr ""
+
+#: wpmmcc.php:94
+msgid "WPMMCC plugin requires PHP 7.2 or higher."
+msgstr ""
+
+#, php-format
+#: src/Infrastructure/Activator.php:88
+msgid "WPMMCC Multilingual requires PHP %1$s or higher. Your server is running PHP %2$s."
+msgstr ""
+
+#, php-format
+#: src/Infrastructure/Activator.php:108
+msgid "WPMMCC Multilingual requires the following PHP extensions: %s"
+msgstr ""
+
+#, php-format
+#: src/Infrastructure/Activator.php:81
+msgid "WPMMCC Multilingual requires WordPress %1$s or higher. You are running WordPress %2$s."
+msgstr ""

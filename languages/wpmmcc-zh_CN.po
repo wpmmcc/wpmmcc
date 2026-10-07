@@ -1,0 +1,5118 @@
+# Chinese (Simplified) translation for WPMMCC plugin.
+# Copyright (C) 2025 WPMMCC Team
+# This file is distributed under the GPL v2 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: WPMMCC - Multilingual Content & Translation Manager "
+"2.0.1\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wpmmcc\n"
+"POT-Creation-Date: 2026-03-18T04:12:01+00:00\n"
+"PO-Revision-Date: 2025-12-01 00:00+0800\n"
+"Last-Translator: WPMMCC Team\n"
+"Language-Team: Chinese (Simplified)\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: WPMMCC Translation Generator\n"
+"X-Domain: wpmmcc\n"
+
+#. Plugin Name of the plugin
+#: wpmmcc.php src/Admin/AdminService.php:125 src/Admin/AdminService.php:126
+msgid "WPMMCC"
+msgstr "WPMMCC"
+
+#. Description of the plugin
+#: wpmmcc.php
+msgid ""
+"A comprehensive multilingual solution for WordPress with content "
+"translation, theme translation, site group management, and multilingual "
+"sitemaps."
+msgstr ""
+"WordPress 的综合多语言解决方案，包含内容翻译、主题翻译、站点组管理和多语言站"
+"点地图。"
+
+#. Author of the plugin
+#: wpmmcc.php
+msgid "WPMMCC Team"
+msgstr "WPMMCC 团队"
+
+#. Author URI of the plugin
+#: wpmmcc.php
+msgid "https://www.wpmm.cc"
+msgstr "https://www.wpmm.cc"
+
+#: includes/asrunner/classes/abstracts/ActionScheduler_Abstract_QueueRunner.php:168
+msgid ""
+"This action appears to be consistently failing. A new instance will not be "
+"scheduled."
+msgstr "此操作似乎持续失败，不会再为其安排新的执行实例。"
+
+#: includes/asrunner/classes/abstracts/ActionScheduler_Logger.php:98
+msgid "action created"
+msgstr "操作已创建"
+
+#: includes/asrunner/classes/abstracts/ActionScheduler_Logger.php:107
+msgid "action canceled"
+msgstr "操作已取消"
+
+#. translators: %s: context
+#: includes/asrunner/classes/abstracts/ActionScheduler_Logger.php:119
+#, php-format
+msgid "action started via %s"
+msgstr "操作已通过 %s 启动"
+
+#: includes/asrunner/classes/abstracts/ActionScheduler_Logger.php:121
+msgid "action started"
+msgstr "操作已启动"
+
+#. translators: %s: context
+#: includes/asrunner/classes/abstracts/ActionScheduler_Logger.php:136
+#, php-format
+msgid "action complete via %s"
+msgstr "操作已通过 %s 完成"
+
+#: includes/asrunner/classes/abstracts/ActionScheduler_Logger.php:138
+msgid "action complete"
+msgstr "操作已完成"
+
+#. translators: 1: context 2: exception message
+#: includes/asrunner/classes/abstracts/ActionScheduler_Logger.php:153
+#, php-format
+msgid "action failed via %1$s: %2$s"
+msgstr "操作通过 %1$s 执行失败：%2$s"
+
+#. translators: %s: exception message
+#: includes/asrunner/classes/abstracts/ActionScheduler_Logger.php:156
+#, php-format
+msgid "action failed: %s"
+msgstr "操作失败：%s"
+
+#. translators: %s: amount of time
+#: includes/asrunner/classes/abstracts/ActionScheduler_Logger.php:169
+#, php-format
+msgid ""
+"action marked as failed after %s seconds. Unknown error occurred. Check "
+"server, PHP and database error logs to diagnose cause."
+msgstr "操作在 %s 秒后被标记为失败。发生未知错误。请检查服务器、PHP 和数据库错误日志以诊断原因。"
+
+#. translators: 1: error message 2: filename 3: line
+#: includes/asrunner/classes/abstracts/ActionScheduler_Logger.php:181
+#, php-format
+msgid "unexpected shutdown: PHP Fatal error %1$s in %2$s on line %3$s"
+msgstr "异常关闭：PHP 致命错误 %1$s，文件 %2$s，第 %3$s 行"
+
+#: includes/asrunner/classes/abstracts/ActionScheduler_Logger.php:191
+msgid "action reset"
+msgstr "操作已重置"
+
+#. translators: %s: context
+#: includes/asrunner/classes/abstracts/ActionScheduler_Logger.php:203
+#, php-format
+msgid "action ignored via %s"
+msgstr "操作已通过 %s 忽略"
+
+#: includes/asrunner/classes/abstracts/ActionScheduler_Logger.php:205
+msgid "action ignored"
+msgstr "操作已忽略"
+
+#. translators: %s: exception message
+#: includes/asrunner/classes/abstracts/ActionScheduler_Logger.php:220
+#, php-format
+msgid "There was a failure fetching this action: %s"
+msgstr "获取该操作时失败：%s"
+
+#: includes/asrunner/classes/abstracts/ActionScheduler_Logger.php:222
+msgid "There was a failure fetching this action"
+msgstr "获取该操作时失败"
+
+#. translators: %s: exception message
+#: includes/asrunner/classes/abstracts/ActionScheduler_Logger.php:236
+#, php-format
+msgid "There was a failure scheduling the next instance of this action: %s"
+msgstr "为该操作调度下一次执行实例时失败：%s"
+
+#. translators: %d is a number (maximum length of action arguments).
+#: includes/asrunner/classes/abstracts/ActionScheduler_Store.php:376
+#, php-format
+msgid ""
+"ActionScheduler_Action::$args too long. To ensure the args column can be "
+"indexed, action args should not be more than %d characters when encoded as "
+"JSON."
+msgstr "ActionScheduler_Action::$args 过长。为确保 args 列可建立索引，操作参数在编码为 JSON 后不应超过 %d 个字符。"
+
+#: includes/asrunner/classes/abstracts/ActionScheduler_Store.php:454
+#: src/Admin/Pages/TaskListPage.php:530 src/Admin/Pages/TaskListPage.php:796
+#: src/Admin/Pages/TaskListPage.php:941
+msgid "Complete"
+msgstr "完成"
+
+#: includes/asrunner/classes/abstracts/ActionScheduler_Store.php:455
+#: src/Admin/Pages/TaskListPage.php:528 src/Admin/Pages/TaskListPage.php:794
+#: src/Admin/Pages/TaskListPage.php:939 src/Admin/Tables/TaskChainTable.php:308
+#: src/Admin/Tables/TaskListTable.php:344
+msgid "Pending"
+msgstr "待处理"
+
+#: includes/asrunner/classes/abstracts/ActionScheduler_Store.php:456
+msgid "In-progress"
+msgstr "进行中"
+
+#: includes/asrunner/classes/abstracts/ActionScheduler_Store.php:457
+#: src/Admin/Pages/TaskListPage.php:531 src/Admin/Pages/TaskListPage.php:797
+#: src/Admin/Pages/TaskListPage.php:942 src/Admin/Tables/TaskChainTable.php:311
+#: src/Admin/Tables/TaskListTable.php:347
+msgid "Failed"
+msgstr "失败"
+
+#: includes/asrunner/classes/abstracts/ActionScheduler_Store.php:458
+#: src/Admin/Pages/TaskListPage.php:532 src/Admin/Pages/TaskListPage.php:798
+#: src/Admin/Pages/TaskListPage.php:943 src/Admin/Tables/TaskChainTable.php:312
+#: src/Admin/Tables/TaskListTable.php:348
+msgid "Canceled"
+msgstr "已取消"
+
+#. translators: 1: action hook.
+#: includes/asrunner/classes/actions/ActionScheduler_Action.php:80
+#, php-format
+msgid ""
+"Scheduled action for %1$s will not be executed as no callbacks are "
+"registered."
+msgstr "由于未注册任何回调，计划用于 %1$s 的操作将不会执行。"
+
+#: includes/asrunner/classes/ActionScheduler_ActionFactory.php:232
+msgid "Invalid action - must be a recurring action."
+msgstr "无效的操作，必须是循环操作。"
+
+#. translators: %1$s is the name of the hook to be enqueued, %2$s is the exception message.
+#: includes/asrunner/classes/ActionScheduler_ActionFactory.php:323
+#, php-format
+msgid "Caught exception while enqueuing action \"%1$s\": %2$s"
+msgstr "将操作“%1$s”加入队列时捕获到异常：%2$s"
+
+#. translators: 1: action ID 2: schedule
+#: includes/asrunner/classes/ActionScheduler_InvalidActionException.php:22
+#, php-format
+msgid "Action [%1$s] has an invalid schedule: %2$s"
+msgstr "操作 [%1$s] 的调度无效：%2$s"
+
+#. translators: 1: action ID 2: arguments
+#: includes/asrunner/classes/ActionScheduler_InvalidActionException.php:40
+#, php-format
+msgid ""
+"Action [%1$s] has invalid arguments. It cannot be JSON decoded to an array. "
+"$args = %2$s"
+msgstr "操作 [%1$s] 的参数无效，无法从 JSON 解码为数组。$args = %2$s"
+
+#. Translators: %s is the exception message.
+#: includes/asrunner/classes/ActionScheduler_QueueCleaner.php:70
+#, php-format
+msgid "It was not possible to determine a valid cut-off time: %s."
+msgstr "无法确定有效的截止时间：%s。"
+
+#: includes/asrunner/classes/data-stores/ActionScheduler_DBStore.php:165
+msgid "Database error."
+msgstr "数据库错误。"
+
+#. translators: %s: error message
+#: includes/asrunner/classes/data-stores/ActionScheduler_DBStore.php:173
+#, php-format
+msgid "Error saving action: %s"
+msgstr "保存操作时出错：%s"
+
+#: includes/asrunner/classes/data-stores/ActionScheduler_DBStore.php:462
+msgid "Invalid value for select or count parameter. Cannot query actions."
+msgstr "select 或 count 参数值无效，无法查询操作。"
+
+#: includes/asrunner/classes/data-stores/ActionScheduler_DBStore.php:531
+msgid ""
+"JSON partial matching not supported in your environment. Please check your "
+"MySQL/MariaDB version."
+msgstr "当前环境不支持 JSON 局部匹配。请检查你的 MySQL/MariaDB 版本。"
+
+#. translators: %s: provided value type
+#: includes/asrunner/classes/data-stores/ActionScheduler_DBStore.php:549
+#, php-format
+msgid ""
+"The value type for the JSON partial matching is not supported. Must be "
+"either integer, boolean, double or string. %s type provided."
+msgstr "JSON 局部匹配的值类型不受支持，必须是 integer、boolean、double 或 string。当前提供的是 %s 类型。"
+
+#: includes/asrunner/classes/data-stores/ActionScheduler_DBStore.php:571
+msgid "Unknown partial args matching value."
+msgstr "未知的局部参数匹配值。"
+
+#. translators: %s: action ID
+#: includes/asrunner/classes/data-stores/ActionScheduler_DBStore.php:742
+#, php-format
+msgid ""
+"Unidentified action %s: we were unable to cancel this action. It may may "
+"have been deleted by another process."
+msgstr "无法识别的操作 %s：我们无法取消该操作。它可能已被其他进程删除。"
+
+#. translators: %s is the action ID
+#: includes/asrunner/classes/data-stores/ActionScheduler_DBStore.php:844
+#, php-format
+msgid ""
+"Unidentified action %s: we were unable to delete this action. It may may "
+"have been deleted by another process."
+msgstr "无法识别的操作 %s：我们无法删除该操作。它可能已被其他进程删除。"
+
+#. translators: %s is the action ID
+#: includes/asrunner/classes/data-stores/ActionScheduler_DBStore.php:881
+#, php-format
+msgid ""
+"Unidentified action %s: we were unable to determine the date of this action. "
+"It may may have been deleted by another process."
+msgstr "无法识别的操作 %s：我们无法确定该操作的日期。它可能已被其他进程删除。"
+
+#. translators: %s: group name(s)
+#: includes/asrunner/classes/data-stores/ActionScheduler_DBStore.php:989
+#, php-format
+msgid "The group \"%s\" does not exist."
+msgid_plural "The groups \"%s\" do not exist."
+msgstr[0] "分组“%s”不存在。"
+
+#: includes/asrunner/classes/data-stores/ActionScheduler_DBStore.php:1163
+msgctxt "database error"
+msgid "unknown"
+msgstr "未知"
+
+#. translators: %s database error.
+#: includes/asrunner/classes/data-stores/ActionScheduler_DBStore.php:1169
+#, php-format
+msgid "Unable to claim actions. Database error: %s."
+msgstr "无法认领操作。数据库错误：%s。"
+
+#. translators: %d is an id.
+#: includes/asrunner/classes/data-stores/ActionScheduler_DBStore.php:1289
+#, php-format
+msgid "Unable to release actions from claim id %d."
+msgstr "无法从认领 ID %d 释放操作。"
+
+#. translators: %s is the action ID
+#: includes/asrunner/classes/data-stores/ActionScheduler_DBStore.php:1343
+#, php-format
+msgid ""
+"Unidentified action %s: we were unable to mark this action as having failed. "
+"It may may have been deleted by another process."
+msgstr "无法识别的操作 %s：我们无法将该操作标记为失败。它可能已被其他进程删除。"
+
+#. translators: 1: action ID. 2: status slug.
+#: includes/asrunner/classes/data-stores/ActionScheduler_DBStore.php:1375
+#, php-format
+msgid "Unable to update the status of action %1$d to %2$s."
+msgstr "无法将操作 %1$d 的状态更新为 %2$s。"
+
+#. translators: %s is the action ID
+#: includes/asrunner/classes/data-stores/ActionScheduler_DBStore.php:1412
+#, php-format
+msgid ""
+"Unidentified action %s: we were unable to mark this action as having "
+"completed. It may may have been deleted by another process."
+msgstr "无法识别的操作 %s：我们无法将该操作标记为已完成。它可能已被其他进程删除。"
+
+#: includes/asrunner/classes/data-stores/ActionScheduler_DBStore.php:1449
+msgid "Invalid action ID. No status found."
+msgstr "无效的操作 ID，未找到状态。"
+
+#: includes/asrunner/classes/data-stores/ActionScheduler_DBStore.php:1451
+msgid "Unknown status found for action."
+msgstr "发现操作的未知状态。"
+
+#: src/Admin/AdminService.php:135 src/Admin/AdminService.php:261
+#: src/Admin/AdminService.php:501 src/Admin/Pages/SiteListPage.php:1531
+#: src/Admin/Pages/ThemeTranslationPage.php:270
+#: src/Admin/Pages/TranslationRulesPage.php:486
+msgid "Machine translation"
+msgstr "机器翻译"
+
+#: src/Admin/AdminService.php:136 src/Admin/AdminService.php:262
+#: src/Admin/Pages/SiteListPage.php:1531
+#: src/Admin/Pages/ThemeTranslationPage.php:270
+#: src/Admin/Pages/TranslationRulesPage.php:487
+msgid "LLM translation"
+msgstr "LLM 翻译"
+
+#: src/Admin/AdminService.php:137 src/Admin/Pages/SitesPage.php:94
+msgid "Sites"
+msgstr "站点"
+
+#: src/Admin/AdminService.php:138 src/Admin/Pages/ThemePage.php:95
+msgid "Theme"
+msgstr "主题"
+
+#: src/Admin/AdminService.php:139 src/Admin/Pages/TasksPage.php:59
+msgid "Tasks"
+msgstr "任务"
+
+#: src/Admin/AdminService.php:140
+#: src/Admin/Pages/TranslationManagementPage.php:112
+msgid "Translation management"
+msgstr "翻译管理"
+
+#: src/Admin/AdminService.php:141 src/Admin/Pages/SitemapPage.php:139
+msgid "Sitemap"
+msgstr "站点地图"
+
+#: src/Admin/AdminService.php:142
+msgid "Parameters"
+msgstr "参数设置"
+
+#: src/Admin/AdminService.php:207
+msgid "Testing, please wait…"
+msgstr "测试中，请稍候…"
+
+#: src/Admin/AdminService.php:208
+msgid "Test succeeded."
+msgstr "测试成功。"
+
+#: src/Admin/AdminService.php:209
+msgid "Test failed, please check the configuration."
+msgstr "测试失败，请检查配置。"
+
+#: src/Admin/AdminService.php:210
+msgid "Please enter test content first."
+msgstr "请先输入测试内容。"
+
+#: src/Admin/AdminService.php:211
+msgid "Configuration has changed, please test again before saving."
+msgstr "配置已更改，请在保存前重新测试。"
+
+#: src/Admin/AdminService.php:212
+msgid "Please complete the rule configuration before testing."
+msgstr "请在测试前完成规则配置。"
+
+#. translators: %s: Comma-separated list of fields that need values.
+#: src/Admin/AdminService.php:214
+#, php-format
+msgid "Please fill in the following fields before testing: %s."
+msgstr "请在测试前填写以下字段：%s。"
+
+#: src/Admin/AdminService.php:216 src/Admin/Pages/TranslationRulesPage.php:475
+#: src/Admin/Tables/TranslationRulesTable.php:70
+#: src/Admin/Tables/TranslationRulesTable.php:83
+msgid "Rule name"
+msgstr "规则名称"
+
+#: src/Admin/AdminService.php:217 src/Admin/Pages/TranslationRulesPage.php:496
+#: src/Admin/Tables/TranslationRulesTable.php:84
+msgid "Translation vendor"
+msgstr "翻译厂商"
+
+#: src/Admin/AdminService.php:218 src/Admin/Pages/TranslationRulesPage.php:508
+msgid "LLM model"
+msgstr "LLM 模型"
+
+#: src/Admin/AdminService.php:219 src/Admin/Pages/TranslationRulesPage.php:544
+msgid "Source language code"
+msgstr "源语言代码"
+
+#: src/Admin/AdminService.php:220 src/Admin/Pages/TranslationRulesPage.php:550
+msgid "Target language code"
+msgstr "目标语言代码"
+
+#: src/Admin/AdminService.php:221
+msgid "Maximum content length per request"
+msgstr "每次请求的最大内容长度"
+
+#: src/Admin/AdminService.php:222
+msgid "Test text content"
+msgstr "测试文本内容"
+
+#: src/Admin/AdminService.php:223 src/Admin/Pages/TranslationRulesPage.php:522
+#: src/Admin/Tables/TranslationRulesTable.php:72
+msgid "Temperature"
+msgstr "温度"
+
+#: src/Admin/AdminService.php:224 src/Admin/Pages/TranslationRulesPage.php:529
+#: src/Admin/Tables/TranslationRulesTable.php:73
+msgid "Maximum input tokens"
+msgstr "最大输入令牌数"
+
+#: src/Admin/AdminService.php:225 src/Admin/Pages/TranslationRulesPage.php:536
+#: src/Admin/Tables/TranslationRulesTable.php:74
+msgid "Prompt"
+msgstr "提示词"
+
+#: src/Admin/AdminService.php:227
+msgid "Checking rule name…"
+msgstr "正在检查规则名称…"
+
+#: src/Admin/AdminService.php:228
+msgid "Rule name already exists, please choose another."
+msgstr "规则名称已存在，请选择其他名称。"
+
+#: src/Admin/AdminService.php:229
+msgid "An error occurred while checking the rule name. Please try again later."
+msgstr "检查规则名称时发生错误，请稍后再试。"
+
+#. translators: %s: Comma-separated list of fields that need values.
+#: src/Admin/AdminService.php:231
+#, php-format
+msgid "Please fill in the following fields: %s."
+msgstr "请填写以下字段：%s。"
+
+#: src/Admin/AdminService.php:232 src/Admin/Pages/TranslationRulesPage.php:831
+msgid ""
+"Please test the translation and ensure it succeeds before saving the rule."
+msgstr "请在保存规则前测试翻译并确保成功。"
+
+#: src/Admin/AdminService.php:233
+msgid "Temperature must be between 0 and 2."
+msgstr "温度必须介于 0 到 2 之间。"
+
+#: src/Admin/AdminService.php:234
+msgid "Maximum input tokens must be an integer greater than or equal to 0."
+msgstr "最大输入令牌数必须是大于或等于 0 的整数。"
+
+#: src/Admin/AdminService.php:235
+msgid "Maximum content length per request must be between 1 and 5000."
+msgstr "每次请求的最大内容长度必须介于 1 到 5000 之间。"
+
+#: src/Admin/AdminService.php:236
+msgid "QPS must be an integer greater than 0."
+msgstr "QPS 必须是大于 0 的整数。"
+
+#: src/Admin/AdminService.php:237 src/Admin/Pages/SiteGroupsPage.php:661
+msgid "Site group name cannot be empty."
+msgstr "站点组名称不能为空。"
+
+#: src/Admin/AdminService.php:238
+msgid "Site group name already exists, please choose another."
+msgstr "站点组名称已存在，请选择其他名称。"
+
+#: src/Admin/AdminService.php:239
+msgid ""
+"An error occurred while checking the site group name. Please try again later."
+msgstr "检查站点组名称时发生错误，请稍后再试。"
+
+#: src/Admin/AdminService.php:240
+msgid "Site group directory already exists, please choose another."
+msgstr "站点组目录已存在，请选择其他目录。"
+
+#: src/Admin/AdminService.php:241
+msgid ""
+"An error occurred while checking the site group directory. Please try again "
+"later."
+msgstr "检查站点组目录时发生错误，请稍后再试。"
+
+#: src/Admin/AdminService.php:242
+msgid "Completing uniqueness checks, please wait…"
+msgstr "正在完成唯一性检查，请稍候…"
+
+#: src/Admin/AdminService.php:243
+msgid "Please enter a custom permalink structure."
+msgstr "请输入自定义固定链接结构。"
+
+#: src/Admin/AdminService.php:244
+msgid "Saving"
+msgstr "保存中"
+
+#: src/Admin/AdminService.php:245
+msgid "Saving, please wait…"
+msgstr "保存中，请稍候…"
+
+#: src/Admin/AdminService.php:246
+msgid "Site information has been saved."
+msgstr "站点信息已保存。"
+
+#. translators: %s: Error message returned when saving site fails.
+#: src/Admin/AdminService.php:248
+#, php-format
+msgid "Failed to save site: %s"
+msgstr "保存站点失败：%s"
+
+#: src/Admin/AdminService.php:249 src/Admin/Pages/TranslationRulesPage.php:798
+msgid "Language code cannot be empty."
+msgstr "语言代码不能为空。"
+
+#: src/Admin/AdminService.php:250
+msgid "Please choose a translation rule."
+msgstr "请选择翻译规则。"
+
+#: src/Admin/AdminService.php:251
+msgid "Please enter a child site directory."
+msgstr "请输入子站点目录。"
+
+#: src/Admin/AdminService.php:252
+msgid "Please choose the child site to bind."
+msgstr "请选择要绑定的子站点。"
+
+#: src/Admin/AdminService.php:253
+msgid "This translation rule is already used by another site."
+msgstr "此翻译规则已被其他站点使用。"
+
+#: src/Admin/AdminService.php:254
+msgid "Please save the current row before editing another site."
+msgstr "请在编辑其他站点前保存当前行。"
+
+#: src/Admin/AdminService.php:255
+msgid ""
+"Before deleting, please make sure the child site has been cleaned. Continue?"
+msgstr "删除前，请确保子站点已清理完毕。是否继续？"
+
+#: src/Admin/AdminService.php:256
+msgid "Remove this unsaved site row?"
+msgstr "移除此未保存的站点行？"
+
+#. translators: %s: Error message returned when deleting a site fails.
+#: src/Admin/AdminService.php:258
+#, php-format
+msgid "Failed to delete site: %s"
+msgstr "删除站点失败：%s"
+
+#: src/Admin/AdminService.php:259 src/Admin/AdminService.php:372
+#: src/Admin/Pages/ThemeTranslationPage.php:400
+#: src/Admin/Tables/TaskChainTable.php:160
+#: src/Admin/Tables/TaskListTable.php:530
+msgid "Cancel"
+msgstr "取消"
+
+#: src/Admin/AdminService.php:260
+msgid "Discard the new site and remove unsaved changes?"
+msgstr "放弃新站点并移除未保存的更改？"
+
+#: src/Admin/AdminService.php:263
+msgid "Select a rule"
+msgstr "选择规则"
+
+#: src/Admin/AdminService.php:264
+msgid "Enter directory"
+msgstr "输入目录"
+
+#: src/Admin/AdminService.php:265
+msgid "Select a child site"
+msgstr "选择子站点"
+
+#: src/Admin/AdminService.php:266
+msgid "Search by site title or domain"
+msgstr "按站点标题或域名搜索"
+
+#: src/Admin/AdminService.php:267
+msgid "For example: zh-CN"
+msgstr "例如：zh-CN"
+
+#: src/Admin/AdminService.php:268
+msgid "Site has been deleted."
+msgstr "站点已删除。"
+
+#: src/Admin/AdminService.php:269
+msgid "Translate main site title"
+msgstr "翻译主站点标题"
+
+#: src/Admin/AdminService.php:270
+msgid "Translate main site tagline"
+msgstr "翻译主站点标语"
+
+#: src/Admin/AdminService.php:271
+msgid "Translating, please wait…"
+msgstr "翻译中，请稍候…"
+
+#: src/Admin/AdminService.php:272
+msgid "Translation loaded, you can continue editing."
+msgstr "翻译已加载，您可以继续编辑。"
+
+#. translators: %s: Error message returned from translation API.
+#: src/Admin/AdminService.php:274
+#, php-format
+msgid "Translation failed: %s"
+msgstr "翻译失败：%s"
+
+#: src/Admin/AdminService.php:275
+msgid "Please save the site and choose a translation rule first."
+msgstr "请先保存站点并选择翻译规则。"
+
+#: src/Admin/AdminService.php:276
+msgid "Please choose a translation rule for this site first."
+msgstr "请先为此站点选择翻译规则。"
+
+#: src/Admin/AdminService.php:277
+msgid "Main site content is empty and cannot be translated."
+msgstr "主站点内容为空，无法翻译。"
+
+#: src/Admin/AdminService.php:278 src/Admin/Pages/TranslationRulesPage.php:808
+msgid "Language code must not exceed 10 characters."
+msgstr "语言代码不能超过 10 个字符。"
+
+#: src/Admin/AdminService.php:279 src/Admin/AdminService.php:365
+#: src/Admin/Hooks/TermListHooks.php:1173
+#: src/Admin/Pages/SiteGroupsPage.php:158
+#: src/Admin/Pages/SiteGroupsPage.php:323 src/Admin/Pages/SiteListPage.php:1537
+#: src/Admin/Services/SiteContextService.php:308
+#: src/Sites/SiteContextService.php:311
+msgid "Main site"
+msgstr "主站点"
+
+#: src/Admin/AdminService.php:280 src/Admin/Pages/SiteListPage.php:1537
+msgid "Child site"
+msgstr "子站点"
+
+#: src/Admin/AdminService.php:281
+msgid "Main site does not require translation"
+msgstr "主站点无需翻译"
+
+#: src/Admin/AdminService.php:282
+msgid "No available sites."
+msgstr "没有可用站点。"
+
+#: src/Admin/AdminService.php:283
+msgid "No available rules."
+msgstr "没有可用规则。"
+
+#: src/Admin/AdminService.php:284 src/Admin/Pages/SiteGroupsPage.php:191
+#: src/Admin/Pages/SiteListPage.php:1076
+#: src/Admin/Pages/ThemeTranslationPage.php:1193
+#: src/Admin/Tables/LlmModelTable.php:168
+#: src/Admin/Tables/TranslationRulesTable.php:227
+msgid "Edit"
+msgstr "编辑"
+
+#: src/Admin/AdminService.php:285 src/Admin/Pages/ThemeTranslationPage.php:434
+msgid "Save"
+msgstr "保存"
+
+#: src/Admin/AdminService.php:286 src/Admin/Hooks/TermListHooks.php:538
+#: src/Admin/Pages/SeoFieldsPage.php:69 src/Admin/Pages/SiteGroupsPage.php:192
+#: src/Admin/Pages/SiteListPage.php:1078
+#: src/Admin/Pages/ThemeTranslationPage.php:1198
+#: src/Admin/Tables/LlmModelTable.php:64 src/Admin/Tables/LlmModelTable.php:169
+#: src/Admin/Tables/TaskChainTable.php:178
+#: src/Admin/Tables/TaskListTable.php:542
+#: src/Admin/Tables/TranslationRelationTable.php:76
+#: src/Admin/Tables/TranslationRulesTable.php:100
+#: src/Admin/Tables/TranslationRulesTable.php:228
+msgid "Delete"
+msgstr "删除"
+
+#: src/Admin/AdminService.php:287
+msgid "Please enter the original content."
+msgstr "请输入原始内容。"
+
+#: src/Admin/AdminService.php:288
+msgid "Please enter the source identifier."
+msgstr "请输入来源标识符。"
+
+#: src/Admin/AdminService.php:289
+msgid "Please enter the translated content."
+msgstr "请输入翻译内容。"
+
+#: src/Admin/AdminService.php:290 src/Admin/Pages/ThemeTranslationPage.php:1127
+msgid "Manual translation has been saved."
+msgstr "手动翻译已保存。"
+
+#: src/Admin/AdminService.php:291 src/Admin/Pages/ThemeTranslationPage.php:1120
+msgid "Failed to save manual translation. Please try again later."
+msgstr "保存手动翻译失败，请稍后再试。"
+
+#: src/Admin/AdminService.php:292
+msgid "Saving…"
+msgstr "保存中…"
+
+#: src/Admin/AdminService.php:293
+msgid "Please choose a valid child site before adding manual translations."
+msgstr "请选择有效的子站点后再手动添加翻译。"
+
+#: src/Admin/AdminService.php:362
+msgid "Choose target sites for translation"
+msgstr "选择翻译目标站点"
+
+#: src/Admin/AdminService.php:363
+msgid ""
+"Select the sites to translate content into (multiple selection allowed). "
+"Translation tasks run in the background; you can track progress in the task "
+"list."
+msgstr ""
+"选择要将内容翻译到的站点（可多选）。翻译任务在后台运行，您可以在任务列表中跟"
+"踪进度。"
+
+#: src/Admin/AdminService.php:364
+#: src/Admin/Tables/TranslationRelationTable.php:62
+msgid "Source site"
+msgstr "源站点"
+
+#: src/Admin/AdminService.php:366
+msgid "Selected items"
+msgstr "已选项目"
+
+#: src/Admin/AdminService.php:367
+msgid "Target sites (multiple)"
+msgstr "目标站点（多选）"
+
+#: src/Admin/AdminService.php:368
+msgid "Select all"
+msgstr "全选"
+
+#: src/Admin/AdminService.php:369
+msgid "Deselect all"
+msgstr "取消全选"
+
+#: src/Admin/AdminService.php:370
+msgid "No available target sites"
+msgstr "没有可用的目标站点"
+
+#: src/Admin/AdminService.php:371
+msgid "-- Please select --"
+msgstr "-- 请选择 --"
+
+#: src/Admin/AdminService.php:373
+msgid "Start translation"
+msgstr "开始翻译"
+
+#: src/Admin/AdminService.php:374
+msgid "Please select items to translate first."
+msgstr "请先选择要翻译的项目。"
+
+#: src/Admin/AdminService.php:375
+msgid "Please select at least one target site."
+msgstr "请至少选择一个目标站点。"
+
+#: src/Admin/AdminService.php:376
+msgid "Creating translation task…"
+msgstr "正在创建翻译任务…"
+
+#: src/Admin/AdminService.php:377
+msgid "Translation task created. The page will refresh automatically."
+msgstr "翻译任务已创建，页面将自动刷新。"
+
+#: src/Admin/AdminService.php:378
+msgid "Failed to create translation task. Please try again."
+msgstr "创建翻译任务失败，请重试。"
+
+#: src/Admin/AdminService.php:379 src/Admin/Pages/TaskListPage.php:1303
+msgid "Request failed"
+msgstr "请求失败"
+
+#: src/Admin/AdminService.php:380
+msgid "Draft"
+msgstr "草稿"
+
+#: src/Admin/AdminService.php:395 src/Admin/Pages/ApiVendorsPage.php:191
+#: src/Admin/Pages/GlobalSettingsPage.php:248 src/Admin/Pages/LlmPage.php:83
+#: src/Admin/Pages/SeoFieldsPage.php:46 src/Admin/Pages/SettingsPage.php:72
+#: src/Admin/Pages/SiteGroupsPage.php:49 src/Admin/Pages/SiteListPage.php:87
+#: src/Admin/Pages/SitemapPage.php:64 src/Admin/Pages/SitesPage.php:57
+#: src/Admin/Pages/TaskListPage.php:64 src/Admin/Pages/TasksPage.php:31
+#: src/Admin/Pages/ThemePage.php:69
+#: src/Admin/Pages/ThemeTemplateTagsPage.php:64
+#: src/Admin/Pages/ThemeTranslationPage.php:110
+#: src/Admin/Pages/TranslationFieldsPage.php:43
+#: src/Admin/Pages/TranslationManagementPage.php:82
+#: src/Admin/Pages/TranslationRulesPage.php:130
+msgid "You do not have permission to access this page."
+msgstr "您没有权限访问此页面。"
+
+#: src/Admin/AdminService.php:414
+msgid "Multilingual Manager"
+msgstr "多语言管理器"
+
+#: src/Admin/AdminService.php:415
+msgid "Use this dashboard to control diagnostics or jump to translation tools."
+msgstr "使用此仪表盘可管理诊断功能，或快速跳转到翻译工具。"
+
+#: src/Admin/AdminService.php:420
+msgid "Plugin logging"
+msgstr "插件日志"
+
+#: src/Admin/AdminService.php:421
+msgid ""
+"Toggle whether wpmmcc writes debug information to the WordPress debug log."
+msgstr "切换是否让 wpmmcc 将调试信息写入 WordPress 调试日志。"
+
+#: src/Admin/AdminService.php:429
+msgid "Enable plugin debug logging"
+msgstr "启用插件调试日志"
+
+#. translators: %s: Path to the current log file.
+#: src/Admin/AdminService.php:436
+#, php-format
+msgid "Current log file: %s"
+msgstr "当前日志文件：%s"
+
+#: src/Admin/AdminService.php:441
+msgid "Save logging setting"
+msgstr "保存日志设置"
+
+#: src/Admin/AdminService.php:449
+msgid "Go to translation rules"
+msgstr "前往翻译规则"
+
+#: src/Admin/AdminService.php:465
+msgid "You do not have permission to modify settings."
+msgstr "您没有权限修改设置。"
+
+#: src/Admin/AdminService.php:476
+msgid "Plugin logging has been enabled."
+msgstr "已启用插件日志。"
+
+#: src/Admin/AdminService.php:477
+msgid "Plugin logging has been disabled."
+msgstr "已禁用插件日志。"
+
+#: src/Admin/AdminService.php:489
+msgid "Vendor settings"
+msgstr "厂商设置"
+
+#: src/Admin/AdminService.php:490 src/Admin/Pages/LlmPage.php:93
+#: src/Admin/Pages/TranslationRulesPage.php:248
+msgid "Translation rules"
+msgstr "翻译规则"
+
+#: src/Admin/AdminService.php:512 src/Admin/Pages/LlmPage.php:108
+#: src/Admin/Pages/TranslationRulesPage.php:249
+msgid "Add rule"
+msgstr "添加规则"
+
+#: src/Admin/AdminService.php:517
+msgid "Machine translation navigation"
+msgstr "机器翻译导航"
+
+#: src/Admin/AdminService.php:544
+#: src/Admin/Tables/TranslationRulesTable.php:140
+msgid "Search rules"
+msgstr "搜索规则"
+
+#: src/Admin/AdminService.php:545
+#: src/Admin/Tables/TranslationRulesTable.php:124
+msgid "Enter a rule name"
+msgstr "输入规则名称"
+
+#: src/Admin/AdminService.php:546 src/Admin/Pages/LlmPage.php:137
+#: src/Admin/Pages/SiteGroupsPage.php:139 src/Admin/Pages/SiteListPage.php:1003
+#: src/Admin/Pages/ThemeTranslationPage.php:454
+msgid "Search"
+msgstr "搜索"
+
+#: src/Admin/AdminService.php:698
+msgid "Coming soon"
+msgstr "即将推出"
+
+#: src/Admin/Ajax/BulkTranslationAjaxHandler.php:80
+#: src/Admin/Pages/ApiVendorsPage.php:305
+#: src/Admin/Pages/GlobalSettingsPage.php:210
+#: src/Admin/Pages/GlobalSettingsPage.php:637
+#: src/Admin/Pages/GlobalSettingsPage.php:730 src/Admin/Pages/LlmPage.php:500
+#: src/Admin/Pages/LlmPage.php:678 src/Admin/Pages/SettingsPage.php:204
+#: src/Admin/Pages/SettingsPage.php:239 src/Admin/Pages/SiteGroupsPage.php:553
+#: src/Admin/Pages/SiteGroupsPage.php:787
+#: src/Admin/Pages/SiteGroupsPage.php:836
+#: src/Admin/Pages/SiteGroupsPage.php:861 src/Admin/Pages/SiteListPage.php:160
+#: src/Admin/Pages/SiteListPage.php:227 src/Admin/Pages/SiteListPage.php:299
+#: src/Admin/Pages/SiteListPage.php:424 src/Admin/Pages/TaskListPage.php:806
+#: src/Admin/Pages/ThemeTranslationPage.php:982
+#: src/Admin/Pages/TranslationManagementPage.php:384
+#: src/Admin/Pages/TranslationManagementPage.php:459
+#: src/Admin/Pages/TranslationRulesPage.php:702
+#: src/Admin/Pages/TranslationRulesPage.php:921
+#: src/Admin/Pages/TranslationRulesPage.php:1003
+#: src/Admin/Pages/TranslationRulesPage.php:1076
+msgid "You do not have permission to perform this action."
+msgstr "您没有权限执行此操作。"
+
+#: src/Admin/Ajax/BulkTranslationAjaxHandler.php:110
+msgid "Required parameters are missing. Please try again."
+msgstr "缺少必需的参数，请重试。"
+
+#: src/Admin/Ajax/BulkTranslationAjaxHandler.php:118
+msgid "Unsupported object type."
+msgstr "不支持的对象类型。"
+
+#: src/Admin/Ajax/BulkTranslationAjaxHandler.php:126
+msgid ""
+"Bulk translation is only available on the main site. Please switch to the "
+"main site and try again."
+msgstr "批量翻译只能在主站点上操作，请切换到主站点后重试。"
+
+#. translators: %d: Target site ID.
+#: src/Admin/Ajax/BulkTranslationAjaxHandler.php:137
+#, php-format
+msgid "Invalid target site ID: %d"
+msgstr "目标站点 ID 无效：%d"
+
+#: src/Admin/Ajax/BulkTranslationAjaxHandler.php:149
+msgid ""
+"The current site could not be resolved. Please check site configuration."
+msgstr "无法解析当前站点，请检查站点配置。"
+
+#: src/Admin/Ajax/BulkTranslationAjaxHandler.php:159
+msgid ""
+"The current site configuration is incomplete. Please verify the site group "
+"setup."
+msgstr "当前站点配置不完整。请检查站点组设置。"
+
+#: src/Admin/Ajax/BulkTranslationAjaxHandler.php:212
+msgid ""
+"None of the selected items are original main site content. Only main site "
+"content can be translated."
+msgstr "所选内容均非主站点原始内容，只有主站点内容才能进行翻译。"
+
+#. translators: 1: number of items, 2: object type label
+#: src/Admin/Ajax/BulkTranslationAjaxHandler.php:319
+#, php-format
+msgid "Bulk translation task created: %1$d %2$s"
+msgstr "已创建批量翻译任务：%1$d %2$s"
+
+#: src/Admin/Ajax/BulkTranslationAjaxHandler.php:348
+#: src/Admin/Hooks/MediaBulkActions.php:277
+#: src/Admin/Hooks/PostBulkActions.php:286
+#: src/Admin/Hooks/TermBulkActions.php:305
+msgid "Failed to create translation tasks. Please try again later."
+msgstr "创建翻译任务失败。请稍后重试。"
+
+#. translators: 1: Tasks created, 2: Object count, 3: Object type label, 4: Target site count.
+#: src/Admin/Ajax/BulkTranslationAjaxHandler.php:356
+#, php-format
+msgid ""
+"Created %1$d translation tasks to translate %2$d %3$s into %4$d target sites."
+msgstr "已创建 %1$d 个翻译任务，将 %2$d 个 %3$s 翻译到 %4$d 个目标站点。"
+
+#. translators: %d: Number of sites for which task creation failed.
+#: src/Admin/Ajax/BulkTranslationAjaxHandler.php:367
+#, php-format
+msgid "Note: creating tasks failed for %d sites."
+msgstr "注意：%d 个站点的任务创建失败。"
+
+#: src/Admin/Ajax/BulkTranslationAjaxHandler.php:389
+msgid "An unexpected error occurred. Please try again later."
+msgstr "发生意外错误，请稍后再试。"
+
+#: src/Admin/Ajax/BulkTranslationAjaxHandler.php:405
+msgid "posts"
+msgstr "文章"
+
+#: src/Admin/Ajax/BulkTranslationAjaxHandler.php:406
+msgid "terms"
+msgstr "分类/标签"
+
+#: src/Admin/Ajax/BulkTranslationAjaxHandler.php:407
+msgid "media items"
+msgstr "媒体项"
+
+#: src/Admin/Components/Pagination.php:41
+msgid "items"
+msgstr "项"
+
+#. translators: 1: total items, 2: unit label
+#: src/Admin/Components/Pagination.php:83
+#, php-format
+msgid "Total %1$s %2$s"
+msgstr "共 %1$s %2$s"
+
+#: src/Admin/Components/SiteSelector.php:69
+#: src/Admin/Components/SiteSelector.php:142
+#: src/Admin/Components/SiteSelector.php:219
+#: src/Admin/Hooks/MediaListHooks.php:309 src/Admin/Hooks/TermListHooks.php:175
+#: src/Admin/Hooks/TermListHooks.php:291 src/Admin/Hooks/TermListHooks.php:1122
+#: src/Admin/MetaBoxes/PostSiteMetaBox.php:91
+#: src/Admin/Pages/SiteListPage.php:1047
+msgid "Site"
+msgstr "站点"
+
+#: src/Admin/Components/SiteSelector.php:265
+msgid "Select which site this term belongs to."
+msgstr "请选择该分类/标签所属的站点。"
+
+#: src/Admin/Hooks/CommentListHooks.php:99
+#: src/Admin/Hooks/TermListHooks.php:225
+msgid "Site filter"
+msgstr "站点筛选"
+
+#. translators: %s: Directory path already used by a multisite site.
+#. translators: %s: Directory path already used by multisite site.
+#: src/Admin/Hooks/DirectoryConflictHooks.php:100
+#: src/Admin/Hooks/DirectoryConflictHooks.php:205
+#, php-format
+msgid ""
+"The directory \"%s\" is already used by a WordPress multisite site. Please "
+"choose another directory."
+msgstr "目录 \"%s\" 已被 WordPress 多站点使用。请选择其他目录。"
+
+#. translators: %s: Directory path already used by another plugin site.
+#: src/Admin/Hooks/DirectoryConflictHooks.php:120
+#, php-format
+msgid ""
+"The directory \"%s\" is already used by another site. Please choose a "
+"different directory."
+msgstr "目录 \"%s\" 已被另一个站点使用。请选择不同的目录。"
+
+#. translators: %s: Directory path already used by plugin.
+#: src/Admin/Hooks/DirectoryConflictHooks.php:166
+#, php-format
+msgid ""
+"Error: the directory \"/%s\" is already used by the multilingual translation "
+"plugin. Please use another path or contact an administrator."
+msgstr ""
+"错误：目录 \"/%s\" 已被多语言翻译插件使用。请使用其他路径或联系管理员。"
+
+#: src/Admin/Hooks/DirectoryConflictHooks.php:169
+msgid "Directory conflict"
+msgstr "目录冲突"
+
+#. translators: 1: Requested directory, 2: Existing group name.
+#: src/Admin/Hooks/DirectoryConflictHooks.php:224
+#, php-format
+msgid ""
+"The directory \"%1$s\" is already used by the site group \"%2$s\". Please "
+"choose another directory."
+msgstr "目录 \"%1$s\" 已被站点组 \"%2$s\" 使用。请选择其他目录。"
+
+#: src/Admin/Hooks/MediaBulkActions.php:128
+msgid "Translate media information"
+msgstr "翻译媒体信息"
+
+#: src/Admin/Hooks/MediaBulkActions.php:153
+#: src/Admin/Hooks/PostBulkActions.php:158
+#: src/Admin/Hooks/TermBulkActions.php:157
+msgid ""
+"This site belongs to a multisite-type group, but the wpmmcc plugin is not "
+"network-activated. Cross-site translation is disabled. Please enable wpmmcc "
+"at “Network Admin → Plugins” and try again."
+msgstr ""
+"此站点属于多站点类型组，但 wpmmcc 插件未网络激活。跨站点翻译已禁用。请在“网络"
+"管理 → 插件”中启用 wpmmcc 后重试。"
+
+#: src/Admin/Hooks/MediaBulkActions.php:171
+#: src/Admin/Hooks/TermBulkActions.php:175
+msgid ""
+"The bulk translation flow has been updated. Please refresh the page and try "
+"again."
+msgstr "批量翻译流程已更新。请刷新页面后重试。"
+
+#: src/Admin/Hooks/MediaBulkActions.php:183
+msgid ""
+"Media translation can only be started from the main site. Please switch to "
+"the main site and try again."
+msgstr "媒体翻译只能在主站点启动。请切换到主站点后重试。"
+
+#: src/Admin/Hooks/MediaBulkActions.php:194
+msgid "Please select at least one media item before starting translation."
+msgstr "请至少选择一个媒体项目后再开始翻译。"
+
+#: src/Admin/Hooks/MediaBulkActions.php:264
+msgid "Task created from media library bulk action."
+msgstr "任务从媒体库批量操作创建。"
+
+#: src/Admin/Hooks/MediaBulkActions.php:287
+#: src/Admin/Hooks/PostBulkActions.php:296
+#: src/Admin/Hooks/TermBulkActions.php:315
+msgid ""
+"Translation tasks have been created and will appear in the task list shortly."
+msgstr "翻译任务已创建，将很快出现在任务列表中。"
+
+#: src/Admin/Hooks/MediaBulkActions.php:319
+#: src/Admin/Hooks/PostBulkActions.php:328
+#: src/Admin/Hooks/TermBulkActions.php:347
+msgid ""
+"The current site does not belong to a configured site group. Please complete "
+"setup in the \"Site list\" screen first."
+msgstr "当前站点不属于已配置的站点组。请先在\"站点列表\"页面完成设置。"
+
+#: src/Admin/Hooks/MediaBulkActions.php:320
+#: src/Admin/Hooks/PostBulkActions.php:329
+#: src/Admin/Hooks/TermBulkActions.php:348
+msgid ""
+"The current site group does not have a main site configured and cannot "
+"create translation tasks."
+msgstr "当前站点组未配置主站点，无法创建翻译任务。"
+
+#: src/Admin/Hooks/MediaBulkActions.php:321
+#: src/Admin/Hooks/PostBulkActions.php:330
+#: src/Admin/Hooks/TermBulkActions.php:349
+msgid ""
+"The current site group has no available target sites. Please add sites in "
+"the \"Site list\" screen."
+msgstr "当前站点组没有可用的目标站点。请在\"站点列表\"页面添加站点。"
+
+#: src/Admin/Hooks/MediaEditHooks.php:121
+msgid "View translated content"
+msgstr "查看翻译内容"
+
+#: src/Admin/Hooks/MediaEditHooks.php:124
+msgid "Select a site to view its translated metadata."
+msgstr "选择一个站点以查看其翻译后的元数据。"
+
+#: src/Admin/Hooks/MediaEditHooks.php:238
+msgid ""
+"No media translation fields are enabled for this site group. Enable them on "
+"the \"Translation fields\" settings page."
+msgstr "此站点组未启用媒体翻译字段。请在\"翻译字段\"设置页面启用它们。"
+
+#: src/Admin/Hooks/MediaEditHooks.php:251
+msgid "Select site:"
+msgstr "选择站点："
+
+#: src/Admin/Hooks/MediaEditHooks.php:253
+#: src/Admin/Hooks/MediaEditHooks.php:274
+#: src/Admin/Pages/ThemeTranslationPage.php:391
+#: src/Admin/Pages/ThemeTranslationPage.php:427
+#: src/Admin/Pages/ThemeTranslationPage.php:497
+msgid "Original content"
+msgstr "原始内容"
+
+#: src/Admin/Hooks/MediaEditHooks.php:263
+msgid "(no translation)"
+msgstr "（无翻译）"
+
+#: src/Admin/Hooks/MediaEditHooks.php:278
+#: src/Admin/Hooks/MediaEditHooks.php:333
+#: src/Admin/Pages/TranslationFieldsPage.php:95
+#: src/Admin/Pages/TranslationManagementPage.php:224
+msgid "Title"
+msgstr "标题"
+
+#: src/Admin/Hooks/MediaEditHooks.php:284
+#: src/Admin/Hooks/MediaEditHooks.php:339
+#: src/Admin/Pages/TranslationFieldsPage.php:122
+msgid "Alt text"
+msgstr "替代文本"
+
+#: src/Admin/Hooks/MediaEditHooks.php:290
+#: src/Admin/Hooks/MediaEditHooks.php:345
+#: src/Admin/Pages/TranslationFieldsPage.php:121
+msgid "Caption"
+msgstr "说明文字"
+
+#: src/Admin/Hooks/MediaEditHooks.php:296
+#: src/Admin/Hooks/MediaEditHooks.php:351
+#: src/Admin/Pages/SiteGroupsPage.php:162
+#: src/Admin/Pages/TranslationFieldsPage.php:123
+#: src/Admin/Pages/TranslationFieldsPage.php:152
+msgid "Description"
+msgstr "描述"
+
+#: src/Admin/Hooks/MediaEditHooks.php:326
+msgid "No translated content found. Showing original content."
+msgstr "未找到已翻译内容，显示原始内容。"
+
+#: src/Admin/Hooks/MediaListHooks.php:312
+msgid "Choose which site this media item belongs to."
+msgstr "请选择该媒体文件所属的站点。"
+
+#: src/Admin/Hooks/MediaListHooks.php:428 src/Admin/Hooks/TermListHooks.php:537
+msgid "Translate to other languages"
+msgstr "翻译为其他语言"
+
+#: src/Admin/Hooks/MediaListHooks.php:429
+msgid "Dismiss this notice"
+msgstr "关闭此通知"
+
+#: src/Admin/Hooks/MediaListHooks.php:430
+msgid ""
+"Please click \"Bulk select\" first, then choose the media items you want to "
+"translate."
+msgstr "请先点击“批量选择”，然后选择要翻译的媒体项目。"
+
+#: src/Admin/Hooks/MediaListHooks.php:431
+msgid ""
+"The bulk translation feature is not available yet. Please refresh the page "
+"and try again."
+msgstr "批量翻译功能暂不可用。请刷新页面后重试。"
+
+#: src/Admin/Hooks/MediaListHooks.php:432
+msgid "Translation is only available on the main site."
+msgstr "仅主站点支持翻译。"
+
+#: src/Admin/Hooks/MediaListHooks.php:433
+msgid ""
+"Translation is only available on the main site. Switch to the main site and "
+"try again."
+msgstr "仅主站点支持翻译。请切换到主站点后重试。"
+
+#: src/Admin/Hooks/NetworkStatusNotices.php:96
+msgid ""
+"This site belongs to a “multisite-style” site group, but the wpmmcc plugin "
+"is not network-activated. Cross-site translation and site selection features "
+"are disabled. To enable them, go to “Network Admin → Plugins” and set wpmmcc "
+"to “Network Active”."
+msgstr ""
+"此站点属于”多站点样式”站点组，但 wpmmcc 插件未以网络方式激活。跨站点翻译和站"
+"点选择功能已禁用。要启用这些功能，请前往”网络管理 → 插件”，将 wpmmcc 设置为”"
+"网络激活”。"
+
+#: src/Admin/Hooks/PostBulkActions.php:133
+#: src/Admin/Hooks/TermBulkActions.php:132
+msgid "Translate into other languages"
+msgstr "翻译至其他语言"
+
+#: src/Admin/Hooks/PostBulkActions.php:169
+msgid ""
+"This content is not on the main site and cannot be submitted for translation."
+msgstr "此内容不在主站点，无法提交翻译。"
+
+#: src/Admin/Hooks/PostBulkActions.php:189
+msgid ""
+"The bulk translation workflow has changed. Please refresh the page and try "
+"again."
+msgstr "批量翻译流程已更改。请刷新页面后重试。"
+
+#: src/Admin/Hooks/PostBulkActions.php:200
+msgid "Please select at least one post before starting translation."
+msgstr "请至少选择一篇文章后再开始翻译。"
+
+#: src/Admin/Hooks/PostBulkActions.php:273
+msgid "Task created from post list bulk action."
+msgstr "任务由文章列表批量操作创建。"
+
+#: src/Admin/Hooks/TermBulkActions.php:187
+msgid ""
+"Term translation can only be started from the main site. Please switch to "
+"the main site and try again."
+msgstr "分类/标签翻译只能从主站点发起，请切换到主站点后重试。"
+
+#: src/Admin/Hooks/TermBulkActions.php:198
+msgid "Please select at least one item before starting translation."
+msgstr "请至少选择一项后再开始翻译。"
+
+#: src/Admin/Hooks/TermBulkActions.php:291
+msgid "Task created from term list bulk action."
+msgstr "任务由分类/标签列表批量操作创建。"
+
+#: src/Admin/Hooks/TermListHooks.php:303
+msgid "Choose which site this category or tag belongs to."
+msgstr "请选择该分类/标签所属的站点。"
+
+#: src/Admin/Hooks/TermListHooks.php:535
+#: src/Admin/Tables/TranslationRelationTable.php:141
+msgid "Select bulk action"
+msgstr "选择批量操作"
+
+#: src/Admin/Hooks/TermListHooks.php:536
+#: src/Admin/Tables/TranslationRelationTable.php:143
+msgid "Bulk actions"
+msgstr "批量操作"
+
+#: src/Admin/Hooks/TermListHooks.php:539
+#: src/Admin/Pages/GlobalSettingsPage.php:191
+#: src/Admin/Tables/TranslationRelationTable.php:148
+msgid "Apply"
+msgstr "应用"
+
+#: src/Admin/Hooks/TermListHooks.php:540
+msgid "Search tags:"
+msgstr "搜索标签："
+
+#: src/Admin/Hooks/TermListHooks.php:541
+msgid "Search tags"
+msgstr "搜索标签"
+
+#: src/Admin/Hooks/TermListHooks.php:542 src/Admin/Pages/SiteGroupsPage.php:134
+#: src/Admin/Pages/SiteListPage.php:998
+#: src/Admin/Pages/ThemeTranslationPage.php:326
+#: src/Admin/Tables/TaskListTable.php:192
+#: src/Admin/Tables/TranslationRelationTable.php:181
+#: src/Admin/Tables/TranslationRulesTable.php:173
+msgid "Filter"
+msgstr "筛选"
+
+#: src/Admin/Hooks/TermListHooks.php:1163
+msgid "Main site (original)"
+msgstr "主站点（原始内容）"
+
+#: src/Admin/MetaBoxes/PostSiteMetaBox.php:131
+msgid "Untitled"
+msgstr "无标题"
+
+#: src/Admin/MetaBoxes/PostSiteMetaBox.php:154
+msgid "Warning"
+msgstr "警告"
+
+#. translators: %s: Site information placeholder.
+#: src/Admin/MetaBoxes/PostSiteMetaBox.php:157
+#, php-format
+msgid "The original site is unknown: %s. Please choose a new site."
+msgstr "原始站点未知：%s。请选择一个新站点。"
+
+#: src/Admin/MetaBoxes/PostSiteMetaBox.php:167
+msgid ""
+"Choose which site this content belongs to. When publishing, the selected "
+"site determines which directory-style site it appears on."
+msgstr "请选择该内容所属的站点。发布时，所选站点决定其显示在哪个目录式站点上。"
+
+#: src/Admin/Pages/ApiVendorsPage.php:63
+#: src/Admin/Pages/TranslationRulesPage.php:79
+#: src/Admin/Tables/TranslationRulesTable.php:418
+msgid "Google Cloud Translation"
+msgstr "Google Cloud Translation"
+
+#: src/Admin/Pages/ApiVendorsPage.php:66 src/Admin/Pages/ApiVendorsPage.php:86
+#: src/Admin/Pages/LlmPage.php:456
+msgid "API Key"
+msgstr "API 密钥"
+
+#: src/Admin/Pages/ApiVendorsPage.php:70 src/Admin/Pages/ApiVendorsPage.php:90
+#: src/Admin/Pages/ApiVendorsPage.php:114
+#: src/Admin/Pages/ApiVendorsPage.php:138
+msgid "QPS Limit"
+msgstr "QPS 限制"
+
+#: src/Admin/Pages/ApiVendorsPage.php:72 src/Admin/Pages/ApiVendorsPage.php:92
+#: src/Admin/Pages/ApiVendorsPage.php:116
+#: src/Admin/Pages/ApiVendorsPage.php:140 src/Admin/Pages/LlmPage.php:478
+msgid "Maximum concurrent requests per second (minimum 1, default 10)."
+msgstr "每秒最大并发请求数（最小 1，默认 10）。"
+
+#: src/Admin/Pages/ApiVendorsPage.php:83
+#: src/Admin/Pages/TranslationRulesPage.php:80
+#: src/Admin/Tables/TranslationRulesTable.php:419
+msgid "DeepL"
+msgstr "DeepL"
+
+#: src/Admin/Pages/ApiVendorsPage.php:103
+#: src/Admin/Pages/TranslationRulesPage.php:81
+#: src/Admin/Tables/TranslationRulesTable.php:420
+msgid "Baidu Translate"
+msgstr "百度翻译"
+
+#: src/Admin/Pages/ApiVendorsPage.php:106
+msgid "APP ID"
+msgstr "APP ID"
+
+#: src/Admin/Pages/ApiVendorsPage.php:110
+msgid "Secret Key"
+msgstr "密钥"
+
+#: src/Admin/Pages/ApiVendorsPage.php:127
+#: src/Admin/Pages/TranslationRulesPage.php:82
+#: src/Admin/Tables/TranslationRulesTable.php:421
+msgid "Youdao Translate"
+msgstr "有道翻译"
+
+#: src/Admin/Pages/ApiVendorsPage.php:130
+msgid "App ID"
+msgstr "App ID"
+
+#: src/Admin/Pages/ApiVendorsPage.php:134
+msgid "App Secret Key"
+msgstr "应用密钥"
+
+#: src/Admin/Pages/ApiVendorsPage.php:199
+msgid "Machine Translation"
+msgstr "机器翻译"
+
+#: src/Admin/Pages/ApiVendorsPage.php:236
+#: src/Admin/Pages/ApiVendorsPage.php:238
+msgid "Show Key"
+msgstr "显示密钥"
+
+#: src/Admin/Pages/ApiVendorsPage.php:236
+msgid "Hide Key"
+msgstr "隐藏密钥"
+
+#: src/Admin/Pages/ApiVendorsPage.php:243
+msgid "Saved key is hidden. Please re-enter when updating."
+msgstr "已保存的密钥已隐藏，更新时请重新输入。"
+
+#: src/Admin/Pages/ApiVendorsPage.php:278
+#: src/Admin/Pages/GlobalSettingsPage.php:594
+#: src/Admin/Pages/SettingsPage.php:161
+msgid "Save Settings"
+msgstr "保存设置"
+
+#: src/Admin/Pages/ApiVendorsPage.php:316
+msgid "Unsupported translation vendor."
+msgstr "不支持的翻译厂商。"
+
+#: src/Admin/Pages/ApiVendorsPage.php:374
+msgid "Unable to save settings: settings table does not exist."
+msgstr "无法保存设置：设置表不存在。"
+
+#: src/Admin/Pages/ApiVendorsPage.php:410
+#: src/Admin/Pages/GlobalSettingsPage.php:708
+#: src/Admin/Pages/SettingsPage.php:224
+msgid "Settings saved."
+msgstr "设置已保存。"
+
+#: src/Admin/Pages/GlobalSettingsPage.php:81
+#: src/Admin/Pages/TaskListPage.php:161 src/Admin/Pages/TaskListPage.php:525
+#: src/Admin/Services/SiteContextService.php:327
+#: src/Admin/Tables/TaskListTable.php:172
+#: src/Admin/Tables/TaskListTable.php:248
+#: src/Admin/Tables/TaskListTable.php:281 src/Sites/SiteContextService.php:330
+msgid "Unknown"
+msgstr "未知"
+
+#. translators: %s: version number
+#: src/Admin/Pages/GlobalSettingsPage.php:98
+#, php-format
+msgid "Modified based on %s"
+msgstr "基于 %s 修改"
+
+#: src/Admin/Pages/GlobalSettingsPage.php:103
+msgid "WPMMCC Built-in"
+msgstr "WPMMCC 内置"
+
+#: src/Admin/Pages/GlobalSettingsPage.php:106
+msgid "External Plugin"
+msgstr "外部插件"
+
+#: src/Admin/Pages/GlobalSettingsPage.php:113
+msgid ""
+"Multiple Action Scheduler versions detected. The highest version is "
+"automatically used."
+msgstr "检测到多个 Action Scheduler 版本。系统将自动使用最高版本。"
+
+#: src/Admin/Pages/GlobalSettingsPage.php:119
+msgid "Action Scheduler Status"
+msgstr "Action Scheduler 状态"
+
+#: src/Admin/Pages/GlobalSettingsPage.php:123
+msgid "Active Version:"
+msgstr "当前版本："
+
+#: src/Admin/Pages/GlobalSettingsPage.php:124
+msgid "Not loaded"
+msgstr "未加载"
+
+#: src/Admin/Pages/GlobalSettingsPage.php:127
+msgid "Source:"
+msgstr "来源："
+
+#: src/Admin/Pages/GlobalSettingsPage.php:131
+msgid "Built-in Version:"
+msgstr "内置版本："
+
+#: src/Admin/Pages/GlobalSettingsPage.php:136
+msgid "External Plugin:"
+msgstr "外部插件："
+
+#: src/Admin/Pages/GlobalSettingsPage.php:139
+msgid "Action Scheduler plugin is installed"
+msgstr "已安装 Action Scheduler 插件"
+
+#: src/Admin/Pages/GlobalSettingsPage.php:169
+msgid "Use WordPress language"
+msgstr "使用 WordPress 语言"
+
+#: src/Admin/Pages/GlobalSettingsPage.php:181
+msgid "Plugin language"
+msgstr "插件语言"
+
+#: src/Admin/Pages/GlobalSettingsPage.php:194
+msgid "Select the display language for the plugin admin interface."
+msgstr "选择插件管理界面的显示语言。"
+
+#: src/Admin/Pages/GlobalSettingsPage.php:232
+msgid "Plugin language has been updated."
+msgstr "插件语言已更新。"
+
+#: src/Admin/Pages/GlobalSettingsPage.php:318
+msgid "Global Settings"
+msgstr "全局设置"
+
+#: src/Admin/Pages/GlobalSettingsPage.php:325
+msgid ""
+"Multisite network mode is not enabled. Global configuration is unavailable; "
+"the plugin will always work in local site configuration mode."
+msgstr ""
+"未启用多站点网络模式。全局配置不可用，插件将始终在本地站点配置模式下工作。"
+
+#: src/Admin/Pages/GlobalSettingsPage.php:327
+msgid ""
+"This plugin is not network-activated. Please enable \"Network Activate\" in "
+"Network Admin → Plugins before using global shared mode."
+msgstr ""
+"此插件未网络激活。请在网络管理 → 插件中启用「网络激活」后再使用全局共享模式。"
+
+#: src/Admin/Pages/GlobalSettingsPage.php:329
+msgid ""
+"When multisite network mode is enabled and the plugin is network-activated, "
+"you can choose whether all sites share the same plugin configuration and "
+"data."
+msgstr ""
+"当多站点网络模式启用且插件已网络激活时，您可以选择是否让所有站点共享相同的插"
+"件配置和数据。"
+
+#: src/Admin/Pages/GlobalSettingsPage.php:358
+msgid "Global plugin configuration"
+msgstr "全局插件配置"
+
+#: src/Admin/Pages/GlobalSettingsPage.php:364
+msgid "Off (each site keeps its own settings and data)"
+msgstr "关闭（每个站点保留自己的设置和数据）"
+
+#: src/Admin/Pages/GlobalSettingsPage.php:369
+msgid "On (all sites in the current network share settings and data)"
+msgstr "开启（当前网络中的所有站点共享设置和数据）"
+
+#: src/Admin/Pages/GlobalSettingsPage.php:375
+msgid ""
+"When enabled, task queue settings, translation vendor configuration and "
+"plugin data will be shared across all sites in the current network; when "
+"disabled, each site uses its own independent settings and data."
+msgstr ""
+"启用时，任务队列设置、翻译厂商配置和插件数据将在当前网络的所有站点间共享；禁"
+"用时，每个站点使用各自独立的设置和数据。"
+
+#: src/Admin/Pages/GlobalSettingsPage.php:377
+msgid ""
+"To enable global sharing, please first activate this plugin network‑wide in "
+"the Network Admin, then return here. While the plugin is not "
+"network‑activated, only local site configuration is available."
+msgstr ""
+"要启用全局共享，请先在网络管理中网络激活此插件，然后返回此处。在插件未网络激"
+"活时，只有本地站点配置可用。"
+
+#: src/Admin/Pages/GlobalSettingsPage.php:379
+msgid ""
+"To use network‑level global configuration, please enable WordPress Multisite "
+"first. In a single‑site environment only local site configuration is "
+"available."
+msgstr ""
+"要使用网络级全局配置，请先启用 WordPress 多站点。在单站点环境中，只有本地站点"
+"配置可用。"
+
+#: src/Admin/Pages/GlobalSettingsPage.php:387
+msgid "Shared data source site"
+msgstr "共享数据源站点"
+
+#: src/Admin/Pages/GlobalSettingsPage.php:391
+msgid ""
+"Multisite network is not enabled. Only the current site data will be used."
+msgstr "未启用多站点网络。仅使用当前站点数据。"
+
+#: src/Admin/Pages/GlobalSettingsPage.php:393
+msgid ""
+"The plugin is not network‑activated, so a shared data source site cannot be "
+"selected."
+msgstr "插件未网络激活，因此无法选择共享数据源站点。"
+
+#: src/Admin/Pages/GlobalSettingsPage.php:395
+msgid ""
+"No available network sites were found; the current site will be used as the "
+"data source by default."
+msgstr "未找到可用的网络站点；默认使用当前站点作为数据源。"
+
+#: src/Admin/Pages/GlobalSettingsPage.php:405
+msgid ""
+"When network sharing is enabled, the plugin tables from the selected site "
+"will be used as the shared data source across the network."
+msgstr "启用网络共享后，将使用所选站点的插件表作为网络范围内的共享数据源。"
+
+#: src/Admin/Pages/GlobalSettingsPage.php:412
+msgid "hreflang tags"
+msgstr "hreflang 标签"
+
+#: src/Admin/Pages/GlobalSettingsPage.php:418
+msgid ""
+"Output hreflang tags in the front‑end <head> section "
+"(wpmmcc_ml_hreflang_links)."
+msgstr "在前端 <head> 部分输出 hreflang 标签（wpmmcc_ml_hreflang_links）。"
+
+#: src/Admin/Pages/GlobalSettingsPage.php:421
+msgid ""
+"When disabled, template tags and related hooks will no longer output "
+"hreflang tags, but canonical and other SEO settings remain unaffected."
+msgstr ""
+"禁用时，模板标签和相关钩子将不再输出 hreflang 标签，但规范链接和其他 SEO 设置"
+"不受影响。"
+
+#: src/Admin/Pages/GlobalSettingsPage.php:428
+msgid "Canonical tag"
+msgstr "规范链接标签"
+
+#: src/Admin/Pages/GlobalSettingsPage.php:434
+msgid ""
+"Output the canonical tag in the front‑end <head> section "
+"(wpmmcc_ml_canonical_url)."
+msgstr "在前端 <head> 部分输出规范链接标签（wpmmcc_ml_canonical_url）。"
+
+#: src/Admin/Pages/GlobalSettingsPage.php:437
+msgid ""
+"When disabled, the plugin will no longer output canonical tags, which is "
+"suitable when another SEO plugin manages canonical URLs."
+msgstr ""
+"禁用时，插件将不再输出规范链接标签，适用于由其他 SEO 插件管理规范链接的情况。"
+
+#: src/Admin/Pages/GlobalSettingsPage.php:444
+msgid "Handling of deleted translated content"
+msgstr "已删除翻译内容的处理"
+
+#: src/Admin/Pages/GlobalSettingsPage.php:450
+msgid "Create new translated content (keep the old record in the trash)."
+msgstr "创建新的翻译内容（将旧记录保留在回收站）。"
+
+#: src/Admin/Pages/GlobalSettingsPage.php:455
+msgid "Reuse the deleted content ID (restore from trash and overwrite)."
+msgstr "重用已删除内容的 ID（从回收站恢复并覆盖）。"
+
+#: src/Admin/Pages/GlobalSettingsPage.php:459
+msgid ""
+"When a translated post is deleted (moved to the trash), you can choose "
+"whether to reuse the original post ID by restoring it from the trash, or "
+"create a brand new translated post. The default behavior is to create a new "
+"post."
+msgstr ""
+"当翻译的文章被删除（移至回收站）时，您可以选择通过从回收站恢复来重用原文章 "
+"ID，或创建全新的翻译文章。默认行为是创建新文章。"
+
+#: src/Admin/Pages/GlobalSettingsPage.php:465
+msgid "Data retention on uninstall"
+msgstr "卸载时的数据保留"
+
+#: src/Admin/Pages/GlobalSettingsPage.php:471
+msgid "Keep plugin data when uninstalling (for easy reinstallation)."
+msgstr "卸载时保留插件数据（便于重新安装）。"
+
+#: src/Admin/Pages/GlobalSettingsPage.php:474
+msgid ""
+"When enabled, database tables and settings will be preserved when the plugin "
+"is deleted. This allows you to reinstall the plugin without losing data. "
+"Disable this option if you want to completely remove all plugin data."
+msgstr ""
+"启用后，删除插件时会保留数据库表和设置。这样您重新安装插件时无需担心数据丢"
+"失。如果您希望彻底移除所有插件数据，请关闭此选项。"
+
+#: src/Admin/Pages/GlobalSettingsPage.php:511
+msgid "Task Queue Settings"
+msgstr "任务队列设置"
+
+#: src/Admin/Pages/GlobalSettingsPage.php:512
+msgid ""
+"Configure Action Scheduler task queue behavior and maintenance settings."
+msgstr "配置 Action Scheduler 任务队列行为和维护设置。"
+
+#: src/Admin/Pages/GlobalSettingsPage.php:518
+#: src/Admin/Pages/SettingsPage.php:86
+msgid "Queue Batch Size"
+msgstr "队列批处理大小"
+
+#: src/Admin/Pages/GlobalSettingsPage.php:521
+#: src/Admin/Pages/SettingsPage.php:89
+msgid ""
+"Maximum tasks processed in a single Action Scheduler run, recommended 5-25."
+msgstr "单次 Action Scheduler 运行中处理的最大任务数，建议 5-25。"
+
+#: src/Admin/Pages/GlobalSettingsPage.php:525
+#: src/Admin/Pages/SettingsPage.php:93
+msgid "Concurrent Batches"
+msgstr "并发批次"
+
+#: src/Admin/Pages/GlobalSettingsPage.php:528
+#: src/Admin/Pages/SettingsPage.php:96
+msgid ""
+"Number of batches allowed to run simultaneously, typically keep at 1, can "
+"increase when resources are sufficient."
+msgstr "允许同时运行的批次数量，通常保持为 1，资源充足时可增加。"
+
+#: src/Admin/Pages/GlobalSettingsPage.php:532
+#: src/Admin/Pages/SettingsPage.php:100
+msgid "Time Limit (seconds)"
+msgstr "时间限制（秒）"
+
+#: src/Admin/Pages/GlobalSettingsPage.php:535
+#: src/Admin/Pages/SettingsPage.php:103
+msgid ""
+"Maximum runtime for a single Action Scheduler batch execution to avoid "
+"excessive resource usage."
+msgstr "单次 Action Scheduler 批处理执行的最大运行时间，以避免过度使用资源。"
+
+#: src/Admin/Pages/GlobalSettingsPage.php:539
+#: src/Admin/Pages/SettingsPage.php:107
+msgid "Execution Timeout (seconds)"
+msgstr "执行超时（秒）"
+
+#: src/Admin/Pages/GlobalSettingsPage.php:542
+#: src/Admin/Pages/SettingsPage.php:110
+msgid ""
+"Tasks not completed within this time will be considered stalled and marked "
+"as failed."
+msgstr "在此时间内未完成的任务将被视为停滞并标记为失败。"
+
+#: src/Admin/Pages/GlobalSettingsPage.php:546
+#: src/Admin/Pages/SettingsPage.php:114
+msgid "Maintenance Check Interval (seconds)"
+msgstr "维护检查间隔（秒）"
+
+#: src/Admin/Pages/GlobalSettingsPage.php:549
+#: src/Admin/Pages/SettingsPage.php:117
+msgid ""
+"Frequency of periodic queue checks and cleanup, recommended 300 seconds."
+msgstr "定期队列检查和清理的频率，建议 300 秒。"
+
+#: src/Admin/Pages/GlobalSettingsPage.php:553
+#: src/Admin/Pages/SettingsPage.php:121
+msgid "Overwrite Existing Data When Syncing"
+msgstr "同步时覆盖现有数据"
+
+#: src/Admin/Pages/GlobalSettingsPage.php:557
+#: src/Admin/Pages/SettingsPage.php:125
+msgid "Overwrite existing data on target site when syncing translations."
+msgstr "同步翻译时覆盖目标站点上的现有数据。"
+
+#: src/Admin/Pages/GlobalSettingsPage.php:562
+#: src/Admin/Pages/SettingsPage.php:130
+msgid "Task Retention Days"
+msgstr "任务保留天数"
+
+#: src/Admin/Pages/GlobalSettingsPage.php:565
+#: src/Admin/Pages/SettingsPage.php:133
+msgid "Tasks and logs older than this will be automatically cleaned up."
+msgstr "超过此天数的任务和日志将被自动清理。"
+
+#: src/Admin/Pages/GlobalSettingsPage.php:569
+#: src/Admin/Pages/SettingsPage.php:137
+msgid "Translation Max Retries"
+msgstr "翻译最大重试次数"
+
+#: src/Admin/Pages/GlobalSettingsPage.php:572
+#: src/Admin/Pages/SettingsPage.php:140
+msgid ""
+"Maximum number of retries after a translation request fails, recommended 3. "
+"Set to 0 to disable retries."
+msgstr "翻译请求失败后的最大重试次数，建议 3。设为 0 可禁用重试。"
+
+#: src/Admin/Pages/GlobalSettingsPage.php:576
+#: src/Admin/Pages/SettingsPage.php:144
+msgid "Translation Retry Delay (seconds)"
+msgstr "翻译重试延迟（秒）"
+
+#: src/Admin/Pages/GlobalSettingsPage.php:579
+#: src/Admin/Pages/SettingsPage.php:147
+msgid ""
+"Delay before each retry (seconds), recommended 1-3 seconds. Prevents rate "
+"limiting from frequent requests."
+msgstr "每次重试前的延迟（秒），建议 1-3 秒。防止频繁请求触发速率限制。"
+
+#: src/Admin/Pages/GlobalSettingsPage.php:583
+#: src/Admin/Pages/SettingsPage.php:151
+msgid "Enable Database Scan"
+msgstr "启用数据库扫描"
+
+#: src/Admin/Pages/GlobalSettingsPage.php:587
+#: src/Admin/Pages/SettingsPage.php:155
+msgid ""
+"Include database content (theme_mods, custom fields, etc.) when scanning "
+"themes. Especially important for block themes."
+msgstr ""
+"扫描主题时包含数据库内容（theme_mods、自定义字段等）。对于块主题尤为重要。"
+
+#: src/Admin/Pages/GlobalSettingsPage.php:600
+#: src/Admin/Pages/SettingsPage.php:166
+msgid "Task Log Cleanup"
+msgstr "任务日志清理"
+
+#: src/Admin/Pages/GlobalSettingsPage.php:602
+#: src/Admin/Pages/SettingsPage.php:168
+msgid ""
+"When automatic cleanup fails, you can manually delete task logs older than a "
+"specified number of days here. This operation does not create new task "
+"records."
+msgstr ""
+"当自动清理失败时，您可以在此手动删除超过指定天数的任务日志。此操作不会创建新"
+"的任务记录。"
+
+#: src/Admin/Pages/GlobalSettingsPage.php:604
+#: src/Admin/Pages/SettingsPage.php:170
+msgid ""
+"Risk Warning: Log deletion is irreversible. After deletion, you will not be "
+"able to view historical task execution details. Only proceed after "
+"confirming these logs are no longer needed."
+msgstr ""
+"风险警告：日志删除不可逆。删除后，您将无法查看历史任务执行详情。请确认这些日"
+"志不再需要后再继续。"
+
+#: src/Admin/Pages/GlobalSettingsPage.php:613
+#: src/Admin/Pages/SettingsPage.php:179
+msgid "Delete All Logs Older Than 3 Days"
+msgstr "删除 3 天前的所有日志"
+
+#: src/Admin/Pages/GlobalSettingsPage.php:616
+#: src/Admin/Pages/SettingsPage.php:182
+msgid "Delete All Logs Older Than 10 Days"
+msgstr "删除 10 天前的所有日志"
+
+#: src/Admin/Pages/GlobalSettingsPage.php:618
+#: src/Admin/Pages/SettingsPage.php:184
+msgid ""
+"Are you sure you want to delete all task logs? This action cannot be undone."
+msgstr "您确定要删除所有任务日志吗？此操作无法撤消。"
+
+#: src/Admin/Pages/GlobalSettingsPage.php:619
+#: src/Admin/Pages/SettingsPage.php:185
+msgid "Delete All Logs"
+msgstr "删除所有日志"
+
+#: src/Admin/Pages/GlobalSettingsPage.php:740
+#: src/Admin/Pages/SettingsPage.php:249
+msgid "No valid log cleanup range selected."
+msgstr "未选择有效的日志清理范围。"
+
+#: src/Admin/Pages/GlobalSettingsPage.php:753
+#: src/Admin/Pages/SettingsPage.php:263
+msgid ""
+"Task log table does not exist or has not been created yet, no cleanup needed."
+msgstr "任务日志表不存在或尚未创建，无需清理。"
+
+#: src/Admin/Pages/GlobalSettingsPage.php:769
+#: src/Admin/Pages/SettingsPage.php:280
+msgid "The provided log cleanup days are invalid."
+msgstr "提供的日志清理天数无效。"
+
+#. translators: %d: deleted log rows count
+#: src/Admin/Pages/GlobalSettingsPage.php:790
+#: src/Admin/Pages/SettingsPage.php:302
+#, php-format
+msgid "Log cleanup completed, %d records deleted."
+msgstr "日志清理完成，已删除 %d 条记录。"
+
+#: src/Admin/Pages/GlobalSettingsPage.php:798
+#: src/Admin/Pages/SettingsPage.php:311
+msgid "No logs matching the criteria need to be cleaned up."
+msgstr "没有符合条件的日志需要清理。"
+
+#: src/Admin/Pages/LlmPage.php:92
+msgid "Models"
+msgstr "模型"
+
+#: src/Admin/Pages/LlmPage.php:101
+msgid "LLM Translation"
+msgstr "LLM 翻译"
+
+#: src/Admin/Pages/LlmPage.php:105 src/Admin/Pages/LlmPage.php:366
+msgid "Add model"
+msgstr "添加模型"
+
+#: src/Admin/Pages/LlmPage.php:113
+msgid "LLM translation navigation"
+msgstr "LLM 翻译导航"
+
+#: src/Admin/Pages/LlmPage.php:135 src/Admin/Tables/LlmModelTable.php:106
+msgid "Search models"
+msgstr "搜索模型"
+
+#: src/Admin/Pages/LlmPage.php:136
+msgid "Enter a model name"
+msgstr "输入模型名称"
+
+#. translators: %d: Number of LLM models deleted.
+#: src/Admin/Pages/LlmPage.php:174
+#, php-format
+msgid "%d model deleted."
+msgid_plural "%d models deleted."
+msgstr[0] "已删除 %d 个模型。"
+
+#: src/Admin/Pages/LlmPage.php:364
+msgid "LLM model configuration"
+msgstr "LLM 模型配置"
+
+#: src/Admin/Pages/LlmPage.php:402 src/Admin/Pages/LlmPage.php:685
+msgid "Missing model ID."
+msgstr "缺少模型 ID。"
+
+#: src/Admin/Pages/LlmPage.php:406
+msgid "The requested model does not exist."
+msgstr "请求的模型不存在。"
+
+#: src/Admin/Pages/LlmPage.php:424
+msgid "Edit LLM model"
+msgstr "编辑 LLM 模型"
+
+#: src/Admin/Pages/LlmPage.php:424
+msgid "Add LLM model"
+msgstr "添加 LLM 模型"
+
+#: src/Admin/Pages/LlmPage.php:442 src/Admin/Tables/LlmModelTable.php:47
+msgid "Vendor name"
+msgstr "厂商名称"
+
+#: src/Admin/Pages/LlmPage.php:445
+msgid ""
+"Enter the name of the vendor or service to make it easier to recognise in "
+"the admin UI."
+msgstr "输入供应商或服务的名称，以便在管理界面中更容易识别。"
+
+#: src/Admin/Pages/LlmPage.php:449
+msgid "API endpoint URL"
+msgstr "API 端点 URL"
+
+#: src/Admin/Pages/LlmPage.php:452
+msgid "For example: https://api.openai.com/v1/chat/completions"
+msgstr "例如：https://api.openai.com/v1/chat/completions"
+
+#: src/Admin/Pages/LlmPage.php:460 src/Admin/Pages/LlmPage.php:462
+msgid "Show secret"
+msgstr "显示密钥"
+
+#: src/Admin/Pages/LlmPage.php:460
+msgid "Hide secret"
+msgstr "隐藏密钥"
+
+#: src/Admin/Pages/LlmPage.php:468 src/Admin/Tables/LlmModelTable.php:50
+#: src/Admin/Tables/TranslationRulesTable.php:71
+msgid "Model name"
+msgstr "模型名称"
+
+#: src/Admin/Pages/LlmPage.php:471
+msgid "For example: gpt-4o-mini, gpt-3.5-turbo, etc."
+msgstr "例如：gpt-4o-mini、gpt-3.5-turbo 等。"
+
+#: src/Admin/Pages/LlmPage.php:475 src/Admin/Tables/LlmModelTable.php:51
+msgid "QPS limit"
+msgstr "QPS 限制"
+
+#: src/Admin/Pages/LlmPage.php:483
+msgid "Save model"
+msgstr "保存模型"
+
+#: src/Admin/Pages/LlmPage.php:536
+msgid "Vendor name cannot be empty."
+msgstr "供应商名称不能为空。"
+
+#: src/Admin/Pages/LlmPage.php:540
+msgid "Vendor name must not exceed 80 characters."
+msgstr "供应商名称不能超过 80 个字符。"
+
+#: src/Admin/Pages/LlmPage.php:544
+msgid "Please enter a valid API endpoint URL."
+msgstr "请输入有效的 API 端点 URL。"
+
+#: src/Admin/Pages/LlmPage.php:548
+msgid "Model name cannot be empty."
+msgstr "模型名称不能为空。"
+
+#: src/Admin/Pages/LlmPage.php:552
+msgid "QPS must be a positive integer greater than 0."
+msgstr "QPS 必须是大于 0 的正整数。"
+
+#: src/Admin/Pages/LlmPage.php:559
+msgid "The requested model does not exist or has been deleted."
+msgstr "请求的模型不存在或已被删除。"
+
+#: src/Admin/Pages/LlmPage.php:579
+msgid "The model identifier already exists."
+msgstr "模型标识符已存在。"
+
+#: src/Admin/Pages/LlmPage.php:587
+msgid "API Key cannot be empty."
+msgstr "API 密钥不能为空。"
+
+#: src/Admin/Pages/LlmPage.php:624 src/Admin/Pages/LlmPage.php:647
+#: src/Admin/Pages/TranslationRulesPage.php:866
+#: src/Admin/Pages/TranslationRulesPage.php:890
+msgid "Saving failed. Please try again later."
+msgstr "保存失败，请稍后再试。"
+
+#: src/Admin/Pages/LlmPage.php:662
+msgid "Model saved."
+msgstr "模型已保存。"
+
+#: src/Admin/Pages/LlmPage.php:708
+msgid "The model is referenced by translation rules and cannot be deleted."
+msgstr "该模型被翻译规则引用，无法删除。"
+
+#: src/Admin/Pages/LlmPage.php:728 src/Admin/Pages/TranslationRulesPage.php:958
+msgid "Deletion failed. Please try again later."
+msgstr "删除失败，请稍后再试。"
+
+#: src/Admin/Pages/LlmPage.php:736
+msgid "Model deleted."
+msgstr "模型已删除。"
+
+#: src/Admin/Pages/LlmPage.php:801
+msgid ""
+"You are a professional translation engine. Translate the user provided text "
+"into the target language while keeping HTML tags intact."
+msgstr ""
+"您是一个专业的翻译引擎。请将用户提供的文本翻译成目标语言，同时保持 HTML 标签"
+"完整。"
+
+#: src/Admin/Pages/SeoFieldsPage.php:63
+msgid "Please select a table to scan."
+msgstr "请选择要扫描的数据表。"
+
+#: src/Admin/Pages/SeoFieldsPage.php:64
+msgid "No fields available to add."
+msgstr "没有可添加的字段。"
+
+#: src/Admin/Pages/SeoFieldsPage.php:65
+msgid "Field added."
+msgstr "字段已添加。"
+
+#: src/Admin/Pages/SeoFieldsPage.php:66
+msgid "Field removed."
+msgstr "字段已移除。"
+
+#: src/Admin/Pages/SeoFieldsPage.php:67
+msgid "This field will no longer be translated after deletion. Continue?"
+msgstr "删除后此字段将不再被翻译，确定继续？"
+
+#: src/Admin/Pages/SeoFieldsPage.php:68
+msgid "Add"
+msgstr "添加"
+
+#. translators: %s: meta_key name
+#: src/Admin/Pages/SeoFieldsPage.php:71
+#, php-format
+msgid "meta_key: %s"
+msgstr "meta_key：%s"
+
+#. translators: %s: field name
+#: src/Admin/Pages/SeoFieldsPage.php:73
+#, php-format
+msgid "Field: %s"
+msgstr "字段：%s"
+
+#: src/Admin/Pages/SeoFieldsPage.php:81 src/Admin/Pages/SeoFieldsPage.php:86
+msgid "Add SEO fields"
+msgstr "添加 SEO 字段"
+
+#: src/Admin/Pages/SeoFieldsPage.php:88
+#: src/Admin/Pages/ThemeTranslationPage.php:304
+#: src/Admin/Pages/TranslationFieldsPage.php:73
+#: src/Admin/Tables/TaskListTable.php:95
+#: src/Admin/Tables/TranslationRelationTable.php:61
+msgid "Site group"
+msgstr "站点组"
+
+#: src/Admin/Pages/SeoFieldsPage.php:92
+#: src/Admin/Pages/TranslationFieldsPage.php:76
+msgid "No site groups available"
+msgstr "没有可用的站点组"
+
+#: src/Admin/Pages/SeoFieldsPage.php:110
+msgid "Select database table"
+msgstr "选择数据库表"
+
+#: src/Admin/Pages/SeoFieldsPage.php:112
+msgid "Please select"
+msgstr "请选择"
+
+#: src/Admin/Pages/SeoFieldsPage.php:122
+msgid "Scan fields"
+msgstr "扫描字段"
+
+#: src/Admin/Pages/SeoFieldsPage.php:126
+msgid ""
+"If the scanned results already include configured fields, you can remove "
+"them or toggle their enabled state here."
+msgstr "如果扫描结果中已包含已配置字段，您可以在这里移除它们或切换其启用状态。"
+
+#: src/Admin/Pages/SeoFieldsPage.php:127
+msgid "Select a table above and click Scan."
+msgstr "请先在上方选择数据表，然后点击“扫描”。"
+
+#: src/Admin/Pages/SeoFieldsPage.php:210
+msgid "Please choose a table to scan."
+msgstr "请选择要扫描的数据表。"
+
+#: src/Admin/Pages/SeoFieldsPage.php:214
+msgid "Scanning this table is not allowed."
+msgstr "不允许扫描此数据表。"
+
+#: src/Admin/Pages/SeoFieldsPage.php:222
+msgid "Unable to read table structure."
+msgstr "无法读取数据表结构。"
+
+#: src/Admin/Pages/SeoFieldsPage.php:328 src/Admin/Pages/SeoFieldsPage.php:332
+msgid "Field information is incomplete."
+msgstr "字段信息不完整。"
+
+#: src/Admin/Pages/SeoFieldsPage.php:336
+msgid "Invalid field type."
+msgstr "字段类型无效。"
+
+#: src/Admin/Pages/SeoFieldsPage.php:344
+#: src/Admin/Pages/TranslationFieldsPage.php:243
+msgid "A site group can have at most 10 SEO fields enabled."
+msgstr "一个站点组最多只能启用 10 个 SEO 字段。"
+
+#: src/Admin/Pages/SeoFieldsPage.php:365 src/Admin/Pages/SeoFieldsPage.php:384
+msgid "Missing parameters."
+msgstr "缺少参数。"
+
+#: src/Admin/Pages/SeoFieldsPage.php:395
+#: src/Admin/Pages/TranslationFieldsPage.php:257
+msgid "Insufficient permissions."
+msgstr "权限不足。"
+
+#: src/Admin/Pages/SiteGroupsPage.php:128
+msgid "Filter site group type"
+msgstr "筛选站点组类型"
+
+#: src/Admin/Pages/SiteGroupsPage.php:130
+#: src/Admin/Pages/TranslationManagementPage.php:94
+#: src/Admin/Tables/TaskListTable.php:177
+msgid "All types"
+msgstr "所有类型"
+
+#: src/Admin/Pages/SiteGroupsPage.php:131
+msgid "Multisite site group"
+msgstr "多站点站点组"
+
+#: src/Admin/Pages/SiteGroupsPage.php:132
+msgid "Directory site group"
+msgstr "目录站点组"
+
+#: src/Admin/Pages/SiteGroupsPage.php:137
+msgid "Search site group name"
+msgstr "搜索站点组名称"
+
+#: src/Admin/Pages/SiteGroupsPage.php:138
+msgid "Enter site group name"
+msgstr "输入站点组名称"
+
+#: src/Admin/Pages/SiteGroupsPage.php:156
+#: src/Admin/Pages/TranslationFieldsPage.php:151
+#: src/Admin/Tables/TranslationRelationTable.php:64
+msgid "Name"
+msgstr "名称"
+
+#: src/Admin/Pages/SiteGroupsPage.php:157
+#: src/Admin/Tables/TaskChainTable.php:58
+msgid "Type"
+msgstr "类型"
+
+#: src/Admin/Pages/SiteGroupsPage.php:159
+#: src/Admin/Pages/SiteGroupsPage.php:334
+msgid "Canonical Redirect"
+msgstr "规范重定向"
+
+#: src/Admin/Pages/SiteGroupsPage.php:160
+#: src/Admin/Pages/SiteGroupsPage.php:183
+msgid "Directory"
+msgstr "目录"
+
+#: src/Admin/Pages/SiteGroupsPage.php:161
+msgid "Site count"
+msgstr "站点数量"
+
+#: src/Admin/Pages/SiteGroupsPage.php:163
+#: src/Admin/Tables/TaskChainTable.php:61
+#: src/Admin/Tables/TaskListTable.php:100
+#: src/Admin/Tables/TranslationRulesTable.php:77
+msgid "Created at"
+msgstr "创建时间"
+
+#: src/Admin/Pages/SiteGroupsPage.php:164 src/Admin/Pages/SiteListPage.php:1053
+#: src/Admin/Pages/ThemeTranslationPage.php:499
+#: src/Admin/Tables/LlmModelTable.php:52 src/Admin/Tables/TaskChainTable.php:62
+#: src/Admin/Tables/TaskListTable.php:101
+#: src/Admin/Tables/TranslationRulesTable.php:78
+#: src/Admin/Tables/TranslationRulesTable.php:88
+msgid "Actions"
+msgstr "操作"
+
+#: src/Admin/Pages/SiteGroupsPage.php:169 src/Admin/Pages/SiteListPage.php:991
+#: src/Admin/Pages/SiteListPage.php:1028
+msgid "No site groups have been created yet."
+msgstr "尚未创建站点组。"
+
+#: src/Admin/Pages/SiteGroupsPage.php:183
+msgid "Multisite"
+msgstr "多站点"
+
+#: src/Admin/Pages/SiteGroupsPage.php:185
+msgid "Enabled"
+msgstr "已启用"
+
+#: src/Admin/Pages/SiteGroupsPage.php:185
+msgid "Disabled"
+msgstr "已禁用"
+
+#: src/Admin/Pages/SiteGroupsPage.php:192
+msgid ""
+"Please make sure all child sites have been removed before deleting. Continue?"
+msgstr "请确保在删除之前已移除所有子站点。继续吗？"
+
+#: src/Admin/Pages/SiteGroupsPage.php:239
+#: src/Admin/Pages/SiteGroupsPage.php:795
+msgid "Missing site group ID."
+msgstr "缺少站点组 ID。"
+
+#: src/Admin/Pages/SiteGroupsPage.php:243 src/Admin/Pages/SiteListPage.php:330
+#: src/Admin/Pages/SiteListPage.php:343
+msgid "Site group does not exist."
+msgstr "站点组不存在。"
+
+#: src/Admin/Pages/SiteGroupsPage.php:262
+msgid "Edit Site Group"
+msgstr "编辑站点组"
+
+#: src/Admin/Pages/SiteGroupsPage.php:262
+msgid "Create Site Group"
+msgstr "创建站点组"
+
+#: src/Admin/Pages/SiteGroupsPage.php:293
+msgid "Multisite (subdomain)"
+msgstr "多站点（子域名）"
+
+#: src/Admin/Pages/SiteGroupsPage.php:293
+msgid "Multisite (subdirectory)"
+msgstr "多站点（子目录）"
+
+#: src/Admin/Pages/SiteGroupsPage.php:305
+msgid "Site group name"
+msgstr "站点组名称"
+
+#: src/Admin/Pages/SiteGroupsPage.php:309
+#: src/Admin/Pages/ThemeTemplateTagsPage.php:100
+msgid "Site group type"
+msgstr "站点组类型"
+
+#: src/Admin/Pages/SiteGroupsPage.php:312
+msgid "Directory (virtual sites)"
+msgstr "目录（虚拟站点）"
+
+#: src/Admin/Pages/SiteGroupsPage.php:315
+msgid "WordPress multisite is not enabled. This type cannot be selected."
+msgstr "WordPress 多站点未启用。无法选择此类型。"
+
+#: src/Admin/Pages/SiteGroupsPage.php:317
+msgid ""
+"Please network-activate the wpmmcc plugin before creating multisite groups."
+msgstr "请在创建多站点组之前网络激活 wpmmcc 插件。"
+
+#: src/Admin/Pages/SiteGroupsPage.php:330
+msgid ""
+"For directory groups select the current site; for multisite groups select "
+"the real main site blog_id."
+msgstr "对于目录组，选择当前站点；对于多站点组，选择真正的主站点 blog_id。"
+
+#: src/Admin/Pages/SiteGroupsPage.php:338
+msgid "Enable canonical redirect for URLs with extra path segments"
+msgstr "为带有额外路径片段的 URL 启用规范重定向"
+
+#: src/Admin/Pages/SiteGroupsPage.php:340
+msgid ""
+"When enabled, URLs with extra path segments will be 301 redirected to the "
+"correct URL. If no match is found, a 404 will be returned."
+msgstr ""
+"启用后，带有额外路径片段的 URL 将 301 重定向到正确地址。若未匹配到内容，则返"
+"回 404。"
+
+#: src/Admin/Pages/SiteGroupsPage.php:344
+msgid "Site group directory"
+msgstr "站点组目录"
+
+#: src/Admin/Pages/SiteGroupsPage.php:347
+msgid ""
+"Only lowercase letters, digits and hyphens are allowed. Invalid characters "
+"will be normalised. Leave empty to skip a directory prefix."
+msgstr ""
+"只允许使用小写字母、数字和连字符。无效字符将被规范化。留空以跳过目录前缀。"
+
+#: src/Admin/Pages/SiteGroupsPage.php:351
+msgid "Site group description"
+msgstr "站点组描述"
+
+#: src/Admin/Pages/SiteGroupsPage.php:358
+msgid "Save site group"
+msgstr "保存站点组"
+
+#: src/Admin/Pages/SiteGroupsPage.php:440
+msgid "No eligible main site"
+msgstr "没有可用的主站点"
+
+#. translators: %d: WordPress site ID.
+#. translators: %d: site ID
+#: src/Admin/Pages/SiteGroupsPage.php:497 src/Admin/Pages/SiteListPage.php:1777
+#, php-format
+msgid "Site ID %d"
+msgstr "站点 ID %d"
+
+#. translators: 1: Site URL, 2: WordPress site ID.
+#. translators: 1: Site name, 2: WordPress site ID.
+#. translators: 1: Site type label, 2: WP site ID.
+#: src/Admin/Pages/SiteGroupsPage.php:502
+#: src/Admin/Pages/SiteGroupsPage.php:507 src/Admin/Pages/SiteListPage.php:1570
+#, php-format
+msgid "%1$s · ID %2$d"
+msgstr "%1$s · ID %2$d"
+
+#. translators: 1: Site name, 2: Site URL, 3: WordPress site ID.
+#: src/Admin/Pages/SiteGroupsPage.php:511
+#, php-format
+msgid "%1$s (%2$s) · ID %3$d"
+msgstr "%1$s（%2$s）· ID %3$d"
+
+#: src/Admin/Pages/SiteGroupsPage.php:629
+msgid ""
+"Multisite is not enabled or the plugin is not network-activated. Cannot "
+"create multisite-based site group."
+msgstr "未启用多站点或插件未网络激活，无法创建多站点式站点组。"
+
+#: src/Admin/Pages/SiteGroupsPage.php:693
+msgid "Site group name already exists. Please choose another."
+msgstr "站点组名称已存在，请更换。"
+
+#: src/Admin/Pages/SiteGroupsPage.php:705
+msgid "Site group directory already exists. Please choose another."
+msgstr "站点组目录已存在，请更换。"
+
+#: src/Admin/Pages/SiteGroupsPage.php:715
+msgid ""
+"The selected main site is already being used by another site group. Please "
+"select a different site."
+msgstr "所选主站点已被另一个站点组使用，请选择其他站点。"
+
+#: src/Admin/Pages/SiteGroupsPage.php:748
+msgid ""
+"Save not completed due to site group data save failure. Please try again."
+msgstr "因站点组数据保存失败，保存未完成，请重试。"
+
+#: src/Admin/Pages/SiteGroupsPage.php:768
+msgid "Site group has been saved."
+msgstr "站点组已保存。"
+
+#: src/Admin/Pages/SiteGroupsPage.php:806
+msgid "Please remove sites from the site group before deleting."
+msgstr "请先移除站点组中的站点后再删除。"
+
+#: src/Admin/Pages/SiteGroupsPage.php:821
+msgid "Site group has been deleted."
+msgstr "站点组已删除。"
+
+#: src/Admin/Pages/SiteListPage.php:169 src/Admin/Pages/SiteListPage.php:241
+msgid "Request payload is invalid."
+msgstr "请求数据无效。"
+
+#: src/Admin/Pages/SiteListPage.php:234
+msgid "Missing field to update."
+msgstr "缺少要更新的字段。"
+
+#: src/Admin/Pages/SiteListPage.php:311
+msgid "Unsupported site field for translation."
+msgstr "不支持翻译此站点字段。"
+
+#: src/Admin/Pages/SiteListPage.php:320 src/Admin/Pages/SiteListPage.php:437
+#: src/Translation/TranslationCoordinator.php:125
+msgid "Site does not exist."
+msgstr "站点不存在。"
+
+#: src/Admin/Pages/SiteListPage.php:324
+msgid "The main site does not require translation."
+msgstr "主站点无需翻译。"
+
+#: src/Admin/Pages/SiteListPage.php:334
+msgid "Missing site group information."
+msgstr "缺少站点组信息。"
+
+#: src/Admin/Pages/SiteListPage.php:338 src/Admin/Pages/SiteListPage.php:850
+msgid "Please select a translation rule."
+msgstr "请选择翻译规则。"
+
+#: src/Admin/Pages/SiteListPage.php:349
+msgid "The main site content is empty and cannot be translated."
+msgstr "主站点内容为空，无法翻译。"
+
+#: src/Admin/Pages/SiteListPage.php:359
+#: src/Translation/TranslationService.php:415
+msgid "The translation rule does not exist."
+msgstr "翻译规则不存在。"
+
+#: src/Admin/Pages/SiteListPage.php:363
+msgid "The translation rule type does not match."
+msgstr "翻译规则类型不匹配。"
+
+#: src/Admin/Pages/SiteListPage.php:368
+msgid "Translation failed. Please try again later."
+msgstr "翻译失败，请稍后重试。"
+
+#: src/Admin/Pages/SiteListPage.php:432
+msgid "Missing required parameters."
+msgstr "缺少必要参数。"
+
+#: src/Admin/Pages/SiteListPage.php:441
+msgid "The main site cannot be deleted."
+msgstr "主站点不可删除。"
+
+#: src/Admin/Pages/SiteListPage.php:546
+msgid "Site group information is missing."
+msgstr "缺少站点组信息。"
+
+#: src/Admin/Pages/SiteListPage.php:551
+msgid "The specified site group does not exist."
+msgstr "指定的站点组不存在。"
+
+#: src/Admin/Pages/SiteListPage.php:560
+msgid "The site record could not be found."
+msgstr "找不到站点记录。"
+
+#: src/Admin/Pages/SiteListPage.php:634 src/Admin/Pages/SiteListPage.php:760
+msgid "Failed to update the site. Please try again."
+msgstr "更新站点失败。请重试。"
+
+#: src/Admin/Pages/SiteListPage.php:640 src/Admin/Pages/SiteListPage.php:767
+msgid "Failed to create the site. Please try again."
+msgstr "创建站点失败。请重试。"
+
+#: src/Admin/Pages/SiteListPage.php:739
+msgid "This translation rule is already used by another site in the group."
+msgstr "此翻译规则已被组内其他站点使用。"
+
+#: src/Admin/Pages/SiteListPage.php:743
+msgid "This path is already used by another site in the group."
+msgstr "该路径已被组内其他站点使用。"
+
+#: src/Admin/Pages/SiteListPage.php:747
+msgid "The selected child site has already been linked to another record."
+msgstr "所选子站点已关联到其他记录。"
+
+#: src/Admin/Pages/SiteListPage.php:822
+msgid ""
+"Language code is required. Please enter a 2-5 character value (letters and "
+"hyphen only)."
+msgstr "语言代码为必填项。请输入 2 到 5 个字符的值（仅限字母和连字符）。"
+
+#: src/Admin/Pages/SiteListPage.php:827
+msgid "Language codes must be between 2 and 5 characters."
+msgstr "语言代码长度必须在 2 到 5 个字符之间。"
+
+#: src/Admin/Pages/SiteListPage.php:831
+msgid ""
+"Language codes can only contain letters and the \"-\" symbol (e.g. ZH, EN, "
+"ZH-CN)."
+msgstr "语言代码只能包含字母和“-”符号，例如 ZH、EN、ZH-CN。"
+
+#: src/Admin/Pages/SiteListPage.php:917
+msgid "Failed to sync the site title."
+msgstr "同步站点标题失败。"
+
+#: src/Admin/Pages/SiteListPage.php:926
+msgid "Failed to sync the site subtitle."
+msgstr "同步站点副标题失败。"
+
+#: src/Admin/Pages/SiteListPage.php:1001
+msgid "Search sites"
+msgstr "搜索站点"
+
+#: src/Admin/Pages/SiteListPage.php:1002
+msgid "Enter site title or path"
+msgstr "输入站点标题或路径"
+
+#: src/Admin/Pages/SiteListPage.php:1030 src/Admin/Pages/SiteListPage.php:1060
+msgid "This site group does not contain any sites yet."
+msgstr "此站点组中还没有任何站点。"
+
+#: src/Admin/Pages/SiteListPage.php:1032 src/Admin/Pages/SiteListPage.php:1060
+msgid "No sites matched your search."
+msgstr "没有站点匹配您的搜索。"
+
+#: src/Admin/Pages/SiteListPage.php:1048
+msgid "Domain/Path"
+msgstr "域名/路径"
+
+#: src/Admin/Pages/SiteListPage.php:1049
+msgid "Translation rule"
+msgstr "翻译规则"
+
+#: src/Admin/Pages/SiteListPage.php:1050
+msgid "Site title"
+msgstr "站点标题"
+
+#: src/Admin/Pages/SiteListPage.php:1051
+msgid "Site subtitle"
+msgstr "站点副标题"
+
+#: src/Admin/Pages/SiteListPage.php:1052
+msgid "Language code"
+msgstr "语言代码"
+
+#: src/Admin/Pages/SiteListPage.php:1058
+msgid "No site groups exist yet. Please create one on the “Site groups” page."
+msgstr "尚不存在站点组。请先在“站点组”页面创建一个。"
+
+#: src/Admin/Pages/SiteListPage.php:1088
+msgid "Add row"
+msgstr "添加行"
+
+#. translators: 1: site name, 2: domain
+#. translators: 1: Translation rule name, 2: Rule type label.
+#: src/Admin/Pages/SiteListPage.php:1454 src/Admin/Pages/SiteListPage.php:1533
+#: src/Admin/Pages/SiteListPage.php:1789
+#: src/Admin/Pages/ThemeTranslationPage.php:273
+#, php-format
+msgid "%1$s (%2$s)"
+msgstr "%1$s（%2$s）"
+
+#: src/Admin/Pages/SiteListPage.php:1519
+msgid "Main site does not require translation."
+msgstr "主站点无需翻译。"
+
+#: src/Admin/Pages/SiteListPage.php:1523 src/Admin/Pages/SiteListPage.php:1528
+#: src/Admin/Pages/ThemeTranslationPage.php:279
+msgid "Not configured"
+msgstr "未配置"
+
+#. translators: 1: Site type label, 2: Site domain/path.
+#: src/Admin/Pages/SiteListPage.php:1566
+#, php-format
+msgid "%1$s · %2$s"
+msgstr "%1$s · %2$s"
+
+#. translators: %d: WordPress site ID.
+#: src/Admin/Pages/SiteListPage.php:1583
+#, php-format
+msgid "Site ID: %d"
+msgstr "站点 ID：%d"
+
+#: src/Admin/Pages/SiteListPage.php:1600
+msgid "Please select the child site to bind."
+msgstr "请选择要绑定的子站点。"
+
+#: src/Admin/Pages/SiteListPage.php:1604
+msgid "Child sites cannot be identical to the main site."
+msgstr "子站点不能与主站点相同。"
+
+#: src/Admin/Pages/SiteListPage.php:1627
+msgid "Please enter a directory for the child site."
+msgstr "请输入子站点目录。"
+
+#: src/Admin/Pages/SitemapPage.php:85
+#: src/Admin/Pages/TranslationManagementPage.php:95
+msgid "Posts"
+msgstr "文章"
+
+#: src/Admin/Pages/SitemapPage.php:86
+#: src/Admin/Pages/TranslationManagementPage.php:96
+msgid "Pages"
+msgstr "页面"
+
+#: src/Admin/Pages/SitemapPage.php:87
+#: src/Admin/Pages/TranslationManagementPage.php:99
+#: src/Admin/Tables/TranslationRelationTable.php:101
+msgid "Media"
+msgstr "媒体"
+
+#: src/Admin/Pages/SitemapPage.php:88
+#: src/Admin/Pages/TranslationFieldsPage.php:142
+#: src/Admin/Pages/TranslationManagementPage.php:97
+msgid "Categories"
+msgstr "分类"
+
+#: src/Admin/Pages/SitemapPage.php:89
+#: src/Admin/Pages/TranslationFieldsPage.php:143
+#: src/Admin/Pages/TranslationManagementPage.php:98
+msgid "Tags"
+msgstr "标签"
+
+#: src/Admin/Pages/SitemapPage.php:90
+msgid "Archives"
+msgstr "归档"
+
+#: src/Admin/Pages/SitemapPage.php:91
+msgid "Authors"
+msgstr "作者"
+
+#: src/Admin/Pages/SitemapPage.php:102
+msgid "All site (single sitemap)"
+msgstr "全站点（单个站点地图）"
+
+#: src/Admin/Pages/SitemapPage.php:103
+msgid "By content type (multiple sitemaps)"
+msgstr "按内容类型（多个站点地图）"
+
+#: src/Admin/Pages/SitemapPage.php:112
+msgid "Date descending (newest first)"
+msgstr "按时间降序（最新优先）"
+
+#: src/Admin/Pages/SitemapPage.php:113
+msgid "Date ascending (oldest first)"
+msgstr "按时间升序（最早优先）"
+
+#: src/Admin/Pages/SitemapPage.php:150
+msgid "Select site group"
+msgstr "选择站点组"
+
+#: src/Admin/Pages/SitemapPage.php:159
+msgid "Select site"
+msgstr "选择站点"
+
+#: src/Admin/Pages/SitemapPage.php:162
+msgid "No sites available"
+msgstr "没有可用站点"
+
+#: src/Admin/Pages/SitemapPage.php:174
+msgid "Output format"
+msgstr "输出格式"
+
+#: src/Admin/Pages/SitemapPage.php:183
+msgid "URLs per sitemap"
+msgstr "每个站点地图的 URL 数量"
+
+#: src/Admin/Pages/SitemapPage.php:190
+msgid "Generation mode"
+msgstr "生成模式"
+
+#: src/Admin/Pages/SitemapPage.php:197
+msgid ""
+"All site: generate a single sitemap containing all URLs. By content type: "
+"generate separate sitemaps for each content type."
+msgstr ""
+"全站点：生成一个包含所有 URL 的站点地图。按内容类型：为每种内容类型分别生成站"
+"点地图。"
+
+#: src/Admin/Pages/SitemapPage.php:202
+msgid "Sort order"
+msgstr "排序方式"
+
+#: src/Admin/Pages/SitemapPage.php:209
+msgid "Determines the order of URLs in the generated sitemap."
+msgstr "决定生成的站点地图中 URL 的排列顺序。"
+
+#: src/Admin/Pages/SitemapPage.php:215
+msgid "Custom directory prefix (optional)"
+msgstr "自定义目录前缀（可选）"
+
+#: src/Admin/Pages/SitemapPage.php:223
+msgid "e.g. sitemap"
+msgstr "例如 sitemap"
+
+#: src/Admin/Pages/SitemapPage.php:226
+msgid ""
+"Used only for pretty URLs in previews. Appended after the site root; maximum "
+"length 8; letters, numbers, underscores and dashes only."
+msgstr ""
+"仅用于预览中的伪静态 URL。附加在站点根目录后；最大长度 8 个字符；仅允许字母、"
+"数字、下划线和连字符。"
+
+#: src/Admin/Pages/SitemapPage.php:231
+msgid "Content types"
+msgstr "内容类型"
+
+#: src/Admin/Pages/SitemapPage.php:270
+msgid "loc (required)"
+msgstr "loc（必需）"
+
+#: src/Admin/Pages/SitemapPage.php:274
+msgid "lastmod (last modified time)"
+msgstr "lastmod（最后修改时间）"
+
+#: src/Admin/Pages/SitemapPage.php:278
+msgid "changefreq (update frequency, optional hint)"
+msgstr "changefreq（更新频率，可选提示）"
+
+#: src/Admin/Pages/SitemapPage.php:282
+msgid "priority (priority, optional hint)"
+msgstr "priority（优先级，可选提示）"
+
+#: src/Admin/Pages/SitemapPage.php:290
+msgid "XML node configuration"
+msgstr "XML 节点配置"
+
+#: src/Admin/Pages/SitemapPage.php:309
+msgid ""
+"The loc node is required; lastmod / changefreq / priority are optional hints "
+"that can be enabled as needed."
+msgstr ""
+"loc 节点为必选项；lastmod / changefreq / priority 为可选提示字段，可按需要启"
+"用。"
+
+#: src/Admin/Pages/SitemapPage.php:316
+msgid "Generate sitemap links"
+msgstr "生成站点地图链接"
+
+#: src/Admin/Pages/SitemapPage.php:322
+msgid "Refresh preview"
+msgstr "刷新预览"
+
+#: src/Admin/Pages/SitemapPage.php:331
+msgid "Please select at least one content type to generate."
+msgstr "请至少选择一种内容类型来生成。"
+
+#: src/Admin/Pages/SitemapPage.php:332
+msgid "Generated sitemap links (pretty URL preview)"
+msgstr "生成的站点地图链接（伪静态预览）"
+
+#: src/Admin/Pages/SitesPage.php:65
+msgid "Site groups"
+msgstr "站点组"
+
+#: src/Admin/Pages/SitesPage.php:71
+msgid "Site list"
+msgstr "站点列表"
+
+#: src/Admin/Pages/SitesPage.php:77
+#: src/Admin/Pages/TranslationFieldsPage.php:67
+msgid "Translation fields"
+msgstr "翻译字段"
+
+#: src/Admin/Pages/SitesPage.php:111
+msgid "Add site group"
+msgstr "新增站点组"
+
+#: src/Admin/Pages/SitesPage.php:125
+msgid "Add SEO field"
+msgstr "添加 SEO 字段"
+
+#: src/Admin/Pages/SitesPage.php:131
+msgid "Site management navigation"
+msgstr "站点管理导航"
+
+#: src/Admin/Pages/TaskListPage.php:160
+msgid "All Sites"
+msgstr "所有站点"
+
+#: src/Admin/Pages/TaskListPage.php:335 src/Admin/Pages/TaskListPage.php:827
+msgid "Missing task ID."
+msgstr "缺少任务 ID。"
+
+#: src/Admin/Pages/TaskListPage.php:340
+msgid "Task does not exist."
+msgstr "任务不存在。"
+
+#: src/Admin/Pages/TaskListPage.php:425
+msgid "Task Logs"
+msgstr "任务日志"
+
+#: src/Admin/Pages/TaskListPage.php:427 src/Admin/Pages/TaskListPage.php:759
+msgid "Back to Task List"
+msgstr "返回任务列表"
+
+#: src/Admin/Pages/TaskListPage.php:443
+msgid "Are you sure you want to retry this task?"
+msgstr "确定要重试此任务吗？"
+
+#: src/Admin/Pages/TaskListPage.php:444
+msgid "Retry Task"
+msgstr "重试任务"
+
+#: src/Admin/Pages/TaskListPage.php:451
+msgid "Task Chain Stages"
+msgstr "任务链阶段"
+
+#. translators: %s: Task stage letter.
+#. translators: %s: stage number
+#. translators: %s: stage letter (A, B, C, etc.)
+#. translators: %s: stage letter
+#: src/Admin/Pages/TaskListPage.php:457 src/Admin/Pages/TaskListPage.php:546
+#: src/Admin/Tables/TaskListTable.php:507 src/Tasks/TaskStageHelper.php:245
+#: src/Tasks/TaskStageHelper.php:314 src/Tasks/TaskStageHelper.php:342
+#, php-format
+msgid "Stage %s"
+msgstr "阶段 %s"
+
+#. translators: %d: Number of tasks within the stage.
+#: src/Admin/Pages/TaskListPage.php:467
+#, php-format
+msgid "(%d tasks)"
+msgstr "（%d 个任务）"
+
+#. translators: 1: Total log entries, 2: Current page, 3: Total pages.
+#: src/Admin/Pages/TaskListPage.php:480
+#, php-format
+msgid "Total %1$s log records, page %2$s of %3$s"
+msgstr "共 %1$s 条日志记录，第 %2$s / %3$s 页"
+
+#: src/Admin/Pages/TaskListPage.php:491
+msgid "Time"
+msgstr "时间"
+
+#: src/Admin/Pages/TaskListPage.php:492 src/Admin/Tables/TaskChainTable.php:57
+#: src/Admin/Tables/TaskListTable.php:94
+msgid "Task ID"
+msgstr "任务 ID"
+
+#: src/Admin/Pages/TaskListPage.php:493
+msgid "Task Status"
+msgstr "任务状态"
+
+#: src/Admin/Pages/TaskListPage.php:494 src/Admin/Tables/TaskChainTable.php:56
+msgid "Stage"
+msgstr "阶段"
+
+#: src/Admin/Pages/TaskListPage.php:495
+msgid "Message"
+msgstr "消息"
+
+#: src/Admin/Pages/TaskListPage.php:496
+msgid "Context"
+msgstr "上下文"
+
+#: src/Admin/Pages/TaskListPage.php:503
+msgid ""
+"No log records available for this task. Logs may not have been generated yet "
+"or have been cleared."
+msgstr "此任务没有可用的日志记录。日志可能尚未生成或已被清除。"
+
+#: src/Admin/Pages/TaskListPage.php:529 src/Admin/Pages/TaskListPage.php:795
+#: src/Admin/Pages/TaskListPage.php:940
+msgid "In Progress"
+msgstr "进行中"
+
+#: src/Admin/Pages/TaskListPage.php:562
+msgid "None"
+msgstr "无"
+
+#: src/Admin/Pages/TaskListPage.php:569
+msgid "View Details"
+msgstr "查看详情"
+
+#. translators: %s: Formatted count of log entries.
+#. translators: %s: Formatted count of translation records.
+#: src/Admin/Pages/TaskListPage.php:606
+#: src/Admin/Pages/ThemeTranslationPage.php:529
+#, php-format
+msgid "%s item"
+msgid_plural "%s items"
+msgstr[0] "%s 项"
+
+#: src/Admin/Pages/TaskListPage.php:617 src/Admin/Pages/TaskListPage.php:623
+#: src/Admin/Pages/ThemeTranslationPage.php:540
+#: src/Admin/Pages/ThemeTranslationPage.php:546
+msgid "First page"
+msgstr "第一页"
+
+#: src/Admin/Pages/TaskListPage.php:633 src/Admin/Pages/TaskListPage.php:639
+#: src/Admin/Pages/ThemeTranslationPage.php:556
+#: src/Admin/Pages/ThemeTranslationPage.php:562
+msgid "Previous page"
+msgstr "上一页"
+
+#. translators: 1: current page, 2: total pages.
+#: src/Admin/Pages/TaskListPage.php:648
+#: src/Admin/Pages/ThemeTranslationPage.php:571
+#, php-format
+msgid "%1$s of %2$s"
+msgstr "第 %1$s / %2$s 页"
+
+#: src/Admin/Pages/TaskListPage.php:662 src/Admin/Pages/TaskListPage.php:668
+#: src/Admin/Pages/ThemeTranslationPage.php:585
+#: src/Admin/Pages/ThemeTranslationPage.php:591
+msgid "Next page"
+msgstr "下一页"
+
+#: src/Admin/Pages/TaskListPage.php:678 src/Admin/Pages/TaskListPage.php:684
+#: src/Admin/Pages/ThemeTranslationPage.php:601
+#: src/Admin/Pages/ThemeTranslationPage.php:607
+msgid "Last page"
+msgstr "最后一页"
+
+#: src/Admin/Pages/TaskListPage.php:745
+msgid "Missing task chain identifier."
+msgstr "缺少任务链标识符。"
+
+#: src/Admin/Pages/TaskListPage.php:757
+msgid "Task Chain Details"
+msgstr "任务链详情"
+
+#: src/Admin/Pages/TaskListPage.php:763
+msgid "Chain Statistics"
+msgstr "链统计"
+
+#. translators: %d: Total number of tasks in the chain.
+#: src/Admin/Pages/TaskListPage.php:767
+#, php-format
+msgid "Total tasks: %d"
+msgstr "总任务数: %d"
+
+#. translators: 1: Task status label, 2: Count.
+#: src/Admin/Pages/TaskListPage.php:773
+#, php-format
+msgid "%1$s: %2$d"
+msgstr "%1$s: %2$d"
+
+#: src/Admin/Pages/TaskListPage.php:841
+msgid "Task canceled."
+msgstr "任务已取消。"
+
+#: src/Admin/Pages/TaskListPage.php:845
+msgid "Task added to immediate execution queue."
+msgstr "任务已添加到立即执行队列。"
+
+#: src/Admin/Pages/TaskListPage.php:847
+msgid "Unable to execute task immediately, please try again later."
+msgstr "无法立即执行任务，请稍后重试。"
+
+#: src/Admin/Pages/TaskListPage.php:854
+msgid "Task has been requeued."
+msgstr "任务已重新排队。"
+
+#: src/Admin/Pages/TaskListPage.php:858
+msgid "Task and its logs have been deleted."
+msgstr "任务及其日志已删除。"
+
+#: src/Admin/Pages/TaskListPage.php:860
+msgid "Task deletion failed, it may still be running."
+msgstr "任务删除失败，可能仍在运行中。"
+
+#: src/Admin/Pages/TaskListPage.php:908
+msgid "Post Translation"
+msgstr "文章翻译"
+
+#: src/Admin/Pages/TaskListPage.php:909
+msgid "Page Translation"
+msgstr "页面翻译"
+
+#: src/Admin/Pages/TaskListPage.php:910
+msgid "Category Translation"
+msgstr "分类翻译"
+
+#: src/Admin/Pages/TaskListPage.php:911
+msgid "Tag Translation"
+msgstr "标签翻译"
+
+#: src/Admin/Pages/TaskListPage.php:912
+msgid "Theme Translation"
+msgstr "主题翻译"
+
+#. translators: %d: Site ID.
+#. translators: %d: site ID
+#: src/Admin/Pages/TaskListPage.php:980 src/Admin/Tables/TaskListTable.php:167
+#: src/Admin/Tables/TaskListTable.php:274
+#, php-format
+msgid "Site #%d"
+msgstr "站点 #%d"
+
+#: src/Admin/Pages/TaskListPage.php:1100
+msgid "Insufficient permissions"
+msgstr "权限不足"
+
+#: src/Admin/Pages/TaskListPage.php:1107
+msgid "Nonce verification failed"
+msgstr "安全令牌验证失败"
+
+#: src/Admin/Pages/TaskListPage.php:1118
+msgid "All tasks completed, no processing needed"
+msgstr "所有任务已完成，无需处理"
+
+#. translators: %d: Number of tasks pending in queue.
+#: src/Admin/Pages/TaskListPage.php:1131
+#, php-format
+msgid "Task queue is running automatically, %d tasks pending"
+msgstr "任务队列正在自动运行，%d 个任务待处理"
+
+#: src/Admin/Pages/TaskListPage.php:1146
+msgid "Action Scheduler not loaded"
+msgstr "Action Scheduler 未加载"
+
+#: src/Admin/Pages/TaskListPage.php:1156
+msgid "Action Scheduler unavailable"
+msgstr "Action Scheduler 不可用"
+
+#. translators: 1: Number of batches, 2: Total processed tasks, 3: Duration in seconds.
+#: src/Admin/Pages/TaskListPage.php:1234
+#, php-format
+msgid ""
+"Queue processing complete! Executed %1$d batches, processed %2$d tasks in "
+"%3$.2f seconds"
+msgstr "队列处理完成！执行了 %1$d 批次，处理了 %2$d 个任务，耗时 %3$.2f 秒"
+
+#. translators: %d: Remaining tasks.
+#: src/Admin/Pages/TaskListPage.php:1243
+#, php-format
+msgid " (%d tasks still pending)"
+msgstr "（还有 %d 个任务待处理）"
+
+#. translators: %s: Error message.
+#: src/Admin/Pages/TaskListPage.php:1261
+#, php-format
+msgid "Queue processing failed: %s"
+msgstr "队列处理失败: %s"
+
+#: src/Admin/Pages/TaskListPage.php:1299
+msgid "Processing..."
+msgstr "处理中..."
+
+#: src/Admin/Pages/TaskListPage.php:1300
+msgid "Error:"
+msgstr "错误："
+
+#: src/Admin/Pages/TaskListPage.php:1301
+#: src/Translation/MachineTranslationVendorTester.php:192
+msgid "Unknown error"
+msgstr "未知错误"
+
+#: src/Admin/Pages/TaskListPage.php:1302 src/Admin/Tables/TaskListTable.php:538
+msgid "Retry"
+msgstr "重新排队"
+
+#: src/Admin/Pages/TaskListPage.php:1304
+msgid "Request timed out; the queue may still be processing in the background."
+msgstr "请求已超时；队列可能仍在后台处理中。"
+
+#: src/Admin/Pages/TaskListPage.php:1305
+msgid "Network connection error. Please check your connection."
+msgstr "网络连接错误。请检查您的连接。"
+
+#: src/Admin/Pages/TaskListPage.php:1306
+msgid "Server error"
+msgstr "服务器错误"
+
+#: src/Admin/Pages/TasksPage.php:41
+msgid "Task list"
+msgstr "任务列表"
+
+#: src/Admin/Pages/TasksPage.php:47
+msgid "Task settings"
+msgstr "任务设置"
+
+#: src/Admin/Pages/TasksPage.php:62
+msgid "Tasks navigation"
+msgstr "任务导航"
+
+#: src/Admin/Pages/ThemePage.php:77
+#: src/Admin/Pages/ThemeTranslationPage.php:297
+msgid "Theme translations"
+msgstr "主题翻译"
+
+#: src/Admin/Pages/ThemePage.php:83
+msgid "Template tags"
+msgstr "模板标签"
+
+#: src/Admin/Pages/ThemePage.php:98
+msgid "Theme tools navigation"
+msgstr "主题工具导航"
+
+#: src/Admin/Pages/ThemeTemplateTagsPage.php:75
+msgid "Directory mode site groups"
+msgstr "目录模式站点组"
+
+#: src/Admin/Pages/ThemeTemplateTagsPage.php:76
+msgid ""
+"Directory mode manages multilingual content under a single WordPress site, "
+"using subdirectories to distinguish languages."
+msgstr ""
+"目录模式在单个 WordPress 站点下管理多语言内容，使用子目录来区分不同语言。"
+
+#: src/Admin/Pages/ThemeTemplateTagsPage.php:80
+msgid "Multisite mode"
+msgstr "多站点模式"
+
+#: src/Admin/Pages/ThemeTemplateTagsPage.php:81
+msgid ""
+"Multisite mode uses WordPress network sites, with an individual child site "
+"for each language."
+msgstr "多站点模式使用 WordPress 网络站点，每种语言对应一个独立的子站点。"
+
+#: src/Admin/Pages/ThemeTemplateTagsPage.php:101
+msgid ""
+"The site group type identifies how multilingual sites are organized on the "
+"current page. Directory groups return \\\"directory\\\" and multisite groups "
+"return \\\"multisite\\\"."
+msgstr ""
+"站点组类型标识当前页面上多语言站点的组织方式。目录组返回 \\\"directory\\\"，"
+"多站点组返回 \\\"multisite\\\"。"
+
+#: src/Admin/Pages/ThemeTemplateTagsPage.php:104
+msgid "Current site group type"
+msgstr "当前站点组类型"
+
+#: src/Admin/Pages/ThemeTemplateTagsPage.php:105
+msgid ""
+"Automatically returns directory or multisite based on the current site. "
+"Useful for hints or composing CSS class names."
+msgstr ""
+"根据当前站点自动返回 directory 或 multisite。适用于提示信息或组合 CSS 类名。"
+
+#: src/Admin/Pages/ThemeTemplateTagsPage.php:108
+#: src/Admin/Pages/ThemeTemplateTagsPage.php:135
+#: src/Admin/Pages/ThemeTemplateTagsPage.php:183
+msgid "PHP template"
+msgstr "PHP 模板"
+
+#: src/Admin/Pages/ThemeTemplateTagsPage.php:110
+msgid ""
+"Output the site group type directly in theme templates with HTML escaping "
+"applied."
+msgstr "在主题模板中直接输出站点组类型，已应用 HTML 转义。"
+
+#: src/Admin/Pages/ThemeTemplateTagsPage.php:113
+#: src/Admin/Pages/ThemeTemplateTagsPage.php:140
+#: src/Admin/Pages/ThemeTemplateTagsPage.php:166
+#: src/Admin/Pages/ThemeTemplateTagsPage.php:188
+msgid "Shortcode"
+msgstr "短代码"
+
+#: src/Admin/Pages/ThemeTemplateTagsPage.php:115
+msgid ""
+"Insert the site group type text into classic editor or shortcode blocks."
+msgstr "将站点组类型文本插入经典编辑器或短代码区块中。"
+
+#: src/Admin/Pages/ThemeTemplateTagsPage.php:118
+msgid "Filter example"
+msgstr "过滤器示例"
+
+#: src/Admin/Pages/ThemeTemplateTagsPage.php:120
+msgid ""
+"Write the site group type into the body class so that styles can differ by "
+"mode."
+msgstr "将站点组类型写入 body 类，以便样式可以根据模式进行区分。"
+
+#: src/Admin/Pages/ThemeTemplateTagsPage.php:127
+msgid "Current site language"
+msgstr "当前站点语言"
+
+#: src/Admin/Pages/ThemeTemplateTagsPage.php:128
+msgid ""
+"The current site language returns the language code configured in the site "
+"list (2–4 characters, letters and hyphen only). It can be used for "
+"conditional rendering or marking the current language on the page."
+msgstr ""
+"当前站点语言返回站点列表中配置的语言代码（2-4 个字符，仅限字母和连字符）。可"
+"用于条件渲染或在页面上标记当前语言。"
+
+#: src/Admin/Pages/ThemeTemplateTagsPage.php:131
+msgid "Current language code"
+msgstr "当前语言代码"
+
+#: src/Admin/Pages/ThemeTemplateTagsPage.php:132
+msgid "Returns the language code of the current site in real time."
+msgstr "实时返回当前站点的语言代码。"
+
+#: src/Admin/Pages/ThemeTemplateTagsPage.php:137
+msgid "Output the language code in templates, for example zh-CN."
+msgstr "在模板中输出语言代码，例如 zh-CN。"
+
+#: src/Admin/Pages/ThemeTemplateTagsPage.php:142
+msgid "Display the current language via shortcode within pages or widgets."
+msgstr "通过短代码在页面或小工具中显示当前语言。"
+
+#: src/Admin/Pages/ThemeTemplateTagsPage.php:145
+msgid "Data attribute"
+msgstr "数据属性"
+
+#: src/Admin/Pages/ThemeTemplateTagsPage.php:147
+msgid ""
+"Output to a custom data attribute that front-end scripts can use for "
+"additional logic."
+msgstr "输出到自定义数据属性，前端脚本可用于附加逻辑。"
+
+#: src/Admin/Pages/ThemeTemplateTagsPage.php:152
+msgid "Language item data"
+msgstr "语言项数据"
+
+#: src/Admin/Pages/ThemeTemplateTagsPage.php:153
+msgid ""
+"Return an array of switchable sites, which can be used for custom navigation "
+"or API responses."
+msgstr "返回可切换站点的数组，可用于自定义导航或 API 响应。"
+
+#: src/Admin/Pages/ThemeTemplateTagsPage.php:156
+msgid "PHP array"
+msgstr "PHP 数组"
+
+#: src/Admin/Pages/ThemeTemplateTagsPage.php:158
+msgid ""
+"Iterate over the returned language array and render the required HTML "
+"yourself."
+msgstr "遍历返回的语言数组并自行渲染所需的 HTML。"
+
+#: src/Admin/Pages/ThemeTemplateTagsPage.php:161
+msgid "JSON output"
+msgstr "JSON 输出"
+
+#: src/Admin/Pages/ThemeTemplateTagsPage.php:163
+msgid ""
+"Quickly output the language array as a JSON string for front-end scripts."
+msgstr "快速将语言数组输出为 JSON 字符串供前端脚本使用。"
+
+#: src/Admin/Pages/ThemeTemplateTagsPage.php:168
+msgid ""
+"Output JSON via shortcode. When format=raw, returns PHP var_export style "
+"text."
+msgstr ""
+"通过短代码输出 JSON。当 format=raw 时，返回 PHP var_export 风格的文本。"
+
+#: src/Admin/Pages/ThemeTemplateTagsPage.php:175
+msgid "Site navigation"
+msgstr "站点导航"
+
+#: src/Admin/Pages/ThemeTemplateTagsPage.php:176
+msgid ""
+"Site navigation provides language switchers for visitors. You can use the "
+"default list or customize rendering based on the language array."
+msgstr ""
+"站点导航为访客提供语言切换器。您可以使用默认列表或基于语言数组自定义渲染。"
+
+#: src/Admin/Pages/ThemeTemplateTagsPage.php:179
+msgid "Default language switcher"
+msgstr "默认语言切换器"
+
+#: src/Admin/Pages/ThemeTemplateTagsPage.php:180
+msgid "Output a list with the current language highlighted."
+msgstr "输出一个高亮当前语言的列表。"
+
+#: src/Admin/Pages/ThemeTemplateTagsPage.php:185
+msgid ""
+"Outputs an <ul> list by default. Use parameters to customize the container "
+"and classes."
+msgstr "默认输出 <ul> 列表。使用参数自定义容器和类名。"
+
+#: src/Admin/Pages/ThemeTemplateTagsPage.php:190
+msgid ""
+"Quickly insert the language switcher via shortcode. Supports parameters like "
+"container, class, show_current and more."
+msgstr ""
+"通过短代码快速插入语言切换器。支持 container、class、show_current 等参数。"
+
+#: src/Admin/Pages/ThemeTemplateTagsPage.php:193
+msgid "Block example"
+msgstr "区块示例"
+
+#: src/Admin/Pages/ThemeTemplateTagsPage.php:195
+msgid ""
+"Insert a shortcode block in the block editor to reuse the language switcher."
+msgstr "在区块编辑器中插入短代码区块以复用语言切换器。"
+
+#: src/Admin/Pages/ThemeTemplateTagsPage.php:205
+msgid ""
+"Template tags collect the most common output helpers for multilingual sites. "
+"Copy the code snippets into your theme where needed."
+msgstr ""
+"模板标签收集了多语言站点最常用的输出辅助函数。将代码片段复制到您的主题中需要"
+"的位置。"
+
+#: src/Admin/Pages/ThemeTemplateTagsPage.php:237
+msgid "Usage"
+msgstr "用法"
+
+#: src/Admin/Pages/ThemeTemplateTagsPage.php:279
+msgid "Usage code"
+msgstr "使用代码"
+
+#: src/Admin/Pages/ThemeTemplateTagsPage.php:282
+#: src/Admin/Pages/ThemeTemplateTagsPage.php:317
+msgid "Copy code"
+msgstr "复制代码"
+
+#: src/Admin/Pages/ThemeTemplateTagsPage.php:316
+msgid "Copied"
+msgstr "已复制"
+
+#. translators: %d: Translation rule ID.
+#: src/Admin/Pages/ThemeTranslationPage.php:266
+#, php-format
+msgid "Rule #%d"
+msgstr "规则 #%d"
+
+#. translators: %d: Translation rule ID.
+#: src/Admin/Pages/ThemeTranslationPage.php:276
+#, php-format
+msgid "Rule missing (#%d)"
+msgstr "规则缺失 (#%d)"
+
+#: src/Admin/Pages/ThemeTranslationPage.php:311
+msgid "Select child site"
+msgstr "选择子站点"
+
+#: src/Admin/Pages/ThemeTranslationPage.php:312
+#: src/Admin/Pages/ThemeTranslationPage.php:313
+msgid "Select a site"
+msgstr "选择站点"
+
+#: src/Admin/Pages/ThemeTranslationPage.php:331
+msgid "Main site theme"
+msgstr "主站点主题"
+
+#: src/Admin/Pages/ThemeTranslationPage.php:332
+msgid "Unknown theme"
+msgstr "未知主题"
+
+#: src/Admin/Pages/ThemeTranslationPage.php:333
+msgid "Main site URL"
+msgstr "主站点 URL"
+
+#: src/Admin/Pages/ThemeTranslationPage.php:334
+#: src/Admin/Pages/ThemeTranslationPage.php:336
+#: src/Admin/Pages/ThemeTranslationPage.php:342
+#: src/Admin/Pages/ThemeTranslationPage.php:344
+#: src/Admin/Pages/ThemeTranslationPage.php:346
+#: src/Admin/Pages/ThemeTranslationPage.php:348
+msgid "No data"
+msgstr "暂无数据"
+
+#: src/Admin/Pages/ThemeTranslationPage.php:335
+msgid "Main site ID"
+msgstr "主站点 ID"
+
+#: src/Admin/Pages/ThemeTranslationPage.php:337
+msgid "Last scan time"
+msgstr "上次扫描时间"
+
+#: src/Admin/Pages/ThemeTranslationPage.php:338
+msgid "No records yet"
+msgstr "暂无记录"
+
+#: src/Admin/Pages/ThemeTranslationPage.php:341
+msgid "Current child site URL"
+msgstr "当前子站点 URL"
+
+#: src/Admin/Pages/ThemeTranslationPage.php:343
+msgid "Child site title"
+msgstr "子站点标题"
+
+#: src/Admin/Pages/ThemeTranslationPage.php:345
+msgid "Child site translation rule"
+msgstr "子站点翻译规则"
+
+#: src/Admin/Pages/ThemeTranslationPage.php:347
+msgid "Child site ID"
+msgstr "子站点 ID"
+
+#: src/Admin/Pages/ThemeTranslationPage.php:354
+msgid ""
+"There are no available target sites in this group. Please add child sites on "
+"the Sites page first."
+msgstr "此站点组中没有可用的目标站点。请先在站点页面添加子站点。"
+
+#: src/Admin/Pages/ThemeTranslationPage.php:356
+msgid "Please select a child site before creating a scan task."
+msgstr "请在创建扫描任务前选择一个子站点。"
+
+#: src/Admin/Pages/ThemeTranslationPage.php:365
+msgid "Scan strategy"
+msgstr "扫描策略"
+
+#: src/Admin/Pages/ThemeTranslationPage.php:366
+msgid "Overwrite existing translations"
+msgstr "覆盖现有翻译"
+
+#: src/Admin/Pages/ThemeTranslationPage.php:367
+msgid "Only add new content"
+msgstr "仅添加新内容"
+
+#: src/Admin/Pages/ThemeTranslationPage.php:372
+msgid "Scan and translate"
+msgstr "扫描并翻译"
+
+#: src/Admin/Pages/ThemeTranslationPage.php:375
+msgid ""
+"Are you sure you want to delete all theme translations for this child site? "
+"This operation cannot be undone."
+msgstr "确定要删除此子站点的所有主题翻译吗？此操作无法撤销。"
+
+#: src/Admin/Pages/ThemeTranslationPage.php:376
+msgid "Delete theme translations"
+msgstr "删除主题翻译"
+
+#: src/Admin/Pages/ThemeTranslationPage.php:378
+msgid "Add manually"
+msgstr "手动添加"
+
+#: src/Admin/Pages/ThemeTranslationPage.php:382
+msgid "Add translations manually"
+msgstr "手动添加翻译"
+
+#: src/Admin/Pages/ThemeTranslationPage.php:386
+msgid "Source identifier"
+msgstr "来源标识"
+
+#: src/Admin/Pages/ThemeTranslationPage.php:388
+msgid ""
+"Used to distinguish this manual translation entry. Please fill this field."
+msgstr "用于区分此手动翻译条目。请填写此字段。"
+
+#: src/Admin/Pages/ThemeTranslationPage.php:395
+#: src/Admin/Pages/ThemeTranslationPage.php:431
+#: src/Admin/Pages/ThemeTranslationPage.php:498
+msgid "Translated content"
+msgstr "翻译内容"
+
+#: src/Admin/Pages/ThemeTranslationPage.php:399
+msgid "Save manual translation"
+msgstr "保存手动翻译"
+
+#: src/Admin/Pages/ThemeTranslationPage.php:410
+msgid ""
+"The current site does not have a language code configured, so translations "
+"cannot be edited."
+msgstr "当前站点未配置语言代码，因此无法编辑翻译。"
+
+#: src/Admin/Pages/ThemeTranslationPage.php:420
+msgid "Edit translation"
+msgstr "编辑翻译"
+
+#: src/Admin/Pages/ThemeTranslationPage.php:442
+msgid "Translation results"
+msgstr "翻译结果"
+
+#. translators: %s: Description of searchable fields.
+#: src/Admin/Pages/ThemeTranslationPage.php:451
+#, php-format
+msgid "Search within (%s)"
+msgstr "搜索范围 (%s)"
+
+#. translators: %s: Description of searchable fields.
+#: src/Admin/Pages/ThemeTranslationPage.php:451
+msgid "Source / original / translated content"
+msgstr "来源 / 原文 / 译文内容"
+
+#: src/Admin/Pages/ThemeTranslationPage.php:453
+msgid "Search source, original or translated content"
+msgstr "搜索来源、原文或译文内容"
+
+#: src/Admin/Pages/ThemeTranslationPage.php:496
+msgid "Source"
+msgstr "来源"
+
+#: src/Admin/Pages/ThemeTranslationPage.php:505
+msgid "No translation records yet."
+msgstr "暂无翻译记录。"
+
+#: src/Admin/Pages/ThemeTranslationPage.php:631
+#: src/Admin/Pages/ThemeTranslationPage.php:924
+#: src/Admin/Pages/ThemeTranslationPage.php:963
+msgid "Security check failed. Please try again."
+msgstr "安全检查失败。请重试。"
+
+#: src/Admin/Pages/ThemeTranslationPage.php:635
+msgid "Please select a valid site group before scanning."
+msgstr "请在扫描前选择有效的站点组。"
+
+#: src/Admin/Pages/ThemeTranslationPage.php:643
+msgid "Invalid site group parameter."
+msgstr "无效的站点组参数。"
+
+#: src/Admin/Pages/ThemeTranslationPage.php:658
+msgid ""
+"This site group does not have a main site configured. Unable to scan theme."
+msgstr "此站点组未配置主站点。无法扫描主题。"
+
+#: src/Admin/Pages/ThemeTranslationPage.php:662
+msgid "Please select a valid child site before submitting the task."
+msgstr "请在提交任务前选择有效的子站点。"
+
+#: src/Admin/Pages/ThemeTranslationPage.php:674
+#: src/Admin/Pages/ThemeTranslationPage.php:846
+msgid "The selected child site is invalid or has been removed."
+msgstr "所选子站点无效或已被删除。"
+
+#: src/Admin/Pages/ThemeTranslationPage.php:682
+msgid ""
+"Unable to detect the theme of the main site. Please verify the site "
+"configuration."
+msgstr "无法检测主站点的主题。请验证站点配置。"
+
+#. translators: %s: Site label.
+#: src/Admin/Pages/ThemeTranslationPage.php:708
+#, php-format
+msgid ""
+"Site %s does not have a translation rule configured and has been skipped."
+msgstr "站点 %s 未配置翻译规则，已跳过。"
+
+#. translators: %s: Site label.
+#: src/Admin/Pages/ThemeTranslationPage.php:713
+#, php-format
+msgid "The translation rule for site %s does not exist or has been deleted."
+msgstr "站点 %s 的翻译规则不存在或已被删除。"
+
+#. translators: %s: Site label.
+#: src/Admin/Pages/ThemeTranslationPage.php:733
+#, php-format
+msgid "Failed to create theme translation task for site %s."
+msgstr "为站点 %s 创建主题翻译任务失败。"
+
+#. translators: %d: Number of tasks created.
+#: src/Admin/Pages/ThemeTranslationPage.php:743
+#, php-format
+msgid ""
+"Successfully created %d theme translation master task(s). The system will "
+"automatically split and execute them."
+msgstr "成功创建 %d 个主题翻译主任务。系统将自动拆分并执行它们。"
+
+#: src/Admin/Pages/ThemeTranslationPage.php:752
+msgid ""
+"No tasks were created. Please verify the site and translation rule "
+"configuration."
+msgstr "未创建任何任务。请验证站点和翻译规则配置。"
+
+#: src/Admin/Pages/ThemeTranslationPage.php:808
+msgid "Security check failed while deleting theme translations."
+msgstr "删除主题翻译时安全检查失败。"
+
+#: src/Admin/Pages/ThemeTranslationPage.php:820
+msgid ""
+"Invalid site group or child site. Please refresh the page and try again."
+msgstr "无效的站点组或子站点。请刷新页面后重试。"
+
+#: src/Admin/Pages/ThemeTranslationPage.php:829
+msgid "There are no available target sites in this group."
+msgstr "此站点组中没有可用的目标站点。"
+
+#: src/Admin/Pages/ThemeTranslationPage.php:880
+msgid ""
+"Failed to enqueue theme translation delete task. Please try again later."
+msgstr "排队主题翻译删除任务失败。请稍后重试。"
+
+#. translators: 1: site label, 2: task ID
+#: src/Admin/Pages/ThemeTranslationPage.php:903
+#, php-format
+msgid ""
+"Theme translation delete task (ID #%2$d) has been queued for child site "
+"%1$s. You can monitor its progress on the Tasks page."
+msgstr ""
+"主题翻译删除任务（ID #%2$d）已为子站点 %1$s 排队。您可以在任务页面监控其进"
+"度。"
+
+#: src/Admin/Pages/ThemeTranslationPage.php:909
+msgid "View tasks"
+msgstr "查看任务"
+
+#: src/Admin/Pages/ThemeTranslationPage.php:929
+#: src/Admin/Pages/ThemeTranslationPage.php:968
+msgid "Invalid translation record."
+msgstr "无效的翻译记录。"
+
+#: src/Admin/Pages/ThemeTranslationPage.php:934
+msgid "Translation record not found."
+msgstr "翻译记录未找到。"
+
+#: src/Admin/Pages/ThemeTranslationPage.php:942
+msgid "Missing language identifier. Cannot save translation."
+msgstr "缺少语言标识符。无法保存翻译。"
+
+#: src/Admin/Pages/ThemeTranslationPage.php:948
+msgid "Failed to save translation. Please try again."
+msgstr "保存翻译失败。请重试。"
+
+#: src/Admin/Pages/ThemeTranslationPage.php:951
+msgid "Translation has been saved."
+msgstr "翻译已保存。"
+
+#: src/Admin/Pages/ThemeTranslationPage.php:972
+msgid "Failed to delete translation record. Please try again later."
+msgstr "删除翻译记录失败。请稍后重试。"
+
+#: src/Admin/Pages/ThemeTranslationPage.php:975
+msgid "Translation record has been deleted."
+msgstr "翻译记录已删除。"
+
+#: src/Admin/Pages/ThemeTranslationPage.php:996
+msgid "Please select a valid child site before manually adding translations."
+msgstr "请在手动添加翻译前选择有效的子站点。"
+
+#: src/Admin/Pages/ThemeTranslationPage.php:1000
+msgid "Please fill in the source identifier."
+msgstr "请填写来源标识。"
+
+#: src/Admin/Pages/ThemeTranslationPage.php:1004
+msgid "Please fill in the original content."
+msgstr "请填写原文内容。"
+
+#: src/Admin/Pages/ThemeTranslationPage.php:1008
+msgid "Please fill in the translated content."
+msgstr "请填写翻译内容。"
+
+#: src/Admin/Pages/ThemeTranslationPage.php:1013
+msgid "Child site information is invalid."
+msgstr "子站点信息无效。"
+
+#: src/Admin/Pages/ThemeTranslationPage.php:1054
+msgid "Failed to save original content. Please try again later."
+msgstr "保存原文内容失败。请稍后重试。"
+
+#: src/Admin/Pages/ThemeTranslationPage.php:1062
+msgid "Original content already exists"
+msgstr "原文内容已存在"
+
+#: src/Admin/Pages/ThemeTranslationPage.php:1176
+msgid "Are you sure you want to delete this translation record?"
+msgstr "确定要删除此翻译记录吗？"
+
+#: src/Admin/Pages/ThemeTranslationPage.php:1189
+msgid "Awaiting translation"
+msgstr "等待翻译"
+
+#: src/Admin/Pages/TranslationFieldsPage.php:58
+msgid "Loading, please wait…"
+msgstr "加载中，请稍候…"
+
+#: src/Admin/Pages/TranslationFieldsPage.php:59
+msgid "Save failed. Please try again later."
+msgstr "保存失败，请稍后再试。"
+
+#: src/Admin/Pages/TranslationFieldsPage.php:96
+msgid "Content"
+msgstr "内容"
+
+#: src/Admin/Pages/TranslationFieldsPage.php:97
+msgid "Excerpt"
+msgstr "摘要"
+
+#: src/Admin/Pages/TranslationFieldsPage.php:120
+msgid "Attachment title"
+msgstr "附件标题"
+
+#: src/Admin/Pages/TranslationFieldsPage.php:127
+msgid "Media attachments"
+msgstr "媒体附件"
+
+#: src/Admin/Pages/TranslationFieldsPage.php:168
+msgid "SEO fields"
+msgstr "SEO 字段"
+
+#: src/Admin/Pages/TranslationFieldsPage.php:171
+msgid ""
+"No SEO fields have been added yet. Please configure them using the button "
+"above."
+msgstr "尚未添加 SEO 字段。请使用上方按钮进行配置。"
+
+#: src/Admin/Pages/TranslationFieldsPage.php:225
+msgid "Missing or invalid parameters."
+msgstr "参数缺失或无效。"
+
+#: src/Admin/Pages/TranslationManagementPage.php:128
+msgid "Please create at least one site group on the “Site groups” page first."
+msgstr "请先在”站点组”页面创建至少一个站点组。"
+
+#: src/Admin/Pages/TranslationManagementPage.php:214
+msgid "Translation targets"
+msgstr "翻译目标"
+
+#: src/Admin/Pages/TranslationManagementPage.php:215
+msgid "Search child site or title"
+msgstr "搜索子站点或标题"
+
+#: src/Admin/Pages/TranslationManagementPage.php:216
+msgid "Close"
+msgstr "关闭"
+
+#: src/Admin/Pages/TranslationManagementPage.php:222
+msgid "Site name"
+msgstr "站点名称"
+
+#: src/Admin/Pages/TranslationManagementPage.php:223
+msgid "Site domain/path"
+msgstr "站点域名/路径"
+
+#: src/Admin/Pages/TranslationManagementPage.php:225
+#: src/Admin/Tables/TranslationRelationTable.php:66
+msgid "Last translated at"
+msgstr "最后翻译时间"
+
+#: src/Admin/Pages/TranslationManagementPage.php:392
+msgid "Missing relation ID."
+msgstr "缺少关系 ID。"
+
+#: src/Admin/Pages/TranslationManagementPage.php:403
+msgid "The translation mapping has been deleted."
+msgstr "翻译映射已删除。"
+
+#: src/Admin/Pages/TranslationManagementPage.php:403
+msgid "Deletion failed or the mapping no longer exists."
+msgstr "删除失败或映射不存在。"
+
+#: src/Admin/Pages/TranslationManagementPage.php:470
+msgid "No bulk action was executed."
+msgstr "没有执行批量操作。"
+
+#: src/Admin/Pages/TranslationManagementPage.php:486
+msgid "Please select at least one record to delete."
+msgstr "请至少选择一条记录进行删除。"
+
+#: src/Admin/Pages/TranslationManagementPage.php:560
+msgid "Failed to enqueue delete tasks. Please try again."
+msgstr "无法添加删除任务到队列。请重试。"
+
+#: src/Admin/Pages/TranslationManagementPage.php:568
+msgid ""
+"Some delete tasks could not be created. Please check the task list or try "
+"again."
+msgstr "部分删除任务无法创建。请检查任务列表或重试。"
+
+#. translators: 1: Total selected items, 2: Valid items.
+#: src/Admin/Pages/TranslationManagementPage.php:578
+#, php-format
+msgid "You selected %1$d items, but only %2$d were valid."
+msgstr "您选择了 %1$d 个项目，但只有 %2$d 个有效。"
+
+#. translators: 1: Number of valid items deleted, 2: Tasks created.
+#: src/Admin/Pages/TranslationManagementPage.php:587
+#, php-format
+msgid "Delete submitted: %1$d items (%2$d tasks)."
+msgstr "已提交删除：%1$d 个项目（%2$d 个任务）。"
+
+#: src/Admin/Pages/TranslationRulesPage.php:85
+msgid "OpenAI-compatible API"
+msgstr "OpenAI 兼容 API"
+
+#. translators: %d: number of deleted rules.
+#: src/Admin/Pages/TranslationRulesPage.php:294
+#, php-format
+msgid "%d rule has been deleted."
+msgid_plural "%d rules have been deleted."
+msgstr[0] "已删除 %d 条规则。"
+
+#: src/Admin/Pages/TranslationRulesPage.php:391
+#: src/Admin/Pages/TranslationRulesPage.php:929
+msgid "Missing rule ID."
+msgstr "缺少规则 ID。"
+
+#: src/Admin/Pages/TranslationRulesPage.php:395
+msgid "The requested rule does not exist."
+msgstr "所请求的规则不存在。"
+
+#: src/Admin/Pages/TranslationRulesPage.php:444
+msgid "Edit translation rule"
+msgstr "编辑翻译规则"
+
+#: src/Admin/Pages/TranslationRulesPage.php:444
+msgid "Create translation rule"
+msgstr "创建翻译规则"
+
+#: src/Admin/Pages/TranslationRulesPage.php:483
+msgid "Translation type"
+msgstr "翻译类型"
+
+#: src/Admin/Pages/TranslationRulesPage.php:511
+msgid "Select a model"
+msgstr "选择模型"
+
+#: src/Admin/Pages/TranslationRulesPage.php:517
+msgid ""
+"No LLM models have been configured yet. Please add a model on the \"LLM "
+"Translation\" page first."
+msgstr "尚未配置任何 LLM 模型。请先在\"LLM 翻译\"页面添加模型。"
+
+#: src/Admin/Pages/TranslationRulesPage.php:525
+msgid ""
+"Controls the creativity of the model. A value between 0.2 and 0.8 is "
+"recommended."
+msgstr "控制模型的创意程度，建议值在 0.2 到 0.8 之间。"
+
+#: src/Admin/Pages/TranslationRulesPage.php:532
+msgid "Leave empty or set to 0 to let the model decide automatically."
+msgstr "留空或设为 0 以让模型自动决定。"
+
+#: src/Admin/Pages/TranslationRulesPage.php:539
+msgid ""
+"Sent to the model as a system prompt. Leave empty to use the default prompt."
+msgstr "作为系统提示词发送给模型，留空则使用默认提示词。"
+
+#: src/Admin/Pages/TranslationRulesPage.php:557
+msgid "Maximum characters per request"
+msgstr "单次请求最大字符数"
+
+#: src/Admin/Pages/TranslationRulesPage.php:560
+msgid ""
+"Fill in the maximum number of characters allowed per request according to "
+"the vendor documentation."
+msgstr "请根据厂商文档填写每次请求允许的最大字符数。"
+
+#: src/Admin/Pages/TranslationRulesPage.php:565
+msgid "Test text"
+msgstr "测试文本"
+
+#: src/Admin/Pages/TranslationRulesPage.php:568
+msgid ""
+"Enter sample text and click the button below to run a real-time test (no "
+"content will be saved to the database)."
+msgstr "输入示例文本，点击下方按钮进行实时测试（内容不会保存到数据库）。"
+
+#: src/Admin/Pages/TranslationRulesPage.php:570
+msgid "Test translation"
+msgstr "测试翻译"
+
+#: src/Admin/Pages/TranslationRulesPage.php:576
+msgid "Test result"
+msgstr "测试结果"
+
+#: src/Admin/Pages/TranslationRulesPage.php:603
+msgid "Save rule"
+msgstr "保存规则"
+
+#: src/Admin/Pages/TranslationRulesPage.php:766
+msgid "Please select an available LLM model."
+msgstr "请选择一个可用的 LLM 模型。"
+
+#: src/Admin/Pages/TranslationRulesPage.php:777
+msgid "Rule name cannot be empty."
+msgstr "规则名称不能为空。"
+
+#: src/Admin/Pages/TranslationRulesPage.php:787
+msgid "Rule name must not exceed 20 characters."
+msgstr "规则名称不得超过 20 个字符。"
+
+#: src/Admin/Pages/TranslationRulesPage.php:820
+msgid "The maximum characters per request must be between 1 and 5000."
+msgstr "单次提交内容长度必须在 1 到 5000 之间。"
+
+#: src/Admin/Pages/TranslationRulesPage.php:841
+#: src/Admin/Pages/TranslationRulesPage.php:1095
+msgid "The rule name already exists. Please choose another name."
+msgstr "规则名称已存在，请更换。"
+
+#: src/Admin/Pages/TranslationRulesPage.php:904
+msgid "Translation rule saved."
+msgstr "翻译规则已保存。"
+
+#: src/Admin/Pages/TranslationRulesPage.php:946
+msgid "This rule is in use by sites and cannot be deleted."
+msgstr "此规则正在被站点使用，无法删除。"
+
+#: src/Admin/Pages/TranslationRulesPage.php:969
+msgid "Translation rule deleted."
+msgstr "翻译规则已删除。"
+
+#: src/Admin/Pages/TranslationRulesPage.php:1053
+#: src/Translation/MachineTranslationVendorTester.php:203
+#: src/Translation/MachineTranslationVendorTester.php:247
+msgid "Test completed."
+msgstr "测试完成。"
+
+#: src/Admin/Pages/TranslationRulesPage.php:1059
+msgid "Test failed."
+msgstr "测试失败。"
+
+#: src/Admin/Pages/TranslationRulesPage.php:1087
+msgid "Please enter a rule name."
+msgstr "请输入规则名称。"
+
+#: src/Admin/Services/SiteContextService.php:297
+#: src/Admin/Tables/TaskListTable.php:139
+#: src/Admin/Tables/TaskListTable.php:140 src/Sites/SiteContextService.php:300
+msgid "All sites"
+msgstr "所有站点"
+
+#: src/Admin/Tables/LlmModelTable.php:48
+msgid "API endpoint"
+msgstr "API 端点"
+
+#: src/Admin/Tables/LlmModelTable.php:49
+msgid "KEY"
+msgstr "密钥"
+
+#: src/Admin/Tables/LlmModelTable.php:91
+msgid "Enter vendor or model name"
+msgstr "输入厂商或模型名称"
+
+#: src/Admin/Tables/LlmModelTable.php:133
+msgid "Show key"
+msgstr "显示密钥"
+
+#: src/Admin/Tables/LlmModelTable.php:134
+msgid "Hide key"
+msgstr "隐藏密钥"
+
+#: src/Admin/Tables/LlmModelTable.php:169
+msgid "Are you sure you want to delete this model?"
+msgstr "确定删除此模型？"
+
+#: src/Admin/Tables/TaskChainTable.php:59 src/Admin/Tables/TaskListTable.php:98
+msgid "Status"
+msgstr "状态"
+
+#: src/Admin/Tables/TaskChainTable.php:60 src/Admin/Tables/TaskListTable.php:99
+msgid "Progress"
+msgstr "进度"
+
+#: src/Admin/Tables/TaskChainTable.php:67
+msgid "No tasks found in this task chain."
+msgstr "此任务链中未找到任何任务。"
+
+#: src/Admin/Tables/TaskChainTable.php:100
+#: src/Admin/Tables/TaskListTable.php:234
+msgid "View logs"
+msgstr "查看日志"
+
+#: src/Admin/Tables/TaskChainTable.php:123
+msgid "Waiting for statistics"
+msgstr "等待统计"
+
+#: src/Admin/Tables/TaskChainTable.php:177
+msgid "Are you sure you want to delete this task and all related subtasks?"
+msgstr "确定删除此任务及所有相关子任务？"
+
+#: src/Admin/Tables/TaskChainTable.php:309
+#: src/Admin/Tables/TaskListTable.php:345
+msgid "In progress"
+msgstr "进行中"
+
+#: src/Admin/Tables/TaskChainTable.php:310
+#: src/Admin/Tables/TaskListTable.php:346
+msgid "Completed"
+msgstr "已完成"
+
+#: src/Admin/Tables/TaskChainTable.php:334
+#: src/Admin/Tables/TaskListTable.php:327
+#: src/Tasks/Executors/PostTranslationExecutor.php:47
+#: src/Tasks/Executors/PostTranslationExecutor.php:93
+#: src/Tasks/Executors/PostTranslationExecutor.php:99
+#: src/Tasks/Executors/PostTranslationExecutor.php:318
+#: src/Tasks/Executors/PostTranslationExecutor.php:385
+#: src/Tasks/Executors/PostTranslationExecutor.php:691
+#: src/Tasks/TaskStageHelper.php:95
+msgid "Post translation"
+msgstr "文章翻译"
+
+#: src/Admin/Tables/TaskChainTable.php:335
+#: src/Admin/Tables/TaskListTable.php:328 src/Tasks/TaskStageHelper.php:104
+msgid "Page translation"
+msgstr "页面翻译"
+
+#: src/Admin/Tables/TaskChainTable.php:336
+#: src/Admin/Tables/TaskListTable.php:323
+#: src/Admin/Tables/TaskListTable.php:329
+msgid "Category/Tag translation"
+msgstr "分类/标签翻译"
+
+#: src/Admin/Tables/TaskChainTable.php:337
+#: src/Admin/Tables/TaskListTable.php:330
+#: src/Tasks/Executors/MediaTranslationExecutor.php:46
+#: src/Tasks/Executors/MediaTranslationExecutor.php:171
+#: src/Tasks/Executors/MediaTranslationExecutor.php:233
+#: src/Tasks/Executors/MediaTranslationExecutor.php:602
+#: src/Tasks/Executors/MediaTranslationExecutor.php:655
+#: src/Tasks/Executors/PostTranslationExecutor.php:777
+#: src/Tasks/TaskStageHelper.php:113
+msgid "Media translation"
+msgstr "媒体翻译"
+
+#: src/Admin/Tables/TaskChainTable.php:338
+msgid "Theme translation (master task)"
+msgstr "主题翻译（主任务）"
+
+#: src/Admin/Tables/TaskChainTable.php:339
+msgid "Theme translation (scan)"
+msgstr "主题翻译（扫描）"
+
+#: src/Admin/Tables/TaskChainTable.php:340
+#: src/Admin/Tables/TaskChainTable.php:341
+msgid "Theme translation (file scan)"
+msgstr "主题翻译（文件扫描）"
+
+#: src/Admin/Tables/TaskChainTable.php:342
+msgid "Theme translation (menu scan)"
+msgstr "主题翻译（菜单扫描）"
+
+#: src/Admin/Tables/TaskChainTable.php:343
+msgid "Theme translation (menu item scan)"
+msgstr "主题翻译（菜单项扫描）"
+
+#: src/Admin/Tables/TaskChainTable.php:344
+#: src/Admin/Tables/TaskChainTable.php:345
+msgid "Theme translation (widget scan)"
+msgstr "主题翻译（小工具扫描）"
+
+#: src/Admin/Tables/TaskChainTable.php:346
+#: src/Admin/Tables/TaskListTable.php:308
+msgid "Theme translation"
+msgstr "主题翻译"
+
+#: src/Admin/Tables/TaskChainTable.php:347
+#: src/Admin/Tables/TaskListTable.php:331
+msgid "Sitemap generation"
+msgstr "站点地图生成"
+
+#: src/Admin/Tables/TaskChainTable.php:348
+#: src/Admin/Tables/TaskListTable.php:332
+msgid "URL rewrite"
+msgstr "URL 重写"
+
+#: src/Admin/Tables/TaskListTable.php:96
+msgid "Target site"
+msgstr "目标站点"
+
+#: src/Admin/Tables/TaskListTable.php:97
+msgid "Task type"
+msgstr "任务类型"
+
+#: src/Admin/Tables/TaskListTable.php:124
+#: src/Admin/Tables/TranslationRelationTable.php:163
+msgid "Filter by site group"
+msgstr "按站点组筛选"
+
+#: src/Admin/Tables/TaskListTable.php:126
+#: src/Admin/Tables/TranslationRelationTable.php:165
+msgid "All site groups"
+msgstr "所有站点组"
+
+#: src/Admin/Tables/TaskListTable.php:135
+msgid "Site group (unknown)"
+msgstr "站点组（未知）"
+
+#: src/Admin/Tables/TaskListTable.php:138
+msgid "Filter by site"
+msgstr "按站点筛选"
+
+#: src/Admin/Tables/TaskListTable.php:175
+msgid "Filter by type"
+msgstr "按类型筛选"
+
+#: src/Admin/Tables/TaskListTable.php:183
+msgid "Filter by status"
+msgstr "按状态筛选"
+
+#: src/Admin/Tables/TaskListTable.php:185
+msgid "All statuses"
+msgstr "所有状态"
+
+#: src/Admin/Tables/TaskListTable.php:205
+msgid "Refresh task status"
+msgstr "刷新任务状态"
+
+#: src/Admin/Tables/TaskListTable.php:209
+msgid "Checking..."
+msgstr "正在检查..."
+
+#: src/Admin/Tables/TaskListTable.php:213
+#: src/Admin/Tables/TaskListTable.php:216
+msgid "Search tasks"
+msgstr "搜索任务"
+
+#: src/Admin/Tables/TaskListTable.php:214
+msgid "Enter site group or site name"
+msgstr "输入站点组或站点名称"
+
+#: src/Admin/Tables/TaskListTable.php:304
+msgid "Translation deletion"
+msgstr "翻译删除"
+
+#: src/Admin/Tables/TaskListTable.php:317 src/Tasks/TaskStageHelper.php:130
+msgid "Category translation"
+msgstr "分类翻译"
+
+#: src/Admin/Tables/TaskListTable.php:319 src/Tasks/TaskStageHelper.php:138
+msgid "Tag translation"
+msgstr "标签翻译"
+
+#: src/Admin/Tables/TaskListTable.php:339
+msgid "Unknown type"
+msgstr "未知类型"
+
+#: src/Admin/Tables/TaskListTable.php:477
+msgid "Awaiting metrics"
+msgstr "等待统计"
+
+#: src/Admin/Tables/TaskListTable.php:513
+msgid "View chain"
+msgstr "查看链"
+
+#: src/Admin/Tables/TaskListTable.php:534
+msgid "Run now"
+msgstr "立即执行"
+
+#: src/Admin/Tables/TaskListTable.php:542
+msgid "Are you sure you want to delete this task and its logs?"
+msgstr "确定要删除该任务及日志？"
+
+#: src/Admin/Tables/TaskListTable.php:554
+msgid "Cancel selected"
+msgstr "批量取消"
+
+#: src/Admin/Tables/TaskListTable.php:555
+msgid "Retry selected"
+msgstr "批量重新排队"
+
+#: src/Admin/Tables/TaskListTable.php:556
+msgid "Delete selected"
+msgstr "批量删除"
+
+#: src/Admin/Tables/TaskListTable.php:582
+msgid "Please select at least one task before executing this action."
+msgstr "请选择任务后再执行操作。"
+
+#: src/Admin/Tables/TaskListTable.php:606
+msgid "Selected tasks were canceled."
+msgstr "选中任务已取消。"
+
+#: src/Admin/Tables/TaskListTable.php:607
+msgid "Task has been canceled."
+msgstr "任务已取消。"
+
+#: src/Admin/Tables/TaskListTable.php:608
+msgid "Selected tasks were re-queued."
+msgstr "选中任务已重新排队。"
+
+#: src/Admin/Tables/TaskListTable.php:609
+msgid "Task has been re-queued."
+msgstr "任务已重新排队。"
+
+#: src/Admin/Tables/TaskListTable.php:610
+msgid "Selected tasks were deleted (running tasks remain untouched)."
+msgstr "选中任务已删除（运行中的任务不会被删除）。"
+
+#: src/Admin/Tables/TaskListTable.php:611
+msgid "Task deleted (running tasks are not removed)."
+msgstr "任务已删除（若在运行则未删除）。"
+
+#: src/Admin/Tables/TaskListTable.php:614
+msgid "Action completed."
+msgstr "操作已执行。"
+
+#: src/Admin/Tables/TranslationRelationTable.php:63
+msgid "Object type"
+msgstr "对象类型"
+
+#: src/Admin/Tables/TranslationRelationTable.php:65
+#: src/PublicSite/Hooks/AdminBarHooks.php:90
+msgid "Translations"
+msgstr "翻译"
+
+#: src/Admin/Tables/TranslationRelationTable.php:99
+msgid "Post"
+msgstr "文章"
+
+#: src/Admin/Tables/TranslationRelationTable.php:100
+msgid "Page"
+msgstr "页面"
+
+#: src/Admin/Tables/TranslationRelationTable.php:102
+#: src/Tasks/Executors/PostTranslationExecutor.php:1011
+msgid "Category"
+msgstr "分类"
+
+#: src/Admin/Tables/TranslationRelationTable.php:103
+#: src/Tasks/Executors/PostTranslationExecutor.php:1012
+msgid "Tag"
+msgstr "标签"
+
+#: src/Admin/Tables/TranslationRelationTable.php:173
+msgid "Filter by object type"
+msgstr "按对象类型筛选"
+
+#: src/Admin/Tables/TranslationRelationTable.php:193
+msgid "Search translation relations"
+msgstr "搜索翻译关系"
+
+#: src/Admin/Tables/TranslationRelationTable.php:194
+msgid "Search by title"
+msgstr "按标题搜索"
+
+#: src/Admin/Tables/TranslationRelationTable.php:196
+msgid "Search translations"
+msgstr "搜索翻译"
+
+#: src/Admin/Tables/TranslationRulesTable.php:75
+#: src/Admin/Tables/TranslationRulesTable.php:85
+msgid "Source language"
+msgstr "源语言"
+
+#: src/Admin/Tables/TranslationRulesTable.php:76
+#: src/Admin/Tables/TranslationRulesTable.php:86
+msgid "Target language"
+msgstr "目标语言"
+
+#: src/Admin/Tables/TranslationRulesTable.php:87
+msgid "Max length per request"
+msgstr "单次请求最大长度"
+
+#: src/Admin/Tables/TranslationRulesTable.php:164
+msgid "Filter by vendor"
+msgstr "按厂商筛选"
+
+#: src/Admin/Tables/TranslationRulesTable.php:166
+msgid "All vendors"
+msgstr "所有厂商"
+
+#: src/Admin/Tables/TranslationRulesTable.php:228
+msgid "Are you sure you want to delete this rule?"
+msgstr "确定要删除这条规则吗？"
+
+#: src/Admin/Tables/TranslationRulesTable.php:414
+#: src/Admin/Tables/TranslationRulesTable.php:437
+msgid "OpenAI / Compatible API"
+msgstr "OpenAI / 兼容 API"
+
+#: src/Core/SitemapService.php:274 src/Core/SitemapService.php:655
+msgid "XML Sitemap Index"
+msgstr "XML 站点地图索引"
+
+#: src/Core/SitemapService.php:506 src/Core/SitemapService.php:521
+#: src/Core/SitemapService.php:565 src/Core/SitemapService.php:593
+#: src/Core/SitemapService.php:602 src/Core/SitemapService.php:621
+#: src/Core/SitemapService.php:636
+msgid "XML Sitemap"
+msgstr "XML 站点地图"
+
+#: src/Core/SitemapService.php:508
+msgid "Unknown sitemap type."
+msgstr "未知的站点地图类型。"
+
+#: src/Core/SitemapService.php:567
+msgid "No sitemap found for this group."
+msgstr "未找到此分组的站点地图。"
+
+#: src/Core/SitemapService.php:604
+msgid "No sitemap found for this group site."
+msgstr "未找到此分组站点的站点地图。"
+
+#: src/Core/SitemapService.php:623
+msgid "No sitemap found for this page."
+msgstr "未找到此页面的站点地图。"
+
+#. translators: %s: language label for the currently active site
+#: src/PublicSite/Hooks/AdminBarHooks.php:107
+#, php-format
+msgid "&#9679; %s (current)"
+msgstr "&#9679; %s（当前）"
+
+#: src/Scheduling/TaskMaintenance.php:109
+msgid ""
+"The task exceeded the execution timeout and has been marked as failed "
+"automatically."
+msgstr "任务超过执行超时时间，已自动标记为失败。"
+
+#: src/Scheduling/TaskMaintenance.php:110
+msgid "Task execution timed out and has been stopped."
+msgstr "任务执行超时，已停止。"
+
+#: src/Scheduling/TaskQueue.php:552
+msgid "The task was canceled by Action Scheduler."
+msgstr "任务已被 Action Scheduler 取消。"
+
+#: src/Scheduling/TaskQueue.php:774
+msgid "The task has been canceled."
+msgstr "任务已取消。"
+
+#: src/Scheduling/TaskQueue.php:798
+msgid "The task has been deleted."
+msgstr "任务已删除。"
+
+#: src/Tasks/Executors/MediaTranslationExecutor.php:46
+msgid "Starting media translation task."
+msgstr "开始执行媒体翻译任务。"
+
+#: src/Tasks/Executors/MediaTranslationExecutor.php:60
+#: src/Tasks/Executors/PostTranslationExecutor.php:61
+#: src/Tasks/Executors/TermTranslationExecutor.php:67
+msgid "No pending subtasks."
+msgstr "没有待处理的子任务。"
+
+#: src/Tasks/Executors/MediaTranslationExecutor.php:169
+msgid "Media translation subtask skipped (no translatable content)."
+msgstr "媒体翻译子任务已跳过（没有可翻译内容）。"
+
+#: src/Tasks/Executors/MediaTranslationExecutor.php:210
+#: src/Tasks/Executors/PostTranslationExecutor.php:295
+#: src/Tasks/Executors/TermTranslationExecutor.php:206
+msgid "Unknown translation error"
+msgstr "未知翻译错误"
+
+#. translators: %s: error message
+#: src/Tasks/Executors/MediaTranslationExecutor.php:229
+#: src/Tasks/Executors/PostTranslationExecutor.php:314
+#: src/Tasks/Executors/TermTranslationExecutor.php:225
+#, php-format
+msgid "Translation completed with warnings: %s"
+msgstr "翻译已完成，但有警告：%s"
+
+#: src/Tasks/Executors/MediaTranslationExecutor.php:600
+msgid "Media translation subtask failed."
+msgstr "媒体翻译子任务失败。"
+
+#: src/Tasks/Executors/MediaTranslationExecutor.php:653
+msgid "Media translation subtask completed."
+msgstr "媒体翻译子任务已完成。"
+
+#: src/Tasks/Executors/MediaTranslationExecutor.php:698
+msgid "Source attachment file is missing."
+msgstr "源附件文件缺失。"
+
+#: src/Tasks/Executors/MediaTranslationExecutor.php:709
+msgid "Could not create target upload directory."
+msgstr "无法创建目标上传目录。"
+
+#: src/Tasks/Executors/MediaTranslationExecutor.php:716
+msgid "Failed to copy attachment file to target site."
+msgstr "复制附件文件到目标站点失败。"
+
+#: src/Tasks/Executors/MediaTranslationExecutor.php:771
+#: src/Tasks/Executors/PostTranslationExecutor.php:1277
+#: src/Tasks/Executors/TermTranslationExecutor.php:668
+#: src/Tasks/Executors/ThemeTranslationExecutor.php:428
+msgid "(excerpt)"
+msgstr "（摘要）"
+
+#: src/Tasks/Executors/PostTranslationExecutor.php:47
+msgid "Starting post translation task."
+msgstr "开始执行文章翻译任务。"
+
+#: src/Tasks/Executors/PostTranslationExecutor.php:92
+msgid "Subtask completed."
+msgstr "子任务已完成。"
+
+#: src/Tasks/Executors/PostTranslationExecutor.php:98
+msgid "Subtask failed."
+msgstr "子任务失败。"
+
+#: src/Tasks/Executors/PostTranslationExecutor.php:383
+msgid "Target site not found; post translation aborted."
+msgstr "未找到目标站点，文章翻译已中止。"
+
+#: src/Tasks/Executors/PostTranslationExecutor.php:525
+msgid "Failed to create target post."
+msgstr "创建目标文章失败。"
+
+#: src/Tasks/Executors/PostTranslationExecutor.php:689
+msgid "Post translation subtask processed."
+msgstr "文章翻译子任务已处理。"
+
+#: src/Tasks/Executors/PostTranslationExecutor.php:775
+msgid "Media translation task created from post/page translation."
+msgstr "已根据文章/页面翻译创建媒体翻译任务。"
+
+#. Translators: %s: taxonomy type label.
+#: src/Tasks/Executors/PostTranslationExecutor.php:1018
+#, php-format
+msgid "%s translation task created from post translation."
+msgstr "已根据文章翻译创建 %s 翻译任务。"
+
+#: src/Tasks/Executors/PostTranslationExecutor.php:1022
+#: src/Tasks/Executors/TermTranslationExecutor.php:47
+#: src/Tasks/Executors/TermTranslationExecutor.php:169
+#: src/Tasks/Executors/TermTranslationExecutor.php:229
+#: src/Tasks/Executors/TermTranslationExecutor.php:633
+#: src/Tasks/TaskStageHelper.php:122
+msgid "Term translation"
+msgstr "分类/标签翻译"
+
+#: src/Tasks/Executors/TermTranslationExecutor.php:47
+msgid "Starting term translation task."
+msgstr "开始执行分类/标签翻译任务。"
+
+#: src/Tasks/Executors/TermTranslationExecutor.php:167
+msgid "Term translation subtask skipped (no translatable content)."
+msgstr "分类/标签翻译子任务已跳过（没有可翻译内容）。"
+
+#: src/Tasks/Executors/TermTranslationExecutor.php:631
+msgid "Term translation subtask completed."
+msgstr "分类/标签翻译子任务已完成。"
+
+#: src/Tasks/Executors/ThemeTranslationDeleteExecutor.php:46
+msgid "Theme translation delete subtask missing required parameters."
+msgstr "主题翻译删除子任务缺少必要参数。"
+
+#: src/Tasks/Executors/ThemeTranslationDeleteExecutor.php:61
+msgid ""
+"The specified theme translation entry does not exist; nothing to delete."
+msgstr "指定的主题翻译条目不存在；无需删除。"
+
+#: src/Tasks/Executors/ThemeTranslationDeleteExecutor.php:84
+msgid "Failed to delete the theme translation entry."
+msgstr "删除主题翻译条目失败。"
+
+#: src/Tasks/Executors/ThemeTranslationDeleteExecutor.php:93
+msgid "Theme translation entry deleted."
+msgstr "主题翻译条目已删除。"
+
+#: src/Tasks/Executors/ThemeTranslationDeleteMasterExecutor.php:60
+msgid ""
+"Theme translation delete master task is missing required parameters. "
+"Aborting."
+msgstr "主题翻译删除主任务缺少必要参数。已中止。"
+
+#: src/Tasks/Executors/ThemeTranslationDeleteMasterExecutor.php:76
+msgid ""
+"Theme translation delete master task has started and is collecting entries "
+"to delete."
+msgstr "主题翻译删除主任务已启动，正在收集待删除条目。"
+
+#: src/Tasks/Executors/ThemeTranslationDeleteMasterExecutor.php:97
+msgid "No theme translation entries were found for deletion."
+msgstr "未找到需要删除的主题翻译条目。"
+
+#. translators: 1: delete task ID, 2: entry ID
+#: src/Tasks/Executors/ThemeTranslationDeleteMasterExecutor.php:146
+#, php-format
+msgid "Created theme translation delete subtask #%1$d (entry ID=%2$d)."
+msgstr "已创建主题翻译删除子任务 #%1$d（条目 ID=%2$d）。"
+
+#: src/Tasks/Executors/ThemeTranslationDeleteMasterExecutor.php:164
+msgid "Failed to create any theme translation delete subtasks."
+msgstr "未能创建任何主题翻译删除子任务。"
+
+#. translators: %d: number of delete subtasks
+#: src/Tasks/Executors/ThemeTranslationDeleteMasterExecutor.php:173
+#, php-format
+msgid "Theme translation delete master task finished with %d delete subtasks."
+msgstr "主题翻译删除主任务已完成，共创建 %d 个删除子任务。"
+
+#: src/Tasks/Executors/ThemeTranslationExecutor.php:61
+msgid "Theme translation rule not found."
+msgstr "未找到主题翻译规则。"
+
+#: src/Tasks/Executors/ThemeTranslationExecutor.php:115
+msgid "No pending theme translation content."
+msgstr "没有待处理的主题翻译内容。"
+
+#: src/Tasks/Executors/ThemeTranslationExecutor.php:201
+msgid "Invalid theme translation item found, skipped."
+msgstr "发现无效的主题翻译项，已跳过。"
+
+#: src/Tasks/Executors/ThemeTranslationExecutor.php:203
+#: src/Tasks/Executors/ThemeTranslationExecutor.php:245
+#: src/Tasks/Executors/ThemeTranslationExecutor.php:344
+msgid "Theme translation entry"
+msgstr "主题翻译条目"
+
+#: src/Tasks/Executors/ThemeTranslationExecutor.php:235
+msgid "Translation failed"
+msgstr "翻译失败"
+
+#. translators: %s: error message
+#: src/Tasks/Executors/ThemeTranslationExecutor.php:243
+#, php-format
+msgid "Translation item failed: %s"
+msgstr "翻译条目失败：%s"
+
+#: src/Tasks/Executors/ThemeTranslationExecutor.php:342
+msgid "Theme translation entry processed."
+msgstr "主题翻译条目已处理。"
+
+#. translators: 1: total items, 2: successful, 3: skipped, 4: failed
+#: src/Tasks/Executors/ThemeTranslationExecutor.php:386
+#, php-format
+msgid ""
+"Translation task completed: %1$d total, %2$d succeeded, %3$d skipped, %4$d "
+"failed"
+msgstr "翻译任务完成：共 %1$d 条，成功 %2$d 条，跳过 %3$d 条，失败 %4$d 条"
+
+#: src/Tasks/Executors/ThemeTranslationExecutor.php:393
+msgid "Theme translation summary"
+msgstr "主题翻译摘要"
+
+#: src/Tasks/Executors/ThemeTranslationExecutor.php:445
+msgid "Task has been canceled, execution stopped."
+msgstr "任务已取消，执行已停止。"
+
+#: src/Tasks/Executors/ThemeTranslationExecutor.php:474
+msgid "Upstream task has been deleted, current task terminated."
+msgstr "上游任务已被删除，当前任务已终止。"
+
+#: src/Tasks/Executors/ThemeTranslationExecutor.php:482
+msgid "Upstream task canceled or failed, current task terminated."
+msgstr "上游任务已取消或失败，当前任务已终止。"
+
+#: src/Tasks/Executors/TranslationDeleteExecutor.php:41
+msgid "Required delete parameters are missing."
+msgstr "缺少必要的删除参数。"
+
+#. translators: 1: object type, 2: object ID
+#: src/Tasks/Executors/TranslationDeleteExecutor.php:81
+#, php-format
+msgid "No translation relations found to delete: %1$s ID=%2$d"
+msgstr "未找到要删除的翻译关系：%1$s ID=%2$d"
+
+#. translators: 1: object type, 2: object ID, 3: count
+#: src/Tasks/Executors/TranslationDeleteExecutor.php:93
+#, php-format
+msgid "Preparing to delete %3$d translation relations for %1$s ID=%2$d."
+msgstr "正在准备删除 %1$s ID=%2$d 的 %3$d 条翻译关系。"
+
+#. translators: 1: object type, 2: object ID
+#: src/Tasks/Executors/TranslationDeleteExecutor.php:133
+#, php-format
+msgid "Failed to delete translation relations for %1$s ID=%2$d."
+msgstr "删除 %1$s ID=%2$d 的翻译关系失败。"
+
+#. translators: 1: object type, 2: object ID, 3: count
+#: src/Tasks/Executors/TranslationDeleteExecutor.php:147
+#, php-format
+msgid "Deleted %3$d translation relations for %1$s ID=%2$d."
+msgstr "已删除 %1$s ID=%2$d 的 %3$d 条翻译关系。"
+
+#. translators: 1: post ID
+#: src/Tasks/Executors/TranslationDeleteExecutor.php:240
+#, php-format
+msgid "Deleted shadow post ID=%d."
+msgstr "已删除影子文章 ID=%d。"
+
+#: src/Tasks/Executors/TranslationDeleteMasterExecutor.php:39
+msgid "No translation relations to delete."
+msgstr "没有可删除的翻译关系。"
+
+#. translators: %d: number of objects
+#: src/Tasks/Executors/TranslationDeleteMasterExecutor.php:54
+#, php-format
+msgid ""
+"Translation delete master task started, preparing to delete translation "
+"relations for %d objects."
+msgstr "删除翻译主任务已启动，正在准备删除 %d 个对象的翻译关系。"
+
+#. translators: 1: task ID, 2: object type, 3: object ID
+#: src/Tasks/Executors/TranslationDeleteMasterExecutor.php:110
+#, php-format
+msgid "Created delete subtask #%1$d: %2$s ID=%3$d"
+msgstr "已创建删除子任务 #%1$d：%2$s ID=%3$d"
+
+#: src/Tasks/Executors/TranslationDeleteMasterExecutor.php:125
+msgid "Failed to create any delete subtasks."
+msgstr "未能创建任何删除子任务。"
+
+#. translators: %d: number of subtasks
+#: src/Tasks/Executors/TranslationDeleteMasterExecutor.php:133
+#, php-format
+msgid "Translation delete master task completed, created %d delete subtasks."
+msgstr "删除翻译主任务完成，共创建 %d 个删除子任务。"
+
+#: src/Tasks/TaskDispatcher.php:114 src/Tasks/TaskDispatcher.php:115
+msgid "No matching task executor was found."
+msgstr "未找到匹配的任务执行器。"
+
+#: src/Tasks/TaskDispatcher.php:133
+msgid "Task started."
+msgstr "任务已启动。"
+
+#: src/Tasks/TaskDispatcher.php:162
+msgid "Task completed."
+msgstr "任务已完成。"
+
+#: src/Tasks/TaskDispatcher.php:168
+msgid "Task execution failed."
+msgstr "任务执行失败。"
+
+#: src/Tasks/TaskStageHelper.php:49
+msgid "Theme translation - Master task"
+msgstr "主题翻译 - 主任务"
+
+#: src/Tasks/TaskStageHelper.php:50
+msgid "Create theme translation task chain, plan scan units"
+msgstr "创建主题翻译任务链，并规划扫描单元"
+
+#: src/Tasks/TaskStageHelper.php:70
+msgid "Theme translation - Scan stage"
+msgstr "主题翻译 - 扫描阶段"
+
+#: src/Tasks/TaskStageHelper.php:71
+msgid "Scan theme files, menus, widgets and other translatable content"
+msgstr "扫描主题文件、菜单、小工具及其他可翻译内容"
+
+#: src/Tasks/TaskStageHelper.php:80 src/Tasks/TaskStageHelper.php:86
+msgid "Theme translation - Translation stage"
+msgstr "主题翻译 - 翻译阶段"
+
+#: src/Tasks/TaskStageHelper.php:81 src/Tasks/TaskStageHelper.php:87
+msgid "Execute actual theme content translation"
+msgstr "执行实际的主题内容翻译"
+
+#: src/Tasks/TaskStageHelper.php:96
+msgid "Translate post content"
+msgstr "翻译文章内容"
+
+#: src/Tasks/TaskStageHelper.php:105
+msgid "Translate page content"
+msgstr "翻译页面内容"
+
+#: src/Tasks/TaskStageHelper.php:114
+msgid "Translate media title, description and other info"
+msgstr "翻译媒体标题、描述及其他信息"
+
+#: src/Tasks/TaskStageHelper.php:123
+msgid "Translate categories, tags and other taxonomy terms"
+msgstr "翻译分类、标签及其他分类法术语"
+
+#: src/Tasks/TaskStageHelper.php:131
+msgid "Translate category information"
+msgstr "翻译分类信息"
+
+#: src/Tasks/TaskStageHelper.php:139
+msgid "Translate tag information"
+msgstr "翻译标签信息"
+
+#: src/Tasks/TaskStageHelper.php:147
+msgid "Delete translation - Master task"
+msgstr "删除翻译 - 主任务"
+
+#: src/Tasks/TaskStageHelper.php:148
+msgid "Get original object IDs, create delete task chain"
+msgstr "获取原始对象 ID，并创建删除任务链"
+
+#: src/Tasks/TaskStageHelper.php:155
+msgid "Delete translation - Execution stage"
+msgstr "删除翻译 - 执行阶段"
+
+#: src/Tasks/TaskStageHelper.php:156
+msgid "Find and delete translation records from child and main sites"
+msgstr "查找并删除子站点和主站点中的翻译记录"
+
+#: src/Tasks/TaskStageHelper.php:161
+msgid "Delete translation"
+msgstr "删除翻译"
+
+#: src/Tasks/TaskStageHelper.php:162
+msgid "Delete translations for specified content (legacy)"
+msgstr "删除指定内容的翻译（旧版）"
+
+#: src/Tasks/TaskStageHelper.php:238
+msgid "Unknown stage"
+msgstr "未知阶段"
+
+#. translators: %d: stage position number
+#: src/Tasks/TaskStageHelper.php:316
+#, php-format
+msgid "Stage %d of task execution"
+msgstr "任务执行第 %d 阶段"
+
+#. translators: 1: stage letter, 2: stage name
+#: src/Tasks/TaskStageHelper.php:330
+#, php-format
+msgid "Stage %1$s - %2$s"
+msgstr "第 %1$s 阶段 - %2$s"
+
+#: src/Theme/Workflow/ThemeTranslationWorkflow.php:163
+msgid ""
+"Detected an existing pending or running theme translation master task for "
+"this site. Skipping creation."
+msgstr "检测到该站点已有待处理或正在运行的主题翻译主任务，跳过创建。"
+
+#: src/Theme/Workflow/ThemeTranslationWorkflow.php:207
+msgid "Theme translation master task has been created and queued."
+msgstr "主题翻译主任务已创建并加入队列。"
+
+#: src/Theme/Workflow/ThemeTranslationWorkflow.php:281
+msgid "The master task is missing a valid translation rule."
+msgstr "主任务缺少有效的翻译规则。"
+
+#: src/Theme/Workflow/ThemeTranslationWorkflow.php:307
+msgid "Failed to resolve site information. Master task aborted."
+msgstr "无法解析站点信息，主任务已中止。"
+
+#: src/Theme/Workflow/ThemeTranslationWorkflow.php:316
+#: src/Theme/Workflow/ThemeTranslationWorkflow.php:539
+msgid "Failed to load the source site theme."
+msgstr "无法加载源站点主题。"
+
+#. translators: %s: theme type (block theme or classic theme).
+#: src/Theme/Workflow/ThemeTranslationWorkflow.php:326
+#, php-format
+msgid "Detected theme type: %s"
+msgstr "检测到主题类型：%s"
+
+#: src/Theme/Workflow/ThemeTranslationWorkflow.php:327
+msgid "block theme"
+msgstr "块编辑器主题"
+
+#: src/Theme/Workflow/ThemeTranslationWorkflow.php:327
+msgid "classic theme"
+msgstr "经典主题"
+
+#: src/Theme/Workflow/ThemeTranslationWorkflow.php:356
+msgid "No theme resources were found for scanning."
+msgstr "未找到可扫描的主题资源。"
+
+#: src/Theme/Workflow/ThemeTranslationWorkflow.php:402
+msgid "Theme scan task has been queued."
+msgstr "主题扫描任务已加入队列。"
+
+#: src/Theme/Workflow/ThemeTranslationWorkflow.php:413
+msgid "Failed to create theme scan tasks."
+msgstr "创建主题扫描任务失败。"
+
+#: src/Theme/Workflow/ThemeTranslationWorkflow.php:419
+msgid "Theme scan tasks have been created."
+msgstr "主题扫描任务已创建。"
+
+#: src/Theme/Workflow/ThemeTranslationWorkflow.php:498
+msgid "Theme scan task is missing required parameters."
+msgstr "主题扫描任务缺少必要参数。"
+
+#: src/Theme/Workflow/ThemeTranslationWorkflow.php:506
+msgid "Failed to resolve site information. Theme scan aborted."
+msgstr "无法解析站点信息，主题扫描已中止。"
+
+#: src/Theme/Workflow/ThemeTranslationWorkflow.php:514
+msgid "Theme scan task started."
+msgstr "主题扫描任务已启动。"
+
+#: src/Theme/Workflow/ThemeTranslationWorkflow.php:547
+msgid "No translatable theme text was found during the scan."
+msgstr "扫描过程中未发现可翻译的主题文本。"
+
+#: src/Theme/Workflow/ThemeTranslationWorkflow.php:620
+msgid "Failed to persist scan results."
+msgstr "无法保存扫描结果。"
+
+#: src/Theme/Workflow/ThemeTranslationWorkflow.php:629
+msgid ""
+"Theme scan originals have been synchronized to the translation repository."
+msgstr "主题扫描原始内容已同步到翻译库。"
+
+#: src/Theme/Workflow/ThemeTranslationWorkflow.php:706
+msgid "No original entries require processing. Theme scan has completed."
+msgstr "无需处理的原始条目，主题扫描已完成。"
+
+#: src/Theme/Workflow/ThemeTranslationWorkflow.php:725
+msgid ""
+"Theme scan has completed and translation tasks have not been created "
+"automatically."
+msgstr "主题扫描已完成，未自动创建翻译任务。"
+
+#: src/Theme/Workflow/ThemeTranslationWorkflow.php:796
+msgid "Theme translation sub-task has been created."
+msgstr "主题翻译子任务已创建。"
+
+#: src/Theme/Workflow/ThemeTranslationWorkflow.php:807
+msgid "Theme scan has completed and translation tasks have been scheduled."
+msgstr "主题扫描已完成，翻译任务已安排。"
+
+#: src/Theme/Workflow/ThemeTranslationWorkflow.php:841
+msgid "Task has been canceled. Execution will not continue."
+msgstr "任务已取消，不再继续执行。"
+
+#: src/Theme/Workflow/ThemeTranslationWorkflow.php:868
+msgid "An upstream task has been deleted. The current task has been stopped."
+msgstr "上游任务已被删除，当前任务已停止。"
+
+#: src/Theme/Workflow/ThemeTranslationWorkflow.php:876
+msgid ""
+"An upstream task has been canceled or failed. The current task has been "
+"stopped."
+msgstr "上游任务已取消或失败，当前任务已停止。"
+
+#: src/Translation/MachineTranslationVendorTester.php:69
+msgid "Automatic verification is not supported for this vendor."
+msgstr "此厂商不支持自动验证。"
+
+#: src/Translation/MachineTranslationVendorTester.php:79
+msgid "The API response format is invalid."
+msgstr "API 响应格式无效。"
+
+#: src/Translation/MachineTranslationVendorTester.php:110
+msgid "The translation rule could not be found."
+msgstr "未找到翻译规则。"
+
+#: src/Translation/MachineTranslationVendorTester.php:132
+msgid "Please enter the text to test."
+msgstr "请输入要测试的文本。"
+
+#: src/Translation/MachineTranslationVendorTester.php:140
+msgid "The test text is not valid."
+msgstr "测试文本无效。"
+
+#: src/Translation/MachineTranslationVendorTester.php:151
+msgid "Please select a machine translation vendor."
+msgstr "请选择机器翻译厂商。"
+
+#: src/Translation/MachineTranslationVendorTester.php:172
+msgid ""
+"Vendor credentials are not configured yet. Please fill them on the \"Vendor "
+"Settings\" page first."
+msgstr "尚未配置供应商凭据。请先在\"供应商设置\"页面填写。"
+
+#. translators: %s: error message from vendor verification.
+#: src/Translation/MachineTranslationVendorTester.php:191
+#, php-format
+msgid "Vendor verification failed: %s"
+msgstr "厂商验证失败：%s"
+
+#: src/Translation/MachineTranslationVendorTester.php:225
+msgid "Translation API call failed. Please check your configuration."
+msgstr "翻译 API 调用失败，请检查您的配置。"
+
+#: src/Translation/MachineTranslationVendorTester.php:234
+msgid ""
+"The number of translation results does not match the input. Please try again "
+"later."
+msgstr "翻译结果数量与输入不匹配，请稍后重试。"
+
+#: src/Translation/MachineTranslationVendorTester.php:241
+msgid ""
+"The translation appears to have returned fallback content. Please verify the "
+"configuration."
+msgstr "翻译似乎返回了兜底内容，请验证配置。"
+
+#: src/Translation/Providers/AbstractProvider.php:67
+msgid "This vendor does not support credential verification yet."
+msgstr "此厂商暂不支持凭据验证。"
+
+#: src/Translation/Providers/BaiduProvider.php:28
+msgid "Baidu Translate credentials are not configured."
+msgstr "百度翻译凭证尚未配置。"
+
+#: src/Translation/Providers/BaiduProvider.php:50
+msgid "Baidu translation returned a mismatched number of results."
+msgstr "百度翻译返回的结果数量不匹配。"
+
+#: src/Translation/Providers/BaiduProvider.php:109
+msgid ""
+"Baidu translation request failed. Please check network or credential "
+"configuration."
+msgstr "百度翻译请求失败。请检查网络或凭证配置。"
+
+#: src/Translation/Providers/BaiduProvider.php:122
+msgid "Baidu translation returned invalid JSON."
+msgstr "百度翻译返回了无效的 JSON。"
+
+#: src/Translation/Providers/BaiduProvider.php:133
+msgid "Baidu translation returned an unexpected response."
+msgstr "百度翻译返回了意外的响应。"
+
+#: src/Translation/Providers/BaiduProvider.php:199
+msgid "Please enter Baidu Translate APP ID and secret key."
+msgstr "请输入百度翻译 APP ID 和密钥。"
+
+#: src/Translation/Providers/BaiduProvider.php:209
+#: src/Translation/Providers/DeepLProvider.php:120
+#: src/Translation/Providers/GoogleProvider.php:120
+#: src/Translation/Providers/YoudaoProvider.php:222
+msgid "Test text cannot be empty."
+msgstr "测试文本不能为空。"
+
+#: src/Translation/Providers/BaiduProvider.php:241
+msgid "Baidu API returned invalid JSON."
+msgstr "百度 API 返回了无效的 JSON。"
+
+#: src/Translation/Providers/BaiduProvider.php:248
+#: src/Translation/Providers/DeepLProvider.php:154
+#: src/Translation/Providers/GoogleProvider.php:155
+#: src/Translation/Providers/YoudaoProvider.php:267
+msgid "The API did not return any translation result."
+msgstr "API 未返回任何翻译结果。"
+
+#: src/Translation/Providers/BaiduProvider.php:254
+#: src/Translation/Providers/DeepLProvider.php:159
+#: src/Translation/Providers/GoogleProvider.php:160
+#: src/Translation/Providers/YoudaoProvider.php:273
+msgid "Credential verification succeeded."
+msgstr "凭证验证成功。"
+
+#: src/Translation/Providers/DeepLProvider.php:23
+msgid "DeepL API key is not configured."
+msgstr "DeepL API 密钥尚未配置。"
+
+#: src/Translation/Providers/DeepLProvider.php:53
+msgid "DeepL translation API request failed."
+msgstr "DeepL 翻译 API 请求失败。"
+
+#: src/Translation/Providers/DeepLProvider.php:66
+msgid "DeepL translation returned invalid JSON."
+msgstr "DeepL 翻译返回了无效的 JSON。"
+
+#: src/Translation/Providers/DeepLProvider.php:77
+msgid "DeepL translation returned an unexpected response."
+msgstr "DeepL 翻译返回了意外的响应。"
+
+#: src/Translation/Providers/DeepLProvider.php:90
+msgid "DeepL translation returned a mismatched number of results."
+msgstr "DeepL 翻译返回的结果数量不匹配。"
+
+#: src/Translation/Providers/DeepLProvider.php:110
+msgid "Please enter DeepL API key."
+msgstr "请输入 DeepL API 密钥。"
+
+#: src/Translation/Providers/DeepLProvider.php:147
+msgid "DeepL API returned invalid JSON."
+msgstr "DeepL API 返回了无效的 JSON。"
+
+#: src/Translation/Providers/GoogleProvider.php:23
+msgid "Google Cloud Translation API key is not configured."
+msgstr "Google Cloud Translation API 密钥尚未配置。"
+
+#: src/Translation/Providers/GoogleProvider.php:53
+msgid "Google Translation API request failed."
+msgstr "Google 翻译 API 请求失败。"
+
+#: src/Translation/Providers/GoogleProvider.php:66
+msgid "Google translation returned invalid JSON."
+msgstr "Google 翻译返回了无效的 JSON。"
+
+#: src/Translation/Providers/GoogleProvider.php:77
+msgid "Google translation returned an unexpected response."
+msgstr "Google 翻译返回了意外的响应。"
+
+#: src/Translation/Providers/GoogleProvider.php:90
+msgid "Google translation returned a mismatched number of results."
+msgstr "Google 翻译返回的结果数量不匹配。"
+
+#: src/Translation/Providers/GoogleProvider.php:110
+msgid "Please enter a Google Cloud Translation API key."
+msgstr "请输入 Google Cloud Translation API 密钥。"
+
+#: src/Translation/Providers/GoogleProvider.php:148
+msgid "Google API returned invalid JSON."
+msgstr "Google API 返回了无效的 JSON。"
+
+#: src/Translation/Providers/OpenAiProvider.php:73
+msgid "No usable LLM model found. Please configure one in the model list."
+msgstr "未找到可用的 LLM 模型。请在模型列表中配置一个。"
+
+#: src/Translation/Providers/OpenAiProvider.php:88
+msgid ""
+"LLM model configuration is incomplete. Please confirm API URL, API key and "
+"model name."
+msgstr "LLM 模型配置不完整。请确认 API URL、API 密钥和模型名称。"
+
+#: src/Translation/Providers/OpenAiProvider.php:135
+msgid "LLM translation API request failed."
+msgstr "LLM 翻译 API 请求失败。"
+
+#: src/Translation/Providers/OpenAiProvider.php:152
+msgid ""
+"LLM translation returned an unexpected response. Could not find content in "
+"any known format."
+msgstr "LLM 翻译返回了意外响应，无法在任何已知格式中找到内容。"
+
+#: src/Translation/Providers/OpenAiProvider.php:169
+msgid "LLM translation result could not be parsed."
+msgstr "LLM 翻译结果无法解析。"
+
+#: src/Translation/Providers/YoudaoProvider.php:28
+msgid "Youdao Translate credentials are not configured."
+msgstr "有道翻译凭证尚未配置。"
+
+#: src/Translation/Providers/YoudaoProvider.php:50
+msgid "Youdao translation returned a mismatched number of results."
+msgstr "有道翻译返回的结果数量不匹配。"
+
+#: src/Translation/Providers/YoudaoProvider.php:113
+msgid "Youdao translation API request failed."
+msgstr "有道翻译 API 请求失败。"
+
+#: src/Translation/Providers/YoudaoProvider.php:126
+msgid "Youdao translation returned invalid JSON."
+msgstr "有道翻译返回了无效的 JSON。"
+
+#: src/Translation/Providers/YoudaoProvider.php:137
+msgid "Youdao translation returned an unexpected response."
+msgstr "有道翻译返回了意外的响应。"
+
+#: src/Translation/Providers/YoudaoProvider.php:212
+msgid "Please enter Youdao application ID and secret key."
+msgstr "请输入有道应用 ID 和密钥。"
+
+#: src/Translation/Providers/YoudaoProvider.php:259
+msgid "Youdao API returned invalid JSON."
+msgstr "有道 API 返回了无效的 JSON。"
+
+#: src/Translation/TranslationCoordinator.php:136
+msgid "The site has no translation rule configured."
+msgstr "该站点未配置翻译规则。"
+
+#: src/Translation/TranslationService.php:233
+msgid "The translation service is currently busy. Please try again later."
+msgstr "翻译服务当前繁忙，请稍后再试。"
+
+#: src/Translation/TranslationService.php:807
+msgid "Translation returned a mismatched number of results."
+msgstr "翻译返回的结果数量不匹配。"
+
+#: src/Translation/TranslationService.php:878
+msgid "Some translations were empty and replaced with original text."
+msgstr "部分翻译结果为空，已替换为原始文本。"
+
+#: src/Infrastructure/Activator.php:116
+msgid "Go back to Plugins"
+msgstr "返回插件页面"
+
+#: src/Infrastructure/Activator.php:102
+msgid "Plugin Activation Error"
+msgstr "插件激活错误"
+
+#: src/Infrastructure/Activator.php:100
+msgid "Plugin Activation Failed"
+msgstr "插件激活失败"
+
+#: src/Infrastructure/Deactivator.php:32
+msgid "WPMMCC Multilingual was deactivated while translation tasks were still running. Some tasks may be incomplete."
+msgstr "WPMMCC Multilingual 在翻译任务仍在运行时被停用了。部分任务可能未完成。"
+
+#: src/Infrastructure/Activator.php:95
+msgid "WPMMCC Multilingual requires either the cURL or Sockets PHP extension for HTTP communication."
+msgstr "WPMMCC Multilingual 需要 cURL 或 Sockets PHP 扩展之一来进行 HTTP 通信。"
+
+#: wpmmcc.php:94
+msgid "WPMMCC plugin requires PHP 7.2 or higher."
+msgstr "WPMMCC 插件需要 PHP 7.2 或更高版本。"
+
+#, php-format
+#: src/Infrastructure/Activator.php:88
+msgid "WPMMCC Multilingual requires PHP %1$s or higher. Your server is running PHP %2$s."
+msgstr "WPMMCC Multilingual 需要 PHP %1$s 或更高版本。当前服务器运行的是 PHP %2$s。"
+
+#, php-format
+#: src/Infrastructure/Activator.php:108
+msgid "WPMMCC Multilingual requires the following PHP extensions: %s"
+msgstr "WPMMCC Multilingual 需要以下 PHP 扩展：%s"
+
+#, php-format
+#: src/Infrastructure/Activator.php:81
+msgid "WPMMCC Multilingual requires WordPress %1$s or higher. You are running WordPress %2$s."
+msgstr "WPMMCC Multilingual 需要 WordPress %1$s 或更高版本。当前运行的是 WordPress %2$s。"
+
+#~ msgid "Plain"
+#~ msgstr "朴素"
+
+#~ msgid "Year/Month/Day/Post name"
+#~ msgstr "年/月/日/文章名"
+
+#~ msgid "Year/Month/Post name"
+#~ msgstr "年/月/文章名"
+
+#~ msgid "Numeric"
+#~ msgstr "数字"
+
+#~ msgid "Post name"
+#~ msgstr "文章名"
+
+#, php-format
+#~ msgid "Plain (%s)"
+#~ msgstr "朴素（%s）"
+
+#, php-format
+#~ msgid "Follow main site settings (%s)"
+#~ msgstr "跟随主站点设置（%s）"
+
+#, php-format
+#~ msgid "Custom: %s"
+#~ msgstr "自定义：%s"
+
+#, php-format
+#~ msgid "Use current theme: %s"
+#~ msgstr "使用当前主题：%s"
+
+#, php-format
+#~ msgid "Unknown theme (%s)"
+#~ msgstr "未知主题（%s）"
+
+#~ msgid ""
+#~ "Save not completed due to permalink structure sync failure. Please try "
+#~ "again."
+#~ msgstr "因固定链接结构同步失败，保存未完成，请重试。"
+
+#~ msgid ""
+#~ "The selected theme is not available for this site. Please enable it in "
+#~ "the site first."
+#~ msgstr "所选主题在该站点不可用，请先在站点中启用。"
+
+#~ msgid ""
+#~ "Save not completed due to theme enablement failure. Please try again."
+#~ msgstr "因主题启用失败，保存未完成，请重试。"
+
+#~ msgid "Save not completed due to theme sync failure. Please try again."
+#~ msgstr "因主题同步失败，保存未完成，请重试。"
+
+#~ msgid ""
+#~ "Language code is required. Please enter a 2-4 character value (letters "
+#~ "and hyphen only)."
+#~ msgstr "语言代码为必填项。请输入 2 到 4 个字符的值（仅限字母和连字符）。"
+
+#~ msgid "Language codes must be between 2 and 4 characters."
+#~ msgstr "语言代码长度必须在 2 到 4 个字符之间。"
+
+#~ msgid ""
+#~ "Language codes can only contain letters and the \"-\" symbol (e.g. ZH, "
+#~ "EN, ZH-C)."
+#~ msgstr "语言代码只能包含字母和 “-” 符号（例如 ZH、EN、ZH-C）。"
+
+# Copyright (C) 2025 WPMMCC Team
+# This file is distributed under the GPL v2 or later.
+#~ msgid "WPMMCC - Multilingual Content & Translation Manager"
+#~ msgstr "WPMMCC - 多语言内容与翻译管理器"
+
+#~ msgid "https://example.com/wpmmcc"
+#~ msgstr "https://example.com/wpmmcc"
+
+#~ msgid "原始内容"
+#~ msgstr "原始内容"
+
+#~ msgid "Global settings saved."
+#~ msgstr "全局设置已保存。"
+
+#~ msgid ""
+#~ "Cache refresh has not been wired yet. This action only refreshes preview "
+#~ "data."
+#~ msgstr "缓存刷新功能尚未完成接入。此操作仅刷新预览数据。"
+
+#~ msgid "Estimated URL count"
+#~ msgstr "预估 URL 数量"
+
+#~ msgid "No content available for preview. Adjust the filters and try again."
+#~ msgstr "没有可预览的内容。请调整筛选条件后重试。"
+
+#, php-format
+#~ msgid "No example links are available."
+#~ msgstr "没有可用的示例链接。"
+
+#~ msgid "Refresh preview cache"
+#~ msgstr "刷新预览缓存"
+
+#~ msgid ""
+#~ "There are translation tasks still running. Please wait for them to finish "
+#~ "before deactivating the plugin."
+#~ msgstr "仍有翻译任务正在运行，请等待完成后再停用插件。"
+
+#~ msgid "WPMMCC plugin requires PHP 7.0 or higher."
+#~ msgstr "WPMMCC 插件需要 PHP 7.0 或更高版本。"
