@@ -1,0 +1,11 @@
+{
+  "$comment": "Identity Contract v1.0 golden fixture - wpmmcc GET /wp-json/wpmmcc/v1/sync/ping 200 response. Golden assertions: required fields present, types correct, plugin_identity EXACTLY 'wpmmcc'. Version-like fields change per release; do not byte-compare them.",
+  "success": true,
+  "data": {
+    "plugin_identity": "wpmmcc",
+    "plugin_version": "1.0.0",
+    "protocol_min": 1,
+    "protocol_current": 1,
+    "install_signature": "3f79bb7b435b05321651daefd374cacba0a0c5d83c1cd4e6c9e8d9a3e1d2f4a5"
+  }
+}

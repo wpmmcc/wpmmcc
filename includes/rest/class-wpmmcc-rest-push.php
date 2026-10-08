@@ -473,6 +473,22 @@ class Rest_Push extends Rest_Base {
 			$status = (string) $existing_post->post_status;
 		}
 
+		// Client skip: an absent core key becomes Untitled or an empty
+		// string on this endpoint, so an explicit preserved list keeps the
+		// existing post value. A first insert has nothing to preserve.
+		$preserved = array_map( 'strval', (array) ( $entity['preserved_fields'] ?? array() ) );
+		if ( $existing_post instanceof WP_Post ) {
+			if ( in_array( 'post_title', $preserved, true ) ) {
+				$title = (string) $existing_post->post_title;
+			}
+			if ( in_array( 'post_content', $preserved, true ) ) {
+				$content = (string) $existing_post->post_content;
+			}
+			if ( in_array( 'post_excerpt', $preserved, true ) ) {
+				$excerpt = (string) $existing_post->post_excerpt;
+			}
+		}
+
 		$post_data = array(
 			'post_title'   => $title,
 			'post_content' => $content,

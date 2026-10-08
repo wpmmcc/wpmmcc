@@ -1,0 +1,7 @@
+{
+  "$comment": "Identity Contract v1.0 golden fixture - wpmmcc-ats additive identity block inside the wptsall/v2 client-facing heartbeat and /site/verify data object. Only this additive shape is under contract; the host response's other fields follow the existing implementation.",
+  "data": {
+    "plugin_identity": "wpmmcc_ats",
+    "plugin_version": "2.1.4"
+  }
+}
