@@ -1,0 +1,28 @@
+{
+  "$comment": "Identity Contract v1.0 golden fixture - client DomainTokenBindingsDoc v3 persisted shape (pre-encryption logical form). Credentials are PLACEHOLDERS: never commit real tokens or secrets.",
+  "version": 3,
+  "domains": {
+    "https://site-a.example": {
+      "wp_client_token": "<REDACTED-PLACEHOLDER>",
+      "route_secret": "<REDACTED-PLACEHOLDER>",
+      "plugin_identity": "wpmmcc_ats",
+      "identity_verified_at": "2026-09-20T10:00:00Z",
+      "identity_capabilities": {
+        "plugin_version": "2.1.10",
+        "protocol_min": 1,
+        "protocol_current": 1
+      }
+    },
+    "https://site-b.example": {
+      "wp_client_token": "<REDACTED-PLACEHOLDER>",
+      "route_secret": "<REDACTED-PLACEHOLDER>",
+      "plugin_identity": "wpmmcc",
+      "identity_verified_at": "2026-09-20T10:05:00Z",
+      "identity_capabilities": {
+        "plugin_version": "2.1.10",
+        "protocol_min": 1,
+        "protocol_current": 1
+      }
+    }
+  }
+}

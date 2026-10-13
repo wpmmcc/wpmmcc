@@ -544,7 +544,7 @@ class Packet {
 		$clock_key = 'vclock_' . $post_id;
 		$clock     = wp_cache_get( $clock_key, 'wpmmcc' );
 		if ( false === $clock ) {
-			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom mapping table query.
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- plugin table or connection command; WordPress has no replacement API
 			$clock = (int) $wpdb->get_var(
 				$wpdb->prepare( "SELECT MAX(vector_clock) FROM {$wpdb->prefix}wpmmcc_cross_mappings WHERE local_object_type = 'post' AND local_object_id = %d", $post_id )
 			);

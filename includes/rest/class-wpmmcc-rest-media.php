@@ -51,7 +51,7 @@ class Rest_Media extends Rest_Base {
 			array(
 				'methods'             => WP_REST_Server::READABLE,
 				'callback'            => array( $this, 'handle_download' ),
-				'permission_callback' => '__return_true', // Validated via time-limited signed token
+				'permission_callback' => array( $this, 'permission_download' ),
 			)
 		);
 	}
@@ -138,12 +138,28 @@ class Rest_Media extends Rest_Base {
 	 * @param WP_REST_Request $request Request.
 	 * @return WP_REST_Response|WP_Error
 	 */
-	public function handle_download( WP_REST_Request $request ) {
-		$token = sanitize_text_field( $request->get_param( 'asset_token' ) );
-		if ( empty( $token ) ) {
-			return $this->format_error( 'wpmmcc_missing_asset_token', __( 'Asset token is required.', 'wpmmcc' ), 401 );
+	public function permission_download( WP_REST_Request $request ) {
+		$token = sanitize_text_field( (string) $request->get_param( 'asset_token' ) );
+		if ( '' === $token ) {
+			return new WP_Error(
+				'wpmmcc_missing_asset_token',
+				__( 'Asset token is required.', 'wpmmcc' ),
+				array( 'status' => 401 )
+			);
 		}
+		$attachment_id = (int) get_transient( 'wpmmcc_at_' . $token );
+		if ( $attachment_id <= 0 ) {
+			return new WP_Error(
+				'wpmmcc_expired_asset_token',
+				__( 'Asset token is invalid or expired.', 'wpmmcc' ),
+				array( 'status' => 401 )
+			);
+		}
+		return true;
+	}
 
+	public function handle_download( WP_REST_Request $request ) {
+		$token = sanitize_text_field( (string) $request->get_param( 'asset_token' ) );
 		$attachment_id = (int) get_transient( 'wpmmcc_at_' . $token );
 		if ( $attachment_id <= 0 ) {
 			return $this->format_error( 'wpmmcc_expired_asset_token', __( 'Asset token is invalid or expired.', 'wpmmcc' ), 401 );
@@ -157,18 +173,19 @@ class Rest_Media extends Rest_Base {
 		require_once ABSPATH . 'wp-admin/includes/file.php';
 		\WP_Filesystem();
 		global $wp_filesystem;
+		if ( ! is_object( $wp_filesystem ) || ! $wp_filesystem->exists( $file_path ) ) {
+			return $this->format_error( 'wpmmcc_media_not_found', __( 'Physical media file not found.', 'wpmmcc' ), 404 );
+		}
+		$bytes = $wp_filesystem->get_contents( $file_path );
+		if ( ! is_string( $bytes ) ) {
+			return $this->format_error( 'wpmmcc_media_not_found', __( 'Physical media file not found.', 'wpmmcc' ), 404 );
+		}
 
 		$mime = (string) get_post_mime_type( $attachment_id );
 		header( 'Content-Type: ' . ( $mime ?: 'application/octet-stream' ) );
-		if ( $wp_filesystem && $wp_filesystem->exists( $file_path ) ) {
-			header( 'Content-Length: ' . (string) $wp_filesystem->size( $file_path ) );
-			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Binary stream cannot be HTML escaped.
-			echo $wp_filesystem->get_contents( $file_path );
-		} else {
-			header( 'Content-Length: ' . (string) filesize( $file_path ) );
-			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Binary stream cannot be HTML escaped.
-			echo file_get_contents( $file_path );
-		}
+		header( 'Content-Length: ' . (string) strlen( $bytes ) );
+		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- attachment file bytes; escaping would change the downloaded file
+		echo $bytes;
 		exit;
 	}
 }

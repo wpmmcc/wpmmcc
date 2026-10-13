@@ -114,7 +114,7 @@ final class Plugin {
 		add_action( 'wpmmcc_cron_reconcile_check', array( \WPMMCC\Sync\Reconciler::class, 'run_scheduled_reconcile' ) );
 
 		// ADR-7: Cross-site alternates filter for hreflang coordination
-		add_filter( 'wpmmcc_cross_site_alternates', array( $this, 'filter_cross_site_alternates' ), 10, 2 );
+		add_filter( 'wptsall_cross_site_alternates', array( $this, 'filter_cross_site_alternates' ), 10, 2 );
 	}
 
 	/**
@@ -157,7 +157,7 @@ final class Plugin {
 			return array_merge( $alternates, $cached );
 		}
 
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom table cross mappings query; no core API exists.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- plugin table or connection command; WordPress has no replacement API
 		$rows = $wpdb->get_results(
 			$wpdb->prepare(
 				"SELECT m.remote_permalink, m.remote_lang, m.local_lang, m.last_sync_direction, p.endpoint_url, p.target_lang, p.source_lang

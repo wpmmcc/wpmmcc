@@ -28,6 +28,7 @@ class Media_Delivery {
 
 	private static function state( string $path, string $key ): array {
 		global $wpdb;
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching -- the authority row can change after a crash; a cached document would finish a damaged session
 		$row = $wpdb->get_row( $wpdb->prepare( "SELECT state_json FROM {$wpdb->prefix}wpmmcc_media_deliveries WHERE delivery_key = %s", $key ), ARRAY_A );
 		if ( ! is_array( $row ) || '' !== (string) $wpdb->last_error ) {
 			throw new \RuntimeException( 'Original media SQL authority is unavailable.' );
@@ -39,24 +40,30 @@ class Media_Delivery {
 		global $wpdb;
 		$table = $wpdb->prefix . 'wpmmcc_media_deliveries';
 		$encoded = Private_Document::encode( $state, 'media:' . $key );
-		$previous = $wpdb->get_var( $wpdb->prepare( "SELECT state_json FROM {$table} WHERE delivery_key = %s", $key ) );
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.DirectQuery -- media state is compared with the value just read
+		$previous = $wpdb->get_var( $wpdb->prepare( 'SELECT state_json FROM %i WHERE delivery_key = %s', $table, $key ) );
 		if ( '' !== (string) $wpdb->last_error ) {
 			throw new \RuntimeException( 'Original media authority read failed.' );
 		}
 		if ( null === $previous ) {
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- plugin table or connection command; WordPress has no replacement API
 			$changed = $wpdb->query( $wpdb->prepare(
-				"INSERT IGNORE INTO {$table} (delivery_key, state_json, reserved_bytes, created_at) VALUES (%s, %s, %d, %s)",
-				$key, $encoded, $state['scope']['expected_size'] * 4 + 8388608, current_time( 'mysql' )
+				'INSERT IGNORE INTO %i (delivery_key, state_json, reserved_bytes, created_at) VALUES (%s, %s, %d, %s)',
+				$table, $key, $encoded, $state['scope']['expected_size'] * 4 + 8388608, current_time( 'mysql' )
 			) );
 		} else {
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- plugin table or connection command; WordPress has no replacement API
 			$changed = $wpdb->query( $wpdb->prepare(
-				"UPDATE {$table} SET state_json = %s WHERE delivery_key = %s AND state_json = %s", $encoded, $key, $previous
+				'UPDATE %i SET state_json = %s WHERE delivery_key = %s AND state_json = %s', $table, $encoded, $key, $previous
 			) );
 		}
-		$live = $wpdb->get_var( $wpdb->prepare( "SELECT state_json FROM {$table} WHERE delivery_key = %s", $key ) );
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.DirectQuery -- read-back proves the media state just written
+		$live = $wpdb->get_var( $wpdb->prepare( 'SELECT state_json FROM %i WHERE delivery_key = %s', $table, $key ) );
 		if ( 1 !== $changed || $live !== $encoded || '' !== (string) $wpdb->last_error ) {
 			throw new \RuntimeException( 'Original media state was not committed and read back.' );
 		}
+		wp_cache_delete( 'media_state_' . $key, 'wpmmcc' );
+		wp_cache_delete( 'media_reserved_bytes', 'wpmmcc' );
 	}
 
 	private static function part( string $path, string $key, int $index ): string {
@@ -71,7 +78,14 @@ class Media_Delivery {
 	private static function admit( string $root, int $additional ): void {
 		$used = 0;
 		global $wpdb;
-		$booked = $wpdb->get_var( "SELECT COALESCE(SUM(reserved_bytes), 0) FROM {$wpdb->prefix}wpmmcc_media_deliveries" );
+		$booked = wp_cache_get( 'media_reserved_bytes', 'wpmmcc' );
+		if ( false === $booked ) {
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- plugin table or connection command; WordPress has no replacement API
+			$booked = $wpdb->get_var( "SELECT COALESCE(SUM(reserved_bytes), 0) FROM {$wpdb->prefix}wpmmcc_media_deliveries" );
+			if ( is_numeric( $booked ) && '' === (string) $wpdb->last_error ) {
+				wp_cache_set( 'media_reserved_bytes', $booked, 'wpmmcc' );
+			}
+		}
 		if ( ! is_numeric( $booked ) || '' !== (string) $wpdb->last_error ) {
 			throw new \RuntimeException( 'Media reservations are unavailable.' );
 		}
@@ -101,7 +115,7 @@ class Media_Delivery {
 		}
 		$path = $dir . '/intent.json';
 		global $wpdb;
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Existence proof under the same lease accept() must hold.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.DirectQuery -- media delivery reservation must see a row created by a concurrent request
 		$exists = $wpdb->get_var( $wpdb->prepare( "SELECT delivery_key FROM {$wpdb->prefix}wpmmcc_media_deliveries WHERE delivery_key = %s", $key ) );
 		if ( '' !== (string) $wpdb->last_error ) {
 			throw new \RuntimeException( 'Original media authority read failed.' );
@@ -169,11 +183,21 @@ class Media_Delivery {
 			'attachment_id' => $id, 'attachment_url' => $url, 'reused' => $reused );
 	}
 
+	private static function filesystem() {
+		global $wp_filesystem;
+		require_once ABSPATH . 'wp-admin/includes/file.php';
+		if ( ! WP_Filesystem() || ! is_object( $wp_filesystem ) ) {
+			return null;
+		}
+		return $wp_filesystem;
+	}
+
 	private static function read( string $path, int $limit ): string {
 		if ( is_link( $path ) || ! is_file( $path ) || filesize( $path ) > $limit ) {
 			throw new \RuntimeException( 'Invalid retained media file.' );
 		}
-		$value = file_get_contents( $path );
+		$filesystem = self::filesystem();
+		$value      = $filesystem ? $filesystem->get_contents( $path ) : false;
 		if ( false === $value || strlen( $value ) > $limit ) {
 			throw new \RuntimeException( 'Media read failed.' );
 		}
@@ -181,30 +205,25 @@ class Media_Delivery {
 	}
 
 	private static function save( string $path, string $bytes ): void {
-		$temp = $path . '.' . bin2hex( random_bytes( 8 ) ) . '.tmp';
-		$handle = fopen( $temp, 'x+b' );
-		if ( false === $handle ) {
+		$filesystem = self::filesystem();
+		$temp       = $path . '.' . bin2hex( random_bytes( 8 ) ) . '.tmp';
+		if ( ! $filesystem || $filesystem->exists( $temp ) ) {
 			throw new \RuntimeException( 'Media snapshot creation failed.' );
 		}
-		try {
-			if ( ! chmod( $temp, 0600 ) || strlen( $bytes ) !== fwrite( $handle, $bytes )
-				|| ! fflush( $handle ) || ( function_exists( 'fsync' ) && ! fsync( $handle ) ) ) {
-				throw new \RuntimeException( 'Media snapshot write failed.' );
-			}
-		} finally {
-			fclose( $handle );
+		if ( ! $filesystem->put_contents( $temp, $bytes, 0600 ) ) {
+			throw new \RuntimeException( 'Media snapshot write failed.' );
 		}
-		if ( self::read( $temp, strlen( $bytes ) ) !== $bytes || ! rename( $temp, $path )
+		if ( self::read( $temp, strlen( $bytes ) ) !== $bytes || ! $filesystem->move( $temp, $path, true )
 			|| self::read( $path, strlen( $bytes ) ) !== $bytes ) {
+			$filesystem->delete( $temp );
 			throw new \RuntimeException( 'Media snapshot installation failed.' );
 		}
 	}
 
-	private static function owner( $handle, string $path ): void {
-		$held = fstat( $handle );
+	private static function owner( array $held, string $path ): void {
 		clearstatcache( true, $path );
 		$live = lstat( $path );
-		if ( ! is_array( $held ) || ! is_array( $live ) || is_link( $path ) || ! is_file( $path )
+		if ( ! is_array( $live ) || is_link( $path ) || ! is_file( $path )
 			|| $held['dev'] !== $live['dev'] || $held['ino'] !== $live['ino'] ) {
 			throw new \RuntimeException( 'Media lease path changed.' );
 		}
@@ -223,26 +242,35 @@ class Media_Delivery {
 		}
 		$root = $uploads['basedir'] . '/wpmmcc_chunks';
 		$dir = $root . '/' . $key;
-		if ( is_link( $root ) || is_link( $dir ) || ( ! is_dir( $dir ) && ! mkdir( $dir, 0700, true ) ) ) {
+		$filesystem = self::filesystem();
+		if ( is_link( $root ) || is_link( $dir ) || ! $filesystem ) {
+			throw new \RuntimeException( 'Private media root is unavailable.' );
+		}
+		if ( ! is_dir( $dir ) && ( ( ! is_dir( $root ) && ! $filesystem->mkdir( $root, 0700 ) ) || ! $filesystem->mkdir( $dir, 0700 ) ) ) {
 			throw new \RuntimeException( 'Private media root is unavailable.' );
 		}
 		$lock_path = $dir . '/owner.lock';
 		if ( is_link( $lock_path ) ) {
 			throw new \RuntimeException( 'Invalid media lease.' );
 		}
-		$new_lock = ! file_exists( $lock_path );
-		$lock = fopen( $lock_path, $new_lock ? 'x+b' : 'r+b' );
-		if ( false === $lock ) {
+		$new_lock = ! $filesystem->exists( $lock_path );
+		if ( $new_lock && ! $filesystem->put_contents( $lock_path, '', 0600 ) ) {
+			throw new \RuntimeException( 'Media lease creation failed.' );
+		}
+		if ( ! is_file( $lock_path ) || ( $new_lock && ! $filesystem->chmod( $lock_path, 0600 ) ) ) {
+			throw new \RuntimeException( 'Media delivery is active.' );
+		}
+		clearstatcache( true, $lock_path );
+		$held = lstat( $lock_path );
+		if ( ! is_array( $held ) ) {
 			throw new \RuntimeException( 'Media lease creation failed.' );
 		}
 		try {
-			if ( ( $new_lock && ! chmod( $lock_path, 0600 ) ) || ! flock( $lock, LOCK_EX | LOCK_NB ) ) {
-				throw new \RuntimeException( 'Media delivery is active.' );
-			}
-			self::owner( $lock, $lock_path );
+			self::owner( $held, $lock_path );
 			$path = $dir . '/intent.json';
 			$scope = self::scope( $sender, $params );
 			global $wpdb;
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.DirectQuery -- media delivery reservation must see a row created by a concurrent request
 			$existing = $wpdb->get_var( $wpdb->prepare( "SELECT delivery_key FROM {$wpdb->prefix}wpmmcc_media_deliveries WHERE delivery_key = %s", $key ) );
 			if ( '' !== (string) $wpdb->last_error ) {
 				throw new \RuntimeException( 'Original media authority read failed.' );
@@ -295,7 +323,7 @@ class Media_Delivery {
 			if ( 'receiving' !== $state['phase'] ) {
 				throw new \RuntimeException( 'Original media effect is unknown.' );
 			}
-			self::owner( $lock, $lock_path );
+			self::owner( $held, $lock_path );
 			self::save_state( $path, $key, $state );
 			if ( count( $state['parts'] ) !== $scope['total'] ) {
 				return $ack;
@@ -306,29 +334,26 @@ class Media_Delivery {
 			if ( ! is_string( $assembled ) || 0 === strpos( realpath( $assembled ), realpath( $uploads['basedir'] ) . DIRECTORY_SEPARATOR ) ) {
 				throw new \RuntimeException( 'Private media assembly location is unavailable.' );
 			}
-			$out = fopen( $assembled, 'r+b' );
-			if ( false === $out || ! chmod( $assembled, 0600 ) ) {
+			if ( ! $filesystem->chmod( $assembled, 0600 ) ) {
 				throw new \RuntimeException( 'Media assembly creation failed.' );
 			}
 			$size = 0;
 			$hash = hash_init( 'sha256' );
-			try {
-				for ( $i = 0; $i < $scope['total']; ++$i ) {
-					$chunk = self::part( $dir . '/part_' . str_pad( (string) $i, 6, '0', STR_PAD_LEFT ), $key, $i );
-					if ( ( $state['parts'][ $i ]['sha256'] ?? '' ) !== hash( 'sha256', $chunk ) ) {
-						throw new \RuntimeException( 'Retained media association differs.' );
-					}
-					$size += strlen( $chunk );
-					if ( $size > self::MAX_FILE_BYTES || strlen( $chunk ) !== fwrite( $out, $chunk ) ) {
-						throw new \RuntimeException( 'Media assembly exceeds its quota or failed.' );
-					}
-					hash_update( $hash, $chunk );
+			$buffer = '';
+			for ( $i = 0; $i < $scope['total']; ++$i ) {
+				$chunk = self::part( $dir . '/part_' . str_pad( (string) $i, 6, '0', STR_PAD_LEFT ), $key, $i );
+				if ( ( $state['parts'][ $i ]['sha256'] ?? '' ) !== hash( 'sha256', $chunk ) ) {
+					throw new \RuntimeException( 'Retained media association differs.' );
 				}
-				if ( ! fflush( $out ) || ( function_exists( 'fsync' ) && ! fsync( $out ) ) ) {
-					throw new \RuntimeException( 'Media assembly flush failed.' );
+				$size += strlen( $chunk );
+				if ( $size > self::MAX_FILE_BYTES ) {
+					throw new \RuntimeException( 'Media assembly exceeds its quota or failed.' );
 				}
-			} finally {
-				fclose( $out );
+				$buffer .= $chunk;
+				hash_update( $hash, $chunk );
+			}
+			if ( ! $filesystem->put_contents( $assembled, $buffer, 0600 ) ) {
+				throw new \RuntimeException( 'Media assembly flush failed.' );
 			}
 			$sha256 = hash_final( $hash );
 			if ( hash_file( 'sha256', $assembled ) !== $sha256 || $sha256 !== $scope['expected_sha256'] || $size !== $scope['expected_size'] ) {
@@ -340,7 +365,7 @@ class Media_Delivery {
 			$id = Asset_Registry::lookup_cas_attachment( $sha256 );
 			$reused = $id > 0;
 			$state['materialization'] = array( 'attachment_id' => $id, 'reused' => $reused, 'verified' => $reused );
-			self::owner( $lock, $lock_path );
+			self::owner( $held, $lock_path );
 			$native->assert_owner();
 			self::save_state( $path, $key, $state );
 			if ( ! $reused ) {
@@ -387,16 +412,15 @@ class Media_Delivery {
 			$receipt = self::receipt( (int) $id, $scope, $reused );
 			$state['phase'] = 'applied';
 			$state['receipt'] = $receipt;
-			self::owner( $lock, $lock_path );
+			self::owner( $held, $lock_path );
 			$native->assert_owner();
 			self::save_state( $path, $key, $state );
 			return array_merge( $ack, $receipt );
 		} finally {
-			fclose( $lock );
 			// Only this invocation's private plaintext assembly is temporary.
 			// Original encrypted parts, SQL authority and receipts stay retained.
 			if ( isset( $assembled ) && is_string( $assembled ) && ! is_link( $assembled ) && is_file( $assembled ) ) {
-				unlink( $assembled );
+				wp_delete_file( $assembled );
 			}
 		}
 	}

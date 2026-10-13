@@ -239,9 +239,8 @@ class Schema {
 			if ( 0 !== strpos( $table, $expected_prefix ) ) {
 				continue;
 			}
-			$safe_table = esc_sql( $table );
-			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.SchemaChange, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
-			$wpdb->query( "DROP TABLE IF EXISTS `{$safe_table}`;" );
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.SchemaChange,WordPress.DB.DirectDatabaseQuery.DirectQuery -- schema removal drops only wpmmcc_ tables
+			$wpdb->query( $wpdb->prepare( 'DROP TABLE IF EXISTS %i', $table ) );
 		}
 
 		delete_option( self::DB_VERSION_OPTION );

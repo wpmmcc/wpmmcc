@@ -63,8 +63,14 @@ class Rest_Preflight extends Rest_Base {
 		$shadow_cleaned = false;
 		if ( $shadow_write && $writable ) {
 			$probe_file = $upload_dir['basedir'] . '/.wpmmcc_probe_' . sanitize_file_name( $probe_id ) . '.tmp';
-			$written    = @file_put_contents( $probe_file, 'wpmmcc_preflight_probe' );
-			if ( false !== $written ) {
+			require_once ABSPATH . 'wp-admin/includes/file.php';
+			$written = false;
+			if ( WP_Filesystem() ) {
+				global $wp_filesystem;
+				$chmod   = defined( 'FS_CHMOD_FILE' ) ? \FS_CHMOD_FILE : 0644;
+				$written = is_object( $wp_filesystem ) && $wp_filesystem->put_contents( $probe_file, 'wpmmcc_preflight_probe', $chmod );
+			}
+			if ( $written ) {
 				wp_delete_file( $probe_file );
 				$shadow_cleaned = true;
 			}

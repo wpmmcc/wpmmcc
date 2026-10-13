@@ -56,6 +56,7 @@ class Admin {
 	 */
 	public static function register_hooks(): void {
 		add_action( 'admin_menu', array( __CLASS__, 'register_menu' ) );
+		add_action( 'admin_enqueue_scripts', array( __CLASS__, 'enqueue_admin_assets' ) );
 		add_action( 'admin_post_wpmmcc_generate_pairing_code', array( __CLASS__, 'handle_generate_pairing_code' ) );
 		add_action( 'admin_post_wpmmcc_generate_client_token', array( __CLASS__, 'handle_generate_client_token' ) );
 		add_action( 'admin_post_wpmmcc_connect_peer_site', array( __CLASS__, 'handle_connect_peer_site' ) );
@@ -74,6 +75,28 @@ class Admin {
 	 *
 	 * @return void
 	 */
+	public static function enqueue_admin_assets( string $hook ): void {
+		if ( 'toplevel_page_wpmmcc-sync' !== $hook ) {
+			return;
+		}
+		wp_enqueue_script(
+			'wpmmcc-admin-copy',
+			WPMMCC_PLUGIN_URL . 'assets/js/admin-copy.js',
+			array(),
+			WPMMCC_VERSION,
+			true
+		);
+		wp_localize_script(
+			'wpmmcc-admin-copy',
+			'wpmmccAdminCopy',
+			array(
+				'copied'     => __( 'Copied', 'wpmmcc' ),
+				'copy'       => __( 'Copy', 'wpmmcc' ),
+				'packCopied' => __( 'Connection Pack copied to clipboard!', 'wpmmcc' ),
+			)
+		);
+	}
+
 	public static function register_menu(): void {
 		add_menu_page(
 			__( 'WPMMCC Sync', 'wpmmcc' ),
@@ -123,8 +146,7 @@ class Admin {
 		$token = bin2hex( random_bytes( 32 ) ); // 64-char hex, same shape as ATS client tokens.
 		update_option( 'wpmmcc_client_token', $token, false );
 
-		wp_safe_redirect( admin_url( 'admin.php?page=wpmmcc-sync&client_token_generated=1' ) );
-		exit;
+		self::notice_redirect( array( 'client_token_generated' => '1' ) );
 	}
 
 	/**
@@ -183,13 +205,11 @@ class Admin {
 		$target_lang       = sanitize_text_field( wp_unslash( $_POST['target_lang'] ?? 'zh_CN' ) );
 
 		if ( empty( $remote_url ) || empty( $pairing_code ) ) {
-			wp_safe_redirect( admin_url( 'admin.php?page=wpmmcc-sync&connect_error=' . rawurlencode( __( 'Remote URL and Pairing Code are required.', 'wpmmcc' ) ) ) );
-			exit;
+			self::notice_redirect( array( 'connect_error' => __( 'Remote URL and Pairing Code are required.', 'wpmmcc' ) ) );
 		}
 
 		if ( is_wp_error( $sync_mode ) ) {
-			wp_safe_redirect( admin_url( 'admin.php?page=wpmmcc-sync&connect_error=' . rawurlencode( $sync_mode->get_error_message() ) ) );
-			exit;
+			self::notice_redirect( array( 'connect_error' => $sync_mode->get_error_message() ) );
 		}
 
 		$local_uuid = (string) get_option( 'wpmmcc_origin_uuid', '' );
@@ -227,8 +247,7 @@ class Admin {
 		);
 
 		if ( is_wp_error( $response ) ) {
-			wp_safe_redirect( admin_url( 'admin.php?page=wpmmcc-sync&connect_error=' . rawurlencode( $response->get_error_message() ) ) );
-			exit;
+			self::notice_redirect( array( 'connect_error' => $response->get_error_message() ) );
 		}
 
 		$status_code = (int) wp_remote_retrieve_response_code( $response );
@@ -237,8 +256,7 @@ class Admin {
 
 		if ( 200 !== $status_code || empty( $body_json['success'] ) ) {
 			$error_msg = $body_json['message'] ?? ( $body_json['data']['message'] ?? ( 'Handshake failed with HTTP ' . $status_code ) );
-			wp_safe_redirect( admin_url( 'admin.php?page=wpmmcc-sync&connect_error=' . rawurlencode( $error_msg ) ) );
-			exit;
+			self::notice_redirect( array( 'connect_error' => $error_msg ) );
 		}
 
 		$remote_data    = $body_json['data'] ?? array();
@@ -246,8 +264,7 @@ class Admin {
 		$pairing_secret = (string) ( $remote_data['pairing_secret'] ?? '' );
 
 		if ( empty( $remote_uuid ) || empty( $pairing_secret ) ) {
-			wp_safe_redirect( admin_url( 'admin.php?page=wpmmcc-sync&connect_error=' . rawurlencode( __( 'Remote response missing peer_uuid or pairing_secret', 'wpmmcc' ) ) ) );
-			exit;
+			self::notice_redirect( array( 'connect_error' => __( 'Remote response missing peer_uuid or pairing_secret', 'wpmmcc' ) ) );
 		}
 
 		// HKDF key derivation matching handshake contract
@@ -259,8 +276,14 @@ class Admin {
 		global $wpdb;
 		$table       = $wpdb->prefix . 'wpmmcc_peers';
 		$peer_id_key = 'peer_id_' . md5( $remote_uuid );
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery
-		$existing_id = $wpdb->get_var( $wpdb->prepare( "SELECT id FROM {$table} WHERE peer_uuid = %s", $remote_uuid ) );
+		$cached_peer_id = wp_cache_get( $peer_id_key, 'wpmmcc' );
+		if ( false === $cached_peer_id ) {
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- plugin table or connection command; WordPress has no replacement API
+			$existing_id = $wpdb->get_var( $wpdb->prepare( 'SELECT id FROM %i WHERE peer_uuid = %s', $table, $remote_uuid ) );
+			wp_cache_set( $peer_id_key, null === $existing_id ? 0 : (int) $existing_id, 'wpmmcc' );
+		} else {
+			$existing_id = $cached_peer_id;
+		}
 
 		if ( empty( $peer_name ) ) {
 			$peer_name = sanitize_text_field( $remote_data['peer_name'] ?? (string) wp_parse_url( $remote_url, PHP_URL_HOST ) );
@@ -284,11 +307,11 @@ class Admin {
 		);
 
 		if ( $existing_id ) {
-			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- plugin table or connection command; WordPress has no replacement API
 			$wpdb->update( $table, $peer_record, array( 'id' => $existing_id ) );
 		} else {
 			$peer_record['created_at'] = current_time( 'mysql' );
-			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- plugin table or connection command; WordPress has no replacement API
 			$wpdb->insert( $table, $peer_record );
 		}
 
@@ -296,9 +319,13 @@ class Admin {
 		wp_cache_delete( $peer_id_key, 'wpmmcc' );
 		wp_cache_delete( 'active_peers_list', 'wpmmcc' );
 		wp_cache_delete( 'admin_peers_recent', 'wpmmcc' );
+		wp_cache_delete( 'admin_peer_name_' . md5( $remote_uuid ), 'wpmmcc' );
+		if ( $existing_id ) {
+			wp_cache_delete( 'admin_peer_' . (int) $existing_id, 'wpmmcc' );
+			wp_cache_delete( 'admin_peer_row_' . (int) $existing_id, 'wpmmcc' );
+		}
 
-		wp_safe_redirect( admin_url( 'admin.php?page=wpmmcc-sync&peer_connected=1' ) );
-		exit;
+		self::notice_redirect( array( 'peer_connected' => '1' ) );
 	}
 
 	/**
@@ -315,30 +342,37 @@ class Admin {
 		check_admin_referer( 'wpmmcc_disconnect_peer_' . $peer_id );
 
 		if ( $peer_id <= 0 ) {
-			wp_safe_redirect( admin_url( 'admin.php?page=wpmmcc-sync&peer_delete_error=' . rawurlencode( __( 'Invalid peer id.', 'wpmmcc' ) ) ) );
-			exit;
+			self::notice_redirect( array( 'peer_delete_error' => __( 'Invalid peer id.', 'wpmmcc' ) ) );
 		}
 
 		global $wpdb;
 		$peers_table = $wpdb->prefix . 'wpmmcc_peers';
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom peers table query.
-		$peer = $wpdb->get_row(
-			$wpdb->prepare( "SELECT id, peer_uuid, peer_name FROM {$peers_table} WHERE id = %d", $peer_id )
-		);
+		$peer_cache_key = 'admin_peer_' . $peer_id;
+		$peer           = wp_cache_get( $peer_cache_key, 'wpmmcc' );
+		if ( false === $peer ) {
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- plugin table or connection command; WordPress has no replacement API
+			$peer = $wpdb->get_row(
+				$wpdb->prepare( 'SELECT id, peer_uuid, peer_name FROM %i WHERE id = %d', $peers_table, $peer_id )
+			);
+			if ( $peer ) {
+				wp_cache_set( $peer_cache_key, $peer, 'wpmmcc' );
+			}
+		}
 
 		if ( ! $peer ) {
-			wp_safe_redirect( admin_url( 'admin.php?page=wpmmcc-sync&peer_delete_error=' . rawurlencode( __( 'Peer not found (already removed?).', 'wpmmcc' ) ) ) );
-			exit;
+			self::notice_redirect( array( 'peer_delete_error' => __( 'Peer not found (already removed?).', 'wpmmcc' ) ) );
 		}
 
 		$peer_uuid = (string) $peer->peer_uuid;
 
 		// Current authentication checks status on every request. Preserve the
 		// original peer, mappings, encrypted intents and dedup receipts.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- plugin table or connection command; WordPress has no replacement API
 		$changed = $wpdb->update( $peers_table,
 			array( 'status' => 'disconnected', 'updated_at' => current_time( 'mysql' ) ),
 			array( 'id' => $peer_id, 'peer_uuid' => $peer_uuid ) );
-		$live = $wpdb->get_row( $wpdb->prepare( "SELECT status FROM {$peers_table} WHERE id = %d AND peer_uuid = %s", $peer_id, $peer_uuid ) );
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- plugin table or connection command; WordPress has no replacement API
+		$live = $wpdb->get_row( $wpdb->prepare( 'SELECT status FROM %i WHERE id = %d AND peer_uuid = %s', $peers_table, $peer_id, $peer_uuid ) );
 		if ( false === $changed || ! $live || 'disconnected' !== $live->status ) {
 			wp_die( esc_html__( 'Peer deactivation was not confirmed. Original evidence is retained.', 'wpmmcc' ) );
 		}
@@ -353,6 +387,9 @@ class Admin {
 		wp_cache_delete( 'peer_id_' . md5( $peer_uuid ), 'wpmmcc' );
 		wp_cache_delete( 'active_peers_list', 'wpmmcc' );
 		wp_cache_delete( 'admin_peers_recent', 'wpmmcc' );
+		wp_cache_delete( 'admin_peer_' . $peer_id, 'wpmmcc' );
+		wp_cache_delete( 'admin_peer_row_' . $peer_id, 'wpmmcc' );
+		wp_cache_delete( 'admin_peer_name_' . md5( $peer_uuid ), 'wpmmcc' );
 
 		// Audit trail: a manual lifecycle change must be visible in the
 		// journal. consumed=1 keeps it out of the CDC queue (nothing ships).
@@ -369,8 +406,7 @@ class Admin {
 			)
 		);
 
-		wp_safe_redirect( admin_url( 'admin.php?page=wpmmcc-sync&peer_deleted=1' ) );
-		exit;
+		self::notice_redirect( array( 'peer_deleted' => '1' ) );
 	}
 
 	/**
@@ -431,12 +467,7 @@ class Admin {
 		check_admin_referer( 'wpmmcc_manual_sync_' . $peer_id );
 
 		$redirect = static function ( array $args ): void {
-			$qs = '';
-			foreach ( $args as $key => $value ) {
-				$qs .= ( '' === $qs ? '' : '&' ) . $key . '=' . rawurlencode( (string) $value );
-			}
-			wp_safe_redirect( admin_url( 'admin.php?page=wpmmcc-sync' ) . '&' . $qs );
-			exit;
+			self::notice_redirect( $args );
 		};
 
 		if ( $peer_id <= 0 ) {
@@ -444,11 +475,18 @@ class Admin {
 		}
 
 		global $wpdb;
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom peers table query.
-		$peer = $wpdb->get_row(
-			$wpdb->prepare( "SELECT * FROM {$wpdb->prefix}wpmmcc_peers WHERE id = %d", $peer_id ),
-			\ARRAY_A
-		);
+		$peer_cache_key = 'admin_peer_row_' . $peer_id;
+		$peer           = wp_cache_get( $peer_cache_key, 'wpmmcc' );
+		if ( false === $peer ) {
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- plugin table or connection command; WordPress has no replacement API
+			$peer = $wpdb->get_row(
+				$wpdb->prepare( "SELECT * FROM {$wpdb->prefix}wpmmcc_peers WHERE id = %d", $peer_id ),
+				\ARRAY_A
+			);
+			if ( $peer ) {
+				wp_cache_set( $peer_cache_key, $peer, 'wpmmcc', 60 );
+			}
+		}
 
 		if ( ! $peer ) {
 			$redirect( array( 'sync_error' => __( 'Peer not found (already removed?).', 'wpmmcc' ) ) );
@@ -557,11 +595,18 @@ class Admin {
 	 * @return void
 	 */
 	private static function redirect_to_sync_page( array $args ): void {
-		$qs = '';
-		foreach ( $args as $key => $value ) {
-			$qs .= ( '' === $qs ? '' : '&' ) . $key . '=' . rawurlencode( (string) $value );
-		}
-		wp_safe_redirect( admin_url( 'admin.php?page=wpmmcc-sync' ) . '&' . $qs );
+		self::notice_redirect( $args );
+	}
+
+	/**
+	 * Redirect to the sync screen with a notice nonce.
+	 *
+	 * @param array $args Notice query arguments.
+	 * @return void
+	 */
+	private static function notice_redirect( array $args ): void {
+		$args['wpmmcc_notice'] = wp_create_nonce( 'wpmmcc_admin_notice' );
+		wp_safe_redirect( add_query_arg( $args, admin_url( 'admin.php?page=wpmmcc-sync' ) ) );
 		exit;
 	}
 
@@ -594,8 +639,7 @@ class Admin {
 			wp_die( esc_html__( 'Cleanup was not confirmed. Refresh the preview and confirm again; delivery evidence stays retained.', 'wpmmcc' ) );
 		}
 
-		wp_safe_redirect( admin_url( 'admin.php?page=wpmmcc-sync&journal_cleared=1' ) );
-		exit;
+		self::notice_redirect( array( 'journal_cleared' => '1' ) );
 	}
 
 	/**
@@ -618,7 +662,7 @@ class Admin {
 
 		$peers = wp_cache_get( 'admin_peers_recent', 'wpmmcc' );
 		if ( false === $peers ) {
-			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom peers table query.
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- plugin table or connection command; WordPress has no replacement API
 			$peers = $wpdb->get_results(
 				$wpdb->prepare( "SELECT * FROM {$wpdb->prefix}wpmmcc_peers ORDER BY id DESC LIMIT %d", 20 )
 			);
@@ -627,7 +671,7 @@ class Admin {
 
 		$journal = wp_cache_get( 'admin_journal_recent', 'wpmmcc' );
 		if ( false === $journal ) {
-			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom journal table query.
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- plugin table or connection command; WordPress has no replacement API
 			$journal = $wpdb->get_results(
 				$wpdb->prepare( "SELECT * FROM {$wpdb->prefix}wpmmcc_journal ORDER BY id DESC LIMIT %d", 20 )
 			);
@@ -638,18 +682,25 @@ class Admin {
 		// meta IS the queue membership (posts carrying _wpmmcc_shadow_conflict=1).
 		$conflict_queue = wp_cache_get( 'conflict_queue', 'wpmmcc' );
 		if ( false === $conflict_queue ) {
-			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Shadow queue postmeta join query.
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- plugin table or connection command; WordPress has no replacement API
 			$conflict_queue = $wpdb->get_results(
-				"SELECT p.ID, p.post_title, p.post_date, p.post_type
-				 FROM {$wpdb->posts} p
-				 INNER JOIN {$wpdb->postmeta} pm_shadow
-					ON (pm_shadow.post_id = p.ID AND pm_shadow.meta_key = '" . \WPMMCC\Sync\Shadow_Draft::META_FLAG . "' AND pm_shadow.meta_value = '1')
-				 WHERE p.post_status NOT IN ('trash')
-				 ORDER BY p.ID DESC
-				 LIMIT 20"
+				$wpdb->prepare(
+					"SELECT p.ID, p.post_title, p.post_date, p.post_type
+					 FROM {$wpdb->posts} p
+					 INNER JOIN {$wpdb->postmeta} pm_shadow
+						ON (pm_shadow.post_id = p.ID AND pm_shadow.meta_key = %s AND pm_shadow.meta_value = %s)
+					 WHERE p.post_status NOT IN ('trash')
+					 ORDER BY p.ID DESC
+					 LIMIT %d",
+					\WPMMCC\Sync\Shadow_Draft::META_FLAG,
+					'1',
+					20
+				)
 			);
 			wp_cache_set( 'conflict_queue', $conflict_queue, 'wpmmcc', 30 );
 		}
+		$notice_nonce = isset( $_GET['wpmmcc_notice'] ) ? sanitize_text_field( wp_unslash( (string) $_GET['wpmmcc_notice'] ) ) : '';
+		$show_notices = false !== wp_verify_nonce( $notice_nonce, 'wpmmcc_admin_notice' );
 		?>
 		<div class="wrap">
 			<h1><?php esc_html_e( 'WPMMCC - Cross-Site Synchronization Engine', 'wpmmcc' ); ?></h1>
@@ -657,33 +708,33 @@ class Admin {
 				<?php esc_html_e( 'Standalone cross-site bidirectional content synchronization engine. Zero coupling with intra-site ATS.', 'wpmmcc' ); ?>
 			</p>
 
-			<?php if ( isset( $_GET['peer_connected'] ) ) : // phpcs:ignore WordPress.Security.NonceVerification.Recommended ?>
+			<?php if ( $show_notices && isset( $_GET['peer_connected'] ) ) : ?>
 				<div class="notice notice-success is-dismissible" style="max-width: 900px;">
 					<p><?php esc_html_e( 'Peer site connected successfully! Mutual synchronization credentials have been established.', 'wpmmcc' ); ?></p>
 				</div>
 			<?php endif; ?>
-			<?php if ( isset( $_GET['peer_deleted'] ) ) : // phpcs:ignore WordPress.Security.NonceVerification.Recommended ?>
+			<?php if ( $show_notices && isset( $_GET['peer_deleted'] ) ) : ?>
 				<div class="notice notice-success is-dismissible" style="max-width: 900px;">
 					<p><?php esc_html_e( 'Peer site deactivated. Original mappings, receipts and parked deliveries are retained.', 'wpmmcc' ); ?></p>
 				</div>
 			<?php endif; ?>
-			<?php if ( isset( $_GET['peer_delete_error'] ) ) : // phpcs:ignore WordPress.Security.NonceVerification.Recommended ?>
+			<?php if ( $show_notices && isset( $_GET['peer_delete_error'] ) ) : ?>
 				<div class="notice notice-error is-dismissible" style="max-width: 900px;">
 					<p><strong><?php esc_html_e( 'Peer disconnect failed:', 'wpmmcc' ); ?></strong> <?php echo esc_html( sanitize_text_field( wp_unslash( $_GET['peer_delete_error'] ) ) ); ?></p>
 				</div>
 			<?php endif; ?>
-			<?php if ( isset( $_GET['journal_cleared'] ) ) : // phpcs:ignore WordPress.Security.NonceVerification.Recommended ?>
+			<?php if ( $show_notices && isset( $_GET['journal_cleared'] ) ) : ?>
 				<div class="notice notice-success is-dismissible" style="max-width: 900px;">
 					<p><?php esc_html_e( 'Processed journal entries cleared. Pending sync events (CDC queue) were preserved.', 'wpmmcc' ); ?></p>
 				</div>
 			<?php endif; ?>
-			<?php if ( isset( $_GET['connect_error'] ) ) : // phpcs:ignore WordPress.Security.NonceVerification.Recommended ?>
+			<?php if ( $show_notices && isset( $_GET['connect_error'] ) ) : ?>
 				<div class="notice notice-error is-dismissible" style="max-width: 900px;">
 					<p><strong><?php esc_html_e( 'Peer connection failed:', 'wpmmcc' ); ?></strong> <?php echo esc_html( sanitize_text_field( wp_unslash( $_GET['connect_error'] ) ) ); ?></p>
 				</div>
 			<?php endif; ?>
 			<?php // WPMMCC-P1-03 (3.8flash B1): manual sync console result notices. ?>
-			<?php if ( isset( $_GET['test_ok'] ) ) : // phpcs:ignore WordPress.Security.NonceVerification.Recommended ?>
+			<?php if ( $show_notices && isset( $_GET['test_ok'] ) ) : ?>
 				<div class="notice notice-success is-dismissible" style="max-width: 900px;">
 					<p>
 						<strong><?php esc_html_e( 'Connection test succeeded:', 'wpmmcc' ); ?></strong>
@@ -692,12 +743,12 @@ class Admin {
 					</p>
 				</div>
 			<?php endif; ?>
-			<?php if ( isset( $_GET['test_error'] ) ) : // phpcs:ignore WordPress.Security.NonceVerification.Recommended ?>
+			<?php if ( $show_notices && isset( $_GET['test_error'] ) ) : ?>
 				<div class="notice notice-error is-dismissible" style="max-width: 900px;">
 					<p><strong><?php esc_html_e( 'Connection test failed:', 'wpmmcc' ); ?></strong> <?php echo esc_html( sanitize_text_field( wp_unslash( $_GET['test_error'] ) ) ); ?></p>
 				</div>
 			<?php endif; ?>
-			<?php if ( isset( $_GET['push_done'] ) ) : // phpcs:ignore WordPress.Security.NonceVerification.Recommended ?>
+			<?php if ( $show_notices && isset( $_GET['push_done'] ) ) : ?>
 				<div class="notice <?php echo absint( $_GET['failed'] ?? 0 ) > 0 ? 'notice-warning' : 'notice-success'; ?> is-dismissible" style="max-width: 900px;">
 					<p>
 						<?php
@@ -722,7 +773,7 @@ class Admin {
 					</p>
 				</div>
 			<?php endif; ?>
-			<?php if ( isset( $_GET['requeue_done'] ) ) : // phpcs:ignore WordPress.Security.NonceVerification.Recommended ?>
+			<?php if ( $show_notices && isset( $_GET['requeue_done'] ) ) : ?>
 				<div class="notice notice-success is-dismissible" style="max-width: 900px;">
 					<p>
 						<?php
@@ -737,7 +788,7 @@ class Admin {
 					</p>
 				</div>
 			<?php endif; ?>
-			<?php if ( isset( $_GET['pull_done'] ) ) : // phpcs:ignore WordPress.Security.NonceVerification.Recommended ?>
+			<?php if ( $show_notices && isset( $_GET['pull_done'] ) ) : ?>
 				<div class="notice <?php echo absint( $_GET['failed'] ?? 0 ) > 0 ? 'notice-warning' : 'notice-success'; ?> is-dismissible" style="max-width: 900px;">
 					<p>
 						<?php
@@ -753,23 +804,23 @@ class Admin {
 					</p>
 				</div>
 			<?php endif; ?>
-			<?php if ( isset( $_GET['sync_error'] ) ) : // phpcs:ignore WordPress.Security.NonceVerification.Recommended ?>
+			<?php if ( $show_notices && isset( $_GET['sync_error'] ) ) : ?>
 				<div class="notice notice-error is-dismissible" style="max-width: 900px;">
 					<p><strong><?php esc_html_e( 'Manual sync failed:', 'wpmmcc' ); ?></strong> <?php echo esc_html( sanitize_text_field( wp_unslash( $_GET['sync_error'] ) ) ); ?></p>
 				</div>
 			<?php endif; ?>
 			<?php // WPMMCC-P1-05 (3.8flash B3): conflict review result notices. ?>
-			<?php if ( isset( $_GET['conflict_accepted'] ) ) : // phpcs:ignore WordPress.Security.NonceVerification.Recommended ?>
+			<?php if ( $show_notices && isset( $_GET['conflict_accepted'] ) ) : ?>
 				<div class="notice notice-success is-dismissible" style="max-width: 900px;">
 					<p><?php esc_html_e( 'Conflict resolved: the remote (shadow draft) version was accepted and promoted to the mapped local representative.', 'wpmmcc' ); ?></p>
 				</div>
 			<?php endif; ?>
-			<?php if ( isset( $_GET['conflict_kept'] ) ) : // phpcs:ignore WordPress.Security.NonceVerification.Recommended ?>
+			<?php if ( $show_notices && isset( $_GET['conflict_kept'] ) ) : ?>
 				<div class="notice notice-success is-dismissible" style="max-width: 900px;">
 					<p><?php esc_html_e( 'Conflict resolved: the local version was kept. The mapping now points at the original post and the shadow staging draft was removed.', 'wpmmcc' ); ?></p>
 				</div>
 			<?php endif; ?>
-			<?php if ( isset( $_GET['conflict_error'] ) ) : // phpcs:ignore WordPress.Security.NonceVerification.Recommended ?>
+			<?php if ( $show_notices && isset( $_GET['conflict_error'] ) ) : ?>
 				<div class="notice notice-error is-dismissible" style="max-width: 900px;">
 					<p><strong><?php esc_html_e( 'Conflict review failed:', 'wpmmcc' ); ?></strong> <?php echo esc_html( sanitize_text_field( wp_unslash( $_GET['conflict_error'] ) ) ); ?></p>
 				</div>
@@ -815,7 +866,7 @@ class Admin {
 						<td>
 							<?php if ( '' !== $client_token ) : ?>
 								<input type="text" readonly value="<?php echo esc_attr( $client_token ); ?>" style="width: 350px; font-family: monospace;" />
-								<?php if ( isset( $_GET['client_token_generated'] ) ) : // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only success flag. ?>
+								<?php if ( $show_notices && isset( $_GET['client_token_generated'] ) ) : ?>
 									<span class="description" style="color: green;"><?php esc_html_e( 'Generated. Previous token (if any) is now invalid.', 'wpmmcc' ); ?></span>
 								<?php endif; ?>
 							<?php else : ?>
@@ -853,7 +904,7 @@ class Admin {
 							?>
 							<textarea id="wpmmcc-conn-pack-textarea" readonly rows="5" style="width: 100%; max-width: 550px; font-family: monospace; font-size: 11px;"><?php echo esc_textarea( $pack_json ); ?></textarea>
 							<p style="margin-top: 5px;">
-								<button type="button" class="button button-secondary" onclick="navigator.clipboard.writeText(document.getElementById('wpmmcc-conn-pack-textarea').value); alert('Connection Pack copied to clipboard!');">
+								<button type="button" class="button button-secondary" data-wpmmcc-copy-pack="1">
 									<?php esc_html_e( 'Copy Connection Pack JSON', 'wpmmcc' ); ?>
 								</button>
 								<span class="description" style="margin-left: 10px;"><?php esc_html_e( 'Paste into the standalone client Sites page to bind automatically.', 'wpmmcc' ); ?></span>
@@ -1070,10 +1121,16 @@ class Admin {
 						if ( '' === $origin_uuid || isset( $peer_names[ $origin_uuid ] ) ) {
 							continue;
 						}
-						// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom peers table query.
-						$peer_names[ $origin_uuid ] = (string) $wpdb->get_var(
-							$wpdb->prepare( "SELECT peer_name FROM {$wpdb->prefix}wpmmcc_peers WHERE peer_uuid = %s LIMIT 1", $origin_uuid )
-						);
+						$name_key  = 'admin_peer_name_' . md5( $origin_uuid );
+						$peer_name = wp_cache_get( $name_key, 'wpmmcc' );
+						if ( false === $peer_name ) {
+							// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- plugin table or connection command; WordPress has no replacement API
+							$peer_name = (string) $wpdb->get_var(
+								$wpdb->prepare( "SELECT peer_name FROM {$wpdb->prefix}wpmmcc_peers WHERE peer_uuid = %s LIMIT 1", $origin_uuid )
+							);
+							wp_cache_set( $name_key, $peer_name, 'wpmmcc', 30 );
+						}
+						$peer_names[ $origin_uuid ] = (string) $peer_name;
 					}
 					?>
 					<?php foreach ( (array) $conflict_queue as $cq ) : ?>
@@ -1098,8 +1155,7 @@ class Admin {
 							</summary>
 							<?php if ( $local_post && $shadow_post ) : ?>
 								<?php // Native diff renderer: left = kept local version, right = pushed remote version. ?>
-								<?php // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- wp_text_diff() renders a core-escaped diff table; titles come from __() within it. ?>
-							<?php echo wp_text_diff( (string) $local_post->post_content, (string) $shadow_post->post_content, array( 'title_left' => __( 'Local version (kept)', 'wpmmcc' ), 'title_right' => __( 'Remote version (pushed)', 'wpmmcc' ) ) ); ?>
+								<?php echo wp_kses_post( wp_text_diff( (string) $local_post->post_content, (string) $shadow_post->post_content, array( 'title_left' => __( 'Local version (kept)', 'wpmmcc' ), 'title_right' => __( 'Remote version (pushed)', 'wpmmcc' ) ) ) ); ?>
 								<p class="description">
 									<?php esc_html_e( 'Local counterpart:', 'wpmmcc' ); ?>
 									<?php if ( '' !== $counterpart ) : ?>
@@ -1144,37 +1200,6 @@ class Admin {
 				<?php if ( empty( $journal ) ) : ?>
 					<p><?php esc_html_e( 'No journal entries yet.', 'wpmmcc' ); ?></p>
 				<?php else : ?>
-					<script>
-						<?php // WPMMCC-P2-04 (B2): copy must work on BOTH secure and insecure
-						// origins — navigator.clipboard is undefined over plain http,
-						// so the async API falls back to the execCommand path. ?>
-						function wpmmccCopyUuid(btn) {
-							var text = btn.dataset.wpmmccCopy;
-							var done = function () {
-								btn.textContent = <?php echo wp_json_encode( __( 'Copied', 'wpmmcc' ) ); ?>;
-								setTimeout(function () {
-									btn.textContent = <?php echo wp_json_encode( __( 'Copy', 'wpmmcc' ) ); ?>;
-								}, 1200);
-							};
-							if (navigator.clipboard && navigator.clipboard.writeText) {
-								navigator.clipboard.writeText(text).then(done).catch(function () {
-									wpmmccCopyLegacy(text, done);
-								});
-							} else {
-								wpmmccCopyLegacy(text, done);
-							}
-						}
-						function wpmmccCopyLegacy(text, done) {
-							var ta = document.createElement('textarea');
-							ta.value = text;
-							ta.style.position = 'fixed';
-							ta.style.opacity = '0';
-							document.body.appendChild(ta);
-							ta.select();
-							try { document.execCommand('copy'); done(); } catch (e) {}
-							document.body.removeChild(ta);
-						}
-					</script>
 					<?php
 					try {
 						$cleanup_preview = \WPMMCC\Sync\Journal_Cleanup::preview();
@@ -1183,7 +1208,15 @@ class Admin {
 					}
 					?>
 					<?php if ( is_array( $cleanup_preview ) ) : ?>
-					<p><?php echo esc_html( sprintf( __( 'Eligible peer-lifecycle audit rows: %d. Content, packets, queues, mappings, media and receipts are not deleted.', 'wpmmcc' ), $cleanup_preview['count'] ) ); ?></p>
+					<p><?php
+					echo esc_html(
+						sprintf(
+							/* translators: %d: number of eligible peer-lifecycle audit rows. */
+							__( 'Eligible peer-lifecycle audit rows: %d. Content, packets, queues, mappings, media and receipts are not deleted.', 'wpmmcc' ),
+							$cleanup_preview['count']
+						)
+					);
+					?></p>
 					<form method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" style="margin-bottom: 8px;">
 						<?php wp_nonce_field( 'wpmmcc_clear_journal' ); ?>
 						<input type="hidden" name="action" value="wpmmcc_clear_journal" />
@@ -1216,8 +1249,7 @@ class Admin {
 										<?php // Full UUID via title + one-click copy affordance. ?>
 										<?php if ( ! empty( $entry->canonical_uuid ) ) : ?>
 											<code title="<?php echo esc_attr( $entry->canonical_uuid ); ?>"><?php echo esc_html( substr( (string) $entry->canonical_uuid, 0, 16 ) ); ?>…</code>
-											<button type="button" class="button button-small" data-wpmmcc-copy="<?php echo esc_attr( $entry->canonical_uuid ); ?>"
-												onclick="wpmmccCopyUuid(this)">
+											<button type="button" class="button button-small" data-wpmmcc-copy="<?php echo esc_attr( $entry->canonical_uuid ); ?>">
 												<?php esc_html_e( 'Copy', 'wpmmcc' ); ?>
 											</button>
 										<?php else : ?>

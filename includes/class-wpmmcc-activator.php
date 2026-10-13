@@ -55,6 +55,36 @@ class Activator {
 				wp_schedule_event( time(), 'hourly', 'wpmmcc_cron_reconcile_check' );
 			}
 		}
+
+		if ( defined( 'WPMMCC_VERSION' ) ) {
+			update_option( 'wpmmcc_version', WPMMCC_VERSION, false );
+		}
+	}
+
+	/**
+	 * Create or update tables after a file replacement.
+	 *
+	 * Directory release 2.0.1 is the previous multilingual plugin and stamps
+	 * wpmmcc_db_version as 2.0.0. This release's schema stamp is 1.3.0, so a
+	 * numeric "is the stored version older" check would skip the new tables.
+	 *
+	 * @return void
+	 */
+	public static function maybe_upgrade(): void {
+		if ( ! function_exists( 'get_option' ) ) {
+			return;
+		}
+
+		require_once WPMMCC_PLUGIN_DIR . 'includes/database/class-wpmmcc-schema.php';
+
+		$code      = defined( 'WPMMCC_VERSION' ) ? WPMMCC_VERSION : '';
+		$installed = (string) get_option( 'wpmmcc_version', '' );
+		$db        = (string) get_option( Schema::DB_VERSION_OPTION, '' );
+		if ( '' !== $code && $installed === $code && $db === Schema::DB_VERSION ) {
+			return;
+		}
+
+		self::activate();
 	}
 
 	/**

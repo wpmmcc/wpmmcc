@@ -19,8 +19,8 @@ class Delivery_Receipt {
 		$key = hash( 'sha256', $sender . "\n" . $packet['packet_id'] );
 		$digest = Packet::digest( $packet );
 		$table = $wpdb->prefix . 'wpmmcc_delivery_receipts';
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Query only the original authenticated sender and packet scope.
-		$row = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$table} WHERE receipt_key = %s", $key ), ARRAY_A );
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.DirectQuery -- receipt is loaded to continue this delivery
+		$row = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM %i WHERE receipt_key = %s", $table, $key ), ARRAY_A );
 		if ( '' !== (string) $wpdb->last_error ) {
 			return new WP_Error( 'wpmmcc_receipt_read_failed', 'Original target authority is unavailable.', array( 'status' => 503 ) );
 		}
@@ -56,7 +56,8 @@ class Delivery_Receipt {
 		}
 		$key = hash( 'sha256', $sender . "\n" . $packet['packet_id'] );
 		$table = $wpdb->prefix . 'wpmmcc_delivery_receipts';
-		$row = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$table} WHERE receipt_key = %s", $key ), ARRAY_A );
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.DirectQuery -- receipt is loaded to continue this delivery
+		$row = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM %i WHERE receipt_key = %s", $table, $key ), ARRAY_A );
 		if ( '' !== (string) $wpdb->last_error ) {
 			return new WP_Error( 'wpmmcc_receipt_read_failed', 'Original target authority is unavailable.', array( 'status' => 503 ) );
 		}
@@ -77,16 +78,16 @@ class Delivery_Receipt {
 		$key    = hash( 'sha256', $sender . "\n" . $packet['packet_id'] );
 		$digest = Packet::digest( $packet );
 		$table  = $wpdb->prefix . 'wpmmcc_delivery_receipts';
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Unique durable delivery authority.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.DirectQuery -- receipt insert must hit the table
 		$inserted = $wpdb->query( $wpdb->prepare(
-			"INSERT IGNORE INTO {$table} (receipt_key, packet_digest, phase, result_json, created_at) VALUES (%s, %s, 'applying', '', %s)",
-			$key, $digest, current_time( 'mysql' )
+			"INSERT IGNORE INTO %i (receipt_key, packet_digest, phase, result_json, created_at) VALUES (%s, %s, 'applying', '', %s)",
+			$table, $key, $digest, current_time( 'mysql' )
 		) );
 		if ( false === $inserted ) {
 			return new WP_Error( 'wpmmcc_receipt_not_saved', 'Delivery intent was not saved; no target write started.', array( 'status' => 503 ) );
 		}
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Read back exact delivery authority.
-		$row = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$table} WHERE receipt_key = %s", $key ), ARRAY_A );
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.DirectQuery -- read-back proves the receipt just written
+		$row = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM %i WHERE receipt_key = %s", $table, $key ), ARRAY_A );
 		if ( ! is_array( $row ) || ! hash_equals( $digest, (string) $row['packet_digest'] ) ) {
 			return new WP_Error( 'wpmmcc_receipt_scope_changed', 'Original packet identity is retained.', array( 'status' => 409 ) );
 		}
@@ -104,13 +105,13 @@ class Delivery_Receipt {
 		global $wpdb;
 		$table   = $wpdb->prefix . 'wpmmcc_delivery_receipts';
 		$encoded = Private_Document::encode( $result, 'receipt:' . $authority['key'] );
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Exact intent CAS, in the materialization transaction.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.DirectQuery -- receipt phase write must hit the table
 		$changed = $wpdb->query( $wpdb->prepare(
-			"UPDATE {$table} SET phase = 'applied', result_json = %s WHERE receipt_key = %s AND packet_digest = %s AND phase = 'applying'",
-			$encoded, $authority['key'], $authority['digest']
+			"UPDATE %i SET phase = 'applied', result_json = %s WHERE receipt_key = %s AND packet_digest = %s AND phase = 'applying'",
+			$table, $encoded, $authority['key'], $authority['digest']
 		) );
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Check the stored receipt before reporting completion.
-		$row = $wpdb->get_row( $wpdb->prepare( "SELECT phase, packet_digest, result_json FROM {$table} WHERE receipt_key = %s", $authority['key'] ), ARRAY_A );
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.DirectQuery -- read-back proves the receipt phase just written
+		$row = $wpdb->get_row( $wpdb->prepare( "SELECT phase, packet_digest, result_json FROM %i WHERE receipt_key = %s", $table, $authority['key'] ), ARRAY_A );
 		return 1 === $changed && is_array( $row ) && 'applied' === $row['phase']
 			&& $row['packet_digest'] === $authority['digest'] && $row['result_json'] === $encoded;
 	}

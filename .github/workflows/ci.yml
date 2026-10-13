@@ -19,3 +19,7 @@ jobs:
           php-version: ${{ matrix.php }}
       - name: Validate production PHP syntax
         run: find . -type f -name '*.php' -print0 | xargs -0 -n1 php -l
+      - name: Run standalone plugin tests
+        run: |
+          mkdir -p tests/.cache
+          python3 tests/modules/wpmmcc/run-tests.py

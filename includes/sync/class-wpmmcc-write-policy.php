@@ -58,7 +58,11 @@ class Write_Policy {
 		$previous                        = self::$receiver_uuid_writes[ $id ] ?? null;
 		self::$receiver_uuid_writes[ $id ] = $uuid;
 		try {
-			return (bool) update_post_meta( $id, '_wpmmcc_canonical_uuid', $uuid );
+			$stored = (bool) update_post_meta( $id, '_wpmmcc_canonical_uuid', $uuid );
+			if ( $stored ) {
+				wp_cache_delete( 'postmeta_uuid_' . md5( $uuid ), 'wpmmcc' );
+			}
+			return $stored;
 		} finally {
 			if ( null === $previous ) {
 				unset( self::$receiver_uuid_writes[ $id ] );

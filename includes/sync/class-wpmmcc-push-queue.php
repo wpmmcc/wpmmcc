@@ -186,14 +186,25 @@ class Push_Queue {
 			return false;
 		}
 
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom journal table query.
-		$rows = $wpdb->get_results(
-			$wpdb->prepare(
-				"SELECT * FROM {$table} WHERE direction = 'outbound' AND consumed = 0 AND canonical_uuid = %s AND occurred_at >= %s ORDER BY id ASC LIMIT 1001",
-				$canonical_uuid,
-				$cutoff
-			), ARRAY_A
-		);
+		$journal_generation = wp_cache_get( 'wpmmcc_journal_generation', 'wpmmcc' );
+		$cache_key         = 'coalesce_rows_' . md5( $canonical_uuid . '|' . $cutoff . '|' . (string) $journal_generation );
+		$rows              = wp_cache_get( $cache_key, 'wpmmcc' );
+		if ( ! is_array( $rows ) ) {
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- plugin table or connection command; WordPress has no replacement API
+			$rows = $wpdb->get_results(
+				$wpdb->prepare(
+					"SELECT * FROM %i WHERE direction = 'outbound' AND consumed = 0 AND canonical_uuid = %s AND occurred_at >= %s ORDER BY id ASC LIMIT %d",
+					$table,
+					$canonical_uuid,
+					$cutoff,
+					1001
+				),
+				ARRAY_A
+			);
+			if ( is_array( $rows ) && '' === (string) $wpdb->last_error ) {
+				wp_cache_set( $cache_key, $rows, 'wpmmcc' );
+			}
+		}
 		if ( ! is_array( $rows ) || '' !== (string) $wpdb->last_error || empty( $rows ) || count( $rows ) > 1000 ) {
 			return false;
 		}
@@ -217,21 +228,37 @@ class Push_Queue {
 
 		$lease->assert_owner();
 		$now = self::now();
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom journal table update.
-		$changed = $wpdb->query(
-			$wpdb->prepare(
-				"UPDATE {$table} SET occurred_at = %s, payload_digest = %s, event_type = %s WHERE id IN (" . implode( ',', $ids ) . ") AND direction = 'outbound' AND consumed = 0 AND canonical_uuid = %s AND occurred_at >= %s",
-				$now,
-				$payload_digest,
-				$event_type,
-				$canonical_uuid,
-				$cutoff
-			)
-		);
-		if ( false === $changed ) {
-			throw new \RuntimeException( 'Queue coalescing was not saved.' );
+		foreach ( $ids as $id ) {
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- plugin table or connection command; WordPress has no replacement API
+			$changed = $wpdb->query(
+				$wpdb->prepare(
+					"UPDATE %i SET occurred_at = %s, payload_digest = %s, event_type = %s WHERE id = %d AND direction = 'outbound' AND consumed = 0 AND canonical_uuid = %s AND occurred_at >= %s",
+					$table,
+					$now,
+					$payload_digest,
+					$event_type,
+					$id,
+					$canonical_uuid,
+					$cutoff
+				)
+			);
+			if ( false === $changed ) {
+				throw new \RuntimeException( 'Queue coalescing was not saved.' );
+			}
 		}
-		$live = $wpdb->get_results( "SELECT * FROM {$table} WHERE id IN (" . implode( ',', $ids ) . ')', ARRAY_A );
+		$live = array();
+		foreach ( $ids as $id ) {
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- plugin table or connection command; WordPress has no replacement API
+			$one = $wpdb->get_row(
+				$wpdb->prepare( 'SELECT * FROM %i WHERE id = %d', $table, $id ),
+				ARRAY_A
+			);
+			if ( ! is_array( $one ) ) {
+				$live = null;
+				break;
+			}
+			$live[] = $one;
+		}
 		if ( ! is_array( $live ) || '' !== (string) $wpdb->last_error || count( $live ) !== count( $ids ) ) {
 			throw new \RuntimeException( 'Queue coalescing readback is unavailable.' );
 		}
@@ -242,6 +269,8 @@ class Push_Queue {
 			}
 		}
 		$lease->assert_owner();
+		$journal_generation = wp_cache_get( 'wpmmcc_journal_generation', 'wpmmcc' );
+		wp_cache_set( 'wpmmcc_journal_generation', ( is_int( $journal_generation ) ? $journal_generation : 0 ) + 1, 'wpmmcc' );
 		wp_cache_delete( 'admin_journal_recent', 'wpmmcc' );
 		return true;
 	}
@@ -258,10 +287,15 @@ class Push_Queue {
 	private static function delivery_covers_row( string $canonical_uuid, int $row_id ): bool {
 		global $wpdb;
 
-		$deliveries = $wpdb->prefix . 'wpmmcc_outbound_deliveries';
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom delivery table query.
+		$deliveries  = $wpdb->prefix . 'wpmmcc_outbound_deliveries';
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching -- a cached miss would rewrite a delivery that was booked after the last read
 		$event = $wpdb->get_var(
-			$wpdb->prepare( "SELECT event_id FROM {$deliveries} WHERE canonical_uuid = %s AND event_id >= %d LIMIT 1", $canonical_uuid, $row_id )
+			$wpdb->prepare(
+				'SELECT event_id FROM %i WHERE canonical_uuid = %s AND event_id >= %d LIMIT 1',
+				$deliveries,
+				$canonical_uuid,
+				$row_id
+			)
 		);
 		if ( '' !== (string) $wpdb->last_error ) {
 			throw new \RuntimeException( 'Frozen delivery evidence is unavailable.' );
@@ -324,17 +358,38 @@ class Push_Queue {
 	private static function newest_pending_row( string $canonical_uuid, string $peer_uuid ): ?array {
 		global $wpdb;
 
-		$table = $wpdb->prefix . 'wpmmcc_journal';
-		$sql   = "SELECT * FROM {$table} WHERE direction = 'outbound' AND consumed = 0 AND canonical_uuid = %s";
-		$args  = array( $canonical_uuid );
-		if ( '' !== $peer_uuid ) {
-			$sql   .= " AND peer_uuid IN ('', %s)";
-			$args[] = $peer_uuid;
+		$table      = $wpdb->prefix . 'wpmmcc_journal';
+		$generation = wp_cache_get( 'wpmmcc_journal_generation', 'wpmmcc' );
+		$cache_key  = 'newest_pending_' . md5( $canonical_uuid . '|' . $peer_uuid . '|' . (string) $generation );
+		$cached     = wp_cache_get( $cache_key, 'wpmmcc' );
+		if ( is_array( $cached ) && array_key_exists( 'row', $cached ) ) {
+			return is_array( $cached['row'] ) ? $cached['row'] : null;
 		}
-		$sql .= ' ORDER BY id DESC LIMIT 1';
-
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.PreparedSQL.NotPrepared -- Custom journal table query; placeholders assembled above.
-		$row = $wpdb->get_row( $wpdb->prepare( $sql, $args ), \ARRAY_A );
+		if ( '' !== $peer_uuid ) {
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- plugin table or connection command; WordPress has no replacement API
+			$row = $wpdb->get_row(
+				$wpdb->prepare(
+					"SELECT * FROM %i WHERE direction = 'outbound' AND consumed = 0 AND canonical_uuid = %s AND peer_uuid IN ('', %s) ORDER BY id DESC LIMIT 1",
+					$table,
+					$canonical_uuid,
+					$peer_uuid
+				),
+				ARRAY_A
+			);
+		} else {
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- plugin table or connection command; WordPress has no replacement API
+			$row = $wpdb->get_row(
+				$wpdb->prepare(
+					"SELECT * FROM %i WHERE direction = 'outbound' AND consumed = 0 AND canonical_uuid = %s ORDER BY id DESC LIMIT 1",
+					$table,
+					$canonical_uuid
+				),
+				ARRAY_A
+			);
+		}
+		if ( '' === (string) $wpdb->last_error ) {
+			wp_cache_set( $cache_key, array( 'row' => is_array( $row ) ? $row : null ), 'wpmmcc' );
+		}
 		return is_array( $row ) ? $row : null;
 	}
 
@@ -349,19 +404,61 @@ class Push_Queue {
 	private static function select_pending( string $peer_uuid, bool $retry, int $limit ): array {
 		global $wpdb;
 
-		$table = $wpdb->prefix . 'wpmmcc_journal';
-		$sql   = "SELECT * FROM {$table} WHERE direction = 'outbound' AND consumed = 0 AND outcome " . ( $retry ? '=' : '<>' ) . " 'failed'";
-		$args  = array();
-		if ( '' !== $peer_uuid ) {
-			$sql   .= " AND peer_uuid IN ('', %s)";
-			$args[] = $peer_uuid;
+		$table      = $wpdb->prefix . 'wpmmcc_journal';
+		$generation = wp_cache_get( 'wpmmcc_journal_generation', 'wpmmcc' );
+		$cache_key  = 'select_pending_' . md5( $peer_uuid . '|' . ( $retry ? '1' : '0' ) . '|' . $limit . '|' . (string) $generation );
+		$cached     = wp_cache_get( $cache_key, 'wpmmcc' );
+		if ( is_array( $cached ) ) {
+			return $cached;
 		}
-		$sql   .= ' ORDER BY id ASC LIMIT %d';
-		$args[] = $limit;
-
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.PreparedSQL.NotPrepared -- Custom journal table query; placeholders assembled above.
-		$rows = $wpdb->get_results( $wpdb->prepare( $sql, $args ), \ARRAY_A );
-		return is_array( $rows ) ? $rows : array();
+		if ( $retry && '' !== $peer_uuid ) {
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- plugin table or connection command; WordPress has no replacement API
+			$rows = $wpdb->get_results(
+				$wpdb->prepare(
+					"SELECT * FROM %i WHERE direction = 'outbound' AND consumed = 0 AND outcome = 'failed' AND peer_uuid IN ('', %s) ORDER BY id ASC LIMIT %d",
+					$table,
+					$peer_uuid,
+					$limit
+				),
+				ARRAY_A
+			);
+		} elseif ( $retry ) {
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- plugin table or connection command; WordPress has no replacement API
+			$rows = $wpdb->get_results(
+				$wpdb->prepare(
+					"SELECT * FROM %i WHERE direction = 'outbound' AND consumed = 0 AND outcome = 'failed' ORDER BY id ASC LIMIT %d",
+					$table,
+					$limit
+				),
+				ARRAY_A
+			);
+		} elseif ( '' !== $peer_uuid ) {
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- plugin table or connection command; WordPress has no replacement API
+			$rows = $wpdb->get_results(
+				$wpdb->prepare(
+					"SELECT * FROM %i WHERE direction = 'outbound' AND consumed = 0 AND outcome <> 'failed' AND peer_uuid IN ('', %s) ORDER BY id ASC LIMIT %d",
+					$table,
+					$peer_uuid,
+					$limit
+				),
+				ARRAY_A
+			);
+		} else {
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- plugin table or connection command; WordPress has no replacement API
+			$rows = $wpdb->get_results(
+				$wpdb->prepare(
+					"SELECT * FROM %i WHERE direction = 'outbound' AND consumed = 0 AND outcome <> 'failed' ORDER BY id ASC LIMIT %d",
+					$table,
+					$limit
+				),
+				ARRAY_A
+			);
+		}
+		$rows = is_array( $rows ) ? $rows : array();
+		if ( '' === (string) $wpdb->last_error ) {
+			wp_cache_set( $cache_key, $rows, 'wpmmcc' );
+		}
+		return $rows;
 	}
 
 	/**
@@ -412,7 +509,7 @@ class Push_Queue {
 		return self::update_group(
 			$leader,
 			$peer_uuid,
-			"consumed = %d, outcome = 'success', message = NULL",
+			'ack',
 			array( self::DONE )
 		);
 	}
@@ -456,7 +553,7 @@ class Push_Queue {
 		self::update_group(
 			$leader,
 			$peer_uuid,
-			"consumed = %d, outcome = 'failed', diff_summary = %s, message = %s" . ( $dead ? ', occurred_at = %s' : '' ),
+			$dead ? 'dead' : 'fail',
 			array_merge(
 				array( $dead ? self::DEAD : self::PENDING, $state, $message ),
 				$dead ? array( self::now() ) : array()
@@ -470,26 +567,102 @@ class Push_Queue {
 	 *
 	 * @param array  $leader    Leader row.
 	 * @param string $peer_uuid Peer scope ('' = unscoped).
-	 * @param string $set       SET body with %d / %s placeholders.
-	 * @param array  $set_args  Placeholder values.
+	 * @param string $mode      ack | fail | dead.
+	 * @param array  $set_args  Placeholder values for that mode.
 	 * @return int Rows changed.
 	 */
-	private static function update_group( array $leader, string $peer_uuid, string $set, array $set_args ): int {
+	private static function update_group( array $leader, string $peer_uuid, string $mode, array $set_args ): int {
 		global $wpdb;
 
-		$table = $wpdb->prefix . 'wpmmcc_journal';
-		$sql   = "UPDATE {$table} SET {$set} WHERE direction = 'outbound' AND consumed = 0 AND canonical_uuid = %s AND id <= %d";
-		$args  = array_merge( $set_args, array( (string) ( $leader['canonical_uuid'] ?? '' ), (int) ( $leader['id'] ?? 0 ) ) );
-		if ( '' !== $peer_uuid ) {
-			$sql   .= " AND peer_uuid IN ('', %s)";
-			$args[] = $peer_uuid;
+		$table  = $wpdb->prefix . 'wpmmcc_journal';
+		$uuid   = (string) ( $leader['canonical_uuid'] ?? '' );
+		$id     = (int) ( $leader['id'] ?? 0 );
+		$scoped = '' !== $peer_uuid;
+		if ( 'ack' === $mode && $scoped ) {
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- plugin table or connection command; WordPress has no replacement API
+			$changed = $wpdb->query(
+				$wpdb->prepare(
+					"UPDATE %i SET consumed = %d, outcome = 'success', message = NULL WHERE direction = 'outbound' AND consumed = 0 AND canonical_uuid = %s AND id <= %d AND peer_uuid IN ('', %s)",
+					$table,
+					$set_args[0],
+					$uuid,
+					$id,
+					$peer_uuid
+				)
+			);
+		} elseif ( 'ack' === $mode ) {
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- plugin table or connection command; WordPress has no replacement API
+			$changed = $wpdb->query(
+				$wpdb->prepare(
+					"UPDATE %i SET consumed = %d, outcome = 'success', message = NULL WHERE direction = 'outbound' AND consumed = 0 AND canonical_uuid = %s AND id <= %d",
+					$table,
+					$set_args[0],
+					$uuid,
+					$id
+				)
+			);
+		} elseif ( 'dead' === $mode && $scoped ) {
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- plugin table or connection command; WordPress has no replacement API
+			$changed = $wpdb->query(
+				$wpdb->prepare(
+					"UPDATE %i SET consumed = %d, outcome = 'failed', diff_summary = %s, message = %s, occurred_at = %s WHERE direction = 'outbound' AND consumed = 0 AND canonical_uuid = %s AND id <= %d AND peer_uuid IN ('', %s)",
+					$table,
+					$set_args[0],
+					$set_args[1],
+					$set_args[2],
+					$set_args[3],
+					$uuid,
+					$id,
+					$peer_uuid
+				)
+			);
+		} elseif ( 'dead' === $mode ) {
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- plugin table or connection command; WordPress has no replacement API
+			$changed = $wpdb->query(
+				$wpdb->prepare(
+					"UPDATE %i SET consumed = %d, outcome = 'failed', diff_summary = %s, message = %s, occurred_at = %s WHERE direction = 'outbound' AND consumed = 0 AND canonical_uuid = %s AND id <= %d",
+					$table,
+					$set_args[0],
+					$set_args[1],
+					$set_args[2],
+					$set_args[3],
+					$uuid,
+					$id
+				)
+			);
+		} elseif ( $scoped ) {
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- plugin table or connection command; WordPress has no replacement API
+			$changed = $wpdb->query(
+				$wpdb->prepare(
+					"UPDATE %i SET consumed = %d, outcome = 'failed', diff_summary = %s, message = %s WHERE direction = 'outbound' AND consumed = 0 AND canonical_uuid = %s AND id <= %d AND peer_uuid IN ('', %s)",
+					$table,
+					$set_args[0],
+					$set_args[1],
+					$set_args[2],
+					$uuid,
+					$id,
+					$peer_uuid
+				)
+			);
+		} else {
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- plugin table or connection command; WordPress has no replacement API
+			$changed = $wpdb->query(
+				$wpdb->prepare(
+					"UPDATE %i SET consumed = %d, outcome = 'failed', diff_summary = %s, message = %s WHERE direction = 'outbound' AND consumed = 0 AND canonical_uuid = %s AND id <= %d",
+					$table,
+					$set_args[0],
+					$set_args[1],
+					$set_args[2],
+					$uuid,
+					$id
+				)
+			);
 		}
-
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.PreparedSQL.NotPrepared -- Custom journal table update; placeholders assembled above.
-		$changed = $wpdb->query( $wpdb->prepare( $sql, $args ) );
 		if ( false === $changed ) {
 			throw new \RuntimeException( 'Queue state was not saved; original delivery retained.' );
 		}
+		$journal_generation = wp_cache_get( 'wpmmcc_journal_generation', 'wpmmcc' );
+		wp_cache_set( 'wpmmcc_journal_generation', ( is_int( $journal_generation ) ? $journal_generation : 0 ) + 1, 'wpmmcc' );
 		wp_cache_delete( 'admin_journal_recent', 'wpmmcc' );
 		return (int) $changed;
 	}
@@ -505,32 +678,97 @@ class Push_Queue {
 	public static function sweep_unshippable( string $peer_uuid = '' ): int {
 		global $wpdb;
 
-		$table = $wpdb->prefix . 'wpmmcc_journal';
-		$rules = array(
-			"object_type <> 'post'"  => 'unsupported object type',
-			"canonical_uuid = ''"    => 'missing canonical uuid',
-			'local_object_id = 0'    => 'missing local object id',
+		$table  = $wpdb->prefix . 'wpmmcc_journal';
+		$now    = self::now();
+		$batch  = self::SWEEP_BATCH;
+		$scoped = '' !== $peer_uuid;
+		$rules  = array(
+			'type' => 'unsupported object type',
+			'uuid' => 'missing canonical uuid',
+			'id'   => 'missing local object id',
 		);
 
 		$total = 0;
-		foreach ( $rules as $cond => $why ) {
-			$sql  = "UPDATE {$table} SET consumed = 2, outcome = 'failed', occurred_at = %s, message = %s WHERE direction = 'outbound' AND consumed = 0 AND {$cond}";
-			$args = array( self::now(), 'Dead-lettered: cannot ship this event (' . $why . ')' );
-			if ( '' !== $peer_uuid ) {
-				$sql   .= " AND peer_uuid IN ('', %s)";
-				$args[] = $peer_uuid;
+		foreach ( $rules as $mode => $why ) {
+			$message = 'Dead-lettered: cannot ship this event (' . $why . ')';
+			if ( 'type' === $mode && $scoped ) {
+				// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- plugin table or connection command; WordPress has no replacement API
+				$changed = $wpdb->query(
+					$wpdb->prepare(
+						"UPDATE %i SET consumed = 2, outcome = 'failed', occurred_at = %s, message = %s WHERE direction = 'outbound' AND consumed = 0 AND object_type <> 'post' AND peer_uuid IN ('', %s) LIMIT %d",
+						$table,
+						$now,
+						$message,
+						$peer_uuid,
+						$batch
+					)
+				);
+			} elseif ( 'type' === $mode ) {
+				// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- plugin table or connection command; WordPress has no replacement API
+				$changed = $wpdb->query(
+					$wpdb->prepare(
+						"UPDATE %i SET consumed = 2, outcome = 'failed', occurred_at = %s, message = %s WHERE direction = 'outbound' AND consumed = 0 AND object_type <> 'post' LIMIT %d",
+						$table,
+						$now,
+						$message,
+						$batch
+					)
+				);
+			} elseif ( 'uuid' === $mode && $scoped ) {
+				// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- plugin table or connection command; WordPress has no replacement API
+				$changed = $wpdb->query(
+					$wpdb->prepare(
+						"UPDATE %i SET consumed = 2, outcome = 'failed', occurred_at = %s, message = %s WHERE direction = 'outbound' AND consumed = 0 AND canonical_uuid = '' AND peer_uuid IN ('', %s) LIMIT %d",
+						$table,
+						$now,
+						$message,
+						$peer_uuid,
+						$batch
+					)
+				);
+			} elseif ( 'uuid' === $mode ) {
+				// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- plugin table or connection command; WordPress has no replacement API
+				$changed = $wpdb->query(
+					$wpdb->prepare(
+						"UPDATE %i SET consumed = 2, outcome = 'failed', occurred_at = %s, message = %s WHERE direction = 'outbound' AND consumed = 0 AND canonical_uuid = '' LIMIT %d",
+						$table,
+						$now,
+						$message,
+						$batch
+					)
+				);
+			} elseif ( $scoped ) {
+				// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- plugin table or connection command; WordPress has no replacement API
+				$changed = $wpdb->query(
+					$wpdb->prepare(
+						"UPDATE %i SET consumed = 2, outcome = 'failed', occurred_at = %s, message = %s WHERE direction = 'outbound' AND consumed = 0 AND local_object_id = 0 AND peer_uuid IN ('', %s) LIMIT %d",
+						$table,
+						$now,
+						$message,
+						$peer_uuid,
+						$batch
+					)
+				);
+			} else {
+				// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- plugin table or connection command; WordPress has no replacement API
+				$changed = $wpdb->query(
+					$wpdb->prepare(
+						"UPDATE %i SET consumed = 2, outcome = 'failed', occurred_at = %s, message = %s WHERE direction = 'outbound' AND consumed = 0 AND local_object_id = 0 LIMIT %d",
+						$table,
+						$now,
+						$message,
+						$batch
+					)
+				);
 			}
-			$sql   .= ' LIMIT %d';
-			$args[] = self::SWEEP_BATCH;
-
-			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.PreparedSQL.NotPrepared -- Custom journal table update; placeholders assembled above.
-			$changed = $wpdb->query( $wpdb->prepare( $sql, $args ) );
 			if ( false === $changed ) {
 				throw new \RuntimeException( 'Unshippable queue state was not saved.' );
 			}
 			$total += (int) $changed;
 		}
 		if ( $total > 0 ) {
+			$journal_generation = wp_cache_get( 'wpmmcc_journal_generation', 'wpmmcc' );
+			wp_cache_set( 'wpmmcc_journal_generation', ( is_int( $journal_generation ) ? $journal_generation : 0 ) + 1, 'wpmmcc' );
 			wp_cache_delete( 'admin_journal_recent', 'wpmmcc' );
 		}
 		return $total;
@@ -546,18 +784,29 @@ class Push_Queue {
 		global $wpdb;
 
 		$table = $wpdb->prefix . 'wpmmcc_journal';
-		$sql   = "UPDATE {$table} SET consumed = 0, outcome = 'success', diff_summary = NULL, message = NULL WHERE direction = 'outbound' AND consumed = 2";
-		$args  = array();
 		if ( '' !== $peer_uuid ) {
-			$sql   .= " AND peer_uuid IN ('', %s)";
-			$args[] = $peer_uuid;
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- plugin table or connection command; WordPress has no replacement API
+			$changed = $wpdb->query(
+				$wpdb->prepare(
+					"UPDATE %i SET consumed = 0, outcome = 'success', diff_summary = NULL, message = NULL WHERE direction = 'outbound' AND consumed = 2 AND peer_uuid IN ('', %s)",
+					$table,
+					$peer_uuid
+				)
+			);
+		} else {
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- plugin table or connection command; WordPress has no replacement API
+			$changed = $wpdb->query(
+				$wpdb->prepare(
+					'UPDATE %i SET consumed = 0, outcome = \'success\', diff_summary = NULL, message = NULL WHERE direction = \'outbound\' AND consumed = 2',
+					$table
+				)
+			);
 		}
-
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.PreparedSQL.NotPrepared -- Custom journal table update; placeholders assembled above.
-		$changed = $wpdb->query( empty( $args ) ? $sql : $wpdb->prepare( $sql, $args ) );
 		if ( false === $changed ) {
 			throw new \RuntimeException( 'Queue requeue was not saved.' );
 		}
+		$journal_generation = wp_cache_get( 'wpmmcc_journal_generation', 'wpmmcc' );
+		wp_cache_set( 'wpmmcc_journal_generation', ( is_int( $journal_generation ) ? $journal_generation : 0 ) + 1, 'wpmmcc' );
 		wp_cache_delete( 'admin_journal_recent', 'wpmmcc' );
 		return is_int( $changed ) ? $changed : (int) (bool) $changed;
 	}
@@ -572,23 +821,68 @@ class Push_Queue {
 	public static function counts( string $peer_uuid = '' ): array {
 		global $wpdb;
 
-		$table = $wpdb->prefix . 'wpmmcc_journal';
-		$count = static function ( string $cond ) use ( $wpdb, $table, $peer_uuid ): int {
-			$sql  = "SELECT COUNT(*) FROM {$table} WHERE direction = 'outbound' AND {$cond}";
-			$args = array();
-			if ( '' !== $peer_uuid ) {
-				$sql   .= " AND peer_uuid IN ('', %s)";
-				$args[] = $peer_uuid;
-			}
-			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.PreparedSQL.NotPrepared -- Custom journal table count; placeholders assembled above.
-			return (int) $wpdb->get_var( empty( $args ) ? $sql : $wpdb->prepare( $sql, $args ) );
-		};
-
-		return array(
-			'pending'  => $count( "consumed = 0 AND outcome <> 'failed'" ),
-			'retrying' => $count( "consumed = 0 AND outcome = 'failed'" ),
-			'dead'     => $count( 'consumed = 2' ),
+		$table      = $wpdb->prefix . 'wpmmcc_journal';
+		$generation = wp_cache_get( 'wpmmcc_journal_generation', 'wpmmcc' );
+		$cache_key  = 'queue_counts_' . md5( $peer_uuid . '|' . (string) $generation );
+		$cached     = wp_cache_get( $cache_key, 'wpmmcc' );
+		if ( is_array( $cached ) ) {
+			return $cached;
+		}
+		if ( '' !== $peer_uuid ) {
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- plugin table or connection command; WordPress has no replacement API
+			$pending  = (int) $wpdb->get_var(
+				$wpdb->prepare(
+					"SELECT COUNT(*) FROM %i WHERE direction = 'outbound' AND consumed = 0 AND outcome <> 'failed' AND peer_uuid IN ('', %s)",
+					$table,
+					$peer_uuid
+				)
+			);
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- plugin table or connection command; WordPress has no replacement API
+			$retrying = (int) $wpdb->get_var(
+				$wpdb->prepare(
+					"SELECT COUNT(*) FROM %i WHERE direction = 'outbound' AND consumed = 0 AND outcome = 'failed' AND peer_uuid IN ('', %s)",
+					$table,
+					$peer_uuid
+				)
+			);
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- plugin table or connection command; WordPress has no replacement API
+			$dead = (int) $wpdb->get_var(
+				$wpdb->prepare(
+					"SELECT COUNT(*) FROM %i WHERE direction = 'outbound' AND consumed = 2 AND peer_uuid IN ('', %s)",
+					$table,
+					$peer_uuid
+				)
+			);
+		} else {
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- plugin table or connection command; WordPress has no replacement API
+			$pending  = (int) $wpdb->get_var(
+				$wpdb->prepare(
+					"SELECT COUNT(*) FROM %i WHERE direction = 'outbound' AND consumed = 0 AND outcome <> 'failed'",
+					$table
+				)
+			);
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- plugin table or connection command; WordPress has no replacement API
+			$retrying = (int) $wpdb->get_var(
+				$wpdb->prepare(
+					"SELECT COUNT(*) FROM %i WHERE direction = 'outbound' AND consumed = 0 AND outcome = 'failed'",
+					$table
+				)
+			);
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- plugin table or connection command; WordPress has no replacement API
+			$dead = (int) $wpdb->get_var(
+				$wpdb->prepare(
+					"SELECT COUNT(*) FROM %i WHERE direction = 'outbound' AND consumed = 2",
+					$table
+				)
+			);
+		}
+		$counts = array(
+			'pending'  => $pending,
+			'retrying' => $retrying,
+			'dead'     => $dead,
 		);
+		wp_cache_set( $cache_key, $counts, 'wpmmcc' );
+		return $counts;
 	}
 
 	/**
@@ -603,7 +897,7 @@ class Push_Queue {
 		if ( '' === $peer_uuid ) {
 			return 0;
 		}
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Retain unconfirmed rows when disconnecting a peer.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- plugin table or connection command; WordPress has no replacement API
 		$changed = $wpdb->query(
 			$wpdb->prepare(
 				"UPDATE {$wpdb->prefix}wpmmcc_journal SET consumed = 2, outcome = 'failed', message = 'Peer disconnected; original delivery retained' WHERE direction = 'outbound' AND consumed = 0 AND peer_uuid = %s",
@@ -613,6 +907,8 @@ class Push_Queue {
 		if ( false === $changed ) {
 			throw new \RuntimeException( 'Disconnected queue was not parked.' );
 		}
+		$journal_generation = wp_cache_get( 'wpmmcc_journal_generation', 'wpmmcc' );
+		wp_cache_set( 'wpmmcc_journal_generation', ( is_int( $journal_generation ) ? $journal_generation : 0 ) + 1, 'wpmmcc' );
 		wp_cache_delete( 'admin_journal_recent', 'wpmmcc' );
 		return is_int( $changed ) ? $changed : (int) (bool) $changed;
 	}

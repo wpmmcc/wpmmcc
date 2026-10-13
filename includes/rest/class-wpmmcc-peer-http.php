@@ -17,7 +17,7 @@
  *    where cloud metadata services live, no carrier NAT), while patched releases
  *    refuse the whole IANA special-purpose list. The host is checked here against
  *    every address it resolves to and against that whole list, so the answer does
- *    not change with the release (the plugin supports 5.8 and up).
+ *    not change with the release (the plugin supports 6.2 and up).
  *  - A peer on a private network is a legitimate setup (LAN, Docker, one host
  *    running both sites), so it is opt-in: the wpmmcc_allow_private_peers option
  *    or the wpmmcc_allow_private_peer_host filter. The option alone never opens

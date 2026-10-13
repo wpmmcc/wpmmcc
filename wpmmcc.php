@@ -2,8 +2,8 @@
 /**
  * Plugin Name:       WPMMCC
  * Plugin URI:        https://www.wpmm.cc
- * Description:       Cross-site bidirectional content synchronization engine for WordPress.
- * Version:           1.0.0
+ * Description:       Copy posts, terms, and media between paired WordPress sites. Direct pairing only syncs. The WPTSALL Client can translate the title, content, and excerpt while syncing.
+ * Version:           2.1.10
  * Author:            WPMMCC Team
  * Author URI:        https://www.wpmm.cc
  * Text Domain:       wpmmcc
@@ -22,7 +22,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // 1. Identity and Version Constants (Identity Contract v1.0 single truth)
-define( 'WPMMCC_VERSION', '1.0.0' );
+define( 'WPMMCC_VERSION', '2.1.10' );
 define( 'WPMMCC_IDENTITY', 'wpmmcc' );
 define( 'WPMMCC_PROTOCOL_MIN', 1 );
 define( 'WPMMCC_PROTOCOL_CURRENT', 1 );
@@ -43,3 +43,8 @@ WPMMCC\Plugin::instance();
 // 5. Register Activation and Deactivation Hooks
 register_activation_hook( __FILE__, array( 'WPMMCC\Activator', 'activate' ) );
 register_deactivation_hook( __FILE__, array( 'WPMMCC\Deactivator', 'deactivate' ) );
+
+// WordPress replaces plugin files without firing the activation hook.
+// 2.0.1 stored wpmmcc_db_version as 2.0.0, which is numerically newer than
+// this plugin's schema stamp 1.3.0, so the check is an exact mismatch.
+add_action( 'plugins_loaded', array( 'WPMMCC\Activator', 'maybe_upgrade' ), 5 );

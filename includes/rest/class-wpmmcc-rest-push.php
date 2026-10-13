@@ -149,7 +149,7 @@ class Rest_Push extends Rest_Base {
 		$cache_key     = 'peer_strat_' . md5( $strategy_peer );
 		$peer_strategy = wp_cache_get( $cache_key, 'wpmmcc' );
 		if ( false === $peer_strategy ) {
-			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom peers table query.
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- plugin table or connection command; WordPress has no replacement API
 			$peer_strategy = $wpdb->get_var(
 				$wpdb->prepare( "SELECT conflict_strategy FROM {$wpdb->prefix}wpmmcc_peers WHERE peer_uuid = %s LIMIT 1", $strategy_peer )
 			) ?: 'lww';
@@ -187,7 +187,6 @@ class Rest_Push extends Rest_Base {
 		$duration_ms = (int) round( ( microtime( true ) - $start_time ) * 1000 );
 
 		if ( is_wp_error( $result ) ) {
-			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Original intent remains outside this transaction.
 			$transaction->rollback();
 			Event_Recorder::record_journal_entry(
 				array(
@@ -216,7 +215,7 @@ class Rest_Push extends Rest_Base {
 
 		// 3. Update Cross Mappings on overwrite or initial creation
 		if ( 'skipped' !== $status_outcome && $local_id > 0 ) {
-			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom mapping table replace.
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- plugin table or connection command; WordPress has no replacement API
 			$mapping_saved = $wpdb->replace(
 				$wpdb->prefix . 'wpmmcc_cross_mappings',
 				array(
@@ -245,6 +244,7 @@ class Rest_Push extends Rest_Base {
 			wp_cache_delete( 'canonical_uuid_' . $object_type . '_' . $local_id, 'wpmmcc' );
 			wp_cache_delete( 'vclock_' . $local_id, 'wpmmcc' );
 			wp_cache_delete( 'cross_site_alt_' . $local_id, 'wpmmcc' );
+			wp_cache_delete( 'local_post_uuid_' . md5( $guid ), 'wpmmcc' );
 		}
 
 		// 4. Record inbound outcome in journal
@@ -285,11 +285,9 @@ class Rest_Push extends Rest_Base {
 		if ( ! \WPMMCC\Sync\Delivery_Receipt::finish( $authority, $receipt ) ) {
 			throw new \RuntimeException( 'Target receipt was not saved.' );
 		}
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Only now can the caller acknowledge this packet.
 		$transaction->commit();
 		return $this->format_success( $receipt, 200 );
 		} catch ( \Throwable $error ) {
-			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Keep the original applying intent for reconciliation.
 			if ( $transaction ) {
 				$transaction->rollback();
 			}
@@ -350,7 +348,7 @@ class Rest_Push extends Rest_Base {
 		// sync point, so the verdict never depends on storage order. Read
 		// straight from the table: a cached row would outlive the writes of the
 		// other paths that touch mappings.
-		// phpcs:disable WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom mapping table query.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.DirectQuery -- conflict verdict reads the peer mapping that exists now
 		$existing_row = $wpdb->get_row(
 			$wpdb->prepare(
 				"SELECT * FROM {$wpdb->prefix}wpmmcc_cross_mappings WHERE canonical_uuid = %s AND local_object_type = 'post' AND peer_uuid = %s LIMIT 1",
@@ -359,6 +357,7 @@ class Rest_Push extends Rest_Base {
 			)
 		);
 		if ( ! $existing_row ) {
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.DirectQuery -- conflict verdict reads the peer mapping that exists now
 			$existing_row = $wpdb->get_row(
 				$wpdb->prepare(
 					"SELECT * FROM {$wpdb->prefix}wpmmcc_cross_mappings WHERE canonical_uuid = %s AND local_object_type = 'post' ORDER BY last_synced_at DESC LIMIT 1",
@@ -366,7 +365,6 @@ class Rest_Push extends Rest_Base {
 				)
 			);
 		}
-		// phpcs:enable WordPress.DB.DirectDatabaseQuery.DirectQuery
 
 		$existing_local_id = $existing_row ? (int) $existing_row->local_object_id : 0;
 		$existing_post     = $existing_local_id > 0 ? get_post( $existing_local_id ) : null;
@@ -473,6 +471,22 @@ class Rest_Push extends Rest_Base {
 			$status = (string) $existing_post->post_status;
 		}
 
+		// Client skip: an absent core key becomes Untitled or an empty
+		// string on this endpoint, so an explicit preserved list keeps the
+		// existing post value. A first insert has nothing to preserve.
+		$preserved = array_map( 'strval', (array) ( $entity['preserved_fields'] ?? array() ) );
+		if ( $existing_post instanceof WP_Post ) {
+			if ( in_array( 'post_title', $preserved, true ) ) {
+				$title = (string) $existing_post->post_title;
+			}
+			if ( in_array( 'post_content', $preserved, true ) ) {
+				$content = (string) $existing_post->post_content;
+			}
+			if ( in_array( 'post_excerpt', $preserved, true ) ) {
+				$excerpt = (string) $existing_post->post_excerpt;
+			}
+		}
+
 		$post_data = array(
 			'post_title'   => $title,
 			'post_content' => $content,
@@ -503,6 +517,7 @@ class Rest_Push extends Rest_Base {
 
 		// Save canonical UUID in post meta
 		update_post_meta( $saved_id, '_wpmmcc_canonical_uuid', $guid );
+		wp_cache_delete( 'postmeta_uuid_' . md5( $guid ), 'wpmmcc' );
 
 		if ( 'shadow_draft' === $verdict['action'] ) {
 			update_post_meta( $saved_id, Shadow_Draft::META_FLAG, 1 );
@@ -517,6 +532,7 @@ class Rest_Push extends Rest_Base {
 			if ( ! $review_open ) {
 				update_post_meta( $saved_id, Shadow_Draft::META_LOCAL_ID, $existing_local_id );
 			}
+			wp_cache_delete( 'postmeta_uuid_' . md5( $guid ), 'wpmmcc' );
 		}
 
 		// Apply basic meta fields safely. Under a delta merge, only meta keys

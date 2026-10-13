@@ -157,7 +157,7 @@ class Rest_Middleware {
 			return;
 		}
 		$sender = self::requesting_peer_uuid( $request );
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Use the currently authenticated peer key, never request-supplied key material.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.DirectQuery -- response signature uses the peer secret stored now; a cached secret survives revocation
 		$peer = $wpdb->get_row( $wpdb->prepare(
 			"SELECT shared_secret, key_salt FROM {$wpdb->prefix}wpmmcc_peers WHERE peer_uuid = %s AND status = 'active' LIMIT 1", $sender
 		) );
@@ -310,7 +310,7 @@ class Rest_Middleware {
 				$result = self::evaluate_hmac( $request, $body_hash );
 				$data   = is_wp_error( $result ) ? $result->get_error_data() : array();
 				if ( is_array( $data ) && in_array( (int) ( $data['status'] ?? 0 ), array( 401, 403 ), true ) ) {
-					$ip   = sanitize_text_field( (string) ( $_SERVER['REMOTE_ADDR'] ?? 'unknown' ) );
+					$ip   = sanitize_text_field( wp_unslash( (string) ( $_SERVER['REMOTE_ADDR'] ?? 'unknown' ) ) );
 					$rate = self::enforce_rate_limit( 'preauth|ip|' . $ip );
 					if ( is_wp_error( $rate ) ) {
 						return $rate;
@@ -413,7 +413,7 @@ class Rest_Middleware {
 		}
 
 		// Database nonce table fallback check
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom nonce table query.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.DirectQuery -- replay check must see a nonce stored by a request that just finished
 		$existing = $wpdb->get_var(
 			$wpdb->prepare( "SELECT id FROM {$wpdb->prefix}wpmmcc_nonces WHERE nonce = %s LIMIT 1", $nonce )
 		);
@@ -427,7 +427,7 @@ class Rest_Middleware {
 		}
 
 		// Revoked/rotated authority cannot remain usable for a cache TTL.
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Security authority must be current.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.DirectQuery -- auth must see a peer revoked after the previous request
 		$peer = $wpdb->get_row(
 			$wpdb->prepare( "SELECT * FROM {$wpdb->prefix}wpmmcc_peers WHERE peer_uuid = %s AND status = 'active' LIMIT 1", $peer_uuid )
 		);
@@ -495,7 +495,7 @@ class Rest_Middleware {
 		}
 
 		// 7. Store nonce to prevent future replay
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom nonce table insert.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- plugin table or connection command; WordPress has no replacement API
 		$inserted = $wpdb->insert(
 			$wpdb->prefix . 'wpmmcc_nonces',
 			array(

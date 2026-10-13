@@ -145,7 +145,17 @@ class Shadow_Draft {
 			return 0;
 		}
 
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Postmeta reverse lookup; no core API resolves a meta value to a post.
+		$cache_key = 'postmeta_uuid_' . md5( $uuid );
+		$cached    = wp_cache_get( $cache_key, 'wpmmcc' );
+		if ( is_int( $cached ) && $cached > 0 && ! self::is_shadow( $cached )
+			&& (string) get_post_meta( $cached, '_wpmmcc_canonical_uuid', true ) === $uuid ) {
+			return $cached;
+		}
+		if ( false !== $cached ) {
+			wp_cache_delete( $cache_key, 'wpmmcc' );
+		}
+
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- plugin table or connection command; WordPress has no replacement API
 		$candidates = $wpdb->get_results(
 			$wpdb->prepare(
 				"SELECT post_id FROM {$wpdb->postmeta} WHERE meta_key = '_wpmmcc_canonical_uuid' AND meta_value = %s ORDER BY post_id ASC LIMIT %d",
@@ -156,6 +166,7 @@ class Shadow_Draft {
 		foreach ( (array) $candidates as $candidate ) {
 			$post_id = (int) ( is_object( $candidate ) ? $candidate->post_id : ( $candidate['post_id'] ?? 0 ) );
 			if ( $post_id > 0 && ! self::is_shadow( $post_id ) ) {
+				wp_cache_set( $cache_key, $post_id, 'wpmmcc', 300 );
 				return $post_id;
 			}
 		}
@@ -237,6 +248,7 @@ class Shadow_Draft {
 		}
 
 		delete_post_meta( $post_id, self::META_FLAG );
+		wp_cache_delete( 'postmeta_uuid_' . md5( $context['canonical_uuid'] ), 'wpmmcc' );
 		delete_post_meta( $post_id, self::META_ORIGIN );
 		delete_post_meta( $post_id, self::META_LOCAL_ID );
 
@@ -289,7 +301,7 @@ class Shadow_Draft {
 			return new WP_Error( 'wpmmcc_counterpart_missing', __( 'The recorded local counterpart no longer exists. Resolve manually (edit the shadow, or Accept Remote).', 'wpmmcc' ) );
 		}
 
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom mapping table update.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- plugin table or connection command; WordPress has no replacement API
 		$updated = $wpdb->update(
 			$wpdb->prefix . 'wpmmcc_cross_mappings',
 			array(
@@ -336,6 +348,7 @@ class Shadow_Draft {
 		wp_cache_delete( 'canonical_mapping_' . md5( $context['canonical_uuid'] ), 'wpmmcc' );
 		wp_cache_delete( 'canonical_uuid_post_' . $context['local_id'], 'wpmmcc' );
 		wp_cache_delete( 'vclock_' . $context['local_id'], 'wpmmcc' );
+		wp_cache_delete( 'local_post_uuid_' . md5( $context['canonical_uuid'] ), 'wpmmcc' );
 		wp_cache_delete( 'conflict_queue', 'wpmmcc' );
 		return $context;
 	}
@@ -360,7 +373,7 @@ class Shadow_Draft {
 		}
 
 		delete_post_meta( $local_id, '_wpmmcc_canonical_uuid' );
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom mapping table delete.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- plugin table or connection command; WordPress has no replacement API
 		$wpdb->delete(
 			$wpdb->prefix . 'wpmmcc_cross_mappings',
 			array(
@@ -373,5 +386,7 @@ class Shadow_Draft {
 		wp_cache_delete( 'vclock_' . $local_id, 'wpmmcc' );
 		wp_cache_delete( 'cross_site_alt_' . $local_id, 'wpmmcc' );
 		wp_cache_delete( 'canonical_mapping_' . md5( $uuid ), 'wpmmcc' );
+		wp_cache_delete( 'local_post_uuid_' . md5( $uuid ), 'wpmmcc' );
+		wp_cache_delete( 'postmeta_uuid_' . md5( $uuid ), 'wpmmcc' );
 	}
 }

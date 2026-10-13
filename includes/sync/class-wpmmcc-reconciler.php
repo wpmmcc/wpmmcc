@@ -68,7 +68,7 @@ class Reconciler {
 			$cache_key     = 'mapping_' . md5( $uuid . '_' . $peer_uuid );
 			$local_mapping = wp_cache_get( $cache_key, 'wpmmcc' );
 			if ( false === $local_mapping ) {
-				// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom mapping table query.
+				// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- plugin table or connection command; WordPress has no replacement API
 				$local_mapping = $wpdb->get_row(
 					$wpdb->prepare(
 						"SELECT * FROM {$wpdb->prefix}wpmmcc_cross_mappings WHERE canonical_uuid = %s AND peer_uuid = %s LIMIT 1",
@@ -137,12 +137,19 @@ class Reconciler {
 
 		// Current clock: the source-side self row (FL-14 bump/persist), else 1.
 		global $wpdb;
-		$clock = (int) $wpdb->get_var(
-			$wpdb->prepare(
-				"SELECT vector_clock FROM {$wpdb->prefix}wpmmcc_cross_mappings WHERE local_object_type = 'post' AND local_object_id = %d LIMIT 1",
-				$local_id
-			)
-		);
+		$clock_key = 'vclock_' . $local_id;
+		$clock     = wp_cache_get( $clock_key, 'wpmmcc' );
+		if ( false === $clock ) {
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- plugin table or connection command; WordPress has no replacement API
+			$clock = (int) $wpdb->get_var(
+				$wpdb->prepare(
+					"SELECT vector_clock FROM {$wpdb->prefix}wpmmcc_cross_mappings WHERE local_object_type = 'post' AND local_object_id = %d LIMIT 1",
+					$local_id
+				)
+			);
+			wp_cache_set( $clock_key, $clock, 'wpmmcc', 300 );
+		}
+		$clock = (int) $clock;
 		if ( $clock <= 0 ) {
 			$clock = 1;
 		}
@@ -172,13 +179,21 @@ class Reconciler {
 			return 0;
 		}
 
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom mapping table query.
-		$local_id = (int) $wpdb->get_var(
-			$wpdb->prepare(
-				"SELECT local_object_id FROM {$wpdb->prefix}wpmmcc_cross_mappings WHERE canonical_uuid = %s AND local_object_type = 'post' LIMIT 1",
-				$uuid
-			)
-		);
+		$cache_key = 'local_post_uuid_' . md5( $uuid );
+		$local_id  = wp_cache_get( $cache_key, 'wpmmcc' );
+		if ( false === $local_id ) {
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- plugin table or connection command; WordPress has no replacement API
+			$local_id = (int) $wpdb->get_var(
+				$wpdb->prepare(
+					"SELECT local_object_id FROM {$wpdb->prefix}wpmmcc_cross_mappings WHERE canonical_uuid = %s AND local_object_type = 'post' LIMIT 1",
+					$uuid
+				)
+			);
+			if ( $local_id > 0 ) {
+				wp_cache_set( $cache_key, $local_id, 'wpmmcc', 300 );
+			}
+		}
+		$local_id = (int) $local_id;
 		// A mapping re-pointed at a conflict-review draft stands for the
 		// displaced local post, which is the entity this site really has (WMC-11).
 		$local_id = Shadow_Draft::entity_post_id( $local_id );
@@ -238,7 +253,7 @@ class Reconciler {
 
 		$peers = wp_cache_get( 'active_peers_list', 'wpmmcc' );
 		if ( false === $peers ) {
-			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom peers table query.
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- plugin table or connection command; WordPress has no replacement API
 			$peers = $wpdb->get_results(
 				$wpdb->prepare(
 					"SELECT * FROM {$wpdb->prefix}wpmmcc_peers WHERE status = %s",
@@ -265,7 +280,7 @@ class Reconciler {
 	public static function get_pending_cdc_events( int $limit = 50 ): array {
 		global $wpdb;
 
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom journal table query.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.DirectQuery -- pending journal page; a cached page would resend events that were just acked
 		$results = $wpdb->get_results(
 			$wpdb->prepare(
 				"SELECT * FROM {$wpdb->prefix}wpmmcc_journal WHERE direction = 'outbound' AND consumed = 0 ORDER BY id ASC LIMIT %d",
@@ -291,14 +306,18 @@ class Reconciler {
 		}
 
 		$ids = array_values( array_map( 'intval', $event_ids ) );
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery
-		$wpdb->query(
-			$wpdb->prepare(
-				"UPDATE {$wpdb->prefix}wpmmcc_journal SET consumed = 1 WHERE id IN (" . implode( ',', array_fill( 0, count( $ids ), '%d' ) ) . ")",
-				$ids
-			)
-		);
+		foreach ( $ids as $id ) {
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- plugin table or connection command; WordPress has no replacement API
+			$wpdb->query(
+				$wpdb->prepare(
+					"UPDATE {$wpdb->prefix}wpmmcc_journal SET consumed = 1 WHERE id = %d",
+					$id
+				)
+			);
+		}
 		wp_cache_delete( 'admin_journal_recent', 'wpmmcc' );
+		$journal_generation = wp_cache_get( 'wpmmcc_journal_generation', 'wpmmcc' );
+		wp_cache_set( 'wpmmcc_journal_generation', ( is_int( $journal_generation ) ? $journal_generation : 0 ) + 1, 'wpmmcc' );
 	}
 
 	/**
@@ -321,25 +340,38 @@ class Reconciler {
 		$cache_key = 'digest_posts_' . md5( implode( ',', $clean_post_types ) . '_' . $last_seen_id . '_' . $limit );
 		$rows      = wp_cache_get( $cache_key, 'wpmmcc' );
 		if ( false === $rows ) {
-			$query_args = array_merge( $clean_post_types, array( $last_seen_id, $limit ) );
-
 			// Conflict-review drafts are excluded IN the query, not after it: a
 			// page that lost rows to a post-filter comes back short, and a short
 			// page reads as "end of catalog" to the client (WMC-11).
-			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery
-			$rows = $wpdb->get_results(
-				$wpdb->prepare(
-					"SELECT ID, post_title, post_content, post_excerpt, post_date_gmt, comment_status, ping_status, menu_order, post_status, post_modified_gmt, post_type\x20
-					 FROM {$wpdb->posts}\x20
-					 WHERE post_type IN (" . implode( ',', array_fill( 0, count( $clean_post_types ), '%s' ) ) . ")\x20
-					   AND post_status IN ('publish', 'draft', 'trash')\x20
-					   AND ID NOT IN ( SELECT post_id FROM {$wpdb->postmeta} WHERE meta_key = '" . Shadow_Draft::META_FLAG . "' AND meta_value = '1' )\x20
-					   AND ID > %d\x20
-					 ORDER BY ID ASC\x20
-					 LIMIT %d",
-					$query_args
-				)
+			$merged = array();
+			foreach ( $clean_post_types as $post_type ) {
+				// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- plugin table or connection command; WordPress has no replacement API
+				$type_rows = $wpdb->get_results(
+					$wpdb->prepare(
+						"SELECT ID, post_title, post_content, post_excerpt, post_date_gmt, comment_status, ping_status, menu_order, post_status, post_modified_gmt, post_type FROM {$wpdb->posts} WHERE post_type = %s AND post_status IN ('publish', 'draft', 'trash') AND ID NOT IN ( SELECT post_id FROM {$wpdb->postmeta} WHERE meta_key = %s AND meta_value = %s ) AND ID > %d ORDER BY ID ASC LIMIT %d",
+						$post_type,
+						Shadow_Draft::META_FLAG,
+						'1',
+						$last_seen_id,
+						$limit
+					)
+				);
+				if ( is_array( $type_rows ) ) {
+					foreach ( $type_rows as $type_row ) {
+						$merged[] = $type_row;
+					}
+				}
+			}
+			usort(
+				$merged,
+				static function ( $left, $right ): int {
+					return (int) $left->ID <=> (int) $right->ID;
+				}
 			);
+			$rows = array_slice( $merged, 0, $limit );
+			if ( '' !== (string) $wpdb->last_error ) {
+				$rows = array();
+			}
 			wp_cache_set( $cache_key, $rows, 'wpmmcc', 30 );
 		}
 
@@ -356,7 +388,7 @@ class Reconciler {
 			$clock_key = 'vclock_' . $local_id;
 			$clock     = wp_cache_get( $clock_key, 'wpmmcc' );
 			if ( false === $clock ) {
-				// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom mapping table query.
+				// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- plugin table or connection command; WordPress has no replacement API
 				$clock = (int) $wpdb->get_var(
 					$wpdb->prepare(
 						"SELECT vector_clock FROM {$wpdb->prefix}wpmmcc_cross_mappings WHERE local_object_type = 'post' AND local_object_id = %d LIMIT 1",

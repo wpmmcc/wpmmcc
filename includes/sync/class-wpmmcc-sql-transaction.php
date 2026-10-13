@@ -28,6 +28,7 @@ class SQL_Transaction {
 		$connection = $wpdb->dbh;
 		// mysqli does not expose the C API server_status flag. Use the native
 		// SQL admission check below, which refuses an already-active transaction.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.DirectQuery -- transaction and savepoint commands must run on this connection
 		$autocommit = $wpdb->get_var( 'SELECT @@session.autocommit' );
 		if ( ( ! is_object( $connection ) && ! is_resource( $connection ) )
 			|| '1' !== (string) $autocommit || '' !== (string) $wpdb->last_error || empty( $tables ) ) {
@@ -39,12 +40,22 @@ class SQL_Transaction {
 				throw new \RuntimeException( 'Transaction table scope is invalid.' );
 			}
 		}
-		$placeholders = implode( ',', array_fill( 0, count( $tables ), '%s' ) );
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.PreparedSQL.NotPrepared -- Checked names are bound as values, not identifiers.
-		$engines = $wpdb->get_results( $wpdb->prepare(
-			"SELECT TABLE_NAME, ENGINE FROM information_schema.TABLES WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME IN ({$placeholders})",
-			$tables
-		), ARRAY_A );
+		$engines = array();
+		foreach ( $tables as $table ) {
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.DirectQuery -- transaction and savepoint commands must run on this connection
+			$engine = $wpdb->get_row(
+				$wpdb->prepare(
+					'SELECT TABLE_NAME, ENGINE FROM information_schema.TABLES WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = %s',
+					$table
+				),
+				ARRAY_A
+			);
+			if ( ! is_array( $engine ) ) {
+				$engines = null;
+				break;
+			}
+			$engines[] = $engine;
+		}
 		if ( ! is_array( $engines ) || '' !== (string) $wpdb->last_error || count( $engines ) !== count( $tables ) ) {
 			throw new \RuntimeException( 'Transaction table evidence is unavailable.' );
 		}
@@ -62,6 +73,7 @@ class SQL_Transaction {
 		// SET TRANSACTION (without SESSION/GLOBAL) errors inside an active
 		// transaction and never commits it. It admits only our NEXT transaction.
 		if ( $wpdb->dbh !== $connection
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.DirectQuery -- transaction and savepoint commands must run on this connection
 			|| false === $wpdb->query( 'SET TRANSACTION READ WRITE' )
 			|| false === $wpdb->query( 'START TRANSACTION' ) ) {
 			throw new \RuntimeException( 'Transaction did not start on the original connection.' );
@@ -69,7 +81,8 @@ class SQL_Transaction {
 		$transaction->open = true;
 		// The fence detects hooks that commit, reconnect or start a replacement
 		// transaction, even when the connection is still marked IN_TRANS.
-		if ( false === $wpdb->query( 'SAVEPOINT ' . $transaction->fence ) ) {
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.DirectQuery -- transaction and savepoint commands must run on this connection
+		if ( false === $wpdb->query( $wpdb->prepare( 'SAVEPOINT %i', $transaction->fence ) ) ) {
 			$transaction->rollback();
 			throw new \RuntimeException( 'Transaction fence was not saved.' );
 		}
@@ -81,10 +94,12 @@ class SQL_Transaction {
 		global $wpdb;
 		$this->lease->assert_owner();
 		if ( ! $this->open || $wpdb->dbh !== $this->connection
-			|| false === $wpdb->query( 'RELEASE SAVEPOINT ' . $this->fence ) ) {
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.DirectQuery -- transaction and savepoint commands must run on this connection
+			|| false === $wpdb->query( $wpdb->prepare( 'RELEASE SAVEPOINT %i', $this->fence ) ) ) {
 			throw new \RuntimeException( 'Original transaction changed; completion is unconfirmed.' );
 		}
-		if ( false === $wpdb->query( 'SAVEPOINT ' . $this->fence ) ) {
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.DirectQuery -- transaction and savepoint commands must run on this connection
+		if ( false === $wpdb->query( $wpdb->prepare( 'SAVEPOINT %i', $this->fence ) ) ) {
 			throw new \RuntimeException( 'Original transaction fence changed.' );
 		}
 	}
@@ -92,6 +107,7 @@ class SQL_Transaction {
 	public function commit(): void {
 		global $wpdb;
 		$this->assert_active();
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.DirectQuery -- transaction and savepoint commands must run on this connection
 		if ( false === $wpdb->query( 'COMMIT' ) || $wpdb->dbh !== $this->connection ) {
 			throw new \RuntimeException( 'Original transaction commit is unconfirmed.' );
 		}
@@ -102,7 +118,8 @@ class SQL_Transaction {
 	public function rollback(): void {
 		global $wpdb;
 		if ( $this->open && $wpdb->dbh === $this->connection && $this->lease->owns()
-			&& false !== $wpdb->query( 'RELEASE SAVEPOINT ' . $this->fence ) ) {
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.DirectQuery -- transaction and savepoint commands must run on this connection
+			&& false !== $wpdb->query( $wpdb->prepare( 'RELEASE SAVEPOINT %i', $this->fence ) ) ) {
 			$wpdb->query( 'ROLLBACK' );
 		}
 		$this->open = false;

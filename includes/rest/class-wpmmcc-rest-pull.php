@@ -66,7 +66,7 @@ class Rest_Pull extends Rest_Base {
 			$cache_key = 'canonical_mapping_' . md5( $uuid );
 			$row       = wp_cache_get( $cache_key, 'wpmmcc' );
 			if ( false === $row ) {
-				// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom mapping table query.
+				// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- plugin table or connection command; WordPress has no replacement API
 				$row = $wpdb->get_row(
 					$wpdb->prepare( "SELECT * FROM {$wpdb->prefix}wpmmcc_cross_mappings WHERE canonical_uuid = %s LIMIT 1", $uuid )
 				);

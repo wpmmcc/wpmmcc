@@ -39,7 +39,7 @@ class Asset_Registry {
 		$cache_key     = 'cas_asset_' . $sha256;
 		$attachment_id = wp_cache_get( $cache_key, 'wpmmcc' );
 		if ( false === $attachment_id ) {
-			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom asset registry table query.
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- plugin table or connection command; WordPress has no replacement API
 			$attachment_id = (int) $wpdb->get_var(
 				$wpdb->prepare( "SELECT attachment_id FROM {$wpdb->prefix}wpmmcc_asset_registry WHERE sha256 = %s LIMIT 1", $sha256 )
 			);
@@ -72,7 +72,7 @@ class Asset_Registry {
 	public static function register_cas_asset( int $attachment_id, string $sha256, int $size_bytes, string $origin_peer_uuid = '' ): bool {
 		global $wpdb;
 
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom asset registry table replace.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- plugin table or connection command; WordPress has no replacement API
 		$result = $wpdb->replace(
 			$wpdb->prefix . 'wpmmcc_asset_registry',
 			array(
@@ -86,7 +86,7 @@ class Asset_Registry {
 		);
 
 		wp_cache_delete( 'cas_asset_' . $sha256, 'wpmmcc' );
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Exact CAS readback.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.DirectQuery -- read-back proves the registry row just written
 		$row = $wpdb->get_row( $wpdb->prepare(
 			"SELECT attachment_id, size_bytes FROM {$wpdb->prefix}wpmmcc_asset_registry WHERE sha256 = %s", $sha256
 		), ARRAY_A );

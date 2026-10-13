@@ -183,9 +183,11 @@ class Event_Recorder {
 		if ( '' === $canonical_uuid || is_wp_error( $lease ) ) {
 			throw new \RuntimeException( 'Source clock authority is unavailable.' );
 		}
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.DirectQuery -- clock increment starts from the value stored now
 		$raw_curr = $wpdb->get_var(
 			$wpdb->prepare(
-				"SELECT vector_clock FROM {$table} WHERE local_object_type = %s AND local_object_id = %d ORDER BY vector_clock DESC LIMIT 1",
+				'SELECT vector_clock FROM %i WHERE local_object_type = %s AND local_object_id = %d ORDER BY vector_clock DESC LIMIT 1',
+				$table,
 				$object_type,
 				$local_id
 			)
@@ -205,7 +207,7 @@ class Event_Recorder {
 		$lease->assert_owner();
 		if ( null !== $raw_curr && false !== $raw_curr && (int) $raw_curr > 0 ) {
 			if ( null === $clock ) {
-				// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom mapping table update.
+				// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- plugin table or connection command; WordPress has no replacement API
 				$changed = $wpdb->update(
 					$table,
 					array( 'vector_clock' => $next ),
@@ -219,10 +221,11 @@ class Event_Recorder {
 			} else {
 				// GREATEST guard: a save-hook bump racing between export_post()'s
 				// read and this write must never be lowered.
-				// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom mapping table update.
+				// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- plugin table or connection command; WordPress has no replacement API
 				$changed = $wpdb->query(
 					$wpdb->prepare(
-						"UPDATE {$table} SET vector_clock = GREATEST(vector_clock, %d) WHERE local_object_type = %s AND local_object_id = %d",
+						'UPDATE %i SET vector_clock = GREATEST(vector_clock, %d) WHERE local_object_type = %s AND local_object_id = %d',
+						$table,
 						$next,
 						$object_type,
 						$local_id
@@ -231,7 +234,7 @@ class Event_Recorder {
 			}
 		} else {
 			// No local row yet: create the self row.
-			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom mapping table insert.
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- plugin table or connection command; WordPress has no replacement API
 			$changed = $wpdb->insert(
 				$table,
 				array(
@@ -250,9 +253,12 @@ class Event_Recorder {
 		if ( false === $changed ) {
 			throw new \RuntimeException( 'Source clock was not saved.' );
 		}
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.DirectQuery -- read-back proves the clock just written
 		$live = $wpdb->get_var( $wpdb->prepare(
-			"SELECT vector_clock FROM {$table} WHERE local_object_type = %s AND local_object_id = %d ORDER BY vector_clock DESC LIMIT 1",
-			$object_type, $local_id
+			'SELECT vector_clock FROM %i WHERE local_object_type = %s AND local_object_id = %d ORDER BY vector_clock DESC LIMIT 1',
+			$table,
+			$object_type,
+			$local_id
 		) );
 		if ( '' !== (string) $wpdb->last_error || ! is_numeric( $live ) || (int) $live < $next ) {
 			throw new \RuntimeException( 'Source clock readback differs.' );
@@ -392,11 +398,13 @@ class Event_Recorder {
 			'consumed'           => (int) ( $entry['consumed'] ?? 0 ),
 		);
 
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom journal table insert.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- plugin table or connection command; WordPress has no replacement API
 		$changed = $wpdb->insert( $wpdb->prefix . 'wpmmcc_journal', $data );
 		if ( 1 !== $changed || (int) $wpdb->insert_id <= 0 ) {
 			throw new \RuntimeException( 'Journal evidence was not saved.' );
 		}
+		$journal_generation = wp_cache_get( 'wpmmcc_journal_generation', 'wpmmcc' );
+		wp_cache_set( 'wpmmcc_journal_generation', ( is_int( $journal_generation ) ? $journal_generation : 0 ) + 1, 'wpmmcc' );
 		wp_cache_delete( 'admin_journal_recent', 'wpmmcc' );
 		return (int) $wpdb->insert_id;
 	}
@@ -414,7 +422,7 @@ class Event_Recorder {
 		$cache_key = 'canonical_uuid_' . $object_type . '_' . $object_id;
 		$uuid      = wp_cache_get( $cache_key, 'wpmmcc' );
 		if ( false === $uuid || null === $uuid ) {
-			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom mapping table query.
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- plugin table or connection command; WordPress has no replacement API
 			$uuid = $wpdb->get_var(
 				$wpdb->prepare(
 					"SELECT canonical_uuid FROM {$wpdb->prefix}wpmmcc_cross_mappings WHERE local_object_type = %s AND local_object_id = %d LIMIT 1",

@@ -24,13 +24,14 @@ class SQL_Lease {
 	public static function acquire( string $scope ) {
 		global $wpdb;
 		$name = 'wmc:' . substr( hash( 'sha256', $wpdb->prefix . "\n" . $scope ), 0, 60 );
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Native, connection-owned, non-blocking advisory lease.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.DirectQuery -- lock ownership is a property of this database connection
 		$locked = $wpdb->get_var( $wpdb->prepare( 'SELECT GET_LOCK(%s, 0)', $name ) );
 		if ( '1' !== (string) $locked ) {
 			return new \WP_Error( 'wpmmcc_delivery_busy', 'Original delivery is active or its execution fence is unavailable.', array( 'status' => 409 ) );
 		}
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- A reconnect must not inherit the old connection's authority.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.DirectQuery -- lock ownership is a property of this database connection
 		$connection = (int) $wpdb->get_var( 'SELECT CONNECTION_ID()' );
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.DirectQuery -- lock ownership is a property of this database connection
 		$database = $wpdb->get_var( 'SELECT DATABASE()' );
 		$lease = new self( $name, $connection, (string) $database );
 		if ( $connection <= 0 || ! is_string( $database ) || '' === $database || ! $lease->owns() ) {
@@ -41,10 +42,11 @@ class SQL_Lease {
 
 	public function owns(): bool {
 		global $wpdb;
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Check both native owner and the live connection.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.DirectQuery -- lock ownership is a property of this database connection
 		$owner = $wpdb->get_var( $wpdb->prepare( 'SELECT IS_USED_LOCK(%s)', $this->name ) );
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Read-only native identity check.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.DirectQuery -- lock ownership is a property of this database connection
 		$current = $wpdb->get_var( 'SELECT CONNECTION_ID()' );
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.DirectQuery -- lock ownership is a property of this database connection
 		$database = $wpdb->get_var( 'SELECT DATABASE()' );
 		return (string) $owner === (string) $this->connection && (string) $current === (string) $this->connection
 			&& $database === $this->database && '' === (string) $wpdb->last_error;
@@ -60,7 +62,7 @@ class SQL_Lease {
 		global $wpdb;
 		try {
 			if ( $this->owns() ) {
-				// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Release only this invocation's native lease.
+				// phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.DirectQuery -- lock ownership is a property of this database connection
 				$wpdb->get_var( $wpdb->prepare( 'SELECT RELEASE_LOCK(%s)', $this->name ) );
 			}
 		} catch ( \Throwable $error ) {

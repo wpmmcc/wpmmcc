@@ -36,7 +36,7 @@ class Rest_Handshake extends Rest_Base {
 			array(
 				'methods'             => WP_REST_Server::CREATABLE,
 				'callback'            => array( $this, 'handle_handshake' ),
-				'permission_callback' => '__return_true', // Handshake is authenticated by pairing_code
+				'permission_callback' => array( $this, 'permission_handshake' ),
 			)
 		);
 	}
@@ -58,6 +58,31 @@ class Rest_Handshake extends Rest_Base {
 	 * @param WP_REST_Request $request Request.
 	 * @return WP_REST_Response|WP_Error
 	 */
+	public function permission_handshake( WP_REST_Request $request ) {
+		$params = $request->get_json_params();
+		if ( empty( $params ) ) {
+			$params = $request->get_params();
+		}
+		$pairing_code = sanitize_text_field( $params['pairing_code'] ?? '' );
+		$stored_code  = get_transient( 'wpmmcc_active_pairing_code' );
+		if ( empty( $stored_code ) || ! hash_equals( (string) $stored_code, $pairing_code ) ) {
+			$origin_uuid = sanitize_text_field( $params['origin_uuid'] ?? '' );
+			$origin_url  = esc_url_raw( $params['origin_url'] ?? '' );
+			Rest_Middleware::record_auth_failure(
+				'/wpmmcc/v1/sync/handshake',
+				'invalid_pairing_code',
+				$origin_uuid,
+				array( 'origin_url' => substr( $origin_url, 0, 200 ) )
+			);
+			return $this->format_error(
+				'wpmmcc_invalid_pairing_code',
+				__( 'Invalid or expired pairing code. Please generate a new one.', 'wpmmcc' ),
+				400
+			);
+		}
+		return true;
+	}
+
 	public function handle_handshake( WP_REST_Request $request ) {
 		global $wpdb;
 
@@ -67,19 +92,10 @@ class Rest_Handshake extends Rest_Base {
 		}
 
 		$pairing_code        = sanitize_text_field( $params['pairing_code'] ?? '' );
-		$origin_uuid         = sanitize_text_field( $params['origin_uuid'] ?? '' );
-		$origin_url          = esc_url_raw( $params['origin_url'] ?? '' );
-		$origin_name         = sanitize_text_field( $params['origin_name'] ?? 'Peer Site' );
-		$origin_signature    = sanitize_text_field( $params['install_signature'] ?? '' );
-		$requested_direction = sanitize_text_field( $params['requested_direction'] ?? 'bidirectional' );
-		$source_lang         = sanitize_text_field( $params['source_lang'] ?? 'en_US' );
-		$target_lang         = sanitize_text_field( $params['target_lang'] ?? 'zh_CN' );
-		$sync_mode           = sanitize_text_field( $params['sync_mode'] ?? 'sync_only' );
-
-		// 1. Verify Pairing Code
-		$stored_code = get_transient( 'wpmmcc_active_pairing_code' );
+		$stored_code         = get_transient( 'wpmmcc_active_pairing_code' );
 		if ( empty( $stored_code ) || ! hash_equals( (string) $stored_code, $pairing_code ) ) {
-			// G-06: audit pairing failures (never log the pairing code itself).
+			$origin_uuid = sanitize_text_field( $params['origin_uuid'] ?? '' );
+			$origin_url  = esc_url_raw( $params['origin_url'] ?? '' );
 			Rest_Middleware::record_auth_failure(
 				'/wpmmcc/v1/sync/handshake',
 				'invalid_pairing_code',
@@ -93,7 +109,17 @@ class Rest_Handshake extends Rest_Base {
 			);
 		}
 
-		// Consume one-time pairing code immediately
+		$origin_uuid         = sanitize_text_field( $params['origin_uuid'] ?? '' );
+		$origin_url          = esc_url_raw( $params['origin_url'] ?? '' );
+		$origin_name         = sanitize_text_field( $params['origin_name'] ?? 'Peer Site' );
+		$origin_signature    = sanitize_text_field( $params['install_signature'] ?? '' );
+		$requested_direction = sanitize_text_field( $params['requested_direction'] ?? 'bidirectional' );
+		$source_lang         = sanitize_text_field( $params['source_lang'] ?? 'en_US' );
+		$target_lang         = sanitize_text_field( $params['target_lang'] ?? 'zh_CN' );
+		$sync_mode           = sanitize_text_field( $params['sync_mode'] ?? 'sync_only' );
+
+		// permission_handshake() already checked this and did not consume it.
+		// Verify again here so a direct call cannot skip the gate, then consume once.
 		delete_transient( 'wpmmcc_active_pairing_code' );
 
 		// 2. Validate Origin UUID
@@ -165,7 +191,7 @@ class Rest_Handshake extends Rest_Base {
 		$peer_id_key = 'peer_id_' . md5( $origin_uuid );
 		$existing_id = wp_cache_get( $peer_id_key, 'wpmmcc' );
 		if ( false === $existing_id ) {
-			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom peers table query.
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- plugin table or connection command; WordPress has no replacement API
 			$existing_id = $wpdb->get_var(
 				$wpdb->prepare( "SELECT id FROM {$wpdb->prefix}wpmmcc_peers WHERE peer_uuid = %s", $origin_uuid )
 			);
@@ -197,11 +223,11 @@ class Rest_Handshake extends Rest_Base {
 		);
 
 		if ( $existing_id ) {
-			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom peers table update.
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- plugin table or connection command; WordPress has no replacement API
 			$wpdb->update( $wpdb->prefix . 'wpmmcc_peers', $peer_data, array( 'id' => $existing_id ) );
 		} else {
 			$peer_data['created_at'] = current_time( 'mysql' );
-			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom peers table insert.
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- plugin table or connection command; WordPress has no replacement API
 			$wpdb->insert( $wpdb->prefix . 'wpmmcc_peers', $peer_data );
 		}
 
@@ -209,6 +235,11 @@ class Rest_Handshake extends Rest_Base {
 		wp_cache_delete( $peer_id_key, 'wpmmcc' );
 		wp_cache_delete( 'active_peers_list', 'wpmmcc' );
 		wp_cache_delete( 'admin_peers_recent', 'wpmmcc' );
+		wp_cache_delete( 'admin_peer_name_' . md5( $origin_uuid ), 'wpmmcc' );
+		if ( $existing_id ) {
+			wp_cache_delete( 'admin_peer_' . (int) $existing_id, 'wpmmcc' );
+			wp_cache_delete( 'admin_peer_row_' . (int) $existing_id, 'wpmmcc' );
+		}
 
 		return $this->format_success(
 			array(

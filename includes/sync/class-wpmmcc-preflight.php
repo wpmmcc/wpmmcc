@@ -41,7 +41,7 @@ class Preflight {
 			$cache_key = 'peer_' . md5( $peer_uuid );
 			$peer      = wp_cache_get( $cache_key, 'wpmmcc' );
 			if ( false === $peer ) {
-				// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom plugin table query.
+				// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- plugin table or connection command; WordPress has no replacement API
 				$peer = $wpdb->get_row(
 					$wpdb->prepare( "SELECT * FROM {$wpdb->prefix}wpmmcc_peers WHERE peer_uuid = %s", $peer_uuid )
 				);
@@ -135,8 +135,14 @@ class Preflight {
 		// Step 6: Shadow Write Probe
 		if ( ! empty( $args['shadow_write'] ) && $writable ) {
 			$probe_file = $upload_dir['basedir'] . '/.wpmmcc_probe_' . bin2hex( random_bytes( 4 ) ) . '.tmp';
-			$written    = @file_put_contents( $probe_file, 'probe' );
-			if ( false !== $written && file_exists( $probe_file ) ) {
+			require_once ABSPATH . 'wp-admin/includes/file.php';
+			$written = false;
+			if ( WP_Filesystem() ) {
+				global $wp_filesystem;
+				$chmod   = defined( 'FS_CHMOD_FILE' ) ? \FS_CHMOD_FILE : 0644;
+				$written = is_object( $wp_filesystem ) && $wp_filesystem->put_contents( $probe_file, 'probe', $chmod );
+			}
+			if ( $written && file_exists( $probe_file ) ) {
 				wp_delete_file( $probe_file );
 				$report['steps']['6_shadow_probe'] = array(
 					'status'  => 'PASS',

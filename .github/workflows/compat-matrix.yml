@@ -1,0 +1,245 @@
+name: WP compatibility matrix
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+# Same header claims as wpmmcc-ats: Requires at least 6.2 / Tested up to 7.1 /
+# Requires PHP 7.4. The tested-up-to cell is WordPress 7.1.3, the current
+# patch, not the original 7.1 tag.
+#
+# Single-site cells install, activate, and check WPMMCC_VERSION, the
+# wpmmcc/v1 routes, and the sync tables. Uninstall must remove every
+# wpmmcc_ table. A second install proves the site can be re-activated
+# after that cleanup.
+#
+# Multisite cells only prove network activation on the main site. This
+# plugin does not provision a subsite until that site loads the plugin.
+# If a cell fails because WordPress itself cannot install under that PHP
+# (not a plugin defect), drop that cell and record why here.
+jobs:
+  wp-compat:
+    name: WP ${{ matrix.wp }} on PHP ${{ matrix.php }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        php: ['7.4', '8.0', '8.1', '8.2', '8.3']
+        wp: ['6.2', '6.3', '6.4', '6.5', '6.6', '6.7', '6.8', '6.9', '7.0', '7.1.3']
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: root
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping --host=localhost -proot"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=10
+    env:
+      WP_PATH: /tmp/wp
+      WP_URL: http://127.0.0.1:8080
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: mysqli
+          coverage: none
+
+      - name: Install wp-cli
+        run: |
+          curl -sSL https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar -o /tmp/wp-cli.phar
+          sudo install -m 0755 /tmp/wp-cli.phar /usr/local/bin/wp
+          wp --allow-root --info | sed -n '1,4p'
+
+      - name: Install WordPress ${{ matrix.wp }}
+        run: |
+          set -euo pipefail
+          wp core download --version='${{ matrix.wp }}' --path="$WP_PATH" --allow-root
+          wp config create --path="$WP_PATH" --dbname=wp --dbuser=root --dbpass=root \
+            --dbhost=127.0.0.1:3306 --allow-root
+          wp db create --path="$WP_PATH" --allow-root
+          wp core install --path="$WP_PATH" --url="$WP_URL" --title=WPMMCC \
+            --admin_user=admin --admin_password=ci-admin-pass-2026 \
+            --admin_email=ci@example.com --skip-email --allow-root
+          got="$(wp core version --path="$WP_PATH" --allow-root)"
+          echo "installed WordPress $got"
+          case "$got" in
+            "${{ matrix.wp }}"|"${{ matrix.wp }}."*) ;;
+            *) echo "expected WordPress ${{ matrix.wp }}, got $got" >&2; exit 1 ;;
+          esac
+
+      - name: Copy plugin under test into the site
+        run: |
+          set -euo pipefail
+          mkdir -p "$WP_PATH/wp-content/plugins/wpmmcc"
+          tar -C "$GITHUB_WORKSPACE" --exclude=./.git -cf - . \
+            | tar -C "$WP_PATH/wp-content/plugins/wpmmcc" -xf -
+
+      - name: Activate and smoke-test the plugin
+        run: |
+          set -euo pipefail
+          wp plugin activate wpmmcc --path="$WP_PATH" --allow-root
+          cat > /tmp/activation-smoke.php <<'PHP'
+          <?php
+          if ( ! defined( 'WPMMCC_VERSION' ) ) {
+            fwrite( STDERR, "WPMMCC_VERSION is not defined\n" );
+            exit( 1 );
+          }
+          global $wpdb;
+          $peers = $wpdb->get_var( $wpdb->prepare( 'SHOW TABLES LIKE %s', $wpdb->esc_like( $wpdb->prefix . 'wpmmcc_peers' ) ) );
+          if ( ! is_string( $peers ) || '' === $peers ) {
+            fwrite( STDERR, "wpmmcc_peers is missing after activation\n" );
+            exit( 1 );
+          }
+          $found = false;
+          foreach ( array_keys( rest_get_server()->get_routes() ) as $route ) {
+            if ( 0 === strpos( (string) $route, '/wpmmcc/v1' ) ) {
+              $found = true;
+              break;
+            }
+          }
+          if ( ! $found ) {
+            fwrite( STDERR, "wpmmcc/v1 REST routes are not registered\n" );
+            exit( 1 );
+          }
+          echo 'activation-smoke-ok version=' . WPMMCC_VERSION . "\n";
+          PHP
+          wp eval-file /tmp/activation-smoke.php --path="$WP_PATH" --allow-root
+
+      - name: Uninstall and verify the sync tables are gone
+        run: |
+          set -euo pipefail
+          wp plugin deactivate wpmmcc --path="$WP_PATH" --allow-root
+          wp plugin uninstall wpmmcc --path="$WP_PATH" --allow-root
+          if [ -d "$WP_PATH/wp-content/plugins/wpmmcc" ]; then
+            echo "plugin directory survived uninstall" >&2
+            exit 1
+          fi
+          cat > /tmp/uninstall-smoke.php <<'PHP'
+          <?php
+          global $wpdb;
+          $tables = (array) $wpdb->get_col( $wpdb->prepare( 'SHOW TABLES LIKE %s', $wpdb->esc_like( $wpdb->prefix . 'wpmmcc_' ) . '%' ) );
+          if ( ! empty( $tables ) ) {
+            fwrite( STDERR, "wpmmcc tables survived uninstall: " . implode( ',', $tables ) . "\n" );
+            exit( 1 );
+          }
+          if ( false !== get_option( 'wpmmcc_db_version' ) ) {
+            fwrite( STDERR, "wpmmcc_db_version survived uninstall\n" );
+            exit( 1 );
+          }
+          echo "uninstall-ok\n";
+          PHP
+          wp eval-file /tmp/uninstall-smoke.php --path="$WP_PATH" --allow-root
+
+      - name: Re-install and activate again
+        run: |
+          set -euo pipefail
+          mkdir -p "$WP_PATH/wp-content/plugins/wpmmcc"
+          tar -C "$GITHUB_WORKSPACE" --exclude=./.git -cf - . \
+            | tar -C "$WP_PATH/wp-content/plugins/wpmmcc" -xf -
+          wp plugin activate wpmmcc --path="$WP_PATH" --allow-root
+          wp eval-file /tmp/activation-smoke.php --path="$WP_PATH" --allow-root
+          wp plugin deactivate wpmmcc --path="$WP_PATH" --allow-root
+          wp plugin uninstall wpmmcc --path="$WP_PATH" --allow-root
+          wp eval-file /tmp/uninstall-smoke.php --path="$WP_PATH" --allow-root
+          echo "matrix cell OK: WP ${{ matrix.wp }} x PHP ${{ matrix.php }}"
+
+  wp-compat-multisite:
+    name: multisite WP ${{ matrix.wp }} on PHP ${{ matrix.php }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - php: '7.4'
+            wp: '6.2'
+          - php: '8.0'
+            wp: '6.7'
+          - php: '8.3'
+            wp: '7.1.3'
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: root
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping --host=localhost -proot"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=10
+    env:
+      WP_PATH: /tmp/wp
+      WP_URL: http://127.0.0.1:8080
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: mysqli
+          coverage: none
+
+      - name: Install wp-cli
+        run: |
+          curl -sSL https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar -o /tmp/wp-cli.phar
+          sudo install -m 0755 /tmp/wp-cli.phar /usr/local/bin/wp
+
+      - name: Install WordPress multisite ${{ matrix.wp }}
+        run: |
+          set -euo pipefail
+          wp core download --version='${{ matrix.wp }}' --path="$WP_PATH" --allow-root
+          wp config create --path="$WP_PATH" --dbname=wp --dbuser=root --dbpass=root \
+            --dbhost=127.0.0.1:3306 --allow-root
+          wp db create --path="$WP_PATH" --allow-root
+          wp core multisite-install --path="$WP_PATH" --url="$WP_URL" --title=WPMMCC \
+            --admin_user=admin --admin_password=ci-multisite-admin \
+            --admin_email=ci@example.com --skip-email --allow-root
+          got="$(wp core version --path="$WP_PATH" --allow-root)"
+          case "$got" in
+            "${{ matrix.wp }}"|"${{ matrix.wp }}."*) ;;
+            *) echo "expected WordPress ${{ matrix.wp }}, got $got" >&2; exit 1 ;;
+          esac
+
+      - name: Copy plugin and network-activate
+        run: |
+          set -euo pipefail
+          mkdir -p "$WP_PATH/wp-content/plugins/wpmmcc"
+          tar -C "$GITHUB_WORKSPACE" --exclude=./.git -cf - . \
+            | tar -C "$WP_PATH/wp-content/plugins/wpmmcc" -xf -
+          wp plugin activate wpmmcc --network --path="$WP_PATH" --allow-root
+          cat > /tmp/ms-activation-smoke.php <<'PHP'
+          <?php
+          if ( ! is_multisite() ) {
+            fwrite( STDERR, "multisite constants are not in effect\n" );
+            exit( 1 );
+          }
+          if ( ! defined( 'WPMMCC_VERSION' ) ) {
+            fwrite( STDERR, "WPMMCC_VERSION is not defined\n" );
+            exit( 1 );
+          }
+          global $wpdb;
+          $peers = $wpdb->get_var( $wpdb->prepare( 'SHOW TABLES LIKE %s', $wpdb->esc_like( $wpdb->prefix . 'wpmmcc_peers' ) ) );
+          if ( ! is_string( $peers ) || '' === $peers ) {
+            fwrite( STDERR, "main site has no wpmmcc_peers after network activation\n" );
+            exit( 1 );
+          }
+          echo 'ms-activation-smoke-ok version=' . WPMMCC_VERSION . "\n";
+          PHP
+          wp eval-file /tmp/ms-activation-smoke.php --url="$WP_URL" --path="$WP_PATH" --allow-root
+          wp plugin deactivate wpmmcc --network --path="$WP_PATH" --allow-root
+          wp plugin uninstall wpmmcc --path="$WP_PATH" --allow-root
+          echo "multisite cell OK: WP ${{ matrix.wp }} x PHP ${{ matrix.php }}"

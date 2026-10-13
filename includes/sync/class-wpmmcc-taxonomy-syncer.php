@@ -89,7 +89,7 @@ class Taxonomy_Syncer {
 					// Record term mapping
 					if ( '' !== $peer_uuid && $source_id > 0 ) {
 						$term_canonical = 'term_' . md5( $taxonomy . '|' . $slug );
-						// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom plugin table query.
+						// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- plugin table or connection command; WordPress has no replacement API
 						$wpdb->replace(
 							$wpdb->prefix . 'wpmmcc_cross_mappings',
 							array(
@@ -106,6 +106,7 @@ class Taxonomy_Syncer {
 							array( '%s', '%s', '%d', '%s', '%d', '%s', '%d', '%s', '%s' )
 						);
 						wp_cache_delete( 'mapping_' . md5( $term_canonical . '_' . $peer_uuid ), 'wpmmcc' );
+						wp_cache_delete( 'local_post_uuid_' . md5( $term_canonical ), 'wpmmcc' );
 					}
 				}
 			}

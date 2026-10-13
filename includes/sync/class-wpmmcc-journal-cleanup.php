@@ -45,17 +45,60 @@ class Journal_Cleanup {
 	 */
 	public static function preview( string $cutoff = '', bool $locked = false ): array {
 		global $wpdb;
-		$sql = "SELECT * FROM {$wpdb->prefix}wpmmcc_journal WHERE " . self::predicate();
-		if ( '' !== $cutoff ) {
-			$sql .= $wpdb->prepare( ' AND occurred_at < %s', $cutoff );
+		$cache_key = 'journal_cleanup_preview_' . md5( $cutoff );
+		if ( ! $locked ) {
+			$cached = wp_cache_get( $cache_key, 'wpmmcc' );
+			if ( is_array( $cached ) ) {
+				return $cached;
+			}
 		}
-		$sql .= ' ORDER BY id ASC LIMIT ' . self::BATCH . ( $locked ? ' FOR UPDATE' : '' );
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.PreparedSQL.NotPrepared -- Literal allowlist predicate, prepared cutoff.
-		$rows = $wpdb->get_results( $sql, ARRAY_A );
+		if ( '' !== $cutoff && $locked ) {
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- plugin table or connection command; WordPress has no replacement API
+			$rows = $wpdb->get_results(
+				$wpdb->prepare(
+					"SELECT * FROM {$wpdb->prefix}wpmmcc_journal WHERE consumed = 1 AND outcome IN ('success', 'skipped') AND object_type = 'peer' AND event_type IN ('peer_connect', 'peer_disconnect') AND canonical_uuid = '' AND packet_id = '' AND payload_digest = '' AND source_fingerprint = '' AND local_object_id = 0 AND remote_object_id = 0 AND diff_summary IS NULL AND id NOT IN (SELECT event_id FROM {$wpdb->prefix}wpmmcc_outbound_deliveries WHERE event_id IS NOT NULL) AND occurred_at < %s ORDER BY id ASC LIMIT %d FOR UPDATE",
+					$cutoff,
+					self::BATCH
+				),
+				ARRAY_A
+			);
+		} elseif ( '' !== $cutoff ) {
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- plugin table or connection command; WordPress has no replacement API
+			$rows = $wpdb->get_results(
+				$wpdb->prepare(
+					"SELECT * FROM {$wpdb->prefix}wpmmcc_journal WHERE consumed = 1 AND outcome IN ('success', 'skipped') AND object_type = 'peer' AND event_type IN ('peer_connect', 'peer_disconnect') AND canonical_uuid = '' AND packet_id = '' AND payload_digest = '' AND source_fingerprint = '' AND local_object_id = 0 AND remote_object_id = 0 AND diff_summary IS NULL AND id NOT IN (SELECT event_id FROM {$wpdb->prefix}wpmmcc_outbound_deliveries WHERE event_id IS NOT NULL) AND occurred_at < %s ORDER BY id ASC LIMIT %d",
+					$cutoff,
+					self::BATCH
+				),
+				ARRAY_A
+			);
+		} elseif ( $locked ) {
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- plugin table or connection command; WordPress has no replacement API
+			$rows = $wpdb->get_results(
+				$wpdb->prepare(
+					"SELECT * FROM {$wpdb->prefix}wpmmcc_journal WHERE consumed = 1 AND outcome IN ('success', 'skipped') AND object_type = 'peer' AND event_type IN ('peer_connect', 'peer_disconnect') AND canonical_uuid = '' AND packet_id = '' AND payload_digest = '' AND source_fingerprint = '' AND local_object_id = 0 AND remote_object_id = 0 AND diff_summary IS NULL AND id NOT IN (SELECT event_id FROM {$wpdb->prefix}wpmmcc_outbound_deliveries WHERE event_id IS NOT NULL) ORDER BY id ASC LIMIT %d FOR UPDATE",
+					self::BATCH
+				),
+				ARRAY_A
+			);
+		} else {
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- plugin table or connection command; WordPress has no replacement API
+			$rows = $wpdb->get_results(
+				$wpdb->prepare(
+					"SELECT * FROM {$wpdb->prefix}wpmmcc_journal WHERE consumed = 1 AND outcome IN ('success', 'skipped') AND object_type = 'peer' AND event_type IN ('peer_connect', 'peer_disconnect') AND canonical_uuid = '' AND packet_id = '' AND payload_digest = '' AND source_fingerprint = '' AND local_object_id = 0 AND remote_object_id = 0 AND diff_summary IS NULL AND id NOT IN (SELECT event_id FROM {$wpdb->prefix}wpmmcc_outbound_deliveries WHERE event_id IS NOT NULL) ORDER BY id ASC LIMIT %d",
+					self::BATCH
+				),
+				ARRAY_A
+			);
+		}
 		if ( ! is_array( $rows ) || '' !== (string) $wpdb->last_error ) {
 			throw new \RuntimeException( 'Cleanup preview is unavailable; all evidence retained.' );
 		}
-		return array( 'rows' => $rows, 'count' => count( $rows ), 'revision' => Packet::digest( $rows ) );
+		$result = array( 'rows' => $rows, 'count' => count( $rows ), 'revision' => Packet::digest( $rows ) );
+		if ( ! $locked ) {
+			wp_cache_set( $cache_key, $result, 'wpmmcc' );
+		}
+		return $result;
 	}
 
 	/**
@@ -101,15 +144,28 @@ class Journal_Cleanup {
 				},
 				$live['rows']
 			);
-			$sql = "DELETE FROM {$wpdb->prefix}wpmmcc_journal WHERE " . self::predicate()
-				. ' AND id IN (' . implode( ',', $ids ) . ')';
-			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.PreparedSQL.NotPrepared -- Integer ids frozen inside the transaction with the full allowlist rechecked.
-			$deleted = $wpdb->query( $sql );
+			$deleted = 0;
+			foreach ( $ids as $id ) {
+				// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- plugin table or connection command; WordPress has no replacement API
+				$changed = $wpdb->query(
+					$wpdb->prepare(
+						"DELETE FROM {$wpdb->prefix}wpmmcc_journal WHERE consumed = 1 AND outcome IN ('success', 'skipped') AND object_type = 'peer' AND event_type IN ('peer_connect', 'peer_disconnect') AND canonical_uuid = '' AND packet_id = '' AND payload_digest = '' AND source_fingerprint = '' AND local_object_id = 0 AND remote_object_id = 0 AND diff_summary IS NULL AND id NOT IN (SELECT event_id FROM {$wpdb->prefix}wpmmcc_outbound_deliveries WHERE event_id IS NOT NULL) AND id = %d",
+						$id
+					)
+				);
+				if ( false === $changed ) {
+					throw new \RuntimeException( 'Cleanup scope differs; no partial cleanup is accepted.' );
+				}
+				$deleted += (int) $changed;
+			}
 			if ( count( $ids ) !== $deleted ) {
 				throw new \RuntimeException( 'Cleanup scope differs; no partial cleanup is accepted.' );
 			}
 			$transaction->commit();
+			wp_cache_delete( 'journal_cleanup_preview_' . md5( $cutoff ), 'wpmmcc' );
 			wp_cache_delete( 'admin_journal_recent', 'wpmmcc' );
+			$journal_generation = wp_cache_get( 'wpmmcc_journal_generation', 'wpmmcc' );
+			wp_cache_set( 'wpmmcc_journal_generation', ( is_int( $journal_generation ) ? $journal_generation : 0 ) + 1, 'wpmmcc' );
 			return $deleted;
 		} catch ( \Throwable $error ) {
 			$transaction->rollback();

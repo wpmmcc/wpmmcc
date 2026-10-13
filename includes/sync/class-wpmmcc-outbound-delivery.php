@@ -41,14 +41,22 @@ class Outbound_Delivery {
 			'mode' => $peer['sync_mode'] ?? 'sync_only',
 		) );
 		// Finish an older unknown effect before a newer event may supersede it.
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Stable entity authority, independent of coalesced queue leaders.
-		$row = $wpdb->get_row( $wpdb->prepare(
-			"SELECT * FROM {$table} WHERE peer_uuid = %s AND canonical_uuid = %s AND phase <> 'confirmed' ORDER BY created_at ASC LIMIT 1",
-			$peer_uuid, $guid
-		), ARRAY_A );
+		$generation = wp_cache_get( 'wpmmcc_outbound_generation', 'wpmmcc' );
+		$open_key   = 'outbound_open_' . md5( $peer_uuid . '|' . $guid . '|' . (string) $generation );
+		$row        = wp_cache_get( $open_key, 'wpmmcc' );
+		if ( ! is_array( $row ) ) {
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- plugin table or connection command; WordPress has no replacement API
+			$row = $wpdb->get_row( $wpdb->prepare(
+				"SELECT * FROM %i WHERE peer_uuid = %s AND canonical_uuid = %s AND phase <> 'confirmed' ORDER BY created_at ASC LIMIT 1",
+				$table, $peer_uuid, $guid
+			), ARRAY_A );
+			if ( is_array( $row ) ) {
+				wp_cache_set( $open_key, $row, 'wpmmcc' );
+			}
+		}
 		if ( ! $row ) {
-			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Confirmed deliveries remain for exact receipt replay.
-			$row = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$table} WHERE delivery_key = %s", $key ), ARRAY_A );
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- plugin table or connection command; WordPress has no replacement API
+			$row = $wpdb->get_row( $wpdb->prepare( 'SELECT * FROM %i WHERE delivery_key = %s', $table, $key ), ARRAY_A );
 		}
 		try {
 			$lease->assert_owner();
@@ -67,16 +75,18 @@ class Outbound_Delivery {
 				}
 				$intent = array( 'packet' => $packet, 'event' => $event, 'peer_scope' => $peer_scope );
 				$encoded = Private_Document::encode( $intent, 'outbound:' . $key );
-				// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Create-only intent before any target request.
+				// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- plugin table or connection command; WordPress has no replacement API
 				$changed = $wpdb->query( $wpdb->prepare(
-					"INSERT IGNORE INTO {$table} (delivery_key, peer_uuid, canonical_uuid, event_id, intent_json, phase, result_json, created_at) VALUES (%s, %s, %s, %d, %s, 'prepared', '', %s)",
-					$key, $peer_uuid, $guid, $event_id, $encoded, current_time( 'mysql' )
+					'INSERT IGNORE INTO %i (delivery_key, peer_uuid, canonical_uuid, event_id, intent_json, phase, result_json, created_at) VALUES (%s, %s, %s, %d, %s, \'prepared\', \'\', %s)',
+					$table, $key, $peer_uuid, $guid, $event_id, $encoded, current_time( 'mysql' )
 				) );
-				// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Exact private intent readback.
-				$row = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$table} WHERE delivery_key = %s", $key ), ARRAY_A );
+				// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- plugin table or connection command; WordPress has no replacement API
+				$row = $wpdb->get_row( $wpdb->prepare( 'SELECT * FROM %i WHERE delivery_key = %s', $table, $key ), ARRAY_A );
 				if ( 1 !== $changed || ! is_array( $row ) || $row['intent_json'] !== $encoded ) {
 					throw new \RuntimeException( 'Outbound intent was not confirmed.' );
 				}
+				$generation = wp_cache_get( 'wpmmcc_outbound_generation', 'wpmmcc' );
+				wp_cache_set( 'wpmmcc_outbound_generation', ( is_int( $generation ) ? $generation : 0 ) + 1, 'wpmmcc' );
 			}
 			$key = $row['delivery_key'];
 			$intent = Private_Document::decode( $row['intent_json'], 'outbound:' . $key );
@@ -152,16 +162,18 @@ class Outbound_Delivery {
 	private static function transition( array $row, string $phase, string $result ): array {
 		global $wpdb;
 		$table = $wpdb->prefix . 'wpmmcc_outbound_deliveries';
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Exact phase/private-bytes CAS.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- plugin table or connection command; WordPress has no replacement API
 		$changed = $wpdb->query( $wpdb->prepare(
-			"UPDATE {$table} SET phase = %s, result_json = %s WHERE delivery_key = %s AND phase = %s AND intent_json = %s AND result_json = %s",
-			$phase, $result, $row['delivery_key'], $row['phase'], $row['intent_json'], $row['result_json']
+			'UPDATE %i SET phase = %s, result_json = %s WHERE delivery_key = %s AND phase = %s AND intent_json = %s AND result_json = %s',
+			$table, $phase, $result, $row['delivery_key'], $row['phase'], $row['intent_json'], $row['result_json']
 		) );
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Exact readback before another side effect or closure.
-		$live = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$table} WHERE delivery_key = %s", $row['delivery_key'] ), ARRAY_A );
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- plugin table or connection command; WordPress has no replacement API
+		$live = $wpdb->get_row( $wpdb->prepare( 'SELECT * FROM %i WHERE delivery_key = %s', $table, $row['delivery_key'] ), ARRAY_A );
 		if ( 1 !== $changed || ! is_array( $live ) || $live['phase'] !== $phase || $live['result_json'] !== $result || $live['intent_json'] !== $row['intent_json'] ) {
 			throw new \RuntimeException( 'Outbound transition was not confirmed.' );
 		}
+		$generation = wp_cache_get( 'wpmmcc_outbound_generation', 'wpmmcc' );
+		wp_cache_set( 'wpmmcc_outbound_generation', ( is_int( $generation ) ? $generation : 0 ) + 1, 'wpmmcc' );
 		return $live;
 	}
 }

@@ -108,7 +108,7 @@ class Rest_Ping extends Rest_Base {
 			// The bucket is the connection's address, never a request parameter:
 			// a caller-named "address" would mint a fresh bucket per request.
 			$ip = '';
-			if ( isset( $_SERVER['REMOTE_ADDR'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Rate limit bucketing only.
+			if ( isset( $_SERVER['REMOTE_ADDR'] ) ) {
 				$ip = sanitize_text_field( wp_unslash( $_SERVER['REMOTE_ADDR'] ) );
 			}
 			$rate = Rest_Middleware::enforce_rate_limit( 'client|ip|' . $ip );
