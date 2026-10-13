@@ -32,7 +32,7 @@ Supported layouts:
 * Network subsite to standalone site
 * Standalone site to network subsite
 
-Direction can be bidirectional, push only, or pull only. Conflict handling can be last-write-wins, source wins, target wins, manual review, or a field merge. Source and target locales are recorded with the pairing. This plugin does not translate those locales.
+Direction can be bidirectional, push only, or pull only. Conflict handling can be last-write-wins, source wins, target wins, manual review, or a field merge. Source and target locales are stored with the pairing as labels.
 
 All features are free. No license key or payment is required.
 
@@ -133,13 +133,14 @@ Deleting the plugin removes its database tables, settings, scheduled task, and c
 == Screenshots ==
 
 1. Site identity, pairing code, and the connection pack for the optional WPTSALL Client.
-2. Connect a peer. The form copies content only and does not translate.
+2. Connect a peer. A direct pairing copies content. The WPTSALL Client can translate the title, content, and excerpt while syncing.
 3. Connected peers, the conflict review queue, and the sync journal.
 
 == Changelog ==
 
 = 2.1.10 =
 * Changed: Directory listing describes the current free sync plugin, with screenshots of WPMMCC Sync and links to https://www.wpmm.cc/ and the WPTSALL Client on GitHub.
+* Changed: Directory text says a direct pairing only syncs, and the WPTSALL Client can translate the title, content, and excerpt while syncing.
 
 = 2.1.9 =
 * Changed: Directory version is 2.1.9, which is newer than 2.0.1, so WordPress can update an existing install.
