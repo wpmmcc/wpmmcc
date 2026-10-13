@@ -1,10 +1,10 @@
 # WPMMCC — WordPress 跨站内容同步
 
-**在你配对的 WordPress 站点之间复制内容。这个插件不翻译。**
+**在配对的 WordPress 站点之间复制内容。直接配对只同步。WPTSALL 客户端可以在同步时翻译。**
 
 [English](../README.md) | **简体中文**
 
-WPMMCC 在管理员配对的站点之间复制文章、分类、媒体和支持的插件字段。后台菜单是 WPMMCC Sync。REST 命名空间是 wpmmcc/v1。全部功能免费，不需要许可证或付费。直接配对只复制内容。可选的 WPTSALL 客户端也可以作为同步对端配对，它不会通过这个插件翻译。
+WPMMCC 在管理员配对的站点之间复制文章、分类、媒体和支持的插件字段。后台菜单是 WPMMCC Sync。REST 命名空间是 wpmmcc/v1。全部功能免费，不需要许可证或付费。直接配对只复制内容，该表单会拒绝 sync_and_translate。可选的 WPTSALL 客户端可以配对本插件，并在推送前翻译标题、正文和摘要。
 
 ## 相关链接
 - 项目官网 — https://www.wpmm.cc/
@@ -26,7 +26,7 @@ WPMMCC 在管理员配对的站点之间复制文章、分类、媒体和支持�
 
 ## 翻译是另一个插件
 
-翻译是 WPMMCC ATS。它的菜单是 WPTSALL，REST 命名空间是 wptsall/v2。本插件的直接配对表单会拒绝“同步并翻译”。目录页：https://wordpress.org/plugins/wpmmcc-ats/ 。
+站内翻译是 WPMMCC ATS。它的菜单是 WPTSALL，REST 命名空间是 wptsall/v2。本插件的直接配对表单会拒绝 sync_and_translate。这个模式在 WPTSALL 客户端里运行：客户端调用翻译厂商，本插件不调用。目录页：https://wordpress.org/plugins/wpmmcc-ats/ 。
 
 ## 环境要求
 - WordPress 6.2 或更高版本
@@ -44,7 +44,7 @@ WPMMCC 在管理员配对的站点之间复制文章、分类、媒体和支持�
 3. 管理员连接对端、执行同步，或已配对站点的每小时核对运行之前，不会向外发送内容
 
 ## 可选的 WPTSALL 客户端
-两个站点直接配对不需要客户端。同一个客户端可以用 WPMMCC Sync 里的连接包配对：站点 URL、客户端令牌、路由密钥和本站 UUID。WebUI 是浏览器页面，地址是 127.0.0.1:8977。Desktop 监听 127.0.0.1:8978，只留在这台电脑上。客户端经这个插件复制的内容不会被翻译。源码：https://github.com/wpmmcc/wptsall-client 。发布：https://github.com/wpmmcc/wptsall-client/releases 。指南：https://www.wpmm.cc/docs/client-guide.html 。
+两个站点直接配对不需要客户端。同一个客户端可以用 WPMMCC Sync 里的连接包配对：站点 URL、客户端令牌、路由密钥和本站 UUID。WebUI 是浏览器页面，地址是 127.0.0.1:8977。Desktop 监听 127.0.0.1:8978，只留在这台电脑上。sync_and_translate 模式下，客户端在那台电脑上翻译标题、正文和摘要，再推送结果。本插件不调用翻译厂商。源码：https://github.com/wpmmcc/wptsall-client 。发布：https://github.com/wpmmcc/wptsall-client/releases 。指南：https://www.wpmm.cc/docs/client-guide.html 。
 
 ## 更新
 - 通过仪表盘 → 更新，或插件页面安装更新

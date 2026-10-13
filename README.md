@@ -1,10 +1,10 @@
 # WPMMCC — Cross-site content sync for WordPress
 
-**Copy content between WordPress sites you pair. This plugin does not translate.**
+**Copy content between paired WordPress sites. Direct pairing syncs only. The WPTSALL Client can translate while syncing.**
 
 **English** | [简体中文](readme/README.zh-CN.md)
 
-WPMMCC copies posts, terms, media, and supported plugin fields between sites an administrator pairs. The wp-admin menu is WPMMCC Sync. The REST namespace is wpmmcc/v1. All features are free. No license key or payment is required. A direct pairing copies content only. The optional WPTSALL Client can also pair as a sync peer; it does not translate through this plugin.
+WPMMCC copies posts, terms, media, and supported plugin fields between sites an administrator pairs. The wp-admin menu is WPMMCC Sync. The REST namespace is wpmmcc/v1. All features are free. No license key or payment is required. A direct pairing copies content only, and that form rejects sync_and_translate. The optional WPTSALL Client can pair with this plugin and translate the title, content, and excerpt before it pushes them.
 
 ## Links
 - Project website — https://www.wpmm.cc/
@@ -26,7 +26,7 @@ WPMMCC copies posts, terms, media, and supported plugin fields between sites an 
 
 ## Translation is a different plugin
 
-Translation is WPMMCC ATS. Its menu is WPTSALL and its REST namespace is wptsall/v2. The direct pairing form on this plugin rejects a sync-and-translate mode. Directory page: https://wordpress.org/plugins/wpmmcc-ats/ .
+In-site translation is WPMMCC ATS. Its menu is WPTSALL and its REST namespace is wptsall/v2. This plugin's direct pairing form rejects sync_and_translate. That mode runs in the WPTSALL Client: the client calls the translation provider, and this plugin does not. Directory page: https://wordpress.org/plugins/wpmmcc-ats/ .
 
 ## Requirements
 - WordPress 6.2 or newer
@@ -44,7 +44,7 @@ Translation is WPMMCC ATS. Its menu is WPTSALL and its REST namespace is wptsall
 3. Nothing is sent until an administrator connects a peer, runs a sync, or the hourly reconciliation runs for a peer that is already paired
 
 ## Optional WPTSALL Client
-Direct pairing does not need the client. The same client can pair with this plugin by using the connection pack from WPMMCC Sync: site URL, client token, route secret, and this site's UUID. WebUI is a browser page at 127.0.0.1:8977. Desktop listens on 127.0.0.1:8978 and stays on this computer. Content the client copies is not translated by this plugin. Source: https://github.com/wpmmcc/wptsall-client . Releases: https://github.com/wpmmcc/wptsall-client/releases . Guide: https://www.wpmm.cc/docs/client-guide.html .
+Direct pairing does not need the client. The same client can pair with this plugin by using the connection pack from WPMMCC Sync: site URL, client token, route secret, and this site's UUID. WebUI is a browser page at 127.0.0.1:8977. Desktop listens on 127.0.0.1:8978 and stays on this computer. In sync_and_translate mode the client translates the title, content, and excerpt on that computer, then pushes the result. This plugin does not call the translation vendor. Source: https://github.com/wpmmcc/wptsall-client . Releases: https://github.com/wpmmcc/wptsall-client/releases . Guide: https://www.wpmm.cc/docs/client-guide.html .
 
 ## Updating
 - Updates install through Dashboard → Updates or the Plugins page
