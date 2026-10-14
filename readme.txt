@@ -8,7 +8,7 @@ Stable tag: 2.1.10
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Copy posts, terms, and media between paired WordPress sites. Direct pairing only syncs. The WPTSALL Client can translate the title, content, and excerpt while syncing.
+Copy posts, terms, and media between paired WordPress sites. Direct pairing only syncs. The WPTSALL Client can translate while syncing.
 
 == Description ==
 
